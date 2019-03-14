@@ -1,0 +1,370 @@
+OBSERVED TODOS
+
+Last updated: 2019-03-14
+
+-----
+
+laanwj: focus on user problems and actual bugs
+
+-----
+
+https://github.com/bitcoin/bitcoin/pull/15538
+
+Change bumpfee to add inputs:
+
+promag:     It was suggested bump fee could add an input to support the
+            increased fee, which could result in a change output.
+
+instagibbs: It's a feature I've wanted to do for a while but it required
+            significant refactoring to do it the Right Way previously.
+            Hoping someone in the residency can tackle it maybe.
+
+-----
+
+Date: Tue, 5 Mar 2019 20:00:35 -0800
+From: Dustin Dettmer <dustinpaystaxes@gmail.com>
+To: Bitcoin Protocol Discussion <bitcoin-dev@lists.linuxfoundation.org>,
+    Marco Falke <falke.marco@gmail.com>
+Subject: Removal of reject network messages from Bitcoin Core (BIP61)
+Message-ID: <CABLeJxTuWa-Kaht3PgvwGN5Eb3GW=HpS7uNMESMcLpqn4BgN3Q@mail.gmail.com>
+
+The reject message is helpful for figuring out why a tx was rejected.
+
+It's not useful for determining success, yes. Particularly when doing
+segwit/newer types of txs as there's always one or more pesky nodes who
+still don't support it and send a reject message for perfectly good txs.
+
+But after a delay where you haven't seen your tx propagated on the network,
+it's useful to know *why* it failed.
+
+What would be nice is actually expanding this error message. Currently with
+RBF txs, 'fee too small' is sent for both original transactions as well as
+replacement transactions. So a bug accidentally sending spent txos
+(currently in mempool) says 'fee too small' instead of something more
+appropriate like 'fee too small to supersede existing unconfirmed
+transaction.'
+
+-----
+
+From: Marco Falke <falke.marco@gmail.com>
+To: Bitcoin Protocol Discussion <bitcoin-dev@lists.linuxfoundation.org>
+Subject: [bitcoin-dev] Removal of reject network messages from Bitcoin Core (BIP61)
+Message-ID: <CAK51vgDO2Tg38XbW0pqAnO3ETJ_qf8owRsUYsTXmrf7H2yGZtw@mail.gmail.com>
+
+Bitcoin Core may send "reject" messages as response to "tx", "block" or
+"version" messages from a network peer when the message could not be accepted.
+
+This feature is toggled by the `-enablebip61` command line option and has been
+disabled by default since Bitcoin Core version 0.18.0 (not yet released as of
+time of writing). Nodes on the network can not generally be trusted to send
+valid ("reject") messages, so this should only ever be used when connected to a
+trusted node.
+
+->>> At this time, I am not aware of any software that requires this
+feature, and I would like to remove if from Bitcoin Core to make the codebase
+slimmer, easier to understand and maintain. Let us know if your application
+relies on this feature and you can not use any of the recommended alternatives:
+
+* Testing or debugging of implementations of the Bitcoin P2P network protocol
+  should be done by inspecting the log messages that are produced by a recent
+  version of Bitcoin Core. Bitcoin Core logs debug messages
+  (`-debug=<category>`) to a stream (`-printtoconsole`) or to a file
+  (`-debuglogfile=<debug.log>`).
+
+* Testing the validity of a block can be achieved by specific RPCs:
+  - `submitblock`
+  - `getblocktemplate` with `'mode'` set to `'proposal'` for blocks with
+    potentially invalid POW
+
+* Testing the validity of a transaction can be achieved by specific RPCs:
+  - `sendrawtransaction`
+  - `testmempoolaccept`
+
+* Wallets should not use the absence of "reject" messages to indicate a
+  transaction has propagated the network, nor should wallets use "reject"
+  messages to set transaction fees. Wallets should rather use fee estimation
+  to determine transaction fees and set replace-by-fee if desired. Thus, they
+  could wait until the transaction has confirmed (taking into account the fee
+  target they set (compare the RPC `estimatesmartfee`)) or listen for the
+  transaction announcement by other network peers to check for propagation.
+
+I propose to remove "reject" messages from Bitcoin Core 0.19.0 unless there are
+valid concerns about its removal.
+
+Marco
+
+-----
+
+[08:25] <wumpus> I really want to improve -getinfo now that it's no longer server side, e.g. show regtest/testnet/mainnet, make some information per wallet
+[08:25] <wumpus> so if anyone has ideas let me know
+[08:26] == sipa [~pw@gateway/tor-sasl/sipa1024] has joined #bitcoin-core-dev
+[08:27] <gmaxwell> wumpus: pilfer ideas from that ncurses interface someone did a while back?
+[08:30] <wumpus> maybe! to be clear I intend to keep it in JSON format, just want to update for changes since 0.10 or so when it last was depreceated and diceded to never change it again
+[08:32] <gmaxwell> well one thing in terms of cli usability maybe don't do what many of our other info rpcs have done and put a billion and one vaguely useful things so that when you run them the good stuff scrolls off the top and its hard to sort out anything useful. :P
+[08:32] <wumpus> removing stuff is open for suggestion too
+[08:32] <wumpus> I mean, 'improve' doesn't always mean 'creep any possible feature into it'
+[08:33] <gmaxwell> exactly.
+[08:33] <gmaxwell> or alternatively, go fetch some useful fields out of e.g. getblockchaininfo
+[08:34] <gmaxwell> I'll comment the next time I get wall of texted when trying to get a frequently used field.
+[08:35] <wumpus> I'd say a good requirement for information on it is that it's dynamic, it's meant as a command for checking the status after all
+[08:36] <wumpus> things that are only dependent on on-time configuration might be better to leave off
+[08:36] == tryphe [~tryphe@unaffiliated/tryphe] has quit [Read error: Connection reset by peer]
+[08:37] <wumpus> (I mean, how useful is 'protocolversion' on there for example?) or 'keypoololdest', or settings like 'paytxfee'
+[08:37] == tryphe [~tryphe@unaffiliated/tryphe] has joined #bitcoin-core-dev
+[08:39] <wumpus> but, say, the hash of the most recent block would be useful to have
+[08:39] <fanquake> could change testnet: to something like network, then specify main/test/reg ?
+[08:39] <wumpus> fanquake: yes exactly
+[08:40] <wumpus> that would be a simple and non-controversial improvement
+[08:41] <wumpus> just grab getblockchaininfo.main directly
+[08:41] <wumpus> eh, .chain
+[08:42] <wumpus> "verificationprogress" is also more or less useful, though only during initial sync
+[08:44] <gmaxwell> yea, I think what I mostly use getblockchaininfo is the hash of the most recent block, and its scrolled off...
+[08:44] == Krusty_ [~Mutter@195.181.165.4] has joined #bitcoin-core-dev
+[08:45] <gmaxwell> do we have anything that returns the time of the last updatetip?
+[08:45] <fanquake> Maybe we could do something better for multiwallet use? i.e at the moment walletversion and balance are both just "null" if >1 wallet loaded
+[08:45] <fanquake> * same for keypool*
+[08:45] <wumpus> fanquake: walletversion doesn't need to be in there at all, but yeah, it should *list* wallets
+[08:45] <gmaxwell> keypool shoudl probably be dropped.
+[08:45] <wumpus> gmaxwell: I don't think so
+[08:46] <wumpus> fanquake: the only interesting thing about the wallet in getinfo is the balance, so it could be a object {'walletname': balance} or such then it doesn't really become longer as well
+[08:47] <wumpus> gmaxwell: do we even keep track of the time of an updatetip?
+[08:48] <sipa> wumpus: IsInitialBlockDownload does iirc
+[08:48] == Krusty [~Mutter@88.202.183.117] has quit [Ping timeout: 255 seconds]
+[08:48] == Krusty_ [~Mutter@195.181.165.4] has quit [Client Quit]
+[08:49] <wumpus> sipa: ok-in that case it'd make sense to report that on getblockchaininfo, I guess!
+[08:57] == bitcoin-git [~bitcoin-g@x0f.org] has joined #bitcoin-core-dev
+[08:57] <bitcoin-git> [bitcoin] fanquake opened pull request #15564: cli: remove duplicate wallet fields from -getinfo (master...cli-remove-duplicate-entries) https://github.com/bitcoin/bitcoin/pull/15564
+
+-----
+
+  CXX      leveldb/util/libleveldb_a-coding.o
+  CXX      leveldb/util/libleveldb_a-comparator.o
+  CXX      leveldb/util/libleveldb_a-crc32c.o
+  CXX      leveldb/util/libleveldb_a-env.o
+  CXX      leveldb/util/libleveldb_a-env_posix.o
+  CXX      leveldb/util/libleveldb_a-filter_policy.o
+  CXX      leveldb/util/libleveldb_a-hash.o
+  CXX      leveldb/util/libleveldb_a-histogram.o
+  CXX      leveldb/util/libleveldb_a-logging.o
+leveldb/util/logging.cc: In function ‘bool leveldb::ConsumeDecimalNumber(leveldb::Slice*, uint64_t*)’:
+leveldb/util/logging.cc:58:40: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+           (v == kMaxUint64/10 && delta > kMaxUint64%10)) {
+                                  ~~~~~~^~~~~~~~~~~~~~~
+  CXX      leveldb/util/libleveldb_a-options.o
+  CXX      leveldb/util/libleveldb_a-status.o
+  CXX      leveldb/port/libleveldb_a-port_posix.o
+leveldb/port/port_posix.cc: In function ‘bool leveldb::port::HasAcceleratedCRC32C()’:
+leveldb/port/port_posix.cc:60:15: warning: ‘ecx’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+   return (ecx & (1 << 20)) != 0;
+          ~~~~~^~~~~~~~~~~~
+  AR       leveldb/libleveldb.a
+  CXX      leveldb/port/libleveldb_sse42_a-port_posix_sse.o
+  AR       leveldb/libleveldb_sse42.a
+  CXX      leveldb/helpers/memenv/libmemenv_a-memenv.o
+  AR       leveldb/libmemenv.a
+make[3]: Entering directory '/home/jon/projects/bitcoin/bitcoin/src/secp256k1'
+gcc -I. -g -O2 -Wall -Wextra -Wno-unused-function -c src/gen_context.c -o gen_context.o
+gcc gen_context.o -o gen_context
+./gen_context
+  CC       src/libsecp256k1_la-secp256k1.lo
+  CCLD     libsecp256k1.la
+/usr/bin/ar: `u' modifier ignored since `D' is the default (see `U')
+make[3]: Leaving directory '/home/jon/projects/bitcoin/bitcoin/src/secp256k1'
+  CXXLD    bitcoind
+  CXX      bitcoin_cli-bitcoin-cli.o
+  CXX      rpc/libbitcoin_cli_a-client.o
+  AR       libbitcoin_cli.a
+  CXXLD    bitcoin-cli
+  CXX      bitcoin_tx-bitcoin-tx.o
+  CXXLD    bitcoin-tx
+  CXX      bitcoin_wallet-bitcoin-wallet.o
+  CXX      wallet/libbitcoin_wallet_tool_a-wallettool.o
+  AR       libbitcoin_wallet_tool.a
+  CXXLD    bitcoin-wallet
+
+
+ GEN      qt/locale/bitcoin_bg_BG.qm
+  GEN      qt/locale/bitcoin_bg.qm
+  GEN      qt/locale/bitcoin_ca_ES.qm
+  GEN      qt/locale/bitcoin_ca.qm
+  GEN      qt/locale/bitcoin_ca@valencia.qm
+  GEN      qt/locale/bitcoin_cs.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_cy.qm
+  GEN      qt/locale/bitcoin_da.qm
+  GEN      qt/locale/bitcoin_de.qm
+  GEN      qt/locale/bitcoin_el_GR.qm
+  GEN      qt/locale/bitcoin_el.qm
+  GEN      qt/locale/bitcoin_en_GB.qm
+  GEN      qt/locale/bitcoin_en.qm
+  GEN      qt/locale/bitcoin_eo.qm
+  GEN      qt/locale/bitcoin_es_AR.qm
+  GEN      qt/locale/bitcoin_es_CL.qm
+  GEN      qt/locale/bitcoin_es_CO.qm
+  GEN      qt/locale/bitcoin_es_DO.qm
+  GEN      qt/locale/bitcoin_es_ES.qm
+  GEN      qt/locale/bitcoin_es_MX.qm
+  GEN      qt/locale/bitcoin_es.qm
+  GEN      qt/locale/bitcoin_es_UY.qm
+  GEN      qt/locale/bitcoin_es_VE.qm
+  GEN      qt/locale/bitcoin_et_EE.qm
+  GEN      qt/locale/bitcoin_et.qm
+  GEN      qt/locale/bitcoin_eu_ES.qm
+  GEN      qt/locale/bitcoin_fa_IR.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_fa.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_fi.qm
+  GEN      qt/locale/bitcoin_fr_CA.qm
+  GEN      qt/locale/bitcoin_fr_FR.qm
+  GEN      qt/locale/bitcoin_fr.qm
+  GEN      qt/locale/bitcoin_gl.qm
+  GEN      qt/locale/bitcoin_he.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_hi_IN.qm
+  GEN      qt/locale/bitcoin_hr.qm
+  GEN      qt/locale/bitcoin_hu.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_id_ID.qm
+  GEN      qt/locale/bitcoin_it_IT.qm
+  GEN      qt/locale/bitcoin_it.qm
+  GEN      qt/locale/bitcoin_ja.qm
+  GEN      qt/locale/bitcoin_ka.qm
+  GEN      qt/locale/bitcoin_kk_KZ.qm
+  GEN      qt/locale/bitcoin_ko_KR.qm
+  GEN      qt/locale/bitcoin_ku_IQ.qm
+  GEN      qt/locale/bitcoin_ky.qm
+  GEN      qt/locale/bitcoin_la.qm
+  GEN      qt/locale/bitcoin_lt.qm
+  GEN      qt/locale/bitcoin_lv_LV.qm
+  GEN      qt/locale/bitcoin_mk_MK.qm
+  GEN      qt/locale/bitcoin_mn.qm
+  GEN      qt/locale/bitcoin_ms_MY.qm
+  GEN      qt/locale/bitcoin_nb.qm
+  GEN      qt/locale/bitcoin_ne.qm
+  GEN      qt/locale/bitcoin_nl.qm
+  GEN      qt/locale/bitcoin_pam.qm
+  GEN      qt/locale/bitcoin_pl.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_pt_BR.qm
+  GEN      qt/locale/bitcoin_pt_PT.qm
+  GEN      qt/locale/bitcoin_ro_RO.qm
+  GEN      qt/locale/bitcoin_ro.qm
+  GEN      qt/locale/bitcoin_ru_RU.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_ru.qm
+  GEN      qt/locale/bitcoin_sk.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_sl_SI.qm
+  GEN      qt/locale/bitcoin_sq.qm
+  GEN      qt/locale/bitcoin_sr@latin.qm
+  GEN      qt/locale/bitcoin_sr.qm
+  GEN      qt/locale/bitcoin_sv.qm
+  GEN      qt/locale/bitcoin_ta.qm
+  GEN      qt/locale/bitcoin_th_TH.qm
+  GEN      qt/locale/bitcoin_tr_TR.qm
+  GEN      qt/locale/bitcoin_tr.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_uk.qm
+Removed plural forms as the target language has less forms.
+If this sounds wrong, possibly the target language is not set or recognized.
+  GEN      qt/locale/bitcoin_ur_PK.qm
+  GEN      qt/locale/bitcoin_uz@Cyrl.qm
+  GEN      qt/locale/bitcoin_vi.qm
+  GEN      qt/locale/bitcoin_vi_VN.qm
+  GEN      qt/locale/bitcoin_zh_CN.qm
+  GEN      qt/locale/bitcoin_zh_HK.qm
+  GEN      qt/locale/bitcoin_zh.qm
+  GEN      qt/locale/bitcoin_zh_TW.qm
+  GEN      qt/qrc_bitcoin_locale.cpp
+  CXX      qt/libbitcoinqt_a-qrc_bitcoin_locale.o
+  AR       qt/libbitcoinqt.a
+  CXXLD    qt/bitcoin-qt
+  CXX      qt/test/test_bitcoin_qt-apptests.o
+  CXX      qt/test/test_bitcoin_qt-compattests.o
+  CXX      qt/test/test_bitcoin_qt-rpcnestedtests.o
+  CXX      qt/test/test_bitcoin_qt-test_main.o
+  CXX      qt/test/test_bitcoin_qt-uritests.o
+  CXX      qt/test/test_bitcoin_qt-util.o
+  CXX      test/qt_test_test_bitcoin_qt-test_bitcoin.o
+  CXX      qt/test/test_bitcoin_qt-addressbooktests.o
+  CXX      qt/test/test_bitcoin_qt-wallettests.o
+  CXX      wallet/test/qt_test_test_bitcoin_qt-wallet_test_fixture.o
+  CXX      qt/test/test_bitcoin_qt-paymentservertests.o
+  GEN      qt/test/moc_apptests.cpp
+  CXX      qt/test/test_bitcoin_qt-moc_apptests.o
+  GEN      qt/test/moc_compattests.cpp
+  CXX      qt/test/test_bitcoin_qt-moc_compattests.o
+  GEN      qt/test/moc_rpcnestedtests.cpp
+  CXX      qt/test/test_bitcoin_qt-moc_rpcnestedtests.o
+  GEN      qt/test/moc_uritests.cpp
+  CXX      qt/test/test_bitcoin_qt-moc_uritests.o
+  GEN      qt/test/moc_addressbooktests.cpp
+  CXX      qt/test/test_bitcoin_qt-moc_addressbooktests.o
+  GEN      qt/test/moc_wallettests.cpp
+  CXX      qt/test/test_bitcoin_qt-moc_wallettests.o
+  GEN      qt/test/moc_paymentservertests.cpp
+  CXX      qt/test/test_bitcoin_qt-moc_paymentservertests.o
+  CXXLD    qt/test/test_bitcoin-qt
+  CXX      crypto/libbitcoinconsensus_la-aes.lo
+  CXX      crypto/libbitcoinconsensus_la-chacha20.lo
+  CXX      crypto/libbitcoinconsensus_la-hmac_sha256.lo
+  CXX      crypto/libbitcoinconsensus_la-hmac_sha512.lo
+  CXX      crypto/libbitcoinconsensus_la-ripemd160.lo
+  CXX      crypto/libbitcoinconsensus_la-sha1.lo
+  CXX      crypto/libbitcoinconsensus_la-sha256.lo
+  CXX      crypto/libbitcoinconsensus_la-sha512.lo
+  CXX      crypto/libbitcoinconsensus_la-siphash.lo
+  CXX      crypto/libbitcoinconsensus_la-sha256_sse4.lo
+  CXX      libbitcoinconsensus_la-arith_uint256.lo
+  CXX      consensus/libbitcoinconsensus_la-merkle.lo
+  CXX      libbitcoinconsensus_la-hash.lo
+  CXX      primitives/libbitcoinconsensus_la-block.lo
+  CXX      primitives/libbitcoinconsensus_la-transaction.lo
+  CXX      libbitcoinconsensus_la-pubkey.lo
+  CXX      script/libbitcoinconsensus_la-bitcoinconsensus.lo
+  CXX      script/libbitcoinconsensus_la-interpreter.lo
+  CXX      script/libbitcoinconsensus_la-script.lo
+  CXX      script/libbitcoinconsensus_la-script_error.lo
+  CXX      libbitcoinconsensus_la-uint256.lo
+  CXX      util/libbitcoinconsensus_la-strencodings.lo
+  CXXLD    libbitcoinconsensus.la
+/usr/bin/ar: `u' modifier ignored since `D' is the default (see `U')
+make[2]: Leaving directory '/home/jon/projects/bitcoin/bitcoin/src'
+make[1]: Leaving directory '/home/jon/projects/bitcoin/bitcoin/src'
+Making all in doc/man
+make[1]: Entering directory '/home/jon/projects/bitcoin/bitcoin/doc/man'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/home/jon/projects/bitcoin/bitcoin/doc/man'
+make[1]: Entering directory '/home/jon/projects/bitcoin/bitcoin'
+make[1]: Nothing to be done for 'all-am'.
+make[1]: Leaving directory '/home/jon/projects/bitcoin/bitcoin'
+
+-----
+
+`make lcov` report:
+
+Overall coverage rate:
+  lines......: 79.3% (51120 of 64446 lines)
+  functions..: 79.2% (6838 of 8629 functions)
+
+-----
+
+https://github.com/bitcoin/bitcoin/pull/8394
+
+"in the long run we should make sure that arguments are parsed correctly and
+sanitized. this pr improves parsing of port numbers passed in by users."
+
+"improving parsing is a good thing, if we can factor that out I'd have no
+problem with it."
+
+-----
