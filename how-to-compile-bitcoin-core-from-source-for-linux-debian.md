@@ -1,6 +1,6 @@
 How to compile Bitcoin Core from source on Linux Debian and run the unit and functional tests
 ---------------------------------------------------------------------------------------------
-Last updated: 13 March 2019
+Last updated: 15 March 2019
 
 This is a simplified compilation of the various docs in https://github.com/bitcoin/bitcoin/tree/master/doc. Don't hesitate to read them for more information.
 
@@ -28,7 +28,7 @@ All steps are to be run from your terminal emulator, i.e. the command line.
 
 4. [Recommended] Compile from a tagged release branch instead of master, unless you really want to test the bleeding edge:
     - `git tag -n | sort -V` to see tags and descriptions ordered by most recent last
-    - `git checkout <TAG>` to use a tagged release, for example: `git checkout v0.18.0rc1`
+    - `git checkout <TAG>` to use a tagged release, for example: `git checkout v0.18.0rc2`
 
 5. Compile Bitcoin from source, optionally with lcov and gprof enabled:
     - `./autogen.sh`
