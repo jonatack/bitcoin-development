@@ -34,7 +34,7 @@ All steps are to be run from your terminal emulator, i.e. the command line.
     - `./autogen.sh`
     - Use the output from the BDB build above for the exact export command: `export BDB_PREFIX='<PATH-TO>/db4'`
     - `./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" --enable-lcov --enable-gprof`
-    - `make`
+    - `make`, or if you have multiple threads on your machine, you can tell `make` to utilize all of them and reduce compile time significantly with: `make -j"$(($(nproc)+1))"`
 
 6. Run unit tests:
     - Unit tests only: `make check`
