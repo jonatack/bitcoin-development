@@ -1,6 +1,6 @@
 How to compile Bitcoin Core from source on Linux Debian and run the unit and functional tests
 ---------------------------------------------------------------------------------------------
-Last updated: 15 March 2019
+Last updated: 16 March 2019
 
 This is a simplified compilation of the various docs in https://github.com/bitcoin/bitcoin/tree/master/doc. Don't hesitate to read them for more information.
 
