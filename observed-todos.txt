@@ -368,3 +368,23 @@ sanitized. this pr improves parsing of port numbers passed in by users."
 problem with it."
 
 -----
+
+2018-09-12
+
+Test coverage of our networking code
+
+https://github.com/bitcoin/bitcoin/issues/14210
+
+Our python functional testing framework is pretty limited for what kinds of p2p
+behaviors we can test. Basically, we can currently only make manual connections
+between bitcoind nodes (using the addnode rpc), which are treated differently in
+our code than outbound peers selected using addrman.
+
+While we do have some unit-testing coverage of some of the components (like
+addrman, and parts of net_processing), I don't believe we currently are able to
+test the overall logic of how bitcoind uses those components (I recall this
+coming up when working on #11560, as a specific example).
+
+Anyway I am just mentioning this here as a potential project idea, as this is a
+material gap in our testing that I think would be valuable to work towards
+improving, and I wasn't sure how well known this is.
