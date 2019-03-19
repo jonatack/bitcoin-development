@@ -8,6 +8,10 @@ laanwj: focus on user problems and actual bugs
 
 -----
 
+2019-03-19 Missing functional test for https://github.com/bitcoin/bitcoin/pull/15617
+
+-----
+
 https://github.com/bitcoin/bitcoin/pull/15538
 
 Change bumpfee to add inputs:
