@@ -12,6 +12,12 @@ laanwj: focus on user problems and actual bugs
 
 -----
 
+2019-03-15 Write a test for https://github.com/bitcoin/bitcoin/issues/15608
+           Feature request: Bitcoin wallet should not modify files unless
+           requested or expected.
+
+-----
+
 https://github.com/bitcoin/bitcoin/pull/15538
 
 Change bumpfee to add inputs:
