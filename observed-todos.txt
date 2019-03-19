@@ -1,14 +1,15 @@
 OBSERVED TODOS
 
-Last updated: 2019-03-14
+Last updated: 2019-03-19
 
 -----
 
-laanwj: focus on user problems and actual bugs
+laanwj:    focus on user problems and actual bugs
 
 -----
 
-2019-03-19 Missing functional test for https://github.com/bitcoin/bitcoin/pull/15617
+2019-03-19 Missing functional test in
+           https://github.com/bitcoin/bitcoin/pull/15617
 
 -----
 
@@ -18,134 +19,144 @@ laanwj: focus on user problems and actual bugs
 
 -----
 
-https://github.com/bitcoin/bitcoin/pull/15538
+2019-03-11 IRC discussion: Ideas to improve -getinfo
 
-Change bumpfee to add inputs:
+           <wumpus>   I really want to improve -getinfo now that it's no longer
+                      server side, e.g. show regtest/testnet/mainnet, make some
+                      information per wallet
 
-promag:     It was suggested bump fee could add an input to support the
-            increased fee, which could result in a change output.
+           <wumpus>   so if anyone has ideas let me know
 
-instagibbs: It's a feature I've wanted to do for a while but it required
-            significant refactoring to do it the Right Way previously.
-            Hoping someone in the residency can tackle it maybe.
+           <gmaxwell> wumpus: pilfer ideas from that ncurses interface someone
+                      did a while back?
 
------
+           <wumpus>   maybe! to be clear I intend to keep it in JSON format,
+                      just want to update for changes since 0.10 or so when it
+                      last was deprecated and decided to never change it again
 
-Date: Tue, 5 Mar 2019 20:00:35 -0800
-From: Dustin Dettmer <dustinpaystaxes@gmail.com>
-To: Bitcoin Protocol Discussion <bitcoin-dev@lists.linuxfoundation.org>,
-    Marco Falke <falke.marco@gmail.com>
-Subject: Removal of reject network messages from Bitcoin Core (BIP61)
-Message-ID: <CABLeJxTuWa-Kaht3PgvwGN5Eb3GW=HpS7uNMESMcLpqn4BgN3Q@mail.gmail.com>
+           <gmaxwell> well one thing in terms of cli usability maybe don't do
+                      what many of our other info rpcs have done and put a
+                      billion and one vaguely useful things so that when you run
+                      them the good stuff scrolls off the top and its hard to
+                      sort out anything useful. :P
 
-The reject message is helpful for figuring out why a tx was rejected.
+           <wumpus>   removing stuff is open for suggestion too. I mean,
+                      'improve' doesn't always mean 'creep any possible feature
+                      into it'
 
-It's not useful for determining success, yes. Particularly when doing
-segwit/newer types of txs as there's always one or more pesky nodes who
-still don't support it and send a reject message for perfectly good txs.
+           <gmaxwell> exactly. or alternatively, go fetch some useful fields out
+                      of e.g. getblockchaininfo. I'll comment the next time I
+                      get wall of texted when trying to get a frequently used
+                      field.
 
-But after a delay where you haven't seen your tx propagated on the network,
-it's useful to know *why* it failed.
+           <wumpus>   I'd say a good requirement for information on it is that
+                      it's dynamic, it's meant as a command for checking the
+                      status after all, things that are only dependent on
+                      one-time configuration might be better to leave off. I
+                      mean, how useful is 'protocolversion' on there for
+                      example? or 'keypoololdest', or settings like 'paytxfee'.
+                      but, say, the hash of the most recent block would be
+                      useful to have
 
-What would be nice is actually expanding this error message. Currently with
-RBF txs, 'fee too small' is sent for both original transactions as well as
-replacement transactions. So a bug accidentally sending spent txos
-(currently in mempool) says 'fee too small' instead of something more
-appropriate like 'fee too small to supersede existing unconfirmed
-transaction.'
+           <fanquake> could change testnet: to something like network, then
+                      specify main/test/reg ?
 
------
+           <wumpus>   fanquake: yes exactly, that would be a simple and
+                      non-controversial improvement. just grab
+                      getblockchaininfo.main directly, eh, .chain
 
-From: Marco Falke <falke.marco@gmail.com>
-To: Bitcoin Protocol Discussion <bitcoin-dev@lists.linuxfoundation.org>
-Subject: [bitcoin-dev] Removal of reject network messages from Bitcoin Core (BIP61)
-Message-ID: <CAK51vgDO2Tg38XbW0pqAnO3ETJ_qf8owRsUYsTXmrf7H2yGZtw@mail.gmail.com>
+           <wumpus>   "verificationprogress" is also more or less useful, though
+                      only during initial sync
 
-Bitcoin Core may send "reject" messages as response to "tx", "block" or
-"version" messages from a network peer when the message could not be accepted.
+           <gmaxwell> yea, I think what I mostly use getblockchaininfo is the
+                      hash of the most recent block, and it's scrolled off...
+                      do we have anything that returns the time of the last
+                      updatetip?
 
-This feature is toggled by the `-enablebip61` command line option and has been
-disabled by default since Bitcoin Core version 0.18.0 (not yet released as of
-time of writing). Nodes on the network can not generally be trusted to send
-valid ("reject") messages, so this should only ever be used when connected to a
-trusted node.
+           <fanquake> Maybe we could do something better for multiwallet use?
+                      i.e at the moment walletversion and balance are both just
+                      "null" if >1 wallet loaded. *same for keypool*.
 
-->>> At this time, I am not aware of any software that requires this
-feature, and I would like to remove if from Bitcoin Core to make the codebase
-slimmer, easier to understand and maintain. Let us know if your application
-relies on this feature and you can not use any of the recommended alternatives:
+           <wumpus>   fanquake: walletversion doesn't need to be in there at
+                      all, but yeah, it should *list* wallets
 
-* Testing or debugging of implementations of the Bitcoin P2P network protocol
-  should be done by inspecting the log messages that are produced by a recent
-  version of Bitcoin Core. Bitcoin Core logs debug messages
-  (`-debug=<category>`) to a stream (`-printtoconsole`) or to a file
-  (`-debuglogfile=<debug.log>`).
+           <gmaxwell> keypool shoudl probably be dropped.
 
-* Testing the validity of a block can be achieved by specific RPCs:
-  - `submitblock`
-  - `getblocktemplate` with `'mode'` set to `'proposal'` for blocks with
-    potentially invalid POW
+           <wumpus>   gmaxwell: I don't think so
 
-* Testing the validity of a transaction can be achieved by specific RPCs:
-  - `sendrawtransaction`
-  - `testmempoolaccept`
+           <wumpus>   fanquake: the only interesting thing about the wallet in
+                      getinfo is the balance, so it could be a object
+                      {'walletname': balance} or such then it doesn't really
+                      become longer as well
 
-* Wallets should not use the absence of "reject" messages to indicate a
-  transaction has propagated the network, nor should wallets use "reject"
-  messages to set transaction fees. Wallets should rather use fee estimation
-  to determine transaction fees and set replace-by-fee if desired. Thus, they
-  could wait until the transaction has confirmed (taking into account the fee
-  target they set (compare the RPC `estimatesmartfee`)) or listen for the
-  transaction announcement by other network peers to check for propagation.
+           <wumpus>   gmaxwell: do we even keep track of the time of an
+                      updatetip?
 
-I propose to remove "reject" messages from Bitcoin Core 0.19.0 unless there are
-valid concerns about its removal.
+           <sipa>     wumpus: IsInitialBlockDownload does iirc
 
-Marco
+           <wumpus>   sipa: ok - in that case it'd make sense to report that on
+                      getblockchaininfo, I guess!
+
+           <bitcoin>  [bitcoin] fanquake opened pull request #15564:
+                      cli: remove duplicate wallet fields from -getinfo
+                      https://github.com/bitcoin/bitcoin/pull/15564
 
 -----
 
-[08:25] <wumpus> I really want to improve -getinfo now that it's no longer server side, e.g. show regtest/testnet/mainnet, make some information per wallet
-[08:25] <wumpus> so if anyone has ideas let me know
-[08:26] == sipa [~pw@gateway/tor-sasl/sipa1024] has joined #bitcoin-core-dev
-[08:27] <gmaxwell> wumpus: pilfer ideas from that ncurses interface someone did a while back?
-[08:30] <wumpus> maybe! to be clear I intend to keep it in JSON format, just want to update for changes since 0.10 or so when it last was depreceated and diceded to never change it again
-[08:32] <gmaxwell> well one thing in terms of cli usability maybe don't do what many of our other info rpcs have done and put a billion and one vaguely useful things so that when you run them the good stuff scrolls off the top and its hard to sort out anything useful. :P
-[08:32] <wumpus> removing stuff is open for suggestion too
-[08:32] <wumpus> I mean, 'improve' doesn't always mean 'creep any possible feature into it'
-[08:33] <gmaxwell> exactly.
-[08:33] <gmaxwell> or alternatively, go fetch some useful fields out of e.g. getblockchaininfo
-[08:34] <gmaxwell> I'll comment the next time I get wall of texted when trying to get a frequently used field.
-[08:35] <wumpus> I'd say a good requirement for information on it is that it's dynamic, it's meant as a command for checking the status after all
-[08:36] <wumpus> things that are only dependent on on-time configuration might be better to leave off
-[08:36] == tryphe [~tryphe@unaffiliated/tryphe] has quit [Read error: Connection reset by peer]
-[08:37] <wumpus> (I mean, how useful is 'protocolversion' on there for example?) or 'keypoololdest', or settings like 'paytxfee'
-[08:37] == tryphe [~tryphe@unaffiliated/tryphe] has joined #bitcoin-core-dev
-[08:39] <wumpus> but, say, the hash of the most recent block would be useful to have
-[08:39] <fanquake> could change testnet: to something like network, then specify main/test/reg ?
-[08:39] <wumpus> fanquake: yes exactly
-[08:40] <wumpus> that would be a simple and non-controversial improvement
-[08:41] <wumpus> just grab getblockchaininfo.main directly
-[08:41] <wumpus> eh, .chain
-[08:42] <wumpus> "verificationprogress" is also more or less useful, though only during initial sync
-[08:44] <gmaxwell> yea, I think what I mostly use getblockchaininfo is the hash of the most recent block, and its scrolled off...
-[08:44] == Krusty_ [~Mutter@195.181.165.4] has joined #bitcoin-core-dev
-[08:45] <gmaxwell> do we have anything that returns the time of the last updatetip?
-[08:45] <fanquake> Maybe we could do something better for multiwallet use? i.e at the moment walletversion and balance are both just "null" if >1 wallet loaded
-[08:45] <fanquake> * same for keypool*
-[08:45] <wumpus> fanquake: walletversion doesn't need to be in there at all, but yeah, it should *list* wallets
-[08:45] <gmaxwell> keypool shoudl probably be dropped.
-[08:45] <wumpus> gmaxwell: I don't think so
-[08:46] <wumpus> fanquake: the only interesting thing about the wallet in getinfo is the balance, so it could be a object {'walletname': balance} or such then it doesn't really become longer as well
-[08:47] <wumpus> gmaxwell: do we even keep track of the time of an updatetip?
-[08:48] <sipa> wumpus: IsInitialBlockDownload does iirc
-[08:48] == Krusty [~Mutter@88.202.183.117] has quit [Ping timeout: 255 seconds]
-[08:48] == Krusty_ [~Mutter@195.181.165.4] has quit [Client Quit]
-[08:49] <wumpus> sipa: ok-in that case it'd make sense to report that on getblockchaininfo, I guess!
-[08:57] == bitcoin-git [~bitcoin-g@x0f.org] has joined #bitcoin-core-dev
-[08:57] <bitcoin-git> [bitcoin] fanquake opened pull request #15564: cli: remove duplicate wallet fields from -getinfo (master...cli-remove-duplicate-entries) https://github.com/bitcoin/bitcoin/pull/15564
+2019-03-11 `make lcov` coverage stats:
+            Overall coverage rate:
+              lines......: 79.3% (51120 of 64446 lines)
+              functions..: 79.2% (6838 of 8629 functions)
 
 -----
+
+2019-03-05 New feature requested: Change bumpfee to add inputs
+           Mentioned in https://github.com/bitcoin/bitcoin/pull/15538
+
+           promag: It was suggested bump fee could add an input to support the
+           increased fee, which could result in a change output.
+
+           instagibbs: It's a feature I've wanted to do for a while but required
+           significant refactoring to do it the Right Way previously.
+           Hoping someone in the residency can tackle it maybe.
+
+-----
+
+2018-09-12 Test coverage of the networking code
+           https://github.com/bitcoin/bitcoin/issues/14210
+
+           Our python functional testing framework is pretty limited for what
+           kinds of p2p behaviors we can test. Basically, we can currently only
+           make manual connections between bitcoind nodes (using the addnode
+           rpc), which are treated differently in our code than outbound peers
+           selected using addrman.
+
+           While we do have some unit-testing coverage of some of the components
+           (like addrman, and parts of net_processing), I don't believe we
+           currently are able to test the overall logic of how bitcoind uses
+           those components (I recall this coming up when working on #11560,
+           as a specific example).
+
+           Anyway I am just mentioning this here as a potential project idea, as
+           this is a material gap in our testing that I think would be valuable
+           to work towards improving, and I wasn't sure how well known this is.
+
+-----
+
+2016-08-09 Improving Parsing... mentioned in:
+           https://github.com/bitcoin/bitcoin/pull/8394
+           https://github.com/bitcoin/bitcoin/pull/15586 (March 2019)
+
+           marcof: in the long run we should make sure that arguments are
+           parsed correctly and sanitized. this pr improves parsing of port
+           numbers passed in by users.
+
+           laanwj: improving *parsing* is a good thing, if we can factor that
+           out I'd have no problem with it.
+
+-----
+
+2019-03-11 Compiler warnings
 
   CXX      leveldb/util/libleveldb_a-coding.o
   CXX      leveldb/util/libleveldb_a-comparator.o
@@ -192,8 +203,7 @@ make[3]: Leaving directory '/home/jon/projects/bitcoin/bitcoin/src/secp256k1'
   AR       libbitcoin_wallet_tool.a
   CXXLD    bitcoin-wallet
 
-
- GEN      qt/locale/bitcoin_bg_BG.qm
+  GEN      qt/locale/bitcoin_bg_BG.qm
   GEN      qt/locale/bitcoin_bg.qm
   GEN      qt/locale/bitcoin_ca_ES.qm
   GEN      qt/locale/bitcoin_ca.qm
@@ -361,40 +371,76 @@ make[1]: Leaving directory '/home/jon/projects/bitcoin/bitcoin'
 
 -----
 
-`make lcov` report:
+2019-03-05
 
-Overall coverage rate:
-  lines......: 79.3% (51120 of 64446 lines)
-  functions..: 79.2% (6838 of 8629 functions)
+Date: Tue, 5 Mar 2019 20:00:35 -0800
+From: Dustin Dettmer <dustinpaystaxes@gmail.com>
+To: Bitcoin Protocol Discussion <bitcoin-dev@lists.linuxfoundation.org>,
+    Marco Falke <falke.marco@gmail.com>
+Subject: Removal of reject network messages from Bitcoin Core (BIP61)
+Message-ID: <CABLeJxTuWa-Kaht3PgvwGN5Eb3GW=HpS7uNMESMcLpqn4BgN3Q@mail.gmail.com>
+
+The reject message is helpful for figuring out why a tx was rejected.
+
+It's not useful for determining success, yes. Particularly when doing
+segwit/newer types of txs as there's always one or more pesky nodes who
+still don't support it and send a reject message for perfectly good txs.
+
+But after a delay where you haven't seen your tx propagated on the network,
+it's useful to know *why* it failed.
+
+What would be nice is actually expanding this error message. Currently with
+RBF txs, 'fee too small' is sent for both original transactions as well as
+replacement transactions. So a bug accidentally sending spent txos
+(currently in mempool) says 'fee too small' instead of something more
+appropriate like 'fee too small to supersede existing unconfirmed
+transaction.'
 
 -----
 
-https://github.com/bitcoin/bitcoin/pull/8394
+From: Marco Falke <falke.marco@gmail.com>
+To: Bitcoin Protocol Discussion <bitcoin-dev@lists.linuxfoundation.org>
+Subject: [bitcoin-dev] Removal of reject network messages from Bitcoin Core (BIP61)
+Message-ID: <CAK51vgDO2Tg38XbW0pqAnO3ETJ_qf8owRsUYsTXmrf7H2yGZtw@mail.gmail.com>
 
-"in the long run we should make sure that arguments are parsed correctly and
-sanitized. this pr improves parsing of port numbers passed in by users."
+Bitcoin Core may send "reject" messages as response to "tx", "block" or
+"version" messages from a network peer when the message could not be accepted.
 
-"improving parsing is a good thing, if we can factor that out I'd have no
-problem with it."
+This feature is toggled by the `-enablebip61` command line option and has been
+disabled by default since Bitcoin Core version 0.18.0 (not yet released as of
+time of writing). Nodes on the network can not generally be trusted to send
+valid ("reject") messages, so this should only ever be used when connected to a
+trusted node.
 
------
+->>> At this time, I am not aware of any software that requires this
+feature, and I would like to remove if from Bitcoin Core to make the codebase
+slimmer, easier to understand and maintain. Let us know if your application
+relies on this feature and you can not use any of the recommended alternatives:
 
-2018-09-12
+* Testing or debugging of implementations of the Bitcoin P2P network protocol
+  should be done by inspecting the log messages that are produced by a recent
+  version of Bitcoin Core. Bitcoin Core logs debug messages
+  (`-debug=<category>`) to a stream (`-printtoconsole`) or to a file
+  (`-debuglogfile=<debug.log>`).
 
-Test coverage of our networking code
+* Testing the validity of a block can be achieved by specific RPCs:
+  - `submitblock`
+  - `getblocktemplate` with `'mode'` set to `'proposal'` for blocks with
+    potentially invalid POW
 
-https://github.com/bitcoin/bitcoin/issues/14210
+* Testing the validity of a transaction can be achieved by specific RPCs:
+  - `sendrawtransaction`
+  - `testmempoolaccept`
 
-Our python functional testing framework is pretty limited for what kinds of p2p
-behaviors we can test. Basically, we can currently only make manual connections
-between bitcoind nodes (using the addnode rpc), which are treated differently in
-our code than outbound peers selected using addrman.
+* Wallets should not use the absence of "reject" messages to indicate a
+  transaction has propagated the network, nor should wallets use "reject"
+  messages to set transaction fees. Wallets should rather use fee estimation
+  to determine transaction fees and set replace-by-fee if desired. Thus, they
+  could wait until the transaction has confirmed (taking into account the fee
+  target they set (compare the RPC `estimatesmartfee`)) or listen for the
+  transaction announcement by other network peers to check for propagation.
 
-While we do have some unit-testing coverage of some of the components (like
-addrman, and parts of net_processing), I don't believe we currently are able to
-test the overall logic of how bitcoind uses those components (I recall this
-coming up when working on #11560, as a specific example).
+I propose to remove "reject" messages from Bitcoin Core 0.19.0 unless there are
+valid concerns about its removal.
 
-Anyway I am just mentioning this here as a potential project idea, as this is a
-material gap in our testing that I think would be valuable to work towards
-improving, and I wasn't sure how well known this is.
+Marco
