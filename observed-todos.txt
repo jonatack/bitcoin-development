@@ -8,7 +8,7 @@ laanwj:    focus on user problems and actual bugs
 
 -----
 
-2019-03-19 Missing functional test in
+2019-03-19 Missing functional test in PR "p2p: Do not relay banned IP addresses"
            https://github.com/bitcoin/bitcoin/pull/15617
 
 -----
