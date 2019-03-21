@@ -8,26 +8,29 @@ laanwj:    focus on user problems and actual bugs
 
 -----
 
+2019-03-21  <wumpus> so apparently there's some funding initiative by Twitter/
+            Square for core devs. if you're actively involved in Bitcoin Core's
+            development and need this funding, and would like me to write a
+            recommendation for you, let me know.
+            Ref: https://twitter.com/jimmysong/status/1108500506106843137
+-----
+
 2019-03-21 Issue up for grabs: "flatfile_tests fail on alpine linux"
            https://github.com/bitcoin/bitcoin/issues/15624
-
 -----
 
 2019-03-19 Missing functional test in PR "p2p: Do not relay banned IP addresses"
            https://github.com/bitcoin/bitcoin/pull/15617
-
 -----
 
 2019-03-17 Reduce the number of globals used
            Issue: https://github.com/bitcoin/bitcoin/issues/15612
            PR https://github.com/bitcoin/bitcoin/pull/15622 partially fixes it
-
 -----
 
 2019-03-15 Write a test for https://github.com/bitcoin/bitcoin/issues/15608
            Feature request: Bitcoin wallet should not modify files unless
            requested or expected.
-
 -----
 
 2019-03-11 IRC discussion: Ideas to improve -getinfo
@@ -111,14 +114,12 @@ laanwj:    focus on user problems and actual bugs
            <bitcoin>  [bitcoin] fanquake opened pull request #15564:
                       cli: remove duplicate wallet fields from -getinfo
                       https://github.com/bitcoin/bitcoin/pull/15564
-
 -----
 
 2019-03-11 `make lcov` coverage stats:
             Overall coverage rate:
               lines......: 79.3% (51120 of 64446 lines)
               functions..: 79.2% (6838 of 8629 functions)
-
 -----
 
 2019-03-05 New feature requested: Change bumpfee to add inputs
@@ -130,7 +131,6 @@ laanwj:    focus on user problems and actual bugs
            instagibbs: It's a feature I've wanted to do for a while but required
            significant refactoring to do it the Right Way previously.
            Hoping someone in the residency can tackle it maybe.
-
 -----
 
 2018-09-12 Test coverage of the networking code
@@ -151,7 +151,6 @@ laanwj:    focus on user problems and actual bugs
            Anyway I am just mentioning this here as a potential project idea, as
            this is a material gap in our testing that I think would be valuable
            to work towards improving, and I wasn't sure how well known this is.
-
 -----
 
 2016-08-09 Improving Parsing... mentioned in:
@@ -164,7 +163,6 @@ laanwj:    focus on user problems and actual bugs
 
            laanwj: improving *parsing* is a good thing, if we can factor that
            out I'd have no problem with it.
-
 -----
 
 2019-03-11 Compiler warnings
