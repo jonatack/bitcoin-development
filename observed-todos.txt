@@ -1,10 +1,15 @@
 OBSERVED TODOS
 
-Last updated: 2019-03-19
+Last updated: 2019-03-21
 
 -----
 
 laanwj:    focus on user problems and actual bugs
+
+-----
+
+2019-03-21 Issue up for grabs: "flatfile_tests fail on alpine linux"
+           https://github.com/bitcoin/bitcoin/issues/15624
 
 -----
 
