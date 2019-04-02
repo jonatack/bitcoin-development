@@ -1,9 +1,18 @@
 OBSERVED TODOS
 
-Last updated: 2019-04-01
+Last updated: 2019-04-02
 
 -----
-laanwj:    focus on user problems and actual bugs
+laanwj:    "focus on user problems and actual bugs"
+-----
+
+2019-04-02 Verify/add test coverage for merged PR
+           "Make orphan processing interruptible"
+           https://github.com/bitcoin/bitcoin/pull/15711
+-----
+
+2019-04-02 Add tests for PR "GUI: Generate bech32 addresses by default"
+           https://github.com/bitcoin/bitcoin/pull/15644
 -----
 
 2019-04-01 test/functional/feature_pruning.py:135-136 and 203-204
