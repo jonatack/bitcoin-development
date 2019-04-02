@@ -6,6 +6,11 @@ Last updated: 2019-04-02
 laanwj:    "focus on user problems and actual bugs"
 -----
 
+2019-04-02 Verify/add test coverage for PR "Remove resendwallettransactions RPC"
+           that refactored ResendWalletTransactions in src/wallet/wallet.cpp/
+           https://github.com/bitcoin/bitcoin/pull/15680
+-----
+
 2019-04-02 Verify/add test coverage for merged PR
            "Make orphan processing interruptible"
            https://github.com/bitcoin/bitcoin/pull/15711
