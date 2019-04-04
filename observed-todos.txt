@@ -1,9 +1,16 @@
 OBSERVED TODOS
 
-Last updated: 2019-04-02
+Last updated: 2019-04-04
 
 -----
 laanwj:    "focus on user problems and actual bugs"
+-----
+
+2019-03-15 Fix https://github.com/bitcoin/bitcoin/issues/15608
+           Feature request: Bitcoin wallet should not modify files unless
+           requested or expected.
+           Tests were added with PR https://github.com/bitcoin/bitcoin/pull/15687
+           so now updated to resolving the issue.
 -----
 
 2019-04-02 Verify/add test coverage for PR "Remove resendwallettransactions RPC"
@@ -99,11 +106,6 @@ laanwj:    "focus on user problems and actual bugs"
 2019-03-17 Reduce the number of globals used
            Issue: https://github.com/bitcoin/bitcoin/issues/15612
            PR https://github.com/bitcoin/bitcoin/pull/15622 partially fixes it
------
-
-2019-03-15 Write a test for https://github.com/bitcoin/bitcoin/issues/15608
-           Feature request: Bitcoin wallet should not modify files unless
-           requested or expected.
 -----
 
 2019-03-11 IRC discussion: Ideas to improve -getinfo
