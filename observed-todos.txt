@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-04-04
+Last updated: 2019-04-07
 
 -----
 laanwj:    "focus on user problems and actual bugs"
@@ -77,8 +77,7 @@ laanwj:    "focus on user problems and actual bugs"
            src/test/test_bitcoin.cpp:45
            // TODO: fix the code to support SegWit blocks
 
-           test/functional/p2p_compactblocks.py:100 and 696
-           # TODO: Rewrite this test to support SegWit being always active
+           test/functional/p2p_compactblocks.py:693
            # TODO: repeat this test with witness tx's to a segwit node
 -----
 
