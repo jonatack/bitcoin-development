@@ -1,0 +1,10 @@
+NOTES
+
+-----
+
+fwilson    look very closely at what are the most annoying and frustrating
+           aspects of the current model and focus on features that remove them
+-----
+
+sipa:      never put github usernames in commits
+-----
