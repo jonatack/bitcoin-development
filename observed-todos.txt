@@ -1,12 +1,16 @@
 OBSERVED TODOS
 
-Last updated: 2019-04-07
+Last updated: 2019-04-15
 
 -----
 laanwj:    "focus on user problems and actual bugs"
 -----
 
-2019-03-15 Fix https://github.com/bitcoin/bitcoin/issues/15608
+2019-04-15 Refactor brittle CReserveKey GetReservedKey()-ReturnKey()-KeepKey() cycle
+           As per jnewbery: https://github.com/bitcoin/bitcoin/pull/15557/files#r274514853
+-----
+
+2019-04-04 Fix https://github.com/bitcoin/bitcoin/issues/15608
            Feature request: Bitcoin wallet should not modify files unless
            requested or expected.
            Tests were added with PR https://github.com/bitcoin/bitcoin/pull/15687
