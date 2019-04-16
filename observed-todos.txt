@@ -6,6 +6,13 @@ Last updated: 2019-04-15
 laanwj:    "focus on user problems and actual bugs"
 -----
 
+2019-04-16 doc/developer-notes.md: Add something like "Keep RPC command
+           names short, put documentation and further descrption in the help.
+           Rationale: short names tend to be easier to remember and save typing"
+           per www.erisian.com.au/bitcoin-core-dev/log-2019-04-16.html#l-129
+           Example: wumpus wishes signrawtransactionwithwallet -> signwithwallet
+-----
+
 2019-04-15 Refactor AvailableCoins() to not take an nMinDepth argument now that
            CCoinControl / coin control has an m_min_depth member, per jnewbery:
            https://github.com/bitcoin/bitcoin/pull/15557/files#r271411570
