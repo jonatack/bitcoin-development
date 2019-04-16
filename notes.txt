@@ -8,3 +8,9 @@ fwilson    look very closely at what are the most annoying and frustrating
 
 sipa:      never put github usernames in commits
 -----
+
+How to turn debug=net on with the logging rpc:
+
+  bitcoin-cli logging '["net"]'
+
+-----
