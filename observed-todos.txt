@@ -1,9 +1,10 @@
 OBSERVED TODOS
 
-Last updated: 2019-04-15
+Last updated: 2019-04-16
 
 -----
-laanwj:    "focus on user problems and actual bugs"
+laanwj:    focus on user problems, actual bugs,
+           and "used, but untested" methods that affect outcomes and need tests
 -----
 
 2019-04-16 doc/developer-notes.md: Add something like "Keep RPC command
