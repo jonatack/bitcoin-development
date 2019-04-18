@@ -4,13 +4,26 @@ NOTES
 
 fwilson    look very closely at what are the most annoying and frustrating
            aspects of the current model and focus on features that remove them
+
 -----
 
 sipa:      never put github usernames in commits
+
 -----
 
 How to turn debug=net on with the logging rpc:
 
   bitcoin-cli logging '["net"]'
+
+-----
+
+Static fully valid pubkey in the Core codebase to reference in unit tests:
+
+  <sipa> use the generator
+  <sipa> 0x0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798
+  <sipa> with secret key 0x0000....000013
+  <sipa> it's hardcoded in secp256k1
+  <instagibbs> functional test harness has static keys for quick reference when wallet isn't compiled in
+  <MarcoFalke> ADDRESS_BCRT1_UNSPENDABLE or self.nodes[i].get_deterministic_priv_key().address
 
 -----
