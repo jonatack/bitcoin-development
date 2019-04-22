@@ -1,10 +1,17 @@
 OBSERVED TODOS
 
-Last updated: 2019-04-16
+Last updated: 2019-04-22
 
 -----
 laanwj:    focus on user problems, actual bugs,
            and "used, but untested" methods that affect outcomes and need tests
+-----
+
+2019-04-22 Linter signalled these spelling errors:
+           src/netaddress.cpp:237: addreses  ==> addresses
+           src/netaddress.cpp:285: addreses  ==> addresses
+           src/rpc/rawtransaction.cpp:47: overriden  ==> overridden
+           Combine with code doc typos in src/wallet/feebumper.cpp:250-252 below
 -----
 
 2019-04-16 doc/developer-notes.md: Add something like "Keep RPC command
