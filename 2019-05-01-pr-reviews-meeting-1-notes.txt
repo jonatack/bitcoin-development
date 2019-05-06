@@ -1,0 +1,136 @@
+Bitcoin Core PR Reviews Meeting 1
+Wednesday, 1st May 2019 1700 UTC with John Newbery on #bitcoin-core-pr-reviews
+Info: https://gist.github.com/jnewbery/6e2797a6f484de59aefc849a6b184008
+
+NOTES
+
+jnewbery:
+
+Let me know if you have suggestions for PRs to cover. The aim is for manageable
+PRs (100-150 LOC change seems about right), not too much contextual knowledge
+required, and trying to cover all the different components.
+
+Feel free to leave feedback in this IRC channel. I'll be monitoring through the
+week.
+
+
+General advice
+
+We start Bitcoin Core IRC meetings with a 'hi' so it's clear who's at keyboard.
+
+Feel free to ask who wants review in #bitcoin-core-dev. "I'm interested in
+helping test wallet/net/etc PRs and I'm looking for PRs to help on" would
+definitely be well received.
+
+Feel free to prod authors of stale PRs. You can leave a comment saying
+"I'd like to review this, but I want to make sure that it's still being actively
+maintained." I wouldn't mind recieving that comment on my PRs.
+
+Concept ACK means that the reviewer acknowledges and agrees with the concept of
+the change, but is not (yet) confirming they've looked at the code or tested it.
+This can be a valuable signal to a PR author to let them know that the PR has
+merit and is headed in the right direction.
+
+
+Manual testing of new features is always welcome.
+
+While you're reviewing, adding tests yourself helps you understand the behaviour
+and you can send them to the author who can add them to the PR too.
+Super helpful in my opinion.
+
+Contributing automated tests to the PR author is a really helpful way to start
+contributing.
+
+One of my early contributions here:
+  https://github.com/bitcoin/bitcoin/pull/9484#issuecomment-272547796
+  was adding tests for a new feature which didn't have test coverage.
+
+I really appreciate it when someone reviews my PRs and provides additional tests.
+
+A comment in the PR that is really helpful in review:
+"here's what I tested and my methodology"
+
+
+jnewbery/instagibbs:
+- I check out the branch locally
+- run a difftool on each commit in turn using meld on linux and opendiff on mac
+- ACK the commit hash of the HEAD commit from my local checkout of the branch,
+  so unless my local tools are compromised, I know I'm ACKing the exact changes.
+  It's useful when a force push happens and links to old commits are lost on GH.
+- Though unless you gpg sign the ACK, GH could just modify what you're saying :)
+- If you want to fully remove trust, you can go the full Marco Falke and
+  sign/opentimestamp all of your review comments :)
+
+aj:
+i find "gitk" useful for getting an overview of changes
+
+fanquake:
+- I have some core dev tools in https://github.com/fanquake/core-review
+  It has guides on how to gitian build, review certain types of PRs, etc.
+  I still need to improve the docs and push up more stuff I have sitting locally.
+- There is also https://github.com/bitcoin-core/bitcoin-maintainer-tools
+- Rough distro list for build-related changes:
+  https://github.com/fanquake/core-review/blob/master/operating-systems.md
+
+BIP 125 describes bitcoin core's mempool policy for allowing txs to be replaced:
+https://github.com/bitcoin/bips/blob/master/bip-0125.mediawiki
+
+
+harding: In case it's helpful to anyone, I took a quick look at the PR and
+made notes about what I'd test for it:
+
+https://gist.github.com/harding/168f82e7986a1befb0e785957fb600dd
+
+harding's process:
+
+1. Open PR in browser
+2. Checkout PR in dev environment
+3. Build
+4. Run integration tests
+5. During and after 2-4, make notes on what I need to review
+6. Answer what questions I can by looking at the code
+7. Start regtest node (or testnet or mainnet if necessary) and review actual
+   operation matches my expectation from the code
+
+Notes:
+
+Build ok; tests passed:
+ALL                                   | ✓ Passed  | 1590 s (accumulated)
+Runtime: 406 s
+
+- "important to reuse all previous inputs"
+
+- Added tests don't seem to cover this (don't see it in previous tests either)
+
+- "cannot source new unconfirmed inputs"
+
+- Added tests don't seem to cover this (don't see it in previous tests either)
+
+- seems to use a new key for each bump in some cases?  If I bump 2,000 times,
+  does that mean I go beyond Bitcoin Core's default gap limit and could end up
+  missing funds on a restore the wallet seed?  Related to discussion at:
+  https://github.com/bitcoin/bitcoin/pull/15557/files#r271956393
+
+- RPC documentation says that it will add a change output if one doesn't exist.
+  Will it also remove a change output if it's not neccessary per Bitcoin Core's
+  usual remove-if-not-economical policy?  (Probably unrelated to this specific PR.)
+
+- PR title refers to `bumpfee` RPC; how does this affect the bump fee option in
+  the GUI wallet?  (Code changes seem to be in functions that are shared
+                         between the two, but I can test this later.)
+
+- test_small_output_with_feerate_succeeds only tests the addition of a single
+  input (1 vin -> 2 vins); could manually test to 2->3 or more.
+
+- What happens if I call bumpfee with an old txid?  E.g. I hit the up arrow in
+  my terminal and accidentally repeat an old bumpfee command from an earlier
+  incarnation that had fewer inputs than the later version?  When it rolls over
+  from n to n+1 inputs again, is there a risk that it'll select a different
+  input the second time?  Whatever the repeat behavior is (fail, success,
+  warning), it was probably set when this call was first designed and isn't
+  redefined with this change, however this change has additional risk if the
+  same inputs aren't always used.
+
+- What happens if I have spend zero conf change on and I spend the change
+  output from a tx that I later try to bumpfee? (Not related to this PR, just
+  curious.)
