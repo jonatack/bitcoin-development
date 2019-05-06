@@ -1,6 +1,7 @@
 Bitcoin Core PR Reviews Meeting 1
 Wednesday, 1st May 2019 1700 UTC with John Newbery on #bitcoin-core-pr-reviews
 Info: https://gist.github.com/jnewbery/6e2797a6f484de59aefc849a6b184008
+Meeting log: https://gist.githubusercontent.com/harding/ea914ee7129e8b33dd429f3886d01c8f/raw/f74c65235049242dd5b482be99b065cbfeca59bf/bitcoin-core-pr-reviews-2019-05-01.txt
 
 NOTES
 

@@ -7,6 +7,22 @@ laanwj:    focus on user problems, actual bugs,
            and "used, but untested" methods that affect outcomes and need tests
 -----
 
+2019-05-06 Add tests for merged PR https://github.com/bitcoin/bitcoin/pull/15930
+           adding rpc getbalances and deprecation messages in help getwalletinfo
+-----
+
+2019-05-06 Add tests for merged PR https://github.com/bitcoin/bitcoin/pull/15557
+           "Enhance `bumpfee` to include inputs when targeting a feerate"
+           as per PR Reviews meeting log:
+           https://gist.githubusercontent.com/harding/ea914ee7129e8b33dd429f3886d01c8f/raw/f74c65235049242dd5b482be99b065cbfeca59bf/bitcoin-core-pr-reviews-2019-05-01.txt
+
+           harding: I think this PR probably could've used more tests, and
+           contributions to testing are welcome independently from the PRs
+           that implement the features. I took a quick look at the PR earlier
+           and made notes about what I'd test for it:
+           https://gist.github.com/harding/168f82e7986a1befb0e785957fb600dd
+-----
+
 2019-04-22 Linter signalled these spelling errors:
            src/netaddress.cpp:237: addreses  ==> addresses
            src/netaddress.cpp:285: addreses  ==> addresses
@@ -15,7 +31,7 @@ laanwj:    focus on user problems, actual bugs,
 -----
 
 2019-04-16 doc/developer-notes.md: Add something like "Keep RPC command
-           names short, put documentation and further descrption in the help.
+           names short, put documentation and further description in the help.
            Rationale: short names tend to be easier to remember and save typing"
            per www.erisian.com.au/bitcoin-core-dev/log-2019-04-16.html#l-129
            Example: wumpus wishes signrawtransactionwithwallet -> signwithwallet
