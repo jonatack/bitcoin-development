@@ -1,30 +1,35 @@
 Bitcoin Core Dev IRC Meetings
 -----------------------------
 
-URL history:
-
-  http://www.erisian.com.au/meetbot/bitcoin-core-dev/
-
------
-
-Core dev meetings are held every Thursday at 1900 GMT.
-
-Wallet meetings are held every other Friday at 1900 GMT, since 29 October 2018.
-
------
-
-Meeting topics are managed by Steve Lee in this gist:
-
+*General* meeting every Thursday 1900 UTC on #bitcoin-core-dev
+  Topics are managed by Steve Lee (moneyball on IRC) in this gist:
   https://gist.github.com/moneyball/071d608fdae217c2a6d7c35955881d8a
 
 -----
 
-How to propose a meeting topic via the bitcoin-core-dev IRC:
+*Wallet* meeting every other Friday 1900 UTC on #bitcoin-core-dev since 29/10/18
 
+-----
+
+*PR Reviews* meeting every Wednesday 1700 UTC on #bitcoin-core-pr-reviews
+  Info: https://gist.github.com/jnewbery/6e2797a6f484de59aefc849a6b184008
+
+  jnewbery: "Let me know if you have suggestions for PRs to cover. The aim is
+  for manageable PRs (100-150 LOC), not too much contextual knowledge required,
+  and trying to cover all the different components. Feel free to leave feedback
+  in this IRC channel. I'll be monitoring through the week."
+
+-----
+
+IRC log history: http://www.erisian.com.au/meetbot/bitcoin-core-dev/
+
+To link to a specific line in the log history, append #l-<line-number>
+  http://www.erisian.com.au/bitcoin-core-dev/log-2019-04-16.html#l-129
+
+-----
+
+To propose a meeting topic via the bitcoin-core-dev IRC:
   moneyball: #proposedmeetingtopic <topic>
-
-  Examples:
-
   moneyball: #proposedmeetingtopic Should send-to-non-v0-witness be standard
   moneyball: #proposedmeetingtopic Bitcoin Core design documentation
 
@@ -43,5 +48,10 @@ Commands to host a meeting:
 #topic
 
 The main commands used are #startmeeting, #topic, #action, and #endmeeting.
+
+-----
+
+We start Bitcoin Core IRC meetings with a 'hi' so it's clear who is present.
+Feel free to say hi!
 
 -----
