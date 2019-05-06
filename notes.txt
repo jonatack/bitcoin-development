@@ -2,12 +2,17 @@ NOTES
 
 -----
 
-fwilson    look very closely at what are the most annoying and frustrating
-           aspects of the current model and focus on features that remove them
+fwilson:  look very closely at what are the most annoying and frustrating
+          aspects of the current model and focus on features that remove them
 -----
 
-sipa:      never put github usernames in commits
+sipa:     never put github usernames in commits
 
+-----
+
+laanwj:   Release notes should refer to the RPC help for details instead of
+          substituting for full documentation.
+          Example: "Please refer to the RPC help of `getbalances` for details."
 -----
 
 How to turn debug=net on with the logging rpc:
