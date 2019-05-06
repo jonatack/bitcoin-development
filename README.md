@@ -4,4 +4,6 @@
 
 - [Observed Todos.](https://github.com/jonatack/bitcoin-development/blob/master/observed-todos.txt) Notes on action items for Bitcoin as I run across them.
 
+- [Bitcoin Core Dev IRC meetings.](https://github.com/jonatack/bitcoin-development/blob/master/bitcoin-core-dev-irc-meetings.txt) Practical info about the various IRC meetings (general, wallet, PR reviews).
+
 - [Bryan Bishop transcript: "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh my!"](https://github.com/jonatack/bitcoin-development/blob/master/2018-07-09-pieter-wuille-taproot-schnorr-sigs-and-sighash-noinput.txt) Edited and cleaned up a bit from the original transcript for personal study.
