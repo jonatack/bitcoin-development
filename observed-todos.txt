@@ -1,10 +1,17 @@
 OBSERVED TODOS
 
-Last updated: 2019-04-22
+Last updated: 2019-05-10
 
 -----
 laanwj:    focus on user problems, actual bugs,
            and "used, but untested" methods that affect outcomes and need tests
+-----
+
+2019-05-10 Make MAX_BLOCKFILE_SIZE, BLOCKFILE_CHUNK_SIZE and UNDOFILE_CHUNK_SIZE
+           variable (either custom values for regtest or reducible via a debug
+           parameter) in order to properly do functional testing for pruning.
+           As per comment by jonasschelli here:
+           https://github.com/bitcoin/bitcoin/pull/15949#issuecomment-489235827
 -----
 
 2019-05-06 Add tests for merged PR https://github.com/bitcoin/bitcoin/pull/15930
