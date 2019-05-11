@@ -2,32 +2,59 @@ NOTES
 
 -----
 
-fwilson:  look very closely at what are the most annoying and frustrating
-          aspects of the current model and focus on features that remove them
+laanwj:    focus on user problems, actual bugs,
+           and "used, but untested" methods that affect outcomes and need tests
 -----
 
-sipa:     never put github usernames in commits
+fwilson:   look for the most annoying, frustrating aspects of the current model
+           and focus on features that fix them
+-----
+
+sipa:      never put github usernames in commits
 
 -----
 
-laanwj:   Release notes should refer to the RPC help for details instead of
-          substituting for full documentation.
-          Example: "Please refer to the RPC help of `getbalances` for details."
+laanwj:    Release notes should refer to the RPC help for details instead of
+           substituting for full documentation.
+           Example: "Please refer to the RPC help of `getbalances` for details."
 -----
 
-How to turn debug=net on with the logging rpc:
+MarcoFalke: to run functional tests in the gui, pass BITCOIND=bitcoin-qt
 
-  bitcoin-cli logging '["net"]'
+-----
+
+To turn on debug=net with the logging rpc: bitcoin-cli logging '["net"]'
 
 -----
 
 Static fully valid pubkey in the Core codebase to reference in unit tests:
 
-  <sipa> use the generator
-  <sipa> 0x0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798
-  <sipa> with secret key 0x0000....000013
-  <sipa> it's hardcoded in secp256k1
-  <instagibbs> functional test harness has static keys for quick reference when wallet isn't compiled in
-  <MarcoFalke> ADDRESS_BCRT1_UNSPENDABLE or self.nodes[i].get_deterministic_priv_key().address
+ sipa       use the generator
+            0x0279BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798
+            with secret key 0x0000....000013, it's hardcoded in secp256k1
+ instagibbs functional test harness has static keys for quick reference when
+            wallet isn't compiled
+ MarcoFalke ADDRESS_BCRT1_UNSPENDABLE or
+            self.nodes[i].get_deterministic_priv_key().address
+-----
 
+ryanofsky  I'm not sure the change from const std::string& to std::string&&
+           is an improvement. You also now can't call SetInternalName with
+           an lvalue (plain variable or reference). This is now an error:
+
+           std::string name = "something";
+           SetInternalName(name);
+
+           People get confused about this stuff, but if the goal is to just
+           move-enable SetInternalName, it should take plain std::string,
+           not const std::string&, and not std::string&&.
+
+           If a function just needs to read an argument (and not manipulate it
+           before throwing it away or move it into a data structure) it should
+           take const T&.
+
+           If a function wants to give callers the option of moving from an
+           argument but still allow copies, it should take plain T.
+
+           If a function wants to force callers to move it should take T &&.
 -----
