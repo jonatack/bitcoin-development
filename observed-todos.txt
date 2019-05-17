@@ -11,6 +11,10 @@ laanwj:    focus on user problems, actual bugs,
            enable wallet tests to mock nodes without current heavy node setup
 -----
 
+2019-05-17 Add release note item about the onlynet=tor deprecation as per
+           https://github.com/bitcoin/bitcoin/pull/16029 discussion
+-----
+
 2019-05-06 Add tests for merged PR https://github.com/bitcoin/bitcoin/pull/15930
            adding rpc getbalances and deprecation messages in help getwalletinfo
 
@@ -68,7 +72,8 @@ laanwj:    focus on user problems, actual bugs,
 
            promag: The dump file contains timestamps so it could only throw this
            error if earliest is pruned - same for importmulti if timestamps are
-           given. Especially when manual pruning.
+           given. Especially when manual pruning. UPDATE: proposed in new PR at
+           https://github.com/bitcoin/bitcoin/pull/16037 but why no tests added?
 -----
 
 2019-05-13 jonasschnelli: I wasn't aware importmulti does not support private
