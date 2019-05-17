@@ -1,0 +1,39 @@
+PSBT "Subscriptors"
+
+http://www.erisian.com.au/bitcoin-core-dev/log-2019-05-10.html#l-439
+
+<meshcollider> #topic signing scripts where different satisfactions may have different costs (sipa)
+
+<sipa> gmaxwell: yes, the easiest approach is always assuming the worst case
+<sipa> this is in the context of things like miniscript or the taproot proposal i recently published
+<gmaxwell> sipa:  that isn't quite what I meant, like if you're going to spend via branch X, you have to know that in advance if you want to use lower weight for fee purposes.
+<gmaxwell> so I think PSBT may need an extension for that.
+<sipa> right, but plugging that into fee estimation and coin selection seems nontrivial
+<gmaxwell> I think its trivial once you assume you have a way of knowing the "weight bound" for each input you're going to use... which itself is only triial if you always assume the worst case branch.
+<sipa> gmaxwell: hmm, i guess if we can come up with something sufficiently generic to put in PSBT (something that restricts certain options or so?), it can probably go in the same form into descriptor records
+<gmaxwell> right.
+<gmaxwell> my thought is that a descriptor should be subsettable.
+<gmaxwell> Like if a script is A or B, there should exist a descriptor that maps to the same spk but only lets you spend via A
+<sipa> that's an interesting idea, putting it in the descriptor itself
+<gmaxwell> in the context of taproot, that descriptor might not even reveal the content of B.
+<gmaxwell> Descriptor-slice.
+<sipa> let's call it a subscriptor
+<sipa> :p
+<gmaxwell> oohhhh
+<meshcollider> lol
+<gmaxwell> Right, so basically you make the cost analysis use the worst case, but use of a subscriptor can lower the worst case.
+<achow101> so if used with taproot, you would have the hash of the other branch indicating that that other branch won't be used
+<gmaxwell> right. something like that. I think you should be also able to include the data but indicate it won't be used.
+<sipa> i guess there could be an unavailable(...) syntax element in descriptors, which for output calculation is identical to ..., but assumes the key/path/... subexpression isn't available for signing
+<gmaxwell> (for a lot of applications you'll want to know what it is)
+<sipa> (or something more syntax sugarry)
+<sipa> i like this
+<achow101> but does such a subscriptor need to be included in a psbt?
+<sipa> i think a subscriptor could just result in certain information not being put in a PSBT
+<instagibbs> was going to ask "when miniscript in Core"
+<instagibbs> motivating use-cases are probably required, but above conversation answers that one way
+<gmaxwell> instagibbs: well, maybe it makes sense to do miniscript with taproot and not bother without.
+<instagibbs> yep
+<gmaxwell> certantly, things like taproot need miniscript in the sense that their ability will be wasted if we don't make it easier to make complex scripts.
+
+-----
