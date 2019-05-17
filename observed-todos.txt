@@ -1,10 +1,64 @@
 OBSERVED TODOS
 
-Last updated: 2019-05-11
+Last updated: 2019-05-17
 
 -----
 laanwj:    focus on user problems, actual bugs,
            and "used, but untested" methods that affect outcomes and need tests
+-----
+
+2019-05-17 *** jnewbery suggestion *** during our phone discussion:
+           enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-05-06 Add tests for merged PR https://github.com/bitcoin/bitcoin/pull/15930
+           adding rpc getbalances and deprecation messages in help getwalletinfo
+
+2019-05-17 and tests for merged PR https://github.com/bitcoin/bitcoin/pull/15730
+           adding scanning details to rpc getwalletinfo
+
+           + maybe another commit to try adding my review suggestions to that PR
+           as well as in merged PR https://github.com/bitcoin/bitcoin/pull/15773
+
+           Deprecation test  info: https://github.com/bitcoin/bitcoin/pull/12953
+-----
+
+2019-05-17 Possibly add tests for RPC Man outputs + fixups + clearer defaults
+-----
+
+2019-05-17 Remove getbalance: miniconf
+-----
+
+2019-05-17 Possibly add `count` to responses of RPC calls like banned and peers
+-----
+
+2019-05-17 Get fuzzing to work and add practical example to doc/fuzzing.md
+-----
+
+2019-05-17 Ideas in https://github.com/bitcoin/bitcoin/pull/15870
+
+           jamesob: Makes a lot of sense to allow rescanning for as long as we
+           can as gmaxwell notes above - and it might even be prudent for most
+           users to set a future-proofing prune value that reflects their disk
+           limitations at startup time. Better that your node start pruning vs
+           run out of disk space and exit. Maybe in the future we could default
+           to it based on the datadir device if pruning-enabled-but-not-done-yet
+           behavior is equivalent to a non-pruning node. Or introduce an
+           "adaptive" pruning mode, which periodically polls for available disk
+           space and adjusts the prune target accordingly..  "prune as little as
+           possible and only until necessitated by lack of space." Some kind of
+           adaptive prune to avoid hitting an out-of-disk error as long as
+           possible.
+
+           promag: The dump file contains timestamps so it could only throw this
+           error if earliest is pruned - same for importmulti if timestamps are
+           given. Especially when manual pruning.
+-----
+
+2019-05-13 jonasschnelli: I wasn't aware importmulti does not support private
+           keys through descriptors. This will be fixed by the open PR
+           https://github.com/bitcoin/bitcoin/pull/15024. However, we should add
+           something to the importmulti help (and backport).
 -----
 
 2019-05-11 Add tests, then rebase/update code for open PR from Reviews Club #2:
@@ -18,10 +72,6 @@ laanwj:    focus on user problems, actual bugs,
            parameter) in order to properly do functional testing for pruning.
            As per comment by jonasschelli here:
            https://github.com/bitcoin/bitcoin/pull/15949#issuecomment-489235827
------
-
-2019-05-06 Add tests for merged PR https://github.com/bitcoin/bitcoin/pull/15930
-           adding rpc getbalances and deprecation messages in help getwalletinfo
 -----
 
 2019-05-01 Add tests for merged PR from Bitcoin Core Reviews Club #1:
