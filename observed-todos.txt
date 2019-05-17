@@ -23,6 +23,22 @@ laanwj:    focus on user problems, actual bugs,
            Deprecation test  info: https://github.com/bitcoin/bitcoin/pull/12953
 -----
 
+2019-05-17 Verify/improve functional tests for open PR from Reviews Club #3:
+           "Fix NOTFOUND bug and expire getdata requests for transactions"
+           https://github.com/bitcoin/bitcoin/pull/15834
+
+           aj: There are tests in my older PR that you should be able to abuse:
+               "Expire inflight GETDATA requests"
+               https://github.com/bitcoin/bitcoin/pull/15776
+
+           jnewbery: I'd suggest checking with sdaftuar whether he's already
+                     writing one. It's difficult to catch all problems like this
+                     with functional tests. They should cover high-level
+                     functionality but they're not very good at catching this
+                     class of bug. A stress-testing or soak-testing rig would be
+                     more effective here.
+-----
+
 2019-05-17 Possibly add tests for RPC Man outputs + fixups + clearer defaults
 -----
 
