@@ -75,3 +75,31 @@ ryanofsky I'm not sure the change from const std::string& to std::string&&
 
           If a function wants to force callers to move it should take T &&.
 -----
+
+GETDATA issues...
+
+219 2019-05-11T20:48:22  <gmaxwell> gleb: sdaftuar: uh, is random fetch ordering putting more stress on orphan handling?  The INVs we get from peers are usually in dependency order. That makes us fetch in dependency order, and thus the results we get back end up being mostly in dependency order.
+220 2019-05-11T20:48:42  <gmaxwell> With the random ordering I think we're breaking that.
+221 2019-05-11T20:50:43  <sdaftuar> gmaxwell: i asked you that question! :P
+222 2019-05-11T20:50:52  <sdaftuar> but yeah, i dunno, i wonder the same
+223 2019-05-11T20:52:07  <gmaxwell> oh. you did? damn
+224 2019-05-11T20:52:13  <gmaxwell> sorry, fishbrain here.
+225 2019-05-11T20:52:48  <gmaxwell> Well, I noticed more use of the orphanmap in my logs which is what caused me to ask the question, so I so I believe the answer is yes.
+226 2019-05-11T20:52:59  <gmaxwell> :-/
+227 2019-05-11T20:53:04  <gmaxwell> this is annoying
+228 2019-05-11T20:53:29  <sdaftuar> i think it at least seems we gave this insufficient thought before merging #14897, so if you have reason to believe it's making things worse, i certainly believe it
+229 2019-05-11T20:53:32  <gribble> https://github.com/bitcoin/bitcoin/issues/14897 | randomize GETDATA(tx) request order and introduce bias toward outbound by naumenkogs Ã‚Â· Pull Request #14897 Ã‚Â· bitcoin/bitcoin Ã‚Â· GitHub
+230 2019-05-11T20:53:50  <gmaxwell> it's not so much a problem but the orphan map is limited in size and its expiration process is random, so you really don't want to be using it 'by default'
+231 2019-05-11T20:56:39  <gmaxwell> one answer to this would be to just improve the orphan map behavior.
+
+171 2019-05-14T13:46:37  <sdaftuar> gmaxwell: regarding the orphan transaction issue and the getdata randomization behavior-- it looks to me like we (a) do not put any delay on getdata requests for outbound peers announcing a tx for the first time and (b) have a fixed delay for inbound peers announcing a tx for the first time
+173 2019-05-14T13:48:09  <sdaftuar> gmaxwell: so i think in the case of a peer announcing a set of transactions that are new to us, we'll request those transactions in dependency order from that peer, except if an inbound peer's announcement is partially supserseded by a later announcement from an outbound peer for a subset of the transactions
+174 2019-05-14T13:48:31  <sdaftuar> gmaxwell: so that seems like it should be a relatively small effect (and is an effect we have to some degree already)
+
+-----
+
+Slow getrawmempool...
+
+<gmaxwell> getrawmempool verbose is astonishingly slow, a PR just went in to make it faster but it is still astonishgly slow.
+137 2019-05-17T08:52:54  <gmaxwell> I am reasonably confident that it was not anywhere near this slow last time the mempools were big.
+138 2019-05-17T08:53:21  <gmaxwell> This change in aug 2017 made all the univalue additions quadratic: https://github.com/bitcoin-core/univalue/commit/ceb1194137421afba01e8c1042bf75f3a2cdddc3 (which probably makes a number of our other RPCs slow too), but the changes works around it.
