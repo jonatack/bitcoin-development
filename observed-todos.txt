@@ -31,6 +31,12 @@ laanwj:    focus on user problems, actual bugs,
 
            FEE BUMPING
 
+2019-05-18 Remove `totalFee` from bumpfee functional tests. Refs:
+           "Deprecate totalfee argument in `bumpfee`"
+           https://github.com/bitcoin/bitcoin/pull/15996
+           and my PR https://github.com/bitcoin/bitcoin/pull/16016
+           and maybe https://github.com/bitcoin/bitcoin/pull/15157 for tests
+
 2019-05-01 Add tests for merged PR from Bitcoin Core Reviews Club #1:
            "Enhance `bumpfee` to include inputs when targeting a feerate"
            https://github.com/bitcoin/bitcoin/pull/15557
