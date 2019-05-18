@@ -6,9 +6,23 @@ Last updated: 2019-05-18
 laanwj:    focus on user problems, actual bugs,
            and "used, but untested" methods that affect outcomes and need tests
 -----
-
-2019-05-17 *** jnewbery suggestion *** during our phone discussion:
+           *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-05-18 http://www.erisian.com.au/bitcoin-core-dev/log-2019-05-18.html#l-56
+
+           gmaxwell: any chance we have a bug where we don't fetch blocks from
+           all out outbound peers while catching up? I've noticed a number of
+           peers appear to be doing this. They startup behind, they're slow to
+           respond like they're fetching blocks from someone, but they never
+           fetch from me.
+
+           wumpus: idk, don't think it necessarily fetches blocks from everyone
+           during initial sync
+
+           gmaxwell: IIRC it doesn't fetch from inbound peers, but I thought it
+           fetched from all outbound
 -----
 
 2019-05-17 Add release note item about the onlynet=tor deprecation as per
@@ -119,7 +133,7 @@ laanwj:    focus on user problems, actual bugs,
 
            promag: The dump file contains timestamps so it could only throw this
            error if earliest is pruned - same for importmulti if timestamps are
-           given. Especially when manual pruning. UPDATE: proposed in new PR at
+           given. Especially when manual pruning. UPDATE: proposed by promag in
            https://github.com/bitcoin/bitcoin/pull/16037 but why no tests added?
 -----
 
