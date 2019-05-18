@@ -1,4 +1,114 @@
-PSBT "Subscriptors"
+PSBTs - Partially-Signed Bitcoin Transactions
+
+Last update: 2019-05-18
+
+Summary from the following sources
+- Andrew Chow talk: https://youtu.be/H6xZSRDXUiU
+- Greg Sanders talk: https://youtu.be/iJR9Lg1jyJg
+- bitcoin-cli help (on master v0.18.99.0-a0dcccffb2-dirty / May 2019)
+
+-----
+
+BIP 174 describes the PSBT protocol format
+https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki
+
+Roles:  Creator
+        Updater
+        Signer -> does sanity checking
+        Combiner
+        Finaliser
+        Extractor -> broadcast
+
+Uses:   Multisigs
+        Coinjoins
+        Hardware wallets
+        Offline wallets (ColdCard)
+
+Initially landed in Bitcoin Core 0.17 release.
+
+-----
+
+PSBTs are stored in base64 key-value maps. Each key-value map field tells the
+signer critical information about the transaction.
+
+
+*Global* types are to be used once for possibly many reasons.
+
+- Unsigned transaction: the raw unsigned txn itself.
+  It should not carry any witness data in this form.
+
+
+*Per-Input* types correspond to the transaction's inputs; are 0-indexed.
+
+- Non-Witness UTXO (non-SegWit)
+  Value: Serialised prevtx
+
+- Witness UTXO (SegWit)
+  Value: Serialised prevtx output
+
+- Partial Signature
+  Key: public key - Value: signature
+
+- Sighash Type
+  Value: sighash advisory type, default is sighash all, e.g. hash entire txn and
+         sign, other options include single
+
+- Redeem Script (for P2SH)
+  Value: redeemScript - serialised script which is then recursively evaluated
+
+- Witness Script
+  Value: witnessScript
+
+- BIP 32 Derivation Paths (in a multisig can be any number of them)
+  Key: public key - Value: master fingerprint, index array
+
+- Finalised scriptSig
+  Value: valid and final scriptSig
+
+- Finalised scriptWitness
+  Value: valid and final scriptWitness
+
+
+*Per-Output* types are a subset of Per-Input Types. Example: change outputs.
+
+- Redeem Script
+- Witness Script
+- BIP 32 Derivation Paths
+
+-----
+
+RPC calls
+
+- analyzepsbt "psbt"
+
+- combinepsbt ["psbt",...]
+
+- converttopsbt "hexstring" ( permitsigdata iswitness )
+
+- createpsbt - like createrawtransaction
+               [{"txid":"hex","vout":n,"sequence":n},...] [{"address":amount},
+                {"data":"hex"},...] ( locktime replaceable )
+
+- decodepsbt "psbt" - useful for introspection
+
+- finalizepsbt "psbt" ( extract )
+
+- joinpsbts ["psbt",...]
+
+- utxoupdatepsbt "psbt"
+
+- walletcreatefundedpsbt - equivalent to fundrawtransaction
+                           [{"txid":"hex","vout":n,"sequence":n},...]
+                           [{"address":amount},{"data":"hex"},...]
+                           ( locktime options bip32derivs )
+
+- walletprocesspsbt "psbt" ( sign "sighashtype" bip32derivs )
+
+-----
+
+PSBT Subscriptors
+
+Idea proposed 10 May 2019 on bitcoin-core-dev IRC channel, log URL here:
 
 http://www.erisian.com.au/bitcoin-core-dev/log-2019-05-10.html#l-439
 

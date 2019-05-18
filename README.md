@@ -8,6 +8,6 @@
 
 - [Notes.](https://github.com/jonatack/bitcoin-development/blob/master/notes.txt) Miscellaneous dev notes.
 
-- [PSBT Subscriptors.](https://github.com/jonatack/bitcoin-development/blob/master/psbt-subscriptors.txt) IRC brainstorming discussion on May 10, 2019 about PSBT descriptor slicing/subsetting i.e. "subscriptors".
+- [PSBTs - Partially-Signed Bitcoin Transactions.](https://github.com/jonatack/bitcoin-development/blob/master/psbts.txt) PSBT information, including new May 2019 IRC discussion of ideas for descriptor slicing/subsetting, e.g. "subscriptors".
 
 - [Bryan Bishop transcript: "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh my!"](https://github.com/jonatack/bitcoin-development/blob/master/2018-07-09-pieter-wuille-taproot-schnorr-sigs-and-sighash-noinput.txt) Edited and cleaned up a bit from the original transcript for personal study.
