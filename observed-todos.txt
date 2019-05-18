@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-05-17
+Last updated: 2019-05-18
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -15,6 +15,8 @@ laanwj:    focus on user problems, actual bugs,
            https://github.com/bitcoin/bitcoin/pull/16029 discussion
 -----
 
+           GETWALLETINFO
+
 2019-05-06 Add tests for merged PR https://github.com/bitcoin/bitcoin/pull/15930
            adding rpc getbalances and deprecation messages in help getwalletinfo
 
@@ -25,6 +27,44 @@ laanwj:    focus on user problems, actual bugs,
            as well as in merged PR https://github.com/bitcoin/bitcoin/pull/15773
 
            Deprecation test  info: https://github.com/bitcoin/bitcoin/pull/12953
+-----
+
+           FEE BUMPING
+
+2019-05-01 Add tests for merged PR from Bitcoin Core Reviews Club #1:
+           "Enhance `bumpfee` to include inputs when targeting a feerate"
+           https://github.com/bitcoin/bitcoin/pull/15557
+           as per info in https://bitcoin-core-review-club.github.io/15557.html
+
+           harding: I think this PR probably could've used more tests, and
+           contributions to testing are welcome independently from the PRs
+           that implement the features. I took a quick look at the PR earlier
+           and made notes about what I'd test for it:
+           https://gist.github.com/harding/168f82e7986a1befb0e785957fb600dd
+
+2019-03-05 Feature requested: Change bumpfee to add inputs. Done with PR 15557?
+           Mentioned in https://github.com/bitcoin/bitcoin/pull/15538
+
+           promag: It was suggested bump fee could add an input to support the
+           increased fee, which could result in a change output.
+
+           instagibbs: It's a feature I've wanted to do for a while but required
+           significant refactoring to do it the Right Way previously.
+           Hoping someone in the residency can tackle it maybe.
+
+2019-04-22 Linter signalled these spelling errors:
+           src/netaddress.cpp:237: addreses  ==> addresses
+           src/netaddress.cpp:285: addreses  ==> addresses
+           src/rpc/rawtransaction.cpp:47: overriden  ==> overridden
+           Combine with code doc typos in src/wallet/feebumper.cpp:250-252 below
+
+2019-04-15 Code documentation typos in src/wallet/feebumper.cpp:250-252
+
+2019-03-31 Feebumper `TODO:` in src/wallet/feebumper.cpp:265
+           // TODO: see if JSON-RPC has a standard way of returning a response
+           // along with an exception. It would be good to return information
+           // about wtxBumped to the caller even if marking the original
+           // transaction replaced does not succeed for some reason.
 -----
 
 2019-05-17 Verify/improve functional tests for open PR from Reviews Club #3:
@@ -56,6 +96,7 @@ laanwj:    focus on user problems, actual bugs,
 -----
 
 2019-05-17 Ideas in https://github.com/bitcoin/bitcoin/pull/15870
+           "wallet: Only fail rescan when blocks have actually been pruned"
 
            jamesob: Makes a lot of sense to allow rescanning for as long as we
            can as gmaxwell notes above - and it might even be prudent for most
@@ -95,25 +136,6 @@ laanwj:    focus on user problems, actual bugs,
            https://github.com/bitcoin/bitcoin/pull/15949#issuecomment-489235827
 -----
 
-2019-05-01 Add tests for merged PR from Bitcoin Core Reviews Club #1:
-           "Enhance `bumpfee` to include inputs when targeting a feerate"
-           https://github.com/bitcoin/bitcoin/pull/15557
-           as per info in https://bitcoin-core-review-club.github.io/15557.html
-
-           harding: I think this PR probably could've used more tests, and
-           contributions to testing are welcome independently from the PRs
-           that implement the features. I took a quick look at the PR earlier
-           and made notes about what I'd test for it:
-           https://gist.github.com/harding/168f82e7986a1befb0e785957fb600dd
------
-
-2019-04-22 Linter signalled these spelling errors:
-           src/netaddress.cpp:237: addreses  ==> addresses
-           src/netaddress.cpp:285: addreses  ==> addresses
-           src/rpc/rawtransaction.cpp:47: overriden  ==> overridden
-           Combine with code doc typos in src/wallet/feebumper.cpp:250-252 below
------
-
 2019-04-16 doc/developer-notes.md: Add something like "Keep RPC command
            names short, put documentation and further description in the help.
            Rationale: short names tend to be easier to remember and save typing"
@@ -124,10 +146,6 @@ laanwj:    focus on user problems, actual bugs,
 2019-04-15 Refactor AvailableCoins() to not take an nMinDepth argument now that
            CCoinControl / coin control has an m_min_depth member, per jnewbery:
            https://github.com/bitcoin/bitcoin/pull/15557/files#r271411570
------
-
-2019-04-15 Code documentation typos in src/wallet/feebumper.cpp:250-252
-
 -----
 
 2019-04-15 Refactor brittle CReserveKey GetReservedKey()-ReturnKey()-KeepKey()
@@ -163,13 +181,6 @@ laanwj:    focus on user problems, actual bugs,
 2019-03-31 CWallet::ScanResult `TODO:` in src/wallet/wallet.cpp:1810
            // TODO: This should return success instead of failure, see
            // https://github.com/bitcoin/bitcoin/pull/14711#issuecomment-458342518
------
-
-2019-03-31 Feebumper `TODO:` in src/wallet/feebumper.cpp:265
-           // TODO: see if JSON-RPC has a standard way of returning a response
-           // along with an exception. It would be good to return information
-           // about wtxBumped to the caller even if marking the original
-           // transaction replaced does not succeed for some reason.
 -----
 
 2019-03-31 Address various `TODO:` comments in the codebase:
@@ -323,17 +334,6 @@ laanwj:    focus on user problems, actual bugs,
             Overall coverage rate:
               lines......: 79.3% (51120 of 64446 lines)
               functions..: 79.2% (6838 of 8629 functions)
------
-
-2019-03-05 New feature requested: Change bumpfee to add inputs
-           Mentioned in https://github.com/bitcoin/bitcoin/pull/15538
-
-           promag: It was suggested bump fee could add an input to support the
-           increased fee, which could result in a change output.
-
-           instagibbs: It's a feature I've wanted to do for a while but required
-           significant refactoring to do it the Right Way previously.
-           Hoping someone in the residency can tackle it maybe.
 -----
 
 2018-09-12 Test coverage of the networking code
