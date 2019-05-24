@@ -1,0 +1,136 @@
+[WIP] How to Review Bitcoin Core PRs
+
+
+GENERAL
+
+take the time to understand the process and guidelines
+
+concentrate on selflessly adding value with a humble approach
+
+in general, focus on quality over quantity and a balance between deep work and quick wins
+
+big picture > nits and code style
+
+remember that contributor/reviewer resources are limited; ask for them carefully/respectfully
+
+focus on user problems, actual bugs, and "used, but untested" methods that affect outcomes and need tests
+
+review and help the high-priority and more difficult PRs that tend to intimidate and stagnate, killing authors' motivation with death by a thousand cuts from nits/code style comments, lack of quality review, and rebase hell
+
+try to help PRs move forward by reviewing, proposing tests or fixes in helpful way, proposing to rebase, or even offering to take over the PR after months of silence; in short, help each other!
+
+avoid filing refactoring and fixup/cleanup PRs and commenting in PRs about code style issues; activity like this actively repels multiple long term contributors and diminishes your social capital on the project
+
+the best time for any nit comments is after the concept acks and consensus on the PR, and before the PR is finalised and has tested ACKs
+
+no one is forced to take all review comments into account; it's perfectly fine to say that you don't want to do something in a PR if you feel it is outside the scope of the change, including/especially if it seems nitpicky
+
+take nits and style advice in a purely advisory way (as in, feel free to adjust if you happen to rebase, otherwise don't bother).. do any style adjustments before merging and not necessarily right away
+
+documentation is important, e.g. whether a function has a good description and Doxygen documentation for all its argument, and high-level documentation of how things work and interact
+
+test coverage is essential; write any missing unit or functional tests
+
+in general PRs that intelligently improve documentation and tests tend to be well-received
+
+do not begin by trying to change consensus code; it is difficult and dangerous territory. the goal of bitcoin core is to maintain the correct consensus on the bitcoin network. all else is secondary.
+
+it takes time; nothing can substitute for time invested in gathering context and understanding from reading the code, issues, PRs/reviews, core dev IRC and mailing list
+
+keep ego and hopes out of the process, don't take things personally and move forward
+
+when in doubt, assume good intentions
+
+be patient with people and outcomes
+
+work on it every day
+
+these are all much easier said than done. be forgiving with yourself and others
+
+
+
+jnewbery: a good rule of thumb is to review 5-10 PRs for each PR you make
+          Start small
+          Have a plan, don't spread yourself too thin
+          Sharpen your tools
+          Ask for and offer help, like rebasing for people or adding test cases
+          People are generous with their time because they care
+          Contribute by understanding what others want and being respectful
+          Learn to get people to review when needed
+
+gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
+          style, especially if it comes across as oppressive rather than
+          enabling
+
+
+
+TECHNICAL SPECIFICS
+
+never put GitHub usernames in commits; this causes endless notifications
+
+release notes should refer to the RPC help for details instead of substituting for full documentation, example "Please refer to the RPC help of `getbalances` for details."
+
+to run functional tests in the gui, pass BITCOIND=bitcoin-qt
+
+to turn on debug=net with the logging RPC: bitcoin-cli logging '["net"]'
+
+if we need any more linters it should be to check for unexpected changes to consensus code
+
+concept ACK means that the reviewer acknowledges and agrees with the concept of
+the change, but is not (yet) confirming they've looked at the code or tested it.
+
+this can be a valuable signal to a PR author to let them know that the PR has
+merit and is headed in the right direction.
+
+
+manual testing of new features is always welcome.
+
+while you're reviewing, adding tests yourself helps you understand the behaviour and you can send them to the author who can add them to the PR too
+
+contributing automated tests to the PR author is a really helpful way to start
+contributing
+
+authors really appreciate it when someone reviews the pr and provides additional tests
+
+a comment that is really helpful in review: "here's what I tested and my methodology"
+
+jnewbery/instagibbs:
+- check out the branch locally
+- run a difftool on each commit in turn using meld on linux and opendiff on mac
+- ACK the commit hash of the HEAD commit from my local checkout of the branch,
+  so unless my local tools are compromised, I know I'm ACKing the exact changes.
+  it's useful when a force push happens and links to old commits are lost on GH.
+- though unless you gpg sign the ACK, GH could just modify what you're saying :)
+- if you want to fully remove trust, you can go the full Marco Falke and
+  sign/opentimestamp all of your review comments :)
+
+aj:
+i find "gitk" useful for getting an overview of changes
+
+fanquake:
+- I have some core dev tools in https://github.com/fanquake/core-review
+  It has guides on how to gitian build, review certain types of PRs, etc.
+  I still need to improve the docs and push up more stuff I have sitting locally.
+- There is also https://github.com/bitcoin-core/bitcoin-maintainer-tools
+- Rough distro list for build-related changes:
+  https://github.com/fanquake/core-review/blob/master/operating-systems.md
+
+BIP 125 describes bitcoin core's mempool policy for allowing txs to be replaced:
+https://github.com/bitcoin/bips/blob/master/bip-0125.mediawiki
+
+
+harding: In case it's helpful to anyone, I took a quick look at the PR and
+made notes about what I'd test for it:
+
+https://gist.github.com/harding/168f82e7986a1befb0e785957fb600dd
+
+harding's process:
+
+1. Open PR in browser
+2. Checkout PR in dev environment
+3. Build
+4. Run integration tests
+5. During and after 2-4, make notes on what I need to review
+6. Answer what questions I can by looking at the code
+7. Start regtest node (or testnet or mainnet if necessary) and review actual
+   operation matches my expectation from the code
