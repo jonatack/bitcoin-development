@@ -1,9 +1,45 @@
 [WIP] How to Review Bitcoin Core PRs
 
 
+BEFORE YOU BEGIN
+
+This how-to builds on the foundations laid by the following 3 articles:
+
+1. https://bitcointechtalk.com/a-gentle-introduction-to-bitcoin-core-development-fdc95eaee6b8 by Jimmy Song
+2. https://medium.com/@pierre_rochard/understanding-the-technical-side-of-bitcoin-2c212dd65c09 by Pierre Rochard
+3. https://bitcointechtalk.com/contributing-to-bitcoin-core-a-personal-account-35f3a594340b by John Newbery
+
+
+INTRODUCTION
+
+Reviewing is the best way to begin contributing
+
+Experienced review and testing are regularly cited by long-term Bitcoin Core developers as both
+
+  - resource bottlenecks, and
+
+  - the best and most helpful way to begin contributing and earning reputation in the community
+
+Yet the process and learning curve can seem intimidating and in practice very few new contributors do it.
+
+As a newcomer myself, this article represents my current understanding after two months, a few dozen PR reviews (some more useful than others), a few issues tested or handled, and a handful of commits.
+
+Some of this understanding was gained from years of contributing a large open source project, Ruby on Rails, co-editing the This Week in Rails newsletter (https://rails-weekly.ongoodbits.com/archive), and co-developing and lead-maintaining a popular Ruby search engine, Ransack (https://github.com/activerecord-hackery/ransack).
+
+Yet much of it is specific to Bitcoin Core and came only with time. I would have preferred to know these things from the start.
+
+This is foremost a self-study exercise, but perhaps it can be useful for others.
+
+
 GENERAL
 
-take the time to understand the process and guidelines
+Be aware of what you don’t know; years of deep experience and context in the minds of the long-term contributors
+
+Follow the bitcoin-core-dev IRC and mailing list
+
+take the time to
+  - understand the contribution process and guidelines
+  - get to know the maintainers and regular contributors: what they do, what they like and want
 
 concentrate on selflessly adding value with a humble approach
 
@@ -33,7 +69,9 @@ test coverage is essential; write any missing unit or functional tests
 
 in general PRs that intelligently improve documentation and tests tend to be well-received
 
-do not begin by trying to change consensus code; it is difficult and dangerous territory. the goal of bitcoin core is to maintain the correct consensus on the bitcoin network. all else is secondary.
+do not begin by trying to change consensus code; it is difficult and dangerous territory
+
+the goal of bitcoin core is to maintain the correct consensus on the bitcoin network, all else is secondary
 
 it takes time; nothing can substitute for time invested in gathering context and understanding from reading the code, issues, PRs/reviews, core dev IRC and mailing list
 
@@ -134,3 +172,14 @@ harding's process:
 6. Answer what questions I can by looking at the code
 7. Start regtest node (or testnet or mainnet if necessary) and review actual
    operation matches my expectation from the code
+
+
+CREDITS
+
+This article includes observed comments by the following Bitcoin Core contributors/maintainers who deserve to be credited: Wladimir J. van der Laan, Marco Falke, Pieter Wuille, and Gregory Maxwell.
+
+A special thank you to John Newbery for creating and running the Bitcoin Core PR Reviews Club (https://bitcoin-core-review-club.github.io/) and to the Core contributors who participated so far: Dave Harding, Anthony Towns, Gregory Sanders, Michael Ford, and Marco Falke.
+
+Over the years I had become disillusioned by the central influence of BDFLs in some programming languages and open source projects. Wladimir van der Laan's humble service to Bitcoin sparked the initial idea in my head of doing the same.
+
+Finally, a big thank you to the Core contributors for their patience and receptivity with my stumbling review attempts so far, notably John Newbery, Marco Falke, João Barbosa, practicalswift, Gregory Sanders, Jonas Schnelli, Pieter Wuille and Wladimir J. van der Laan, and to Adam Jonas and John Newbery for their guidance and advice from the start.
