@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-05-18
+Last updated: 2019-05-27
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,10 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-05-27 Perhaps improve/clarify the frequent bitcoind logged warning:
+           "warning='XX of last 100 blocks have unexpected version'"
 -----
 
 2019-05-18 http://www.erisian.com.au/bitcoin-core-dev/log-2019-05-18.html#l-56
