@@ -71,21 +71,11 @@ the big picture is much more important than nits, spelling, or code style
 remember that contributor/reviewer resources are limited; ask for them carefully
 and respectfully
 
-especially at the beginning, be sure to *avoid*:
-
-  - making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
-    valuable contributor and maintaner time for little gain
-
-  - commenting in PRs about code style issues
-
-  - nit-only reviews, particularly with PRs labeled as WIP or in the early
-    stage when the PR author is looking for concept ACKs e.g. high-level
-    consensus/interest in the change
-
-  - in generally, asking for attention for anything trivial/low-value
-
-why: activity like this actively repels long term contributors, and it
-diminishes your social capital on the project
+especially in the beginning, try to avoid overly commenting in PRs about code
+style issues and nits, particularly with PRs labeled as WIP or when a PR has
+just been filed and the PR author is mainly looking for concept ACKs e.g.
+high-level consensus in the change. activity like this actively repels long term
+contributors and can diminish your social capital on the project
 
 focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests
@@ -96,14 +86,6 @@ things work and interact
 
 test coverage is essential; don't hesitate to write any missing unit or
 functional tests
-
-in general, PRs that intelligently improve documentation and tests in a well
-thought-out way that adds value tend to be well-received
-
-don't rush: it's often better to work on code/tests/PRs without actually filing
-them... give them time to mature, re-visit them with fresh eyes and perspective
-
-in other words, write several unfiled PRs for each one that you do file
 
 be a contributor: help PRs move forward by reviewing, proposing tests or fixes
 in a helpful way, proposing to rebase, or even offering to take over the PR
@@ -123,15 +105,8 @@ comment is nitpicky
 the best time for any nit comments is after the concept acks and consensus on
 the PR, and before the PR is finalised and has tested ACKs
 
-give and receive nits and style advice in an advisory way -- as in, feel
-free to ignore, feel free to adjust if you happen to rebase, etc.
-
-nits/style adjustments are often best made right before merging, and not
-necessarily right away
-
-do not begin by trying to change consensus code; it is difficult and dangerous
-territory. the goal of bitcoin core is to maintain the correct consensus on the
-bitcoin network, all else is secondary
+give nits and style advice in an advisory way -- as in, feel free to ignore,
+feel free to adjust if you happen to rebase, etc.
 
 the process takes time; nothing can substitute for time invested in gathering
 context and understanding from reading the code, issues, PRs/reviews, core dev
@@ -224,9 +199,6 @@ harding's process:
 
 jnewbery:
 
-a really good habit when writing PRs is giving reviewers tips on how to review
-and test the changes, e.g. "how to review this" is super helpful
-
 I always download the PR branch to my machine so I can build and review locally.
 I don't use the github webpage to review, only to leave comments.
 
@@ -274,10 +246,6 @@ I have a vagrant file that installs all the dependencies
 I run make check and the functional tests, not usually --extended because I'm
 too impatient
 
-I have travis set up on jnewbery/bitcoin, so whenever I push a branch to my
-github repo it'll get built in travis, although there's not much reason to look
-at it for reviewing, since the branch is already built in bitcoin/bitcoin travis
-
 Here's my vagrant config (YMMV): https://github.com/jnewbery/btc-dev
 
 A toolchain for bitcoind data files: https://github.com/jnewbery/bitcointools
@@ -289,13 +257,60 @@ to turn on debug=net with the logging RPC: bitcoin-cli logging '["net"]'
 if we need any more linters it should be to check for unexpected changes to
 consensus code
 
-if you make a PR:
 
-  - never put GitHub usernames in commits; this causes endless notifications
+ABOUT MAKING PULL REQUESTS
 
-  - release notes should refer to the RPC help for details instead of
-    substituting for full documentation, for example: "Please refer to the RPC
-    help of `getbalances` for details"
+Focus on user problems, actual bugs, and "used, but untested" methods that
+affect outcomes and need tests.
+
+Avoid making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
+valuable contributor and maintainer time for little gain. As mentioned above,
+activity like this actively repels long term contributors and can diminish your
+social capital on the project.
+
+Similarly, do not begin by trying to change consensus code; it is difficult and
+dangerous territory. The goal of bitcoin core is to maintain the correct
+consensus on the bitcoin network, all else is secondary.
+
+Documentation is important, e.g. whether a function has a good description and
+Doxygen documentation for all its arguments, and high-level documentation of how
+things work and interact.
+
+Test coverage is essential; don't hesitate to write any missing unit or
+functional tests.
+
+In general, PRs that intelligently improve documentation and tests in a well
+thought-out way tend to be well-received.
+
+Don't rush: it's often better to work on code/tests/PRs without actually filing
+them... give them time to mature and re-visit them with fresh eyes and
+perspective. Write several unfiled PRs for each one that you do file.
+
+Scale up your PR contributions slowly in line with your ability and
+understanding of the project, process, and codebase.
+
+Never put GitHub usernames in commits; this can cause endless annoying
+notifications for those concerned.
+
+Any release notes should refer to the RPC help for details instead of
+substituting for full documentation, for example: "Please refer to the RPC help
+of `getbalances` for details."
+
+Put the time in to make your PRs as easy to understand and review as possible:
+code/tests/comments, a good commit message, concise references/explanations.
+
+In your PR description, it's a smart habit to give reviewers tips on how to
+review and test your changes, e.g. "Here's how to review this".
+
+Set up Travis CI on your own GitHub Bitcoin repository so that when you push a
+branch or commit the linter and CI tests run. It's a good idea to be sure they
+are all green on your GitHub repository before filing a PR.
+
+Remember to continue doing more reviewing and testing than adding PRs to the
+backlog. 5 to 15 reviews for each PR you add is a good range. Only add PRs that
+are worth merging, both for Bitcoin and for your reputation and track record.
+This way your PRs will receve attention from the maintainers and other
+contributors and be merged more quickly.
 
 
 CREDITS
