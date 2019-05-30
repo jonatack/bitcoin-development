@@ -12,7 +12,7 @@ This how-to builds on the foundations laid by the following 3 articles:
 
 INTRODUCTION
 
-Reviewing is the best way to begin contributing
+Reviewing and testing can be the best ways to begin contributing to Bitcoin Core
 
 Experienced review and testing are regularly cited by long-term Bitcoin Core
 developers as both
@@ -47,71 +47,98 @@ exercise, but perhaps it can be useful for others.
 
 GENERAL
 
-Be aware of what you don’t know; years of deep experience and context in the
-minds of the long-term contributors
-
 Follow the bitcoin-core-dev IRC and mailing list
 
 take the time to
 
-  - understand the contribution process and guidelines
+  - understand the contribution process and guidelines, not only by reading
+    everything in /doc and /test, but also by observing interactions  on IRC and
+    in the repository
 
   - get to know the maintainers and regular contributors: what they do, what
     they like and want
 
 concentrate on selflessly adding value with a humble approach
 
+be aware of what you don’t know; long-term contributors have years of experience
+and context
+
 in general, focus on quality over quantity and a balance between deep work and
 quick wins
 
-big picture > nits and code style
+the big picture is much more important than nits, spelling, or code style
 
 remember that contributor/reviewer resources are limited; ask for them carefully
 and respectfully
 
+especially at the beginning, be sure to *avoid*:
+
+  - making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
+    valuable contributor and maintaner time for little gain
+
+  - commenting in PRs about code style issues
+
+  - nit-only reviews, particularly with PRs labeled as WIP or in the early
+    stage when the PR author is looking for concept ACKs e.g. high-level
+    consensus/interest in the change
+
+  - in generally, asking for attention for anything trivial/low-value
+
+why: activity like this actively repels long term contributors, and it
+diminishes your social capital on the project
+
 focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests
 
-review and help the high-priority and more difficult PRs that tend to intimidate
-and stagnate, killing authors' motivation with death by a thousand cuts from
-nits/code style comments, lack of quality review, and rebase hell
+documentation is important, e.g. whether a function has a good description and
+Doxygen documentation for all its arguments, and high-level documentation of how
+things work and interact
 
-try to help PRs move forward by reviewing, proposing tests or fixes in helpful
-way, proposing to rebase, or even offering to take over the PR after months of
-silence; in short, help each other!
+test coverage is essential; don't hesitate to write any missing unit or
+functional tests
 
-avoid filing refactoring and fixup/cleanup PRs and commenting in PRs about code
-style issues; activity like this actively repels multiple long term contributors
-and diminishes your social capital on the project
+in general, PRs that intelligently improve documentation and tests in a well
+thought-out way that adds value tend to be well-received
+
+don't rush: it's often better to work on code/tests/PRs without actually filing
+them... give them time to mature, re-visit them with fresh eyes and perspective
+
+in other words, write several unfiled PRs for each one that you do file
+
+be a contributor: help PRs move forward by reviewing, proposing tests or fixes
+in a helpful way, proposing to rebase, or even offering to take over the PR
+after months of silence; in short, help each other!
+
+don't just review the easy PRs... you can add much more value by taking the time
+to do deep, quality review of the high-priority and more difficult PRs, the ones
+that intimidate people and stagnate for months, killing their author's
+motivation with death by a thousand cuts from nits/code style comments, lack of
+quality review, and rebase hell
+
+keep in mind that no one is forced to take your review comments into account;
+it's perfectly fine for the author to reply that they don't want to do something
+if they feel it is outside the scope of the change, including/especially if your
+comment is nitpicky
 
 the best time for any nit comments is after the concept acks and consensus on
 the PR, and before the PR is finalised and has tested ACKs
 
-no one is forced to take all review comments into account; it's perfectly fine
-to say that you don't want to do something in a PR if you feel it is outside the
-scope of the change, including/especially if it seems nitpicky
+give and receive nits and style advice in an advisory way -- as in, feel
+free to ignore, feel free to adjust if you happen to rebase, etc.
 
-take nits and style advice in a purely advisory way (as in, feel free to adjust
-if you happen to rebase, otherwise don't bother).. do any style adjustments
-before merging and not necessarily right away
+nits/style adjustments are often best made right before merging, and not
+necessarily right away
 
-documentation is important, e.g. whether a function has a good description and
-Doxygen documentation for all its argument, and high-level documentation of how
-things work and interact
+do not begin by trying to change consensus code; it is difficult and dangerous
+territory. the goal of bitcoin core is to maintain the correct consensus on the
+bitcoin network, all else is secondary
 
-test coverage is essential; write any missing unit or functional tests
+the process takes time; nothing can substitute for time invested in gathering
+context and understanding from reading the code, issues, PRs/reviews, core dev
+IRC and the mailing list
 
-in general PRs that intelligently improve documentation and tests tend to be well-received
-
-do not begin by trying to change consensus code; it is difficult and dangerous territory
-
-the goal of bitcoin core is to maintain the correct consensus on the bitcoin
-network, all else is secondary
-
-it takes time; nothing can substitute for time invested in gathering context and
-understanding from reading the code, issues, PRs/reviews, core dev IRC and mailing list
-
-keep ego and hopes out of the process, don't take things personally and move forward
+keep ego and hopes out of the process, don't take things personally and move
+forward
 
 when in doubt, assume good intentions
 
@@ -121,7 +148,7 @@ work on it every day
 
 these are all much easier said than done. be forgiving with yourself and others
 
-jnewbery: a good rule of thumb is to review 5-10 PRs for each PR you make
+jnewbery: a good rule of thumb is to review 5-15 PRs for each PR you make
           Start small
           Have a plan, don't spread yourself too thin
           Sharpen your tools
@@ -136,19 +163,6 @@ gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
 
 
 TECHNICAL SPECIFICS
-
-never put GitHub usernames in commits; this causes endless notifications
-
-release notes should refer to the RPC help for details instead of substituting
-for full documentation, for example: "Please refer to the RPC help of
-`getbalances` for details."
-
-to run functional tests in the gui, pass BITCOIND=bitcoin-qt
-
-to turn on debug=net with the logging RPC: bitcoin-cli logging '["net"]'
-
-if we need any more linters it should be to check for unexpected changes to
-consensus code
 
 concept ACK means that the reviewer acknowledges and agrees with the concept of
 the change, but is not (yet) confirming they've looked at the code or tested it.
@@ -268,8 +282,20 @@ Here's my vagrant config (YMMV): https://github.com/jnewbery/btc-dev
 
 A toolchain for bitcoind data files: https://github.com/jnewbery/bitcointools
 
-I'm still looking for suggestions for future PRs to cover and volunteers to lead
-discussion
+MarcoFalke: to run functional tests in the gui, pass BITCOIND=bitcoin-qt
+
+to turn on debug=net with the logging RPC: bitcoin-cli logging '["net"]'
+
+if we need any more linters it should be to check for unexpected changes to
+consensus code
+
+if you make a PR:
+
+  - never put GitHub usernames in commits; this causes endless notifications
+
+  - release notes should refer to the RPC help for details instead of
+    substituting for full documentation, for example: "Please refer to the RPC
+    help of `getbalances` for details"
 
 
 CREDITS
