@@ -4,7 +4,7 @@
 
 - [Bitcoin Core Dev IRC meetings.](bitcoin-core-dev-irc-meetings.txt) Practical info about the various IRC meetings (general, wallet, PR reviews).
 
-- [How to Review Bitcoin Core PRs.](how-to-review-bitcoin-core-prs.txt) A work-in-progress guide for self study.
+- [How to Review Bitcoin Core PRs.](how-to-review-bitcoin-core-prs.md) A work-in-progress guide for self study.
 
 - [Observed Todos.](observed-todos.txt) Ideas for things to do as I run across them.
 
