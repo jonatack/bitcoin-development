@@ -10,6 +10,8 @@
 
 - [PSBTs - Partially-Signed Bitcoin Transactions.](psbts.txt) PSBT information, including new May 2019 IRC discussion of ideas for descriptor slicing/subsetting, e.g. "subscriptors".
 
+- [Flame Graphs.](flame-graphs.md) How to generate flame graph profiles.
+
 - [Notes.](notes.txt) Miscellaneous dev notes that are mostly destined to be re-organised into specific documents (like "How to Review Bitcoin Core PRs", etc.)
 
 - [Bryan Bishop transcript: "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh my!"](2018-07-09-pieter-wuille-taproot-schnorr-sigs-and-sighash-noinput.txt) Edited and cleaned up a bit from the original transcript for personal study.
