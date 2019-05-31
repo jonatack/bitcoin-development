@@ -95,11 +95,14 @@ Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
 
 Documentation is important, e.g. whether a function has a good description and
-Doxygen documentation for all its arguments, and high-level documentation of how
+[Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
+for all its arguments, and high-level documentation of how
 things work and interact.
 
-Test coverage is essential; don't hesitate to write any missing unit or
-functional tests.
+Test coverage is essential; don't hesitate to write any missing
+[unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
+[functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
+tests.
 
 Try to avoid overly commenting in PRs about code style issues and nits,
 particularly with PRs labeled as WIP, or when a PR has just been filed and the
@@ -126,14 +129,18 @@ feel free to adjust if you happen to rebase, etc.
 When you can, scale up the difficulty and priority of the PRs you review.
 
 You can add more value by taking the time to do deep, quality review of the
-high-priority and more difficult PRs, the ones that intimidate people and that
-stagnate for months, killing their author's motivation with death by a thousand
-cuts from nits/code style comments, lack of quality review, and rebase hell.
+[high-priority](https://github.com/bitcoin/bitcoin/projects/8) and more
+difficult PRs, the ones that intimidate people and that stagnate for months,
+killing their author's motivation with death by a thousand cuts from lack of
+quality review, nitpicking/code style bikeshedding, and rebase hell.
 
 The process takes time; nothing can substitute for months and years invested in
-gathering context and understanding from following the code, issues,
-PRs/reviews, bitcoin-core-dev IRC and
-[mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-core-dev).
+gathering context and understanding from following the
+[code](https://github.com/bitcoin/bitcoin),
+[issues](https://github.com/bitcoin/bitcoin/issues),
+[PRs/reviews](https://github.com/bitcoin/bitcoin/pulls),
+[bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev),
+and [mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-core-dev).
 
 Keep ego and hopes out of the process. Don't take things personally and keep
 moving forward.
@@ -166,32 +173,32 @@ gmaxwell:
 
 Concept ACK means that the reviewer acknowledges and agrees with the concept of
 the change, but is not (yet) confirming they've looked at the code or tested it.
-
 This can be a valuable signal to a PR author to let them know that the PR has
 merit and is headed in the right direction.
 
 Manual testing of new features is always welcome.
 
+A comment that is really helpful in review: "here's what I tested and my
+methodology", particularly to back up a tested ACK.
+
 While you're reviewing, adding tests yourself helps you understand the behaviour
 and you can send them to the author who can add them to the PR too.
 
 Contributing automated tests to the PR author is a really helpful way to start
-contributing.
-
-Authors really appreciate it when someone reviews the pr and provides additional
-tests.
-
-A comment that is really helpful in review: "here's what I tested and my methodology".
+contributing. Authors really appreciate it when someone reviews their PR and
+provides additional tests.
+[Here's an example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
 
 jnewbery/instagibbs:
 - check out the branch locally
 - run a difftool on each commit in turn using meld on linux and opendiff on mac
 - ACK the commit hash of the HEAD commit from my local checkout of the branch,
-  so unless my local tools are compromised, I know I'm ACKing the exact changes
-  it's useful when a force push happens and links to old commits are lost on GH
-- though unless you gpg sign the ACK, GH could just modify what you're saying;
-  if you want to fully remove trust, you can go the full Marco Falke and
-  sign/opentimestamp all of your review comments
+  so unless my local tools are compromised, I know I'm ACKing the exact changes.
+  It's also useful when a force push happens and links to old commits are lost
+  on GitHub
+- though unless you GPG sign the ACK, GitHub could just modify what you're
+  writing. If you want to fully remove trust, you can go the full Marco Falke
+  and sign/opentimestamp all of your review comments
 
 aj:
 - i find "gitk" useful for getting an overview of changes
@@ -208,9 +215,9 @@ BIP 125 describes bitcoin core's mempool policy for allowing txs to be replaced:
 https://github.com/bitcoin/bips/blob/master/bip-0125.mediawiki
 
 harding:
-- In case it's helpful to anyone, I took a quick look at the PR and made notes
-  about what I'd test for it:
-  https://gist.github.com/harding/168f82e7986a1befb0e785957fb600dd
+- In case it's helpful to anyone, I took a quick look at the PR and
+[made notes about my review process and what I'd test
+for](https://gist.github.com/harding/168f82e7986a1befb0e785957fb600dd)
 
 harding's process:
 1. Open PR in browser
@@ -300,11 +307,14 @@ dangerous territory. The goal of bitcoin core is to maintain the correct
 consensus on the bitcoin network, all else is secondary.
 
 Documentation is important, e.g. whether a function has a good description and
-Doxygen documentation for all its arguments, and high-level documentation of how
+[Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
+for all its arguments, and high-level documentation of how
 things work and interact.
 
-Test coverage is essential; don't hesitate to write any missing unit or
-functional tests.
+Test coverage is essential; don't hesitate to write any missing
+[unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
+[functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
+tests.
 
 In general, PRs that intelligently improve documentation and tests in a well
 thought-out way tend to be well-received.
@@ -334,22 +344,23 @@ Set up Travis CI on your own GitHub Bitcoin repository so that when you push a
 branch or commit the linter and CI tests run. It's a good idea to be sure they
 are all green on your GitHub repository before filing a PR.
 
-Only add PRs that are worth merging, both for Bitcoin and for your track record.
-This way your PRs will receve attention from the maintainers and other
-contributors and be merged more quickly.
+Ask yourself how others will see your PR and try to only file PRs that are worth
+merging, both for Bitcoin and for your track record. This way your PRs will
+receive attention from the maintainers and other contributors and be merged more
+quickly.
 
 Learn how to get people to review your work when needed. It's a skill.
 
-Part of that is to remember to continue doing more reviewing and testing than
-adding PRs to the backlog. 5 to 15 reviews for each PR you add is a good range.
-If you are a good reviewer and begin building a reputation, the other
-contributors might reciprocate by reviewing your work as well.
+Continue to do more reviewing and testing than adding PRs to the backlog.
+Reviewing 5 to 15 PRs for every PR you add is a good range. If you are a good
+reviewer and begin building a reputation, maintainers and other contributors
+might reciprocate by reviewing your work as well.
 
 
 ### CREDITS
 
-A special thank you to John Newbery for launching and running the Bitcoin Core
-PR Reviews Club (https://bitcoin-core-review-club.github.io/) and to the
+A special thank you to John Newbery for launching the [Bitcoin Core PR Reviews
+Club](https://bitcoin-core-review-club.github.io/) and to the
 long-term contributors who participated so far: Dave Harding, Anthony Towns,
 Gregory Sanders, Michael Ford, Andrew Chow, and Marco Falke.
 
@@ -358,8 +369,11 @@ Bitcoin Core contributors/maintainers who deserve to be credited:
 Wladimir J. van der Laan, Marco Falke, Pieter Wuille, and Gregory Maxwell.
 
 Over the years I had become disillusioned by the central influence of BDFLs in
-programming languages and open source projects. Wladimir van der Laan's humble
-service to Bitcoin sparked the possibility to me of perhaps doing the same.
+programming languages and open source projects. Wladimir van der Laan's
+[long-standing](https://twitter.com/orionwl/status/1131564038444453889)
+[humble](https://twitter.com/orionwl/status/1131827793908645888)
+[service](https://twitter.com/orionwl/status/1131924832071880705) to Bitcoin
+sparked the possibility to me of perhaps doing the same.
 
 Finally, a big thank you to the Core contributors for their patience with my
 stumbling review attempts so far, notably John Newbery, Marco Falke, João
