@@ -70,10 +70,9 @@ help more than hinder while getting up to speed.
 Be aware of what you don’t know; long-term contributors have years of experience
 and context.
 
-Follow the bitcoin-core-dev
-[IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
-and
-[mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-core-dev).
+Follow the [bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
+and the
+[bitcoin-dev mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).
 
 Before jumping in, take plenty of time to
 
@@ -116,6 +115,10 @@ tests, or improve the
 [fuzzing tests](https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md) or
 [benchmarking](https://github.com/bitcoin/bitcoin/blob/master/doc/benchmarking.md).
 
+Be a contributor. Help PRs move forward by reviewing, proposing tests or fixes
+in a helpful way, proposing to rebase, or even offering to take over the PR
+after months of silence. In short, help each other!
+
 Try to avoid overly commenting in PRs about code style issues and nits,
 particularly with PRs labeled as WIP, or when a PR has just been filed and the
 PR author is mainly looking for concept ACKs, e.g. general consensus, not
@@ -123,20 +126,16 @@ nitpicking. Long-term contributors report that activity like this repels them,
 and it can diminish your social capital on the project. Try to understand what
 kind of review is needed and when to do what.
 
-Be a contributor. Help PRs move forward by reviewing, proposing tests or fixes
-in a helpful way, proposing to rebase, or even offering to take over the PR
-after months of silence. In short, help each other!
-
-Keep in mind that no one is forced to take your review comments into account;
-it's perfectly fine for the author to reply that they don't want to do something
-if they feel it is outside the scope of the change, including/especially if your
-comment is nitpicky.
-
 The best time for any nit comments is after the concept acks and consensus on
 the PR, and before the PR is finalised and has tested ACKs.
 
 Give nits and style advice in an advisory way -- as in, feel free to ignore,
 feel free to adjust if you happen to rebase, etc.
+
+Keep in mind that no one is forced to take your review comments into account;
+it's perfectly fine for the author to reply that they don't want to do something
+if they feel it is outside the scope of the change, including/especially if your
+comment is nitpicky.
 
 When you can, scale up the difficulty and priority of the PRs you review.
 
@@ -152,7 +151,7 @@ gathering context and understanding from following the
 [issues](https://github.com/bitcoin/bitcoin/issues),
 [PRs/reviews](https://github.com/bitcoin/bitcoin/pulls),
 [bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev),
-and [mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-core-dev).
+and [bitcoin-dev mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).
 
 Keep ego and hopes out of the process. Don't take things personally and keep
 moving forward.
