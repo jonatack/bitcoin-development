@@ -70,8 +70,8 @@ help more than hinder while getting up to speed.
 Be aware of what you don’t know; long-term contributors have years of experience
 and context.
 
-Follow the
-[bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
+Follow the bitcoin-core-dev
+[IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
 and
 [mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-core-dev).
 
@@ -85,11 +85,21 @@ Before jumping in, take plenty of time to
     [code review in the repository](https://github.com/bitcoin/bitcoin/pulls)
 
   - get to know the maintainers and regular contributors: what they do, what
-    they like and want
+    they like and want, how they give feedback
 
 The big picture is much more important than nits, spelling, or code style.
 
-Focus on quality over quantity and a balance between deep work and quick wins.
+Steps to improve understanding of the big picture:
+
+- Do the [Chaincode Labs study guide](https://github.com/chaincodelabs/study-groups).
+
+- Study the [Bitcoin Improvement Proposals](https://github.com/bitcoin/bips/)
+and return to them frequently.
+
+- Subscribe to the [Bitcoin Optech newsletters](https://bitcoinops.org/) and read
+their [Scaling Book](https://github.com/bitcoinops/scaling-book).
+
+Aim for quality over quantity and a balance between deep work and quick wins.
 
 Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
