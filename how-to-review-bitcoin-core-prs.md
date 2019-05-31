@@ -361,6 +361,37 @@ reviewer and begin building a reputation, maintainers and other contributors
 might reciprocate by reviewing your work as well.
 
 
+### BOOKS
+
+#### C++ Books
+
+For C++ a few books might be very helpful. Here are some recommendations:
+
+The Reference
+
+- The C++ Programming Language, 4th Edition
+
+Learning C++
+
+- C++ Primer (more gentle/longer)
+- Accelerated C++ (condensed/steeper/faster)
+
+Intermediate/advanced
+
+- Effective C++
+- Effective Modern C++
+- Effective STL
+- Exceptional C++
+- More Exceptional C++
+- Modern C++ Design: Generic Programming and Design Patterns Applied
+- C++ Concurrency in Action
+
+#### Cryptography
+
+- Foundations of Cryptography
+- Waxwing's blog
+
+
 ### CREDITS
 
 A special thank you to John Newbery for launching the [Bitcoin Core PR Reviews
