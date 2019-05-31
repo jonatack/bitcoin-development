@@ -99,10 +99,12 @@ Documentation is important, e.g. whether a function has a good description and
 for all its arguments, and high-level documentation of how
 things work and interact.
 
-Test coverage is essential; don't hesitate to write any missing
+Test coverage is essential; don't hesitate to improve or write any missing
 [unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
 [functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
-tests.
+tests, or improve the
+[fuzzing tests](https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md) or
+[benchmarking](https://github.com/bitcoin/bitcoin/blob/master/doc/benchmarking.md).
 
 Try to avoid overly commenting in PRs about code style issues and nits,
 particularly with PRs labeled as WIP, or when a PR has just been filed and the
@@ -311,10 +313,12 @@ Documentation is important, e.g. whether a function has a good description and
 for all its arguments, and high-level documentation of how
 things work and interact.
 
-Test coverage is essential; don't hesitate to write any missing
+Test coverage is essential; don't hesitate to improve or write any missing
 [unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
 [functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
-tests.
+tests, or improve the
+[fuzzing tests](https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md) or
+[benchmarking](https://github.com/bitcoin/bitcoin/blob/master/doc/benchmarking.md).
 
 In general, PRs that intelligently improve documentation and tests in a well
 thought-out way tend to be well-received.
