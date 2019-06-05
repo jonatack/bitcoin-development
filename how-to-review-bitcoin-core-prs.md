@@ -127,13 +127,13 @@ the PR after months of silence. In short, help each other!
 
 Try to avoid overly commenting in PRs about code style issues and nits,
 particularly with PRs labeled as WIP, or when a PR has just been filed and the
-PR author is mainly looking for concept ACKs, e.g. general consensus, not
+PR author is mainly looking for Concept ACKs, e.g. general consensus, not
 nitpicking. Long-term contributors report that activity like this repels them,
 and it can diminish your social capital on the project. Try to understand what
 kind of review is needed and when to do what.
 
-The best time for any nit comments is after the concept acks and consensus on
-the PR, and before the PR is finalised and has tested ACKs.
+The best time for any nit comments is after the Concept ACKs and consensus on
+the PR, and before the PR is finalized and has tested ACKs.
 
 Give nits and style advice in an advisory way -- as in, feel free to ignore,
 feel free to adjust if you happen to rebase, etc.
@@ -187,6 +187,13 @@ gmaxwell:
 
 
 ### TECHNICAL SPECIFICS
+
+Be sure to learn and understand the [peer review
+process](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review).
+The process is
+[often](https://github.com/bitcoin/bitcoin/pull/15626)
+[updated](https://github.com/bitcoin/bitcoin/pull/16149),
+so refer back to it frequently.
 
 Concept ACK means that the reviewer acknowledges and agrees with the concept of
 the change, but is not (yet) confirming they've looked at the code or tested it.
