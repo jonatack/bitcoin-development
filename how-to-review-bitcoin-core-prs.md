@@ -1,6 +1,6 @@
 ## (WIP) How to Review Bitcoin Core PRs
 
-Last updated: May 31, 2019
+Last updated: June 5, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -63,12 +63,17 @@ humility, while learning as much as possible.
 
 A good approach is to make it not about you, but rather "How can I best serve?"
 
+One of the most challenging aspects facing new contributors is the breadth of
+the codebase and the complexities of the technologies surrounding it.
+
+Be aware of what you don’t know; long-term contributors have years of experience
+and context. The community has built up deep collective wealth of knowledge and
+experience. Keep in mind that your new ideas may have already been proposed or
+considered several times in the past.
+
 Remember that contributor and maintainer resources are limited; ask for them
 carefully and respectfully. The goal is to try to give more than you take, to
 help more than hinder while getting up to speed.
-
-Be aware of what you don’t know; long-term contributors have years of experience
-and context.
 
 Follow the [bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
 and the
@@ -77,11 +82,13 @@ and the
 Before jumping in, take plenty of time to
 
   - understand the contribution process and guidelines, not only by reading
-    everything in the repository, notably in
-    [/doc](https://github.com/bitcoin/bitcoin/tree/master/doc) and
-    [/test](https://github.com/bitcoin/bitcoin/tree/master/test),
-    but also by observing interactions on the bitcoin-core-dev IRC channel and
-    [code review in the repository](https://github.com/bitcoin/bitcoin/pulls)
+    the documentation in the repository, notably
+    [Contributing to Bitcoin Core](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md)
+    and everything in the [doc](https://github.com/bitcoin/bitcoin/tree/master/doc) and
+    [test](https://github.com/bitcoin/bitcoin/tree/master/test) directories,
+    but also by observing interactions on the
+    [bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
+    and the ongoing [code review in the repository](https://github.com/bitcoin/bitcoin/pulls)
 
   - get to know the maintainers and regular contributors: what they do, what
     they like and want, how they give feedback
@@ -111,13 +118,12 @@ things work and interact.
 Test coverage is essential; don't hesitate to improve or write any missing
 [unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
 [functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
-tests, or improve the
-[fuzzing tests](https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md) or
-[benchmarking](https://github.com/bitcoin/bitcoin/blob/master/doc/benchmarking.md).
+tests.
 
-Be a contributor. Help PRs move forward by reviewing, proposing tests or fixes
-in a helpful way, proposing to rebase, or even offering to take over the PR
-after months of silence. In short, help each other!
+Be a contributor. Help PRs move forward by reviewing,
+[proposing tests](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946),
+or fixes in a helpful way, proposing to rebase, or even offering to take over
+the PR after months of silence. In short, help each other!
 
 Try to avoid overly commenting in PRs about code style issues and nits,
 particularly with PRs labeled as WIP, or when a PR has just been filed and the
@@ -187,6 +193,11 @@ the change, but is not (yet) confirming they've looked at the code or tested it.
 This can be a valuable signal to a PR author to let them know that the PR has
 merit and is headed in the right direction.
 
+As a new contributor, be cautious with giving a NACK. Assume by default that you
+might lack understanding or context. If you do NACK, provide good reasoning.
+[Here's one
+example.](https://github.com/bitcoin/bitcoin/pull/12360#issuecomment-383342462)
+
 Manual testing of new features is always welcome.
 
 A comment that is really helpful in review: "here's what I tested and my
@@ -210,6 +221,7 @@ jnewbery/instagibbs:
 - though unless you GPG sign the ACK, GitHub could just modify what you're
   writing. If you want to fully remove trust, you can go the full Marco Falke
   and sign/opentimestamp all of your review comments
+- [Open Timestamps Git Integration](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md)
 
 aj:
 - i find "gitk" useful for getting an overview of changes
@@ -221,9 +233,6 @@ fanquake:
 - There is also https://github.com/bitcoin-core/bitcoin-maintainer-tools
 - Rough distro list for build-related changes:
   https://github.com/fanquake/core-review/blob/master/operating-systems.md
-
-BIP 125 describes bitcoin core's mempool policy for allowing txs to be replaced:
-https://github.com/bitcoin/bips/blob/master/bip-0125.mediawiki
 
 harding:
 - In case it's helpful to anyone, I took a quick look at the PR and
@@ -309,9 +318,8 @@ Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
 
 Avoid making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
-valuable contributor and maintainer time for little gain. As mentioned above,
-activity like this actively repels long term contributors and can diminish your
-social capital on the project.
+valuable contributor and maintainer time, often for little gain. Any code
+refactoring needs substantial motivation, advantages, or simplifications.
 
 Do not begin by trying to change consensus code; it is difficult and
 dangerous territory. The goal of bitcoin core is to maintain the correct
@@ -319,15 +327,21 @@ consensus on the bitcoin network, all else is secondary.
 
 Documentation is important, e.g. whether a function has a good description and
 [Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
-for all its arguments, and high-level documentation of how
-things work and interact.
+for all its arguments, and high-level documentation of how things work and
+interact.
 
-Test coverage is essential; don't hesitate to improve or write any missing
+Test coverage is essential; don't hesitate to write any missing
 [unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
 [functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
 tests, or improve the
 [fuzzing tests](https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md) or
 [benchmarking](https://github.com/bitcoin/bitcoin/blob/master/doc/benchmarking.md).
+
+A Gregory Maxwell warning to test contributors: "Overly exact tests have greatly
+diminished value if their exactitude turns them into hyper-active *something
+changed* detectors, when they would otherwise be more useful as *something isn't
+right* detectors if constructed more in terms of invariants instead of strict
+behaviour."
 
 In general, PRs that intelligently improve documentation and tests in a well
 thought-out way tend to be well-received.
@@ -353,6 +367,12 @@ code/tests/comments, a good commit message, concise references/explanations.
 In your PR description, it's a smart habit to give reviewers tips on how to
 review and test your changes, e.g. "Here's how to review this".
 
+It is essential for commit messages and PR descriptions to explain why.
+Summarizing "what" can be good too, but "why" is essential to review because if
+the why doesn't make sense then the what probably doesn't matter. Sometimes
+things seem self-apparent, but when in doubt no one was ever hurt by a bit more
+concise and pithy explanation.
+
 Set up Travis CI on your own GitHub Bitcoin repository so that when you push a
 branch or commit the linter and CI tests run. It's a good idea to be sure they
 are all green on your GitHub repository before filing a PR.
@@ -374,7 +394,7 @@ might reciprocate by reviewing your work as well.
 
 #### C++ Books
 
-For C++ a few books might be very helpful. Here are some recommendations:
+Bitcoin Core is written in C++ 11. Here are some C++ book recommendations:
 
 The Reference
 
@@ -407,6 +427,9 @@ A special thank you to John Newbery for launching the [Bitcoin Core PR Reviews
 Club](https://bitcoin-core-review-club.github.io/) and to the
 long-term contributors who participated so far: Dave Harding, Anthony Towns,
 Gregory Sanders, Michael Ford, Andrew Chow, and Marco Falke.
+
+Thanks to [Steve Lee](https://twitter.com/moneyball) for reviewing this
+write-up and his suggestions.
 
 This article includes observed comments on GitHub and IRC by the following
 Bitcoin Core contributors/maintainers who deserve to be credited:
