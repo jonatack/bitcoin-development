@@ -1,11 +1,11 @@
 ## [WIP] How to Review Bitcoin Core PRs
 
-Last updated: June 5, 2019
+Last updated: June 6, 2019
 
 
 ### BEFORE YOU BEGIN
 
-These self-study notes build on the foundations laid by these 3 articles:
+These self-study notes build on the foundation laid by these 3 articles:
 
 1. [A Gentle Introduction to Bitcoin Core Development](https://bitcointechtalk.com/a-gentle-introduction-to-bitcoin-core-development-fdc95eaee6b8)
 by [Jimmy Song](https://twitter.com/jimmysong) (2017)
@@ -19,7 +19,8 @@ by [John Newbery](https://twitter.com/jfnewbery) (2017)
 
 ### INTRODUCTION
 
-Reviewing and testing can be the best ways to begin contributing to Bitcoin Core.
+Reviewing and testing can be the best ways to begin contributing to Bitcoin
+Core.
 
 Experienced review and testing are regularly cited by long-term Bitcoin Core
 developers as both
@@ -51,9 +52,21 @@ Some of this understanding was gained from years of
     [Basecamp](https://basecamp.com/about/team) and since 2016 a member of the
     [Ruby on Rails Core Team](https://rubyonrails.org/community/).
 
-Yet much of it is specific to Bitcoin Core and came only with time. I would have
+Yet much of it is unique to Bitcoin Core and came only with time. I would have
 preferred to know these things from the start. So here we are. This is foremost
 a self-study exercise, but perhaps it can be useful for others.
+
+Some terminology, before we start:
+
+[Nit](https://whatis.techtarget.com/definition/nit): A trivial, often
+non-blocking issue or imperfection.
+
+[PR](https://help.github.com/en/articles/about-pull-requests): An acronym for
+*pull request*, e.g. a merge request, a proposed change to the code or
+documentation in the source code repository.
+
+[WIP](https://en.wikipedia.org/wiki/Work_in_process): An acronym for *work in
+progress*.
 
 
 ### GENERAL
@@ -67,13 +80,13 @@ One of the most challenging aspects facing new contributors is the breadth of
 the codebase and the complexities of the technologies surrounding it.
 
 Be aware of what you don’t know; long-term contributors have years of experience
-and context. The community has built up deep collective wealth of knowledge and
-experience. Keep in mind that your new ideas may have already been proposed or
-considered several times in the past.
+and context. The community has built up a deep collective wealth of knowledge
+and experience. Keep in mind that your new ideas may have already been proposed
+or considered several times in the past.
 
-Remember that contributor and maintainer resources are limited; ask for them
+Remember that contributor and maintainer resources are limited -- ask for them
 carefully and respectfully. The goal is to try to give more than you take, to
-help more than hinder while getting up to speed.
+help more than hinder, while getting up to speed.
 
 Follow the [bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
 and the
@@ -98,13 +111,16 @@ The big picture is much more important than nits, spelling, or code style.
 
 Steps to improve understanding of the big picture:
 
-- Do the [Chaincode Labs study guide](https://github.com/chaincodelabs/study-groups).
+- Do the [Chaincode Labs study guide](https://github.com/chaincodelabs/study-groups)
+
+- Read and do [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin)
 
 - Study the [Bitcoin Improvement Proposals](https://github.com/bitcoin/bips/)
-and return to them frequently.
+  (often referred to in singular form by the acronym "BIP"), and return to them
+  frequently
 
-- Subscribe to the [Bitcoin Optech newsletters](https://bitcoinops.org/) and read
-their [Scaling Book](https://github.com/bitcoinops/scaling-book).
+- Subscribe to the [Bitcoin Optech newsletters](https://bitcoinops.org/) and
+read their [Scaling Book](https://github.com/bitcoinops/scaling-book)
 
 Aim for quality over quantity and a balance between deep work and quick wins.
 
@@ -146,19 +162,21 @@ comment is nitpicky.
 
 When you can, scale up the difficulty and priority of the PRs you review.
 
-You can add more value by taking the time to do deep, quality review of the
-[high-priority](https://github.com/bitcoin/bitcoin/projects/8) and more
-difficult PRs, the ones that intimidate people and that stagnate for months,
-killing their author's motivation with death by a thousand cuts from lack of
-quality review, nitpicking/code style bikeshedding, and rebase hell.
+You can add more value and learn more by taking the time to do deep, quality
+review of the [high-priority](https://github.com/bitcoin/bitcoin/projects/8)
+and the more difficult PRs. These PRs tend to intimidate people and can stagnate
+for months, killing their author's motivation with death by a thousand cuts from
+lack of quality review, nitpicking/code style bikeshedding, and rebase hell.
+Reviewing them well provides a true service to Bitcoin.
 
-The process takes time; nothing can substitute for months and years invested in
-gathering context and understanding from following the
+The process of ramping up takes time; nothing can substitute for months and
+years invested in gathering context and understanding from following the
 [code](https://github.com/bitcoin/bitcoin),
 [issues](https://github.com/bitcoin/bitcoin/issues),
-[PRs/reviews](https://github.com/bitcoin/bitcoin/pulls),
-[bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev),
-and [bitcoin-dev mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).
+[PRs/reviews](https://github.com/bitcoin/bitcoin/pulls), [bitcoin-core-dev IRC
+channel](https://webchat.freenode.net/?channels=bitcoin-core-dev), and
+[bitcoin-dev mailing
+list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).
 
 Keep ego and hopes out of the process. Don't take things personally and keep
 moving forward.
@@ -171,7 +189,7 @@ Work on it every day.
 
 These are all much easier said than done. Be forgiving with yourself and others.
 
-jnewbery:
+John Newbery:
 
 - A good rule of thumb is to review 5-15 PRs for each PR you make
 - Start small
@@ -180,11 +198,6 @@ jnewbery:
 - Ask for and offer help, like rebasing for people or adding test cases
 - People are generous with their time because they care
 - Contribute by understanding what others want and being respectful
-
-gmaxwell:
-
-- Avoid doing review that is inconsistent or focused on minutia or code
-  style, especially if it comes across as oppressive rather than enabling
 
 
 ### TECHNICAL SPECIFICS
@@ -206,10 +219,10 @@ might lack understanding or context. If you do NACK, provide good reasoning.
 [Here's one
 example.](https://github.com/bitcoin/bitcoin/pull/12360#issuecomment-383342462)
 
-Manual testing of new features is always welcome.
+Manual testing of new features and reported issues is always welcome.
 
-A comment that is really helpful in review: "here's what I tested and my
-methodology", particularly to back up a tested ACK.
+A comment that is really helpful in review: "Here's what I tested and my
+methodology", particularly to back up an ACK.
 
 While you're reviewing, adding tests yourself helps you understand the behaviour
 and you can send them to the author who can add them to the PR too.
@@ -257,7 +270,7 @@ harding's process:
 7. Start regtest node (or testnet or mainnet if necessary) and review actual
    operation matches my expectation from the code
 
-jnewbery:
+John Newbery:
 
 I always download the PR branch to my machine so I can build and review locally.
 I don't use the github webpage to review, only to leave comments.
@@ -326,17 +339,13 @@ Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
 
 Avoid making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
-valuable contributor and maintainer time, often for little gain. Any code
+valuable contributor and maintainer time, often for little gain. Code churn can
+cause hidden new bugs and blurs the code history and git blame. Any code
 refactoring needs substantial motivation, advantages, or simplifications.
 
 Do not begin by trying to change consensus code; it is difficult and
 dangerous territory. The goal of Bitcoin Core is to maintain the correct
-consensus on the bitcoin network, and all else is secondary.
-
-Documentation is important, e.g. whether a function has a good description and
-[Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
-for all its arguments, and high-level documentation of how things work and
-interact.
+consensus on the Bitcoin network -- all else is secondary.
 
 Test coverage is essential; don't hesitate to write any missing
 [unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
@@ -351,32 +360,34 @@ changed* detectors, when they would otherwise be more useful as *something isn't
 right* detectors if constructed more in terms of invariants instead of strict
 behaviour."
 
+Documentation is important, e.g. whether a function has a good description and
+[Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
+for all its arguments, and high-level documentation of how things work and
+interact.
+
 In general, PRs that intelligently improve documentation and tests in a well
 thought-out way tend to be well-received.
 
-Don't rush: it's often better to work on code/tests/PRs without actually filing
-them... give them time to mature and re-visit them with fresh eyes and
-perspective. It's a good rule of thumb to write several unfiled PRs for each
-one that you do file.
+Don't rush; it's often better to work on code/tests/PRs without actually
+proposing them as PRs... give your work time to mature and revisit it with fresh
+eyes and perspective. It might be a good rule of thumb to write several WIP
+PRs for each one that you do file.
 
 Scale up your PR contributions slowly in line with your ability and
 understanding of the project, process, and codebase.
 
-Any release notes should refer to the RPC help for details instead of
-substituting for full documentation, for example: "Please refer to the RPC help
-of `getbalances` for details."
-
 Put the time in to make your PRs as easy to understand and review as possible:
-code/tests/comments, a good commit message, concise references/explanations.
+Code, tests, documentation, good commit messages, relevant references, concise
+explanations.
 
 In your PR description, it's a smart habit to give reviewers tips on how to
 review and test your changes, e.g. "Here's how to review this".
 
-It is essential for commit messages and PR descriptions to explain why.
+It is essential for commit messages and PR descriptions to explain *why*.
 Summarizing "what" can be good too, but "why" is essential to review because if
 the why doesn't make sense then the what probably doesn't matter. Sometimes
-things seem self-apparent, but when in doubt no one was ever hurt by a bit more
-concise and pithy explanation.
+things seem self-apparent, but when in doubt no one was ever hurt by a little
+more concise, pithy explanation.
 
 Set up Travis CI on your own GitHub Bitcoin repository so that when you push a
 branch or commit, the linter and continuous integration tests run. It's a good
@@ -397,14 +408,22 @@ commit message and not in the PR description.
 In general, never put GitHub usernames in commits and PR descriptions; this can
 cause endless annoying notifications for those concerned.
 
-Ask yourself how others will see your PR and try to only file PRs that (a)
-people will be motivated to review, and (b) that are worth merging, both for
-Bitcoin and for your track record. This way your PRs will receive attention from
-the contributors and maintainers and be merged more quickly.
+[Add info on when to add release notes]
 
-Continue to do more reviewing and testing than adding PRs to the backlog.
-Reviewing 5 to 15 PRs for every PR you add is a good range. If you are a good
-reviewer and begin building a reputation, maintainers and other contributors
+Any release notes should refer to the RPC help for details instead of
+substituting for full documentation, for example: "Please refer to the RPC help
+of `getbalances` for details."
+
+Ask yourself how others will see your PR. Try to only file PRs that people will
+be motivated to review and that are worth merging, for both Bitcoin and your
+track record. Your PRs will receive more attention from the contributors and
+maintainers and be merged more quickly.
+
+Continue to do more reviewing and testing than adding PRs to the (substantial)
+backlog. Reviewing 5 to 15 PRs for every PR you make is a good range.
+
+If you are a good reviewer and begin building a reputation and appreciation for
+your help in moving the project forward, maintainers and other contributors
 might reciprocate by reviewing your work as well.
 
 
