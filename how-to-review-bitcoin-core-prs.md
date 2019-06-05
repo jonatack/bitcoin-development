@@ -1,4 +1,4 @@
-## (WIP) How to Review Bitcoin Core PRs
+## [WIP] How to Review Bitcoin Core PRs
 
 Last updated: June 5, 2019
 
@@ -82,7 +82,8 @@ and the
 Before jumping in, take plenty of time to
 
   - understand the contribution process and guidelines, not only by reading
-    the documentation in the repository, notably
+    the documentation in the [repository](https://github.com/bitcoin/bitcoin),
+    notably
     [Contributing to Bitcoin Core](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md)
     and everything in the [doc](https://github.com/bitcoin/bitcoin/tree/master/doc) and
     [test](https://github.com/bitcoin/bitcoin/tree/master/test) directories,
@@ -329,8 +330,8 @@ valuable contributor and maintainer time, often for little gain. Any code
 refactoring needs substantial motivation, advantages, or simplifications.
 
 Do not begin by trying to change consensus code; it is difficult and
-dangerous territory. The goal of bitcoin core is to maintain the correct
-consensus on the bitcoin network, all else is secondary.
+dangerous territory. The goal of Bitcoin Core is to maintain the correct
+consensus on the bitcoin network, and all else is secondary.
 
 Documentation is important, e.g. whether a function has a good description and
 [Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
@@ -361,9 +362,6 @@ one that you do file.
 Scale up your PR contributions slowly in line with your ability and
 understanding of the project, process, and codebase.
 
-Never put GitHub usernames in commits; this can cause endless annoying
-notifications for those concerned.
-
 Any release notes should refer to the RPC help for details instead of
 substituting for full documentation, for example: "Please refer to the RPC help
 of `getbalances` for details."
@@ -381,15 +379,28 @@ things seem self-apparent, but when in doubt no one was ever hurt by a bit more
 concise and pithy explanation.
 
 Set up Travis CI on your own GitHub Bitcoin repository so that when you push a
-branch or commit the linter and CI tests run. It's a good idea to be sure they
-are all green on your GitHub repository before filing a PR.
-
-Ask yourself how others will see your PR and try to only file PRs that are worth
-merging, both for Bitcoin and for your track record. This way your PRs will
-receive attention from the maintainers and other contributors and be merged more
-quickly.
+branch or commit, the linter and continuous integration tests run. It's a good
+idea to verify they are all green on your GitHub repository before filing a PR.
 
 Learn how to get people to review your work when needed. It's a skill.
+
+Persistence can pay off. Sometimes a PR succeeds on the second or
+[third try](https://github.com/bitcoin/bitcoin/pull/16060) if the first ones
+didn't see enough review and if there are valid reasons to continue.
+
+In this case, [one idea seen in
+practice](https://github.com/bitcoin/bitcoin/pull/16060#issuecomment-494142593)
+is to recap various ACKs from the previous PRs, with GitHub usernames, to rope
+in support for the new PR. If you do, be sure to do it in a comment -- not in a
+commit message and not in the PR description.
+
+In general, never put GitHub usernames in commits and PR descriptions; this can
+cause endless annoying notifications for those concerned.
+
+Ask yourself how others will see your PR and try to only file PRs that (a)
+people will be motivated to review, and (b) that are worth merging, both for
+Bitcoin and for your track record. This way your PRs will receive attention from
+the contributors and maintainers and be merged more quickly.
 
 Continue to do more reviewing and testing than adding PRs to the backlog.
 Reviewing 5 to 15 PRs for every PR you add is a good range. If you are a good
@@ -433,7 +444,8 @@ Intermediate/advanced
 A special thank you to John Newbery for launching the [Bitcoin Core PR Reviews
 Club](https://bitcoin-core-review-club.github.io/) and to the
 long-term contributors who participated so far: Dave Harding, Anthony Towns,
-Gregory Sanders, Michael Ford, Andrew Chow, and Marco Falke.
+Gregory Sanders, Michael Ford, Andrew Chow, Pieter Wuille, Bryan Bishop,
+Mike Schmidt, and Marco Falke.
 
 Thanks to [Steve Lee](https://twitter.com/moneyball) for reviewing this
 write-up and his suggestions.
