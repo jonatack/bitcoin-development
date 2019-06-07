@@ -368,6 +368,9 @@ interact.
 In general, PRs that intelligently improve documentation and tests in a well
 thought-out way tend to be well-received.
 
+I find it useful to keep a list of PR ideas in the form of
+[observed todos](observed-todos.txt).
+
 Don't rush; it's often better to work on code/tests/PRs without actually
 proposing them as PRs... give your work time to mature and revisit it with fresh
 eyes and perspective. It might be a good rule of thumb to write several WIP
@@ -405,8 +408,8 @@ is to recap various ACKs from the previous PRs, with GitHub usernames, to rope
 in support for the new PR. If you do, be sure to do it in a comment -- not in a
 commit message and not in the PR description.
 
-In general, never put GitHub usernames in commits and PR descriptions; this can
-cause endless annoying notifications for those concerned.
+Never put GitHub usernames in commits and PR descriptions; this can cause
+endless annoying notifications for those concerned.
 
 [Add info on when to add release notes]
 
@@ -454,17 +457,20 @@ Intermediate/advanced
 
 #### Cryptography
 
-- Foundations of Cryptography
-- Waxwing's blog
+- [Foundations of Cryptography](https://www.amazon.com/Foundations-Cryptography-Basic-Tools-Vol-dp-0521791723/dp/0521791723/)
+- [Waxwing's blog](https://joinmarket.me/blog) by JoinMarket expert
+  [Andrew Gibson](https://mastodon.social/@waxwing)
 
 
 ### CREDITS
 
-A special thank you to John Newbery for launching the [Bitcoin Core PR Reviews
-Club](https://bitcoin-core-review-club.github.io/) and to the
-long-term contributors who participated so far: Dave Harding, Anthony Towns,
-Gregory Sanders, Michael Ford, Andrew Chow, Pieter Wuille, Bryan Bishop,
-Mike Schmidt, and Marco Falke.
+A special thank you to [John Newbery](https://twitter.com/jfnewbery)
+for launching the
+[Bitcoin Core PR Reviews Club](https://bitcoin-core-review-club.github.io/) and
+to the long-term contributors who participated so far:
+[Dave Harding](https://hash.social/users/harding),
+Anthony Towns, Gregory Sanders, Michael Ford, Andrew Chow, Pieter Wuille,
+Bryan Bishop, Mike Schmidt, and Marco Falke.
 
 Thanks to [Steve Lee](https://twitter.com/moneyball) for reviewing this
 write-up and his suggestions.
