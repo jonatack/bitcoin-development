@@ -1,6 +1,6 @@
 ## [WIP] How to Review Bitcoin Core PRs
 
-Last updated: June 6, 2019
+Last updated: June 7, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -56,17 +56,17 @@ Yet much of it is unique to Bitcoin Core and came only with time. I would have
 preferred to know these things from the start. So here we are. This is foremost
 a self-study exercise, but perhaps it can be useful for others.
 
-Some terminology, before we start:
-
-[Nit](https://whatis.techtarget.com/definition/nit): A trivial, often
-non-blocking issue or imperfection.
+### TERMINOLOGY
 
 [PR](https://help.github.com/en/articles/about-pull-requests): An acronym for
-*pull request*, e.g. a merge request, a proposed change to the code or
-documentation in the source code repository.
+*pull request*, sometimes called a merge request. A proposed change to the code
+or documentation in the source code repository.
 
 [WIP](https://en.wikipedia.org/wiki/Work_in_process): An acronym for *work in
 progress*.
+
+[ACK, NACK, nit](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review):
+Defined [here](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review).
 
 
 ### GENERAL
