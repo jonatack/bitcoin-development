@@ -14,4 +14,6 @@
 
 - [Notes.](notes.txt) Miscellaneous dev notes that are mostly destined to be re-organised into specific documents (like "How to Review Bitcoin Core PRs", etc.)
 
-- [Bryan Bishop transcript: "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh my!"](2018-07-09-pieter-wuille-taproot-schnorr-sigs-and-sighash-noinput.txt) Edited and cleaned up a bit from the original transcript for personal study.
+- [Bryan Bishop transcript of Pieter Wuille's July 2018 SF Bitcoin talk: "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh my!"](2018-07-09-pieter-wuille-taproot-schnorr-sigs-and-sighash-noinput.txt) Edited and cleaned up a bit from the original transcript for personal study.
+
+- [Bryan Bishop transcript of Jonas Schnelli's June 2019 Breaking Bitcoin talk: "BIP324 V2 Message Transport Protocol"](2019-06-08-jonas-schnelli-bip324-v2-p2p.txt).
