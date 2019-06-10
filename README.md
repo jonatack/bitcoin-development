@@ -16,4 +16,6 @@
 
 - [Bryan Bishop transcript of Pieter Wuille's July 2018 SF Bitcoin talk: "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh my!"](2018-07-09-pieter-wuille-taproot-schnorr-sigs-and-sighash-noinput.txt) Edited and cleaned up a bit from the original transcript for personal study.
 
+- [Bryan Bishop transcript of Jonas Schnelli's June 2019 core.dev talk: "P2P Encryption"](2019-06-07-jonas-schnelli-p2p-encryption.txt).
+
 - [Bryan Bishop transcript of Jonas Schnelli's June 2019 Breaking Bitcoin talk: "BIP324 V2 Message Transport Protocol"](2019-06-08-jonas-schnelli-bip324-v2-p2p.txt).
