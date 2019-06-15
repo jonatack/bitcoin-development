@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-05-27
+Last updated: 2019-06-16
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,20 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-06-15 P2P ideas from Chaincode residency Day 2 p2p session with Suhas:
+           - Multiple p2p networks instead of just one (James Chiang idea).
+           - Use different IP buckets per peer (James Chiang idea). Each IP
+             would have its own AddrMan table and would confer to ensure they
+             don't have the same peer IPs, to avoid IP poisoning e.g. flooding
+             by attacker peers.
+           - Separate block relay from txn relay, e.g. separate them into 2
+             networks. Suhas plans to make a PR to do that.
+           - Improve p2p simulation frameworks: suhas, Jeremy Rubin, gleb
+           - A better framework for systematically thinking about privacy.
+           - Better simulations needed for evaluating Dandelion/++/Lite,
+             contact Giulia Fanti.
 -----
 
 2019-05-27 Perhaps improve/clarify the frequent bitcoind logged warning:
