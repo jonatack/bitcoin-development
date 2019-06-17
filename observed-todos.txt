@@ -10,6 +10,13 @@ laanwj:    focus on user problems, actual bugs,
            enable wallet tests to mock nodes without current heavy node setup
 -----
 
+2019-06-16 GUI wallet "Enter passphrase" and "Change passphrase" forms:
+           Label the "Show password" and "Change password" checkbox buttons as
+           "Show passphrases" and "Edit passphrases" instead, since there are
+           2 or 3 fields and they are all labelled "passphrase" along with the
+           description at the top of the form.
+-----
+
 2019-06-15 P2P ideas from Chaincode residency Day 2 p2p session with Suhas:
            - Multiple p2p networks instead of just one (James Chiang idea).
            - Use different IP buckets per peer (James Chiang idea). Each IP
