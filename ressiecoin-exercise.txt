@@ -1,0 +1,121 @@
+RESSIECOIN EXERCISE
+
+by John Newbery / Chaincode Labs Summer 2019 Bitcoin Seminars
+
+------
+
+EXERCISE
+
+Exploit four possible attack vectors to break RessieCoin (double spend, etc).
+
+------
+
+SETUP
+
+git clone https://github.com/jnewbery/bitcoin/tree/2019-06-breaking-bitcoin-core
+
+git checkout 2019-06-breaking-bitcoin-core
+
+To compile quickly:
+
+./autogen.sh ; export BDB_PREFIX="/home/jon/projects/bitcoin/rescoin/db4" ; ./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" --disable-bench --disable-zmq --without-gui --without-libs --without-miniupnpc --without-qrencode --disable-gui-tests -q ; make -j"$(($(nproc)+1))"
+
+or a simpler version without db4:
+
+./autogen.sh ; ./configure --disable-bench --disable-zmq --without-gui --without-libs --with-incompatible-bdb --without-miniupnpc --without-qrencode --disable-gui-tests -q ; make -j"$(($(nproc)+1))"
+
+If on MacOS, faster build:
+
+make -j “$(($(sysctl -n hw.physicalcpu)+1))”
+
+------
+
+HINTS AND TIPS
+
+You should be able to repurpose code in the functional test framework to build
+txs and blocks.
+
+The change to the mempool in https://github.com/jnewbery/bitcoin/commit/eac4132
+does *not* remove mempool limiting. Sorry; the commit message is misleading.
+What it does:
+
+- In Bitcoin Core, the mempool checks the number of ancestors/descendants when
+  accepting a new tx and no new tx is allowed with more than 25 ancestors.
+  In this branch, there is no check, so arbitrarily long tx chains are allowed.
+
+  Background on the 25 descendant limit:
+    - https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2015-October/011401.html
+    - https://github.com/bitcoin/bitcoin/pull/6771#issuecomment-146488407
+
+- In Bitcoin Core, a single tx may replace up to 100 txs with RBF; in this
+  branch, a single tx can replace an arbitrary number of txs.
+
+  That change is probably the most difficult to exploit of the 4.
+
+- "Don't check for duplicate transaction inputs in CheckBlock()" is probably the
+  easiest. It requires crafting a transaction with duplicate inputs.
+
+The hardest part is probably figuring out how you can use the test framework to
+build your duplicate txs.
+
+Here's an example test that tests merkle tree malleability:
+
+    def run_test(self):
+       # Add p2p connection to node0
+       node = self.nodes[0]  # convenience reference to the node
+       node.add_p2p_connection(P2PDataStore())
+
+       best_block = node.getblock(node.getbestblockhash())
+       tip = int(node.getbestblockhash(), 16)
+       height = best_block["height"] + 1
+       block_time = best_block["time"] + 1
+
+       self.log.info("Create a new block with an anyone-can-spend coinbase")
+
+       height = 1
+       block = create_block(tip, create_coinbase(height), block_time)
+       block.solve()
+       # Save the coinbase for later
+       block1 = block
+       tip = block.sha256
+       node.p2p.send_blocks_and_test([block1], node, success=True)
+
+       self.log.info("Mature the block.")
+       node.generatetoaddress(100, node.get_deterministic_priv_key().address)
+
+       best_block = node.getblock(node.getbestblockhash())
+       tip = int(node.getbestblockhash(), 16)
+       height = best_block["height"] + 1
+       block_time = best_block["time"] + 1
+
+       # Use merkle-root malleability to generate an invalid block with
+       # same blockheader.
+       # Manufacture a block with 3 transactions (coinbase, spend of prior
+       # coinbase, spend of that spend).  Duplicate the 3rd transaction to
+       # leave merkle root and blockheader unchanged but invalidate the block.
+       self.log.info("Test merkle root malleability.")
+
+       block2 = create_block(tip, create_coinbase(height), block_time)
+       block_time += 1
+
+       # b'0x51' is OP_TRUE
+       tx1 = create_tx_with_script(block1.vtx[0], 0, script_sig=b'\x51', amount=50 * COIN)
+       tx2 = create_tx_with_script(tx1, 0, script_sig=b'\x51', amount=50 * COIN)
+
+       block2.vtx.extend([tx1, tx2])
+       block2.hashMerkleRoot = block2.calc_merkle_root()
+       block2.rehash()
+       block2.solve()
+       orig_hash = block2.sha256
+       block2_orig = copy.deepcopy(block2)
+
+       # Mutate block 2
+       block2.vtx.append(tx2)
+       assert_equal(block2.hashMerkleRoot, block2.calc_merkle_root())
+       assert_equal(orig_hash, block2.rehash())
+       assert block2_orig.vtx != block2.vtx
+
+That code is from test/functional/p2p_invalid_block.py on Bitcoin Core master.
+
+Please don't look at the rest of that file - it contains the answer for the
+duplicate input spend.
