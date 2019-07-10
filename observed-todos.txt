@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-06-16
+Last updated: 2019-07-10
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,23 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-07-10 Four functional test runner ideas based on the IRC discussion at
+           http://www.erisian.com.au/bitcoin-core-dev/log-2019-07-10.html#l-262
+           (lines 262 to 323).
+           - "That only works from within the directory itself weirdly enough."
+           - "I think it's just because we don't strip the path when test_runner
+              compares its arguments to what tests it knows about?"
+           - "that's cool. test prefix naming makes even more sense now"
+
+           1. Fix passing wildcard args to the test runner from root and
+              add an example to test/README.md about how to run wallet tests
+              only (test_runner.py wallet*), or for rpc, etc.
+           2. Can one tell the runner to stop on failure? If not, add it.
+           3. Enable passing args like --rpc and --wallet to test_runner.py to
+              run only those test categories
+           4. Clean up the test arguments help info.
 -----
 
 2019-06-16 GUI wallet "Enter passphrase" and "Change passphrase" forms:
