@@ -1,12 +1,12 @@
 PSBTs - Partially-Signed Bitcoin Transactions
 
-Last update: 2019-05-18
+Last update: 2019-07-16
 
 Summary from the following sources
 - Andrew Chow talk: https://youtu.be/H6xZSRDXUiU
 - Greg Sanders talk: https://youtu.be/iJR9Lg1jyJg
-- bitcoin-cli help (on master v0.18.99.0-a0dcccffb2-dirty / May 2019)
-
+- bitcoin-cli help (master v0.18.99.0 / May 2019)
+- IRC discussions
 -----
 
 BIP 174 describes the PSBT protocol format
@@ -147,3 +147,75 @@ http://www.erisian.com.au/bitcoin-core-dev/log-2019-05-10.html#l-439
 <gmaxwell> certantly, things like taproot need miniscript in the sense that their ability will be wasted if we don't make it easier to make complex scripts.
 
 -----
+
+2019-07-16 Combining Taproot with PSBT via descriptors - notes from IRC
+           http://www.erisian.com.au/bitcoin-core-dev/log-2019-07-15.html#l-548
+
+           elichai: We would need
+           1. new descriptors
+           2. classes and support for Witness V2 Bech32 addresses
+           3. classes for Taproot in the wallet
+           4. serialization/deserialization of Taproot and witness v2 addresses
+
+           sipa / achow:
+           To combine Taproot into PSBT, would need to touch signing/PSBT logic
+           and descriptors. If we have Taproot support in descriptors and PSBT,
+           we'll automatically have it in the wallet, just like right now the
+           user never provides keys, UTXOs, etc.
+
+           In the RPC, we have PSBT support for the full stack of operations
+           outside of the wallet, so Taproot can be implemented and tested
+           without ever touching the wallet code at all (assuming descriptor
+           wallets, since we don't have the equivalent of walletprocesspsbt
+           using descriptors yet, maybe we need that first), then all we need is
+           to add Taproot to PSBT/descriptors, and the full stack of operations
+           would be supported outside of the wallet.
+
+           Musig is harder though, as it requires state on the signer device.
+
+           The tree structure for multiple scripts would be in the descriptor.
+           The 32-byte x-coordinate idea (which we may update Taproot with) may
+           affect how that PSBT record is structured too, but it's not like we
+           need new parsing code; Bech32 parsing is already generic.
+
+           If you want to learn Bitcoin Core better (which i very much encourage
+           you to!) I think it's better to focus on one piece at a time, and
+           actually integrate it.
+
+           For example, an RPC that takes a descriptor and a bunch of private
+           keys, and signs with them, would be pretty generally useful.
+
+           For the extensions to PSBT... I think it's generally too early.
+
+           Once Taproot is finalized, I think the way to actually add it to PSBT
+           via descriptors will be pretty straightforward.
+
+           What will be needed in terms of data structures is:
+           1. a "taproot derivation" record in signing providers
+           2. descriptors that can fill that record
+           3. a way for that record to be serialized in PSBT
+           4. and signing logic to use it
+
+           For descriptors we likely want a fragment tap(KEY,[[X,Y],[Z,[T,U]]])
+           kind of construction, where you give the root key and the leaves in
+           some tree-encoding way where the X/Y/Z/T/U are subexpressions that
+           represent scripts.
+
+           They could be pk(), or multi(), ... or once we
+           have miniscript probably a whole bunch more things (I hope to publish
+           more about that soon) and that would then get converted into a
+           "taproot key record" for the key path and for each leaf in
+           signingprovider/psbt.
+
+           src/script/descriptor.cpp L149-170 is an interface for all the "key"
+           expressions inside BIP32, with a number of implementations (pubkeys,
+           descriptors, origin info).
+
+           L335-497 is a generic implementation of a "script" node in a
+           descriptor, followed by implementations that add node-specific logic
+           (pk, pkh, sh, wpkh, wsh, multi, combi, addr, raw), and after that is
+           parsing (string to descriptor) code, and inference (script to
+           descriptor) code.
+
+           If your end goal is integrating things into Bitcoin Core, I suspect
+           getting familiar with the code is the best way to spend time.
