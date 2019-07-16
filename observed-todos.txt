@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-07-10
+Last updated: 2019-07-16
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,12 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-07-16 sipa: "an RPC that takes a descriptor and a bunch of private keys
+           and signs with them, would be pretty generally useful."
+           http://www.erisian.com.au/bitcoin-core-dev/log-2019-07-15.html#l-613
+           (full info in psbts.txt in this repo)
 -----
 
 2019-07-10 Appveyor seems to set wallet file permissions to 666 and not allow
@@ -19,18 +25,21 @@ laanwj:    focus on user problems, actual bugs,
 2019-07-10 Four functional test runner ideas based on the IRC discussion at
            http://www.erisian.com.au/bitcoin-core-dev/log-2019-07-10.html#l-262
            (lines 262 to 323).
-           - "That only works from within the directory itself weirdly enough."
-           - "I think it's just because we don't strip the path when test_runner
-              compares its arguments to what tests it knows about?"
-           - "that's cool. test prefix naming makes even more sense now"
 
            1. Fix passing wildcard args to the test runner from root and
               add an example to test/README.md about how to run wallet tests
-              only (test_runner.py wallet*), or for rpc, etc.
-           2. Can one tell the runner to stop on failure? If not, add it.
-           3. Enable passing args like --rpc and --wallet to test_runner.py to
+              only (test_runner.py wallet*, etc)
+              -> DONE in https://github.com/bitcoin/bitcoin/pull/16374
+
+           2. Enable passing args like --rpc and --wallet to test_runner.py to
               run only those test categories
-           4. Clean up the test arguments help info.
+              -> DONE by promag in https://github.com/bitcoin/bitcoin/pull/16390
+
+           3. Can one tell the runner to stop on failure? If not, add it
+
+           4. Clean up the test arguments help info
+
+           5. Improve test runner output
 -----
 
 2019-06-16 GUI wallet "Enter passphrase" and "Change passphrase" forms:
