@@ -21,13 +21,22 @@ fwilson:  Look for the most annoying, frustrating aspects of the current model
           and focus on features that fix them
 -----
 
-sipa:     Never put GitHub usernames in commits
+sipa:     If your end goal is integrating things into Bitcoin Core,
+          getting familiar with the code is the best way to spend time.
+          To do that (which i very much encourage you to!) I think it's better
+          to focus on one piece at a time and actually integrate it.
 
+          Never put GitHub usernames in commits.
 -----
 
 laanwj:   Release notes should refer to the RPC help for details instead of
           substituting for full documentation. Example:
           "Please refer to the RPC help of `getbalances` for details."
+-----
+
+harding:  To grep Bitcoin "hidden" debug options:
+          bitcoind -help-debug | grep -A3 -- -limit
+
 -----
 
 MarcoFalke: To run functional tests in the gui, pass BITCOIND=bitcoin-qt
