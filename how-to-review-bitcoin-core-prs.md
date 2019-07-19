@@ -444,24 +444,23 @@ Bitcoin Core is written in C++ 11. Here are some C++ book recommendations:
 
 The Reference
 
-- The C++ Programming Language, 4th Edition
+- [The C++ Programming Language, 4th Edition](https://www.amazon.com/Programming-Language-hardcover-4th/dp/0321958322)
 
 Learning C++
 
-- Accelerated C++ (condensed/faster -- from 2001, a bit out of date, but
-  excellent)
-- C++ Primer, 5th edition (more gentle/longer -- not to be confused with the
-  knock-off, "C++ Primer Plus", which is not recommended)
+- [C++ Primer, 5th Edition](https://www.amazon.com/Primer-5th-Stanley-B-Lippman/dp/0321714113/)
+  (more gentle, longer, not to be confused with the knock-off, "C++ Primer Plus")
+- [Accelerated C++](https://www.amazon.com/Accelerated-C-Practical-Programming-Example/dp/020170353X/)
+  (condensed, goes faster, a bit out of date but excellent)
 
 Intermediate/advanced
 
-- Effective C++
-- Effective Modern C++
-- Effective STL
-- Exceptional C++
-- More Exceptional C++
-- Modern C++ Design: Generic Programming and Design Patterns Applied
-- C++ Concurrency in Action
+- [Effective C++](https://www.amazon.com/Effective-Specific-Improve-Programs-Designs/dp/0321334876/)
+- [Effective Modern C++](https://www.amazon.com/Effective-Modern-Specific-Ways-Improve/dp/1491903996/)
+- [Effective STL](https://www.amazon.com/Effective-STL-Specific-Standard-Template/dp/0201749629/)
+- [Exceptional C++](https://www.amazon.com/Exceptional-Engineering-Programming-Problems-Solutions/dp/0201615622/)
+- [More Exceptional C++](https://www.amazon.com/More-Exceptional-Engineering-Programming-Solutions/dp/020170434X/)
+- [C++ Concurrency in Action, 2nd Edition](https://www.amazon.com/C-Concurrency-Action-Anthony-Williams/dp/1617294691/)
 
 #### Cryptography
 
