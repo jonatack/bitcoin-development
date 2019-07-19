@@ -1,0 +1,31 @@
+Taproot PubKeys
+
+2019-07-15 #bitcoin-wizards irc discussion (james chiang / pieter wuille)
+
+digi_james sipa: Hello. I have a question about Taproot PubKeys. I fail to
+           understand why highest two True bits on the 33B PubKey block prevent
+           ambiguity in reading the output script pattern. P2WPKH/P2WSH have
+           different (second) witness element sizes(20/32). You mention it
+           simplifies analysis "without knowledge of the UTXO being spent",
+           what is meant by that? Thank you.
+
+sipa       every valid P2WPKH/P2WSH witness has as last stack element a byte
+           that is 02/03 (for p2wpkh) or a non-invalid opcode (for p2wsh).
+           the range 0xc0-0xff falls outside both classes. so if taproot with
+           this rule is on the network, you can distinguish taproot witnesses
+           (and their annexes) from p2wpkh/p2wsh spends by looking at the first
+           byte of the last witness stack element.
+
+digi_james ah I see, this is to distinguish spends of different output types
+           without knowing the utxo? So if a transaction is verified during
+           mempool acceptance, we have to consider the utxo anyhow, so where is
+           this optimisation helpful?
+
+sipa       everywhere that's not in validation :) e.g. computing the weight of a
+           transaction before it's broadcast (this is taking into account that
+           an annex may be present that modifies the weight of a tx due to the
+           presence of expensive opcodes)
+
+digi_james has the weight computation changed from segwit v0 to taproot spends?
+
+sipa       no. but later extensions could (that's part of the rationale for the annex)
