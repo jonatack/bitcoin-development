@@ -1,6 +1,6 @@
 ## [WIP] How to Review Bitcoin Core PRs
 
-Last updated: June 7, 2019
+Last updated: July 19, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -157,8 +157,8 @@ feel free to adjust if you happen to rebase, etc.
 
 Keep in mind that no one is forced to take your review comments into account;
 it's perfectly fine for the author to reply that they don't want to do something
-if they feel it is outside the scope of the change, including/especially if your
-comment is nitpicky.
+if they feel it is outside the scope of the change, especially if your comment
+is nitpicky.
 
 When you can, scale up the difficulty and priority of the PRs you review.
 
@@ -201,6 +201,9 @@ John Newbery:
 
 
 ### TECHNICAL SPECIFICS
+
+The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
+following PR and review activity.
 
 Be sure to learn and understand the [peer review
 process](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review).
@@ -338,6 +341,9 @@ When you do start contributing PRs, here are some guidelines:
 Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
 
+Good ideas may often be found in PR reviews and #bitcoin-core-dev IRC
+discussions.
+
 Avoid making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
 valuable contributor and maintainer time, often for little gain. Code churn can
 cause hidden new bugs and blurs the code history and git blame. Any code
@@ -442,8 +448,10 @@ The Reference
 
 Learning C++
 
-- C++ Primer (more gentle/longer)
-- Accelerated C++ (condensed/steeper/faster)
+- Accelerated C++ (condensed/faster -- from 2001, a bit out of date, but
+  excellent)
+- C++ Primer, 5th edition (more gentle/longer -- not to be confused with the
+  knock-off, "C++ Primer Plus", which is not recommended)
 
 Intermediate/advanced
 
