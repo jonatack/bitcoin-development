@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-07-18
+Last updated: 2019-07-19
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,14 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-07-19 Hoist max chain depth value of 999999 to a constant, with explanatory
+           code docs, after PR 15906 is merged:
+           src/wallet/coincontrol.h:43    //! Maximum chain depth value for coin availability
+           src/wallet/coincontrol.h:44:   int m_max_depth{9999999};
+           src/wallet/rpcwallet.cpp:2822: int nMaxDepth = 9999999;
+           src/wallet/wallet.cpp:2436:    const int max_depth = { coinControl ? coinControl->m_max_depth : 9999999 };
 -----
 
 2019-07-18 Possibly add test coverage for this very simple PR:
