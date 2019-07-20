@@ -342,7 +342,8 @@ Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
 
 Good ideas may often be found in PR reviews and #bitcoin-core-dev IRC
-discussions.
+discussions. I find it useful to keep a list of PR ideas in the form of
+[observed todos](observed-todos.txt).
 
 Avoid making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
 valuable contributor and maintainer time, often for little gain. Code churn can
@@ -374,20 +375,30 @@ interact.
 In general, PRs that intelligently improve documentation and tests in a well
 thought-out way tend to be well-received.
 
-I find it useful to keep a list of PR ideas in the form of
-[observed todos](observed-todos.txt).
-
 Don't rush; it's often better to work on code/tests/PRs without actually
-proposing them as PRs... give your work time to mature and revisit it with fresh
-eyes and perspective. It might be a good rule of thumb to write several WIP
+proposing them as PRs. Give your work time to mature, revisit it with fresh
+perspective, and iterate on it a few times before putting it out there and
+asking for others' time. It might be a good rule of thumb to write several WIP
 PRs for each one that you do file.
 
-Scale up your PR contributions slowly in line with your ability and
-understanding of the project, process, and codebase.
+Consider also the timing of what is going on in the project in terms of
+priorities and releases as well as your current status. If you already have a
+few PRs open it may be best to close them or concentrate on having them merged
+before adding yet another PR to the review stack. Limits of 5 open PRs per
+contributor have been discussed; consider staying well under that.
 
 Put the time in to make your PRs as easy to understand and review as possible:
 Code, tests, documentation, good commit messages, relevant references, concise
 explanations.
+
+Give some thought to PR size and scope. Many contributors err on the side of
+making their PRs too large and time-consuming to review. It is often better to
+keep your PRs short and focused to make them easier and safer to review. This
+may require splitting your work into several consecutive PRs.
+
+PR descriptions are often either too terse or too verbose. Write the essentials,
+then take the time to make your PR description brief, clear, and
+[pithy](https://www.collinsdictionary.com/dictionary/english/pithy).
 
 In your PR description, it's a smart habit to give reviewers tips on how to
 review and test your changes, e.g. "Here's how to review this".
@@ -396,11 +407,15 @@ It is essential for commit messages and PR descriptions to explain *why*.
 Summarizing "what" can be good too, but "why" is essential to review because if
 the why doesn't make sense then the what probably doesn't matter. Sometimes
 things seem self-apparent, but when in doubt no one was ever hurt by a little
-more concise, pithy explanation.
+more concise explanation.
 
 Set up Travis CI on your own GitHub Bitcoin repository so that when you push a
 branch or commit, the linter and continuous integration tests run. It's a good
 idea to verify they are all green on your GitHub repository before filing a PR.
+
+Remember that every time you comment on your PR after pushing, you're sending
+notifications to the people who previously reviewed or commented on it. Respect
+their time.
 
 Learn how to get people to review your work when needed. It's a skill.
 
@@ -428,12 +443,15 @@ be motivated to review and that are worth merging, for both Bitcoin and your
 track record. Your PRs will receive more attention from the contributors and
 maintainers and be merged more quickly.
 
-Continue to do more reviewing and testing than adding PRs to the (substantial)
-backlog. Reviewing 5 to 15 PRs for every PR you make is a good range.
+Scale up your PR contributions gradually in line with your ability and
+understanding of the project, process, and codebase.
+
+Continue to do more reviewing and testing than adding PRs to the backlog.
+Reviewing 5 to 15 PRs for every PR you make is a good range.
 
 If you are a good reviewer and begin building a reputation and appreciation for
 your help in moving the project forward, maintainers and other contributors
-might reciprocate by reviewing your work as well.
+might reciprocate by reviewing your work as well!
 
 
 ### BOOKS
