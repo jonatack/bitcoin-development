@@ -1,6 +1,6 @@
 ## [WIP] How to Review Bitcoin Core PRs
 
-Last updated: July 19, 2019
+Last updated: July 20, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -205,6 +205,18 @@ John Newbery:
 The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
 following PR and review activity.
 
+Become good at
+[compiling Bitcoin Core from source](https://github.com/jonatack/bitcoin-development/blob/master/how-to-compile-bitcoin-core-from-source-for-linux-debian.md)
+and running the
+[unit tests](https://github.com/bitcoin/bitcoin/tree/master/src/test)
+and
+[functional tests](https://github.com/bitcoin/bitcoin/blob/master/test/README.md)
+since you will need to do it for each PR you review. For this, the Bitcoin Core
+[productivity notes](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md)
+are indispensable.
+
+Read and know the Bitcoin Core [developer notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
+
 Be sure to learn and understand the [peer review
 process](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review).
 The process is
@@ -338,6 +350,8 @@ consensus code
 
 When you do start contributing PRs, here are some guidelines:
 
+Read and know the Bitcoin Core [developer notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
+
 Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
 
@@ -396,6 +410,14 @@ making their PRs too large and time-consuming to review. It is often better to
 keep your PRs short and focused to make them easier and safer to review. This
 may require splitting your work into several consecutive PRs.
 
+As described in the Bitcoin Core
+[contributing guide](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md),
+prefix your PR title with the relevant area (e.g. `doc`,
+`test`, `rpc`, `wallet`), and become comfortable with frequently rebasing your
+commits to squash them. Rebasing is also frequently done to keep your commits
+logical, separate, and easier to review. Even better, hygienic -- each standing
+on their own without introducing regressions.
+
 PR descriptions are often either too terse or too verbose. Write the essentials,
 then take the time to make your PR description brief, clear, and
 [pithy](https://www.collinsdictionary.com/dictionary/english/pithy).
@@ -432,11 +454,11 @@ commit message and not in the PR description.
 Never put GitHub usernames in commits and PR descriptions; this can cause
 endless annoying notifications for those concerned.
 
-[Add info on when to add release notes]
-
-Any release notes should refer to the RPC help for details instead of
-substituting for full documentation, for example: "Please refer to the RPC help
-of `getbalances` for details."
+Add
+[release notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#release-notes)
+when appropriate. RPC-related release notes should refer to the RPC help for
+details instead of substituting for full documentation, for example:
+"Please refer to the RPC help of `getbalances` for details."
 
 Ask yourself how others will see your PR. Try to only file PRs that people will
 be motivated to review and that are worth merging, for both Bitcoin and your
