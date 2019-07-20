@@ -133,8 +133,8 @@ for all its arguments, and high-level documentation of how
 things work and interact.
 
 Test coverage is essential; don't hesitate to improve or write any missing
-[unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
-[functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
+[unit](https://github.com/bitcoin/bitcoin/blob/master/src/test/) or
+[functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional/)
 tests.
 
 Be a contributor. Help PRs move forward by reviewing,
@@ -205,10 +205,10 @@ John Newbery:
 The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
 following PR and review activity.
 
-Become good at
+Become comfortable with
 [compiling Bitcoin Core from source](https://github.com/jonatack/bitcoin-development/blob/master/how-to-compile-bitcoin-core-from-source-for-linux-debian.md)
 and running the
-[unit tests](https://github.com/bitcoin/bitcoin/tree/master/src/test)
+[unit tests](https://github.com/bitcoin/bitcoin/tree/master/src/test/README.md)
 and
 [functional tests](https://github.com/bitcoin/bitcoin/blob/master/test/README.md)
 since you will need to do it for each PR you review. For this, the Bitcoin Core
@@ -389,8 +389,7 @@ interact.
 In general, PRs that intelligently improve documentation and tests in a well
 thought-out way tend to be well-received.
 
-Don't rush; it's often better to work on code/tests/PRs without actually
-proposing them as PRs. Give your work time to mature, revisit it with fresh
+Don't rush. Give your work time to mature, revisit it with fresh
 perspective, and iterate on it a few times before putting it out there and
 asking for others' time. It might be a good rule of thumb to write several WIP
 PRs for each one that you do file.
@@ -398,8 +397,8 @@ PRs for each one that you do file.
 Consider also the timing of what is going on in the project in terms of
 priorities and releases as well as your current status. If you already have a
 few PRs open it may be best to close them or concentrate on having them merged
-before adding yet another PR to the review stack. Limits of 5 open PRs per
-contributor have been discussed; consider staying well under that.
+before adding yet another PR to the review stack. The idea of limiting open PRs
+to 5 per contributor is occasionally raised; consider staying well under that.
 
 Put the time in to make your PRs as easy to understand and review as possible:
 Code, tests, documentation, good commit messages, relevant references, concise
@@ -419,11 +418,10 @@ logical, separate, and easier to review. Even better, hygienic -- each standing
 on their own without introducing regressions.
 
 PR descriptions are often either too terse or too verbose. Write the essentials,
-then take the time to make your PR description brief, clear, and
-[pithy](https://www.collinsdictionary.com/dictionary/english/pithy).
-
-In your PR description, it's a smart habit to give reviewers tips on how to
-review and test your changes, e.g. "Here's how to review this".
+then take the time to make your PR description brief, clear, even
+[pithy](https://www.collinsdictionary.com/dictionary/english/pithy). In your PR
+description, it's a smart habit to give reviewers tips on how to review and test
+your changes: "Here's how to review this".
 
 It is essential for commit messages and PR descriptions to explain *why*.
 Summarizing "what" can be good too, but "why" is essential to review because if
@@ -473,7 +471,7 @@ Reviewing 5 to 15 PRs for every PR you make is a good range.
 
 If you are a good reviewer and begin building a reputation and appreciation for
 your help in moving the project forward, maintainers and other contributors
-might reciprocate by reviewing your work as well!
+may reciprocate by reviewing your work more quickly as well!
 
 
 ### BOOKS
