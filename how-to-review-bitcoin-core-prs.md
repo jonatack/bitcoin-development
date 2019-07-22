@@ -1,6 +1,6 @@
 ## [WIP] How to Review Bitcoin Core PRs
 
-Last updated: July 20, 2019
+Last updated: July 22, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -498,6 +498,8 @@ Intermediate/advanced
 - [Effective STL](https://www.amazon.com/Effective-STL-Specific-Standard-Template/dp/0201749629/)
 - [Exceptional C++](https://www.amazon.com/Exceptional-Engineering-Programming-Problems-Solutions/dp/0201615622/)
 - [More Exceptional C++](https://www.amazon.com/More-Exceptional-Engineering-Programming-Solutions/dp/020170434X/)
+- [C++ Templates: The Complete Guide (1st Edition)](https://www.amazon.com/Templates-Complete-Guide-David-Vandevoorde/dp/0201734842/)
+- [C++ Templates: The Complete Guide (2nd Edition)](https://www.amazon.com/C-Templates-Complete-Guide-2nd/dp/0321714121/)
 - [C++ Concurrency in Action, 2nd Edition](https://www.amazon.com/C-Concurrency-Action-Anthony-Williams/dp/1617294691/)
 
 #### Cryptography
