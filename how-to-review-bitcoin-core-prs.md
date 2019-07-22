@@ -489,7 +489,8 @@ Learning C++
 - [C++ Primer, 5th Edition](https://www.amazon.com/Primer-5th-Stanley-B-Lippman/dp/0321714113/)
   (more gentle, longer, not to be confused with the knock-off, "C++ Primer Plus")
 - [Accelerated C++](https://www.amazon.com/Accelerated-C-Practical-Programming-Example/dp/020170353X/)
-  (condensed, goes faster, a bit out of date but excellent)
+  (condensed, faster, a bit out of date but excellent,
+  [exercise solutions here](https://github.com/bitsai/book-exercises/tree/master/Accelerated%20C%2B%2B))
 
 Intermediate/advanced
 
