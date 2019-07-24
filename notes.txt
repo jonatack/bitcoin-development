@@ -55,6 +55,11 @@ harding:  To grep Bitcoin "hidden" debug options:
 
 -----
 
+          To build Bitcoin with clang for better errors:
+
+          CC=clang CXX=clang ./configure...
+-----
+
           To turn on debug=net with the logging RPC:
 
           bitcoin-cli logging '["net"]'
