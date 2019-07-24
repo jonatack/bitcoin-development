@@ -34,6 +34,21 @@ jnewbery: Review 5-10 PRs per PR made
           https://godbolt.org/
 -----
 
+          To launch the Python debugger on failure of a functional test, pass
+          `--pdbonfailure` as seen in, say, test/functional/wallet_basic.py -h
+
+          test/functional/wallet_basic.py --pdbonfailure
+
+          Does not work via the test runner, e.g. this prints dots ad infinitum:
+
+          test/functional/test_runner.py wallet_basic --pdbonfailure
+-----
+
+          To run a functional test X times and launch the debugger on failure:
+
+          (for i in {1..100}; do test/functional/wallet_basic.py --pdbonfailure ; done)
+-----
+
 laanwj:   Release notes should refer to the RPC help for details instead of
           substituting for full documentation. Example:
           "Please refer to the RPC help of `getbalances` for details."
