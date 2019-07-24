@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-07-19
+Last updated: 2019-07-24
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,13 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-07-24 Matt Corallo suggestion: "Good Bitcoin Core project: take Pieter
+           Wuille's as-map compression format from https://github.com/sipa/asmap
+           and write a decoder for C++, plus incorporate the mappings into the
+           addrman block lookup stuff. That repo is private so ask sipa for
+           access, dunno why its private to begin with."
 -----
 
 2019-07-19 Hoist max chain depth value of 999999 to a constant, with explanatory
