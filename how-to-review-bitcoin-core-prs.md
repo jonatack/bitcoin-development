@@ -356,8 +356,14 @@ Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
 
 Good ideas may often be found in PR reviews and #bitcoin-core-dev IRC
-discussions. I find it useful to keep a list of PR ideas in the form of
-[observed todos](observed-todos.txt).
+discussions.
+
+Things to do and fix can also be found by searching for TODO and FIXME comments
+in the repository. An easy way to do this is to run `git grep "TODO\|FIXME"` on
+the command line from root.
+
+I find it useful to keep a list of PR ideas in the form of [observed
+todos](observed-todos.txt).
 
 Avoid making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
 valuable contributor and maintainer time, often for little gain. Code churn can
