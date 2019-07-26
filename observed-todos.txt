@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-07-24
+Last updated: 2019-07-26
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,10 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-07-26 Address remaining nits in "Add option to create an encrypted wallet"
+           https://github.com/bitcoin/bitcoin/pull/15006
 -----
 
 2019-07-24 Matt Corallo suggestion: "Good Bitcoin Core project: take Pieter
