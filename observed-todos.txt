@@ -14,6 +14,10 @@ laanwj:    focus on user problems, actual bugs,
 
 -----
 
+2019-07-29 Display the network (mainnet, testnet, regtest) in the user-facing
+           output of the bitcoin daemon start/stop commands.
+-----
+
 2019-07-27 Add the missing code documentation requested by reviewers in PR 15713
            "Replace chain relayTransactions/submitMemoryPool by higher method"
            https://github.com/bitcoin/bitcoin/pull/15713
