@@ -17,6 +17,11 @@ jnewbery: Review 5-10 PRs per PR made
           Learn to get people to review when needed
 -----
 
+harding:  To grep Bitcoin "hidden" debug options:
+
+          bitcoind -help-debug | grep -A3 -- -limit
+-----
+
           To test compiler acceptance on the command line:
 
           $ echo 'int main(){ const int min_depth = { true ? 1 : 0 };}' | g++ -x c++ -
@@ -26,7 +31,6 @@ jnewbery: Review 5-10 PRs per PR made
           $ echo 'int main(){ const int min_depth =   true ? 1 : 0   }' | g++ -x c++ -
           <stdin>: In function ‘int main()’:
           <stdin>:1:51: error: expected ‘,’ or ‘;’ before ‘}’ token
-
 -----
 
           C++ Compiler Explorer, shows compiler output and assembly:
@@ -49,10 +53,13 @@ jnewbery: Review 5-10 PRs per PR made
           (for i in {1..100}; do test/functional/wallet_basic.py --pdbonfailure ; done)
 -----
 
-harding:  To grep Bitcoin "hidden" debug options:
+          Unit tests info:
+          https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
 
-          bitcoind -help-debug | grep -A3 -- -limit
-
+          Run a single test with ./src/test/test_bitcoin -t suite_name/case_name
+          Specify the log level, usually debug, with -l debug (see --help)
+          Also, the test log to a debug log file (in master)
+          If you need temporary printing, you can do std::cout or std::cerr
 -----
 
           To build Bitcoin with clang for better errors:
@@ -86,8 +93,14 @@ MarcoFalke: To run functional tests in the gui, pass BITCOIND=bitcoin-qt
 
 -----
 
-jnewbery: We now have a handy WITH_LOCK macro in src/sync.h#L209
+harding   Idea: sendrawtransaction spends from cold wallet with network disabled
+          to do a final inspection of the transaction in local mempool (mainly
+          to check not forgetting an output and spending everything in fees).
+          Before that try testmempoolaccept, and analyzepsbt before even
+          broadcasting it.
+-----
 
+jnewbery: We now have a handy WITH_LOCK macro in src/sync.h#L209
 -----
 
 Static fully valid pubkey in the Core codebase to reference in unit tests:
