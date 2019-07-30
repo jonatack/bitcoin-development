@@ -1,4 +1,4 @@
-## [WIP] How to Review Bitcoin Core PRs
+## How to Review Bitcoin Core PRs - A work-in-progress guide
 
 Last updated: July 30, 2019
 
