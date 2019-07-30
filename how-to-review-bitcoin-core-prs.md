@@ -94,9 +94,11 @@ Remember that contributor and maintainer resources are limited -- ask for them
 carefully and respectfully. The goal is to try to give more than you take, to
 help more than hinder, while getting up to speed.
 
-Follow the [bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
-and the
-[bitcoin-dev mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).
+Follow the
+[#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev)
+IRC channel and the
+[bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
+mailing list.
 
 Before jumping in, take plenty of time to
 
@@ -104,11 +106,14 @@ Before jumping in, take plenty of time to
     the documentation in the [repository](https://github.com/bitcoin/bitcoin),
     notably
     [Contributing to Bitcoin Core](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md)
-    and everything in the [doc](https://github.com/bitcoin/bitcoin/tree/master/doc) and
-    [test](https://github.com/bitcoin/bitcoin/tree/master/test) directories,
+    and everything in the
+    [doc](https://github.com/bitcoin/bitcoin/tree/master/doc) and
+    [test](https://github.com/bitcoin/bitcoin/tree/master/test)
+    [directories](https://github.com/bitcoin/bitcoin/tree/master/src/test),
     but also by observing interactions on the
-    [bitcoin-core-dev IRC channel](https://webchat.freenode.net/?channels=bitcoin-core-dev)
-    and the ongoing [code review in the repository](https://github.com/bitcoin/bitcoin/pulls)
+    [#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev)
+    IRC channel and the ongoing
+    [code review in the repository](https://github.com/bitcoin/bitcoin/pulls)
 
   - get to know the maintainers and regular contributors: what they do, what
     they like and want, how they give feedback
@@ -179,10 +184,11 @@ The process of ramping up takes time; nothing can substitute for months and
 years invested in gathering context and understanding from following the
 [code](https://github.com/bitcoin/bitcoin),
 [issues](https://github.com/bitcoin/bitcoin/issues),
-[PRs/reviews](https://github.com/bitcoin/bitcoin/pulls), [bitcoin-core-dev IRC
-channel](https://webchat.freenode.net/?channels=bitcoin-core-dev), and
-[bitcoin-dev mailing
-list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).
+[pull requests](https://github.com/bitcoin/bitcoin/pulls),
+[#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev)
+IRC channel, and the
+[bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
+mailing list.
 
 Keep ego and hopes out of the process. Don't take things personally and keep
 moving forward.
@@ -361,8 +367,11 @@ Read and know the Bitcoin Core [developer notes](https://github.com/bitcoin/bitc
 Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
 
-Good ideas may often be found in PR reviews and #bitcoin-core-dev IRC
-discussions.
+Good ideas may often be found in the
+[PR reviews](https://github.com/bitcoin/bitcoin/pulls)
+and
+[#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev)
+IRC discussions.
 
 Things to do and fix can also be found by searching for TODO and FIXME comments
 in the repository. An easy way to do this is to run `git grep "TODO\|FIXME"` on
