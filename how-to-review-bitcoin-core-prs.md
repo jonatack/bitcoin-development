@@ -16,6 +16,9 @@ by [Pierre Rochard](https://twitter.com/pierre_rochard) (2018)
 3. [Contributing to Bitcoin Core, a personal account](https://bitcointechtalk.com/contributing-to-bitcoin-core-a-personal-account-35f3a594340b)
 by [John Newbery](https://twitter.com/jfnewbery) (2017)
 
+This presentation also provides guidance on the Bitcoin Core review process.
+
+4. [A hardCORE workout](https://www.youtube.com/watch?v=PKzJktErUdk) by [Jeremy Rubin](https://twitter.com/JeremyRubin). The transcript is available [here](http://diyhpl.us/wiki/transcripts/sf-bitcoin-meetup/2018-04-23-jeremy-rubin-bitcoin-core/) (2018)
 
 ### INTRODUCTION
 
