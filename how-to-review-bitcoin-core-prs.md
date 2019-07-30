@@ -118,6 +118,14 @@ Before jumping in, take plenty of time to
   - get to know the maintainers and regular contributors: what they do, what
     they like and want, how they give feedback
 
+Participate in the excellent
+[Bitcoin Core PR Review Club](https://bitcoin-core-review-club.github.io/)
+weekly meetings on IRC. The club was launched in May 2019 by
+[John Newbery](https://twitter.com/jfnewbery). You'll benefit the most if you
+prepare for each meeting in advance by studying, building and testing the PR
+under review. Go through the notes, questions, and logs of the previous meetings
+-- there is gold in there.
+
 The big picture is much more important than nits, spelling, or code style.
 
 Steps to improve understanding of the big picture:
