@@ -15,6 +15,7 @@ To create a scripted-diff:
 - in the commit message include the bash script between lines containing just the following text:
     - `-BEGIN VERIFY SCRIPT-`
     - `-END VERIFY SCRIPT-`
+- for the first line of the bash script specifying the interpreter (the shebang) use `#!/usr/bin/env bash` instead of the obsolete `#!/bin/bash`.
 
 The scripted-diff is verified by the tool `test/lint/commit-script-check.sh`. The tool's default behavior when supplied
 with a commit is to verify all scripted-diffs from the beginning of time up to said commit. Internally, the tool passes
@@ -31,8 +32,29 @@ Commit [`bb81e173`](https://github.com/bitcoin/bitcoin/commit/bb81e173) is an ex
 
 ------
 
-Scripted-diff examples seen in Bitcoin Core PR descriptions:
+Scripted-diff examples seen in Bitcoin Core PR (not necessarily merged) descriptions:
+
+Commit [`fac03ec`](https://github.com/bitcoin/bitcoin/commit/fac03ec)
 
 scripted-diff: Replace fprintf with tfm::format
 
     sed -i --regexp-extended -e 's/fprintf\(std(err|out), /tfm::format(std::c\1, /g' $(git grep -l 'fprintf(' -- ':(exclude)src/crypto' ':(exclude)src/leveldb' ':(exclude)src/univalue' ':(exclude)src/secp256k1')
+
+Commit [`bb81e173`](https://github.com/bitcoin/bitcoin/commit/bb81e173)
+
+scripted-diff: stop using the gArgs wrappers 
+
+    find src/ -name "*.cpp" ! -wholename "src/util.h" ! -wholename "src/util.cpp" | xargs perl -i -pe 's/(?<!\.)(ParseParameters|ReadConfigFile|IsArgSet|(Soft|Force)?(Get|Set)(|Bool|)Arg(s)?)\(/gArgs.\1(/g'
+
+Commit [`993aa41`](https://github.com/bitcoin/bitcoin/pull/16184/commits/993aa41)
+
+scripted-diff: gitian: Use REFERENCE_DATETIME directly
+
+    sed -i 's#\$REFERENCE_DATE\\\\\\ \$REFERENCE_TIME#\$REFERENCE_DATETIME#g' contrib/gitian-descriptors/*
+
+Commit [`e1e1146`](https://github.com/bitcoin/bitcoin/commit/e1e1146)
+
+scripted-diff: Complete the move from CCriticalSection to identical RecursiveMutex
+
+    git grep -l "CCriticalSection" ":(exclude)src/sync.h" | xargs sed -i "s/CCriticalSection/RecursiveMutex/g"
+
