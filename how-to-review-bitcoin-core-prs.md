@@ -5,7 +5,7 @@ Last updated: July 30, 2019
 
 ### BEFORE YOU BEGIN
 
-These self-study notes build on the foundation laid by these articles/presentations:
+This guide builds on the foundation laid by these presentations:
 
 1. [A Gentle Introduction to Bitcoin Core Development](https://bitcointechtalk.com/a-gentle-introduction-to-bitcoin-core-development-fdc95eaee6b8)
 by [Jimmy Song](https://twitter.com/jimmysong) (2017)
