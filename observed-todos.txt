@@ -10,6 +10,36 @@ laanwj:    focus on user problems, actual bugs,
            enable wallet tests to mock nodes without current heavy node setup
 -----
 
+2019-07-31 Test coverage of our networking code - Who is working on this?
+           https://github.com/bitcoin/bitcoin/issues/14210
+
+           theuni: the idea is to be able to run multiple networking instances
+           inside of one bitcoind process. It would be trivial to implement (I
+           have it done in an ancient branch somewhere) the logic to spoof
+           connection data inside of CConnman in order to simulate different
+           test conditions. Phony IPs, fake latency, dropped packets, peer
+           selection algorithm changes, etc. That's how these tests SHOULD
+           work. Spinning up entire instances of bitcoind just to test net
+           behavior is overkill. Time and energy would be better spent on
+           finishing up the isolated CConnman instantiation.
+
+           dongcarl: A minimal, motivating test case that should make the rest
+           very easy. Here's what we came up with:
+
+           - Instantiate a CConnman (call it c1) with a huge nSendBufferMaxSize
+           - Instantiate a CConnman (call it c2) with a tiny nReceiveFloodSize
+           - Start sending messages from c1 to c2 and ensure that the buffer size
+             restrictions are honored.
+
+           I believe being able to do this would have caught bugs like
+           #12392. CConnman being instantiable like this would allow us to
+           inspect why a CConnman instance might have stopped receiving data
+           rather than just guessing based on pings and timing checks.
+
+           I believe that if we achieve instantiable CConnman, a
+           MockNetworkRouter would be quite easy.
+-----
+
 2019-07-31 Address remaining issues in "Move min/max_depth to coin control"
            https://github.com/bitcoin/bitcoin/pull/15906
            - add docs, hoist value to static constant as per
