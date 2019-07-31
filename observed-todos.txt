@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-07-29
+Last updated: 2019-07-31
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,16 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-07-31 Address remaining issues in "Move min/max_depth to coin control"
+           https://github.com/bitcoin/bitcoin/pull/15906
+           - add docs, hoist value to static constant as per
+           https://github.com/bitcoin/bitcoin/pull/15906#discussion_r305285519
+           - add m_min_depth/m_max_depth unit tests as per
+           https://github.com/bitcoin/bitcoin/pull/15906#issuecomment-513232305
+           - CCoinControl:SetNull should reset values of m_min_depth/m_max_depth
+           https://github.com/bitcoin/bitcoin/pull/15906#issuecomment-513283799
 -----
 
 2019-07-29 On bitcoinbuilds.org, display PR/commit on single build status pages.
