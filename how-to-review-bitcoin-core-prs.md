@@ -537,6 +537,8 @@ Intermediate/advanced
 - [Foundations of Cryptography](https://www.amazon.com/Foundations-Cryptography-Basic-Tools-Vol-dp-0521791723/dp/0521791723/)
 - [Waxwing's blog](https://joinmarket.me/blog) by JoinMarket expert
   [Andrew Gibson](https://mastodon.social/@waxwing)
+- [A Graduate Course in Applied Cryptography](https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_4.pdf) The Crypto Course by Dan Boneh
+- [Cryptopals](https://www.cryptopals.com/) A set of cryptographic code challenges
 
 
 ### CREDITS
