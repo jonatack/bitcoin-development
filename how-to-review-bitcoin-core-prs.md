@@ -225,9 +225,6 @@ John Newbery:
 
 ### TECHNICAL SPECIFICS
 
-The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
-following PR and review activity.
-
 Become comfortable with
 [compiling Bitcoin Core from source](https://github.com/jonatack/bitcoin-development/blob/master/how-to-compile-bitcoin-core-from-source-for-linux-debian.md)
 and running the
@@ -237,6 +234,9 @@ and
 since you will need to do it for each PR you review. For this, the Bitcoin Core
 [productivity notes](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md)
 are indispensable.
+
+Become adept at searching the repository with `git grep`. You'll use it
+constantly.
 
 Read and know the Bitcoin Core [developer notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
 
@@ -257,38 +257,46 @@ might lack understanding or context. If you do NACK, provide good reasoning.
 [Here's one
 example.](https://github.com/bitcoin/bitcoin/pull/12360#issuecomment-383342462)
 
-Manual testing of new features and reported issues is always welcome.
-
-A comment that is really helpful in review: "Here's what I tested and my
-methodology", particularly to back up an ACK.
+Manual testing of new features and reported issues is always welcome. A comment
+that is really helpful in review: "Here's what I tested and my methodology",
+particularly to back up an ACK.
 
 While you're reviewing, adding tests yourself helps you understand the behaviour
-and you can send them to the author who can add them to the PR too.
-
-Contributing automated tests to the PR author is a really helpful way to start
+and verify the changes, and you can send them to the author who can add them to
+the PR. Proposing automated tests to the author is a really helpful way to start
 contributing. Authors really appreciate it when someone reviews their PR and
-provides additional tests.
-[Here's an example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
+provides additional tests. [Here's an
+example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
 
-Bitcoin Core reviewers sometimes use the [Apache voting
-system](https://www.apache.org/foundation/voting.html#expressing-votes-1-0-1-and-fractions).
-Here is an
+A full ACK could look like: "ACK `fa2f991`, I built, ran tests, tested manually
+by doing X/Y/Z and reviewed the code and it looks OK, I agree it can be merged."
+
+When giving an ACK, specify the commits reviewed by appending the commit hash of
+the HEAD commit. The trustless way to do this is to use the hash from your
+*local* checkout of the branch and *not* from the GitHub web page. That way,
+unless your local tools are compromised, you ensure you are ACKing the exact
+changes. This is also useful when a force push happens and links to old commits
+are lost on GitHub.
+
+*Don't trust, verify.* Minimize dependance on GitHub in your review process.
+[Pull down all PRs
+locally](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md#reference-prs-easily-with-refspecs)
+and do all code review in your local environment. This is only a minimum; some
+Bitcoin Core contributors also sign and OpenTimestamp their ACKs. It's trivial
+to sign your commits using the [OpenTimestamps Git
+Integration](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md).
+
+Look at each commit separately using a difftool like gitk or meld on Linux, or
+opendiff on macOS.
+
+Bitcoin Core reviewers frequently use the [Apache voting
+system](https://www.apache.org/foundation/voting.html#expressing-votes-1-0-1-and-fractions)
+in their comments. Here is an
 [example](https://github.com/bitcoin/bitcoin/pull/11426#issuecomment-334091207).
 
-jnewbery/instagibbs:
-- check out the branch locally
-- run a difftool on each commit in turn using meld on linux and opendiff on mac
-- ACK the commit hash of the HEAD commit from my local checkout of the branch,
-  so unless my local tools are compromised, I know I'm ACKing the exact changes.
-  It's also useful when a force push happens and links to old commits are lost
-  on GitHub
-- though unless you GPG sign the ACK, GitHub could just modify what you're
-  writing. If you want to fully remove trust, you can go the full Marco Falke
-  and sign/opentimestamp all of your review comments
-- [Open Timestamps Git Integration](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md)
+The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
+following PR and review activity.
 
-aj:
-- i find "gitk" useful for getting an overview of changes
 
 fanquake:
 - I have some core dev tools in https://github.com/fanquake/core-review
@@ -390,8 +398,9 @@ and
 IRC discussions.
 
 Things to do and fix can also be found by searching for TODO and FIXME comments
-in the repository. An easy way to do this is to run `git grep "TODO\|FIXME"` on
-the command line from root.
+in the codebase. An easy way to do this is to run `git grep "TODO\|FIXME"` on
+the command line from root. Keep in mind that these comments can sometimes be
+out of date.
 
 I find it useful to keep a list of PR ideas in the form of [observed
 todos](observed-todos.txt).
