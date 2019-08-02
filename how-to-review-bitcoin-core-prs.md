@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: July 30, 2019
+Last updated: August 2, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -22,8 +22,7 @@ by [John Newbery](https://twitter.com/jfnewbery) (2017)
    /
    [slides](https://drive.google.com/file/d/149Ta1WRXL5WEvnBdlL-HxmsFDXUbvFDy/view)
    by [Jeremy Rubin](https://twitter.com/JeremyRubin) (2018)
-   /
-5. [Learning-Bitcoin-from-the-Command-Line](https://github.com/ChristopherA/Learning-Bitcoin-from-the-Command-Line) (2017)
+
 
 ### INTRODUCTION
 
@@ -142,6 +141,8 @@ Steps to improve understanding of the big picture:
 
 - Subscribe to the [Bitcoin Optech newsletters](https://bitcoinops.org/) and
 read their [Scaling Book](https://github.com/bitcoinops/scaling-book)
+
+- Do [Learning Bitcoin from the Command Line](https://github.com/ChristopherA/Learning-Bitcoin-from-the-Command-Line)
 
 Aim for quality over quantity and a balance between deep work and quick wins.
 
