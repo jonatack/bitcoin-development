@@ -270,6 +270,11 @@ contributing. Authors really appreciate it when someone reviews their PR and
 provides additional tests.
 [Here's an example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
 
+Bitcoin Core reviewers sometimes use the [Apache voting
+system](https://www.apache.org/foundation/voting.html#expressing-votes-1-0-1-and-fractions).
+Here is an
+[example](https://github.com/bitcoin/bitcoin/pull/11426#issuecomment-334091207).
+
 jnewbery/instagibbs:
 - check out the branch locally
 - run a difftool on each commit in turn using meld on linux and opendiff on mac
