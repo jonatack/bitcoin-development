@@ -476,8 +476,18 @@ things seem self-apparent, but when in doubt no one was ever hurt by a little
 more concise explanation.
 
 Set up Travis CI on your own GitHub Bitcoin repository so that when you push a
-branch or commit, the linter and continuous integration tests run. It's a good
-idea to verify they are all green on your GitHub repository before filing a PR.
+branch or commit, the linter and continuous integration tests run. It can be a
+good idea to verify that they are all green on your GitHub repository before
+filing a PR. Unfortunately, the Travis CI is also currently very slow and times
+out frequently, signaling false negatives.
+
+At the moment, https://bitcoinbuilds.org runs more quickly and reliably than
+the Travis CI (but runs fewer builds), so don't hesitate to consult it for early
+initial feedback when you push a PR or changes.
+
+You can sign your commits using the [OpenTimestamps Git
+Integration](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md).
+It's easy to setup.
 
 Remember that every time you comment on your PR after pushing, you're sending
 notifications to the people who previously reviewed or commented on it. Respect
