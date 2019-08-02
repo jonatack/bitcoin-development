@@ -22,6 +22,8 @@ by [John Newbery](https://twitter.com/jfnewbery) (2017)
    /
    [slides](https://drive.google.com/file/d/149Ta1WRXL5WEvnBdlL-HxmsFDXUbvFDy/view)
    by [Jeremy Rubin](https://twitter.com/JeremyRubin) (2018)
+   /
+5. [Learning-Bitcoin-from-the-Command-Line](https://github.com/ChristopherA/Learning-Bitcoin-from-the-Command-Line) (2017)
 
 ### INTRODUCTION
 
