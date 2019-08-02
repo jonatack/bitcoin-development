@@ -101,7 +101,7 @@ IRC channel and the
 [bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
 mailing list.
 
-Before jumping in, take plenty of time to
+Before jumping in, take plenty of time to:
 
   - understand the contribution process and guidelines, not only by reading
     the documentation in the [repository](https://github.com/bitcoin/bitcoin),
@@ -131,18 +131,18 @@ The big picture is much more important than nits, spelling, or code style.
 
 Steps to improve understanding of the big picture:
 
-- Do the [Chaincode Labs study guide](https://github.com/chaincodelabs/study-groups)
+- do the [Chaincode Labs study guide](https://github.com/chaincodelabs/study-groups)
 
-- Read and do [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin)
+- read and do [Programming Bitcoin](https://github.com/jimmysong/programmingbitcoin)
 
-- Study the [Bitcoin Improvement Proposals](https://github.com/bitcoin/bips/)
+- study the [Bitcoin Improvement Proposals](https://github.com/bitcoin/bips/)
   (often referred to in singular form by the acronym "BIP"), and return to them
   frequently
 
-- Subscribe to the [Bitcoin Optech newsletters](https://bitcoinops.org/) and
+- subscribe to the [Bitcoin Optech newsletters](https://bitcoinops.org/) and
 read their [Scaling Book](https://github.com/bitcoinops/scaling-book)
 
-- Do [Learning Bitcoin from the Command Line](https://github.com/ChristopherA/Learning-Bitcoin-from-the-Command-Line)
+- do [Learning Bitcoin from the Command Line](https://github.com/ChristopherA/Learning-Bitcoin-from-the-Command-Line)
 
 Aim for quality over quantity and a balance between deep work and quick wins.
 
@@ -272,22 +272,22 @@ A full ACK could look like: "ACK `fa2f991`, I built, ran tests, tested manually
 by doing X/Y/Z and reviewed the code and it looks OK, I agree it can be merged."
 
 When giving an ACK, specify the commits reviewed by appending the commit hash of
-the HEAD commit. The trustless way to do this is to use the hash from your
+the `HEAD` commit. The trustless way to do this is to use the hash from your
 *local* checkout of the branch and *not* from the GitHub web page. That way,
 unless your local tools are compromised, you ensure you are ACKing the exact
 changes. This is also useful when a force push happens and links to old commits
 are lost on GitHub.
 
 *Don't trust, verify.* Minimize dependance on GitHub in your review process.
-[Pull down all PRs
+[Pull down the PRs
 locally](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md#reference-prs-easily-with-refspecs)
 and do all code review in your local environment. This is only a minimum; some
 Bitcoin Core contributors also sign and OpenTimestamp their ACKs. It's trivial
 to sign your commits using the [OpenTimestamps Git
 Integration](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md).
 
-Look at each commit separately using a difftool like gitk or meld on Linux, or
-opendiff on macOS.
+In your local environment, review each commit separately using a difftool like
+gitk or meld on Linux, or opendiff on macOS.
 
 Bitcoin Core reviewers frequently use the [Apache voting
 system](https://www.apache.org/foundation/voting.html#expressing-votes-1-0-1-and-fractions)
@@ -405,7 +405,7 @@ out of date.
 I find it useful to keep a list of PR ideas in the form of [observed
 todos](observed-todos.txt).
 
-Avoid making refactoring, fixup/cleanup, or trivial spelling PRs; these consume
+Avoid making trivial refactoring, style cleanup, or spelling PRs; these consume
 valuable contributor and maintainer time, often for little gain. Code churn can
 cause hidden new bugs and blurs the code history and git blame. Any code
 refactoring needs substantial motivation, advantages, or simplifications.
@@ -552,10 +552,12 @@ Intermediate/advanced
 #### Cryptography
 
 - [Foundations of Cryptography](https://www.amazon.com/Foundations-Cryptography-Basic-Tools-Vol-dp-0521791723/dp/0521791723/)
-- [Waxwing's blog](https://joinmarket.me/blog) by JoinMarket expert
-  [Andrew Gibson](https://mastodon.social/@waxwing)
-- [A Graduate Course in Applied Cryptography](https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_4.pdf) The Crypto Course by Dan Boneh
-- [Cryptopals](https://www.cryptopals.com/) A set of cryptographic code challenges
+- [Waxwing's blog](https://joinmarket.me/blog) by the JoinMarket creator and
+    cryptographer [Andrew Gibson](https://mastodon.social/@waxwing)
+- [A Graduate Course in Applied Cryptography](https://crypto.stanford.edu/~dabo/cryptobook/BonehShoup_0_4.pdf)
+    by [Dan Boneh](https://en.wikipedia.org/wiki/Dan_Boneh)
+- [Cryptopals](https://www.cryptopals.com/) - A set of cryptographic code
+    challenges
 
 
 ### CREDITS
