@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-07-31
+Last updated: 2019-08-12
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,20 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-08-12 Improve tooltip info in wallet-qt GUI:
+
+           IRC #bitcoin question: "In the options for Bitcoin Core (GUI), what's
+           'Allow incoming connections' for?  It's checked by default. The
+           tooltip just repeats the text for the label. Can you *not* allow
+           incoming connections? Won't that make Bitcoin not work?"
+
+           IRC reply: "you have to enable listening to allow incomming
+           connections. Also you will probably need to setup your router
+           accordingly. If listening connections are not enabled, your node by
+           itself only creates outgoing connections to other bitcoin nodes that
+           has listening enabled."
 -----
 
 2019-07-31 Test coverage of our networking code - Who is working on this?
@@ -38,6 +52,8 @@ laanwj:    focus on user problems, actual bugs,
 
            I believe that if we achieve instantiable CConnman, a
            MockNetworkRouter would be quite easy.
+
+           dongcarl open PR: https://github.com/bitcoin/bitcoin/pull/14856
 -----
 
 2019-07-31 Address remaining issues in "Move min/max_depth to coin control"
