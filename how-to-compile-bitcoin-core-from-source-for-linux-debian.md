@@ -1,8 +1,8 @@
 How to compile Bitcoin Core from source on Linux Debian and run the unit and functional tests
 ---------------------------------------------------------------------------------------------
-Last updated: 16 March 2019
+Last updated: 16 August 2019
 
-This is a simplified compilation of the various docs in https://github.com/bitcoin/bitcoin/tree/master/doc. Don't hesitate to read them for more information.
+This is a simplified summary of the various docs in https://github.com/bitcoin/bitcoin/tree/master/doc. Don't hesitate to read them for more information.
 
 All steps are to be run from your terminal emulator, i.e. the command line.
 
@@ -30,15 +30,14 @@ All steps are to be run from your terminal emulator, i.e. the command line.
     - `git tag -n | sort -V` to see tags and descriptions ordered by most recent last
     - `git checkout <TAG>` to use a tagged release, for example: `git checkout v0.18.0rc2`
 
-5. Compile Bitcoin from source, optionally with lcov and gprof enabled:
+5. Compile Bitcoin from source:
     - `./autogen.sh`
     - Use the output from the BDB build above for the exact export command: `export BDB_PREFIX='<PATH-TO>/db4'`
-    - `./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" --enable-lcov --enable-gprof`
+    - `./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include"`
     - `make`, or if you have multiple threads on your machine, you can tell `make` to utilize all of them and reduce compile time significantly with: `make -j"$(($(nproc)+1))"`
 
-6. Run unit tests:
-    - Unit tests only: `make check`
-    - Unit tests with coverage report (if lcov was enabled): `make cov`
+6. Run the unit tests:
+    - `make check`
 
-7. Run functional tests:
+7. Run the functional tests:
     - `test/functional/test_runner.py` or `test/functional/test_runner.py --extended`
