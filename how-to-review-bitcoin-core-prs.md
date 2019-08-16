@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: August 2, 2019
+Last updated: August 16, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -256,6 +256,11 @@ As a new contributor, be cautious with giving a NACK. Assume by default that you
 might lack understanding or context. If you do NACK, provide good reasoning.
 [Here's one
 example.](https://github.com/bitcoin/bitcoin/pull/12360#issuecomment-383342462)
+
+When you disagree, state your point of view once and move on. Don't flood the
+comments section, browbeat others or overreact. Remember that the most
+important thing is probably not the issue being discussed, but your relationship
+with the other contributors.
 
 Manual testing of new features and reported issues is always welcome. A comment
 that is really helpful in review: "Here's what I tested and my methodology",
