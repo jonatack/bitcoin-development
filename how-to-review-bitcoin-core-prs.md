@@ -419,6 +419,13 @@ Do not begin by trying to change consensus code; it is difficult and
 dangerous territory. The goal of Bitcoin Core is to maintain the correct
 consensus on the Bitcoin network -- all else is secondary.
 
+Gather context about the change you have in mind. Has it already been proposed
+in the past? Do issues or PRs about it already exist? (They probably do). Sleuth
+a bit. Search the `git log -S` history. Look at the `git blame` of the code in
+question and `git show` the commits. Check the GitHub file history. You'll see
+who understands that part of the codebase and be contacted for questions or
+review.
+
 Test coverage is essential; don't hesitate to write any missing
 [unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
 [functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
