@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: August 16, 2019
+Last updated: August 18, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -40,11 +40,11 @@ developers as both
 Yet the process and learning curve can seem intimidating and in practice very
 few new contributors do it.
 
-As a newcomer, this article represents my current understanding after a couple
-months, a few dozen PR reviews (some more useful than others), a few issues
-tested or handled, and a handful of commits.
+As a newcomer, this article represents my current understanding after a few
+months, a few dozen PR reviews, a few issues tested or handled, and a handful of
+commits.
 
-Some of this understanding was gained from years of
+Some of this understanding was gained from
 
   - contributing to a large open source project,
     [Ruby on Rails](https://github.com/rails/rails), and co-editing its blog and
@@ -127,6 +127,8 @@ prepare for each meeting in advance by studying, building and testing the PR
 under review. Go through the notes, questions, and logs of the previous meetings
 -- there is gold in there.
 
+THE BIG PICTURE
+
 The big picture is much more important than nits, spelling, or code style.
 
 Steps to improve understanding of the big picture:
@@ -146,9 +148,6 @@ read their [Scaling Book](https://github.com/bitcoinops/scaling-book)
 
 Aim for quality over quantity and a balance between deep work and quick wins.
 
-Focus on user problems, actual bugs, and "used, but untested" methods that
-affect outcomes and need tests.
-
 Documentation is important, e.g. whether a function has a good description and
 [Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
 for all its arguments, and high-level documentation of how
@@ -159,33 +158,39 @@ Test coverage is essential; don't hesitate to improve or write any missing
 [functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional/)
 tests.
 
-Be a contributor. Help PRs move forward by reviewing,
-[proposing tests](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946),
-or fixes in a helpful way, proposing to rebase, or even offering to take over
-the PR after months of silence. In short, help each other!
+Be a contributor. Help PRs move forward by reviewing, [proposing
+tests](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946), or
+fixes in a helpful way, proposing to rebase, or even offering to take over the
+PR after months of silence. In short, help each other!
 
-Try to avoid overly commenting in PRs about code style issues and nits,
+NITS
+
+Try to avoid overly commenting in PRs about nits, minutia and code style,
 particularly with PRs labeled as WIP, or when a PR has just been filed and the
-PR author is mainly looking for Concept ACKs, e.g. general consensus, not
-nitpicking. Long-term contributors report that activity like this repels them,
-and it can diminish your social capital on the project. Try to understand what
-kind of review is needed and when to do what.
+PR author is mainly looking for Concept ACKs and Approach ACKs, e.g. general
+consensus, not nitpicking.
 
-The best time for any nit comments is after the Concept ACKs and consensus on
-the PR, and before the PR is finalized and has tested ACKs.
+Long-term contributors report that activity like this repels them, and it can
+diminish your social capital on the project. Try to understand what kind of
+review is needed and when to do what.
 
-Give nits and style advice in an advisory way -- as in, feel free to ignore,
-feel free to adjust if you happen to rebase, etc.
+The best time for any nit comments is after the Concept/Approach ACKs and
+consensus on the PR, and before the PR is finalized and has tested ACKs.
+
+Give nits and style advice in a friendly, light, enabling way -- as in, feel
+free to ignore, feel free to adjust if you happen to rebase, etc.
 
 Keep in mind that no one is forced to take your review comments into account;
 it's perfectly fine for the author to reply that they don't want to do something
 if they feel it is outside the scope of the change, especially if your comment
 is nitpicky.
 
+SCALE UP
+
 When you can, scale up the difficulty and priority of the PRs you review.
 
 You can add more value and learn more by taking the time to do deep, quality
-review of the [high-priority](https://github.com/bitcoin/bitcoin/projects/8)
+review of the [high-priority PRs](https://github.com/bitcoin/bitcoin/projects/8)
 and the more difficult PRs. These PRs tend to intimidate people and can stagnate
 for months, killing their author's motivation with death by a thousand cuts from
 lack of quality review, nitpicking/code style bikeshedding, and rebase hell.
@@ -201,6 +206,8 @@ IRC channel, and the
 [bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
 mailing list.
 
+STEP BY STEP
+
 Keep ego and hopes out of the process. Don't take things personally and keep
 moving forward.
 
@@ -208,7 +215,7 @@ When in doubt, assume good intentions.
 
 Be patient with people and outcomes.
 
-Work on it every day.
+Persistence helps. Work on it every day.
 
 These are all much easier said than done. Be forgiving with yourself and others.
 
@@ -226,7 +233,8 @@ John Newbery:
 ### TECHNICAL SPECIFICS
 
 Become comfortable with
-[compiling Bitcoin Core from source](https://github.com/jonatack/bitcoin-development/blob/master/how-to-compile-bitcoin-core-from-source-for-linux-debian.md)
+[compiling Bitcoin Core from
+source](https://github.com/jonatack/bitcoin-development/blob/master/how-to-compile-bitcoin-core-from-source-for-linux-debian.md)
 and running the
 [unit tests](https://github.com/bitcoin/bitcoin/tree/master/src/test/README.md)
 and
@@ -298,6 +306,8 @@ Bitcoin Core reviewers frequently use the [Apache voting
 system](https://www.apache.org/foundation/voting.html#expressing-votes-1-0-1-and-fractions)
 in their comments. Here is an
 [example](https://github.com/bitcoin/bitcoin/pull/11426#issuecomment-334091207).
+
+A complex PR usually requires 3-4 ACKs before merging.
 
 The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
 following PR and review activity.
@@ -390,6 +400,8 @@ consensus code
 ### ABOUT MAKING PULL REQUESTS
 
 When you do start contributing PRs, here are some guidelines:
+
+Aim for quality over quantity and a balance between deep work and quick wins.
 
 Read and know the Bitcoin Core [developer notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
 
@@ -608,10 +620,10 @@ programming languages and open source projects. Wladimir van der Laan's
 sparked the possibility to me of perhaps doing the same.
 
 Finally, a big thank you to the Core contributors for their patience with my
-stumbling review attempts so far, notably John Newbery, Marco Falke, João
-Barbosa, practicalswift, Gregory Sanders, Jonas Schnelli, Pieter Wuille and
-Wladimir van der Laan, and to Adam Jonas and John Newbery for their guidance and
-advice from the start.
+review attempts so far, notably John Newbery, Marco Falke, João Barbosa,
+practicalswift, Gregory Sanders, Jonas Schnelli, Pieter Wuille and Wladimir van
+der Laan, and to Adam Jonas and John Newbery for their guidance and advice from
+the start.
 
 Cheers,
 
