@@ -584,20 +584,21 @@ Intermediate/advanced
 
 ### CREDITS
 
-A special thank you to [John Newbery](https://twitter.com/jfnewbery)
-for launching the
-[Bitcoin Core PR Reviews Club](https://bitcoin-core-review-club.github.io/) and
-to the long-term contributors who participated so far:
-[Dave Harding](https://hash.social/users/harding),
-Anthony Towns, Gregory Sanders, Michael Ford, Andrew Chow, Pieter Wuille,
-Bryan Bishop, Mike Schmidt, and Marco Falke.
+A special thank you to [John Newbery](https://twitter.com/jfnewbery) (jnewbery)
+for launching the [Bitcoin Core PR Reviews
+Club](https://bitcoin-core-review-club.github.io/) and to the long-term
+contributors who participated so far: [Dave
+Harding](https://hash.social/users/harding) (harding), Anthony Towns (aj),
+Gregory Sanders (instagibbs), Michael Ford (fanquake), Andrew Chow (achow101),
+Pieter Wuille (sipa), Bryan Bishop (kanzure), Mike Schmidt (bitschmidty), Marco
+Falke (MarcoFalke), and Wladimir van der Laan (wumpus).
 
-Thanks to [Steve Lee](https://twitter.com/moneyball) for reviewing this
-write-up and his suggestions.
+Thanks to [Steve Lee](https://twitter.com/moneyball) (moneyball) for reviewing
+this write-up and his suggestions.
 
 This article includes observed comments on GitHub and IRC by the following
 Bitcoin Core contributors/maintainers who deserve to be credited:
-Wladimir J. van der Laan, Marco Falke, Pieter Wuille, and Gregory Maxwell.
+Wladimir van der Laan, Marco Falke, Pieter Wuille, and Gregory Maxwell.
 
 Over the years I had become disillusioned by the central influence of BDFLs in
 programming languages and open source projects. Wladimir van der Laan's
@@ -609,8 +610,8 @@ sparked the possibility to me of perhaps doing the same.
 Finally, a big thank you to the Core contributors for their patience with my
 stumbling review attempts so far, notably John Newbery, Marco Falke, João
 Barbosa, practicalswift, Gregory Sanders, Jonas Schnelli, Pieter Wuille and
-Wladimir J. van der Laan, and to Adam Jonas and John Newbery for their guidance
-and advice from the start.
+Wladimir van der Laan, and to Adam Jonas and John Newbery for their guidance and
+advice from the start.
 
 Cheers,
 
