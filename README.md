@@ -14,15 +14,13 @@
 - [Observed Todos.](observed-todos.txt) Ideas for things to do as I run across
   them.
 
+- [Notes.](notes.txt) Miscellaneous technical notes.
+
 - [PSBTs - Partially-Signed Bitcoin Transactions.](psbts.txt) PSBT information,
   including new May 2019 IRC discussion of ideas for descriptor
   slicing/subsetting, e.g. "subscriptors".
 
 - [Flame Graphs.](flame-graphs.md) How to generate flame graph profiles.
-
-- [Notes.](notes.txt) Miscellaneous dev notes that are mostly destined to be
-  re-organised into specific documents (like "How to Review Bitcoin Core PRs",
-  etc.)
 
 - [Bryan Bishop transcript of Pieter Wuille's July 2018 SF Bitcoin talk:
   "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh

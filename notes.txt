@@ -4,6 +4,11 @@ NOTES
 
 laanwj:   Focus on user problems, actual bugs, and "used, but untested" methods
           that affect outcomes and need tests
+
+          What kind of frustrates me, personally, is that we didn't manage to
+          clearly separate out the consensus parts. Not to a library (which
+          would be useful for rust-bitcoin et al), but also not even to a
+          separate directory.
 -----
 
 jnewbery: Review 5-10 PRs per PR made
@@ -18,8 +23,15 @@ jnewbery: Review 5-10 PRs per PR made
 -----
 
 harding:  To grep Bitcoin "hidden" debug options:
-
           bitcoind -help-debug | grep -A3 -- -limit
+-----
+
+          To search for a term in git history:
+          git log -S 'some string'
+-----
+
+          To see moved-only code:
+          git show --color-moved=dimmed-zebra
 -----
 
           To test compiler acceptance on the command line:
@@ -72,25 +84,45 @@ harding:  To grep Bitcoin "hidden" debug options:
           bitcoin-cli logging '["net"]'
 -----
 
+sipa:     One easy way to make sure you have all the call sites is to rename it.
+
+          If your end goal is integrating things into Bitcoin Core,
+          getting familiar with the code is the best way to spend time.
+          To do that (which i very much encourage you to!) I think it's better
+          to focus on one piece at a time and actually integrate it.
+
+          Never put GitHub usernames in commits, nor PR descriptions which are
+          automatically copied into merge commits.
+-----
+
 laanwj:   Release notes should refer to the RPC help for details instead of
           substituting for full documentation. Example:
           "Please refer to the RPC help of `getbalances` for details."
 -----
 
-fwilson:  Look for the most annoying, frustrating aspects of the current model
-          and focus on features that fix them
+Marco:    To run functional tests in the gui, pass BITCOIND=bitcoin-qt
 -----
 
-sipa:     If your end goal is integrating things into Bitcoin Core,
-          getting familiar with the code is the best way to spend time.
-          To do that (which i very much encourage you to!) I think it's better
-          to focus on one piece at a time and actually integrate it.
+gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
+          style, especially if it comes across as oppressive rather than
+          enabling.
 
-          Never put GitHub usernames in commits.
------
+          Ignore the smallest of nits, make style advice in a purely advisory
+          way (as in, feel free to adjust if you happen to rebase, otherwise
+          don't bother), move style adjustments-- if any-- until right before
+          merging and not as soon as a PR opens. We've operated in that fashion
+          before and I think the project accomplished a lot more at that time
+          and was more enjoyable. (Likely not all due to coding style nits, but
+          I would be surprised if it wasn't a factor.)
 
-MarcoFalke: To run functional tests in the gui, pass BITCOIND=bitcoin-qt
-
+          I reiterate: the background level of refactors, style changes,
+          cleanups, and other related activity is actively repelling multiple
+          long term contributors, myself included. I beg: give it a bit of a
+          rest, we have so many other things that are crying for our attention
+          and our resolve. We should try to find some initiatives that we all
+          feel more exited about, success with them would make it easier to work
+          on other things... but right now a big style change is just not a
+          unifying effort.
 -----
 
 harding   Idea: sendrawtransaction spends from cold wallet with network disabled
