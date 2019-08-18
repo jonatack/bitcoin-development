@@ -3,10 +3,10 @@
 - [How to Review Bitcoin Core PRs.](how-to-review-bitcoin-core-prs.md)
   A work-in-progress guide.
 
-- [How to compile Bitcoin Core from source on Linux Debian and run the unit and
-  functional
-  tests.](how-to-compile-bitcoin-core-from-source-for-linux-debian.md) A
-  simplified step-by-step summary for public use.
+- [How to compile Bitcoin Core from source on Linux Debian and macOS and run the
+  unit and functional
+  tests.](how-to-compile-bitcoin-core-from-source-on-linux-and-macOS.md) A
+  simplified step-by-step summary.
 
 - [Bitcoin Core Dev IRC meetings.](bitcoin-core-dev-irc-meetings.txt) Practical
   info about the various IRC meetings (general, wallet, PR reviews).
