@@ -12,7 +12,7 @@ Bitcoin Core Dev IRC Meetings
 -----
 
 *PR Reviews* meeting every Wednesday 1700 UTC on #bitcoin-core-pr-reviews
-  Info: https://gist.github.com/jnewbery/6e2797a6f484de59aefc849a6b184008
+  Info: https://bitcoin-core-review-club.github.io/
 
   jnewbery: "Let me know if you have suggestions for PRs to cover. The aim is
   for manageable PRs (100-150 LOC), not too much contextual knowledge required,
