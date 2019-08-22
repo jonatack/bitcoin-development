@@ -529,8 +529,9 @@ is to recap various ACKs from the previous PRs, with GitHub usernames, to rope
 in support for the new PR. If you do, be sure to do it in a comment -- not in a
 commit message and not in the PR description.
 
-Never put GitHub usernames in commits and PR descriptions; this can cause
-endless annoying notifications for those concerned.
+Never put GitHub usernames in commits and PR descriptions; the latter because
+usernames in the description are copied into the merge commit by the merge
+script. This can cause endless annoying notifications for those concerned.
 
 Add
 [release notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#release-notes)
