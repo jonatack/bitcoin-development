@@ -2,52 +2,51 @@ Bitcoin Core Dev IRC Meetings
 -----------------------------
 
 *General* meeting every Thursday 1900 UTC on #bitcoin-core-dev
-  Topics are managed by Steve Lee (moneyball on IRC) in this gist:
+
+  General meeting logs:
+  http://www.erisian.com.au/meetbot/bitcoin-core-dev/
+
+  Past and future topics are managed by Steve Lee (moneyball on IRC) in this gist:
   https://gist.github.com/moneyball/071d608fdae217c2a6d7c35955881d8a
+
+  To propose a meeting topic, post a message to moneyball on #bitcoin-core-dev:
+  moneyball: #proposedmeetingtopic <topic>
 
 -----
 
 *Wallet* meeting every other Friday 1900 UTC on #bitcoin-core-dev since 29/10/18
 
------
-
-*PR Reviews* meeting every Wednesday 1700 UTC on #bitcoin-core-pr-reviews
-  Info: https://bitcoin-core-review-club.github.io/
-
-  jnewbery: "Let me know if you have suggestions for PRs to cover. The aim is
-  for manageable PRs (100-150 LOC), not too much contextual knowledge required,
-  and trying to cover all the different components. Feel free to leave feedback
-  in this IRC channel. I'll be monitoring through the week."
+  Wallet meeting logs (same link as for the General meetings):
+  http://www.erisian.com.au/meetbot/bitcoin-core-dev/
 
 -----
 
-IRC log history: http://www.erisian.com.au/meetbot/bitcoin-core-dev/
+*PR Review Club* meeting every Wednesday 1700 UTC on #bitcoin-core-pr-reviews
 
-To link to a specific line in the log history, append #l-<line-number>
-  http://www.erisian.com.au/bitcoin-core-dev/log-2019-04-16.html#l-129
+  Website: https://bitcoin-core-review-club.github.io/
+
+  PR Review Club meeting logs are available on the website by clicking on the
+  past meeting links.
+
+  To suggest a PR or offer to host a meeting, leave a comment at:
+
+  https://github.com/bitcoin-core-review-club/bitcoin-core-review-club.github.io/issues/14
 
 -----
 
-To propose a meeting topic via the bitcoin-core-dev IRC:
-  moneyball: #proposedmeetingtopic <topic>
-  moneyball: #proposedmeetingtopic Should send-to-non-v0-witness be standard
-  moneyball: #proposedmeetingtopic Bitcoin Core design documentation
+Commands to host a #bitcoin-core-dev meeting:
 
------
+  #startmeeting
+  #endmeeting
+  #action
+  #agreed
+  #help
+  #info
+  #idea
+  #link
+  #topic
 
-Commands to host a meeting:
-
-#startmeeting
-#endmeeting
-#action
-#agreed
-#help
-#info
-#idea
-#link
-#topic
-
-The main commands used are #startmeeting, #topic, #action, and #endmeeting.
+  The main commands used are #startmeeting, #topic, #action, and #endmeeting.
 
 -----
 
