@@ -1,6 +1,6 @@
 How to compile Bitcoin Core from source on Linux Debian and macOS and run the unit and functional tests
 -------------------------------------------------------------------------------------------------------
-Last updated: 18 August 2019
+Last updated: 22 August 2019
 
 This is a simplified summary of the various docs in https://github.com/bitcoin/bitcoin/tree/master/doc. Don't hesitate to read them for more information.
 
@@ -29,7 +29,7 @@ All steps are to be run from your terminal emulator, i.e. the command line.
       ./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include" ...
 ```
 
-4. [Recommended] Compile from a tagged release branch instead of master, unless you really want to test the bleeding edge:
+4. Compile from a tagged release branch instead of master, unless you want to test the bleeding edge:
     - `git tag -n | sort -V` to see tags and descriptions ordered by most recent last
     - `git checkout <TAG>` to use a tagged release, for example: `git checkout v0.18.0rc2`
 
@@ -37,6 +37,7 @@ All steps are to be run from your terminal emulator, i.e. the command line.
     - `./autogen.sh`
     - Use the output from the BDB build above for the exact export command: `export BDB_PREFIX='<PATH-TO>/db4'`
     - `./configure BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" BDB_CFLAGS="-I${BDB_PREFIX}/include"`
+    - Note that you can run `./configure --help` to see the (many) configuration options
     - `make`, or if you have multiple threads on your machine, you can tell
       `make` to utilize all of them and reduce compile time significantly with
       `make -j"$(($(nproc)+1))"` on Linux or
