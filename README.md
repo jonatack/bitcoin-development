@@ -10,6 +10,9 @@
 - [Bitcoin Core Dev IRC meetings.](bitcoin-core-dev-irc-meetings.txt) Practical
   info about the General, Wallet, and PR Review Club meetings.
 
+- [IRC channels.](irc-channels.txt) Join these IRC channels for Bitcoin and
+  Lightning development.
+
 - [Observed Todos.](observed-todos.txt) Ideas for things to do as I run across
   them.
 

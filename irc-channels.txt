@@ -1,0 +1,18 @@
+IRC Channels
+------------
+
+Join these IRC channels for Bitcoin and Lightning development, in alphabetical
+order:
+
+#bitcoin-builds
+#bitcoin-core-dev
+#bitcoin-core-pr-reviews
+#bitcoin-wizards
+#bitcoin-workshops
+#c-lightning
+##hwi
+#lightning-dev
+##miniscript
+#mit-dci
+#rust-bitcoin
+#secp256k1
