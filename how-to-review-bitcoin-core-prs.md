@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: August 18, 2019
+Last updated: August 28, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -260,19 +260,27 @@ the change, but is not (yet) confirming they've looked at the code or tested it.
 This can be a valuable signal to a PR author to let them know that the PR has
 merit and is headed in the right direction.
 
-As a new contributor, be cautious with giving a NACK. Assume by default that you
-might lack understanding or context. If you do NACK, provide good reasoning.
-[Here's one
-example.](https://github.com/bitcoin/bitcoin/pull/12360#issuecomment-383342462)
-
-When you disagree, state your point of view once and move on. Don't flood the
-comments section, browbeat others or overreact. Remember that the most
-important thing is probably not the issue being discussed, but your relationship
-with the other contributors.
-
 Manual testing of new features and reported issues is always welcome. A comment
 that is really helpful in review: "Here's what I tested and my methodology",
 particularly to back up an ACK.
+
+Some PRs can be difficult to test or ACK due to complexity, context, or possibly
+a lack of tests or simulation framework. That shouldn't discourage you from
+reviewing. For example, if you've reviewed the code thoroughly, a comment like
+"the code looks correct to me, but I don't feel confident enough about behaviour
+to give an ACK" is a perfectly helpful contribution.
+
+If you're not sure where to start:
+
+While the PR is building and the unit and functional tests are running, read the
+code, read the PR comments, then re-read both. Find something that doesn't make
+sense and try to make sense of it. Repeat. Once it all starts to make sense, run
+it on testnet and/or mainnet, see what happens, tail or search through the
+relevant logs. Maybe add some custom logging, printf statements, or asserts;
+it's always a privilege to add these into other people's code. Run the relevant
+functional test and look through the debug logs. Try refactoring the code to be
+better or prettier, and discover why that doesn't work. Expect it to take twice
+as long as you planned it to. Yes, it's work.
 
 While you're reviewing, adding tests yourself helps you understand the behaviour
 and verify the changes, and you can send them to the author who can add them to
@@ -281,15 +289,15 @@ contributing. Authors really appreciate it when someone reviews their PR and
 provides additional tests. [Here's an
 example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
 
-A full ACK could look like: "ACK `fa2f991`, I built, ran tests, tested manually
-by doing X/Y/Z and reviewed the code and it looks OK, I agree it can be merged."
-
 When giving an ACK, specify the commits reviewed by appending the commit hash of
 the `HEAD` commit. The trustless way to do this is to use the hash from your
 *local* checkout of the branch and *not* from the GitHub web page. That way,
 unless your local tools are compromised, you ensure you are ACKing the exact
 changes. This is also useful when a force push happens and links to old commits
 are lost on GitHub.
+
+A full ACK could look like: "ACK `fa2f991`, I built, ran tests, tested manually
+by doing X/Y/Z and reviewed the code and it looks OK, I agree it can be merged."
 
 *Don't trust, verify.* Minimize dependance on GitHub in your review process.
 [Pull down the PRs
@@ -306,6 +314,16 @@ Bitcoin Core reviewers frequently use the [Apache voting
 system](https://www.apache.org/foundation/voting.html#expressing-votes-1-0-1-and-fractions)
 in their comments. Here is an
 [example](https://github.com/bitcoin/bitcoin/pull/11426#issuecomment-334091207).
+
+As a new contributor, be cautious with giving a NACK. Assume by default that you
+might lack understanding or context. If you do NACK, provide good reasoning.
+[Here's one
+example.](https://github.com/bitcoin/bitcoin/pull/12360#issuecomment-383342462)
+
+When you disagree, state your point of view once and move on. Don't flood the
+comments section, browbeat others or overreact. Remember that the most
+important thing is probably not the issue being discussed, but your relationship
+with the other contributors.
 
 A complex PR usually requires 3-4 ACKs before merging.
 
