@@ -299,6 +299,10 @@ are lost on GitHub.
 A full ACK could look like: "ACK `fa2f991`, I built, ran tests, tested manually
 by doing X/Y/Z and reviewed the code and it looks OK, I agree it can be merged."
 
+The Bitcoin Core merge script currently copies all ACK comments into the merge
+commit. Remember that anything you write in an ACK comment will be in git
+history forever when the PR is merged.
+
 *Don't trust, verify.* Minimize dependance on GitHub in your review process.
 [Pull down the PRs
 locally](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md#reference-prs-easily-with-refspecs)
