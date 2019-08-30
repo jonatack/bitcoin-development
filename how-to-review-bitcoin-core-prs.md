@@ -521,6 +521,10 @@ the why doesn't make sense then the what probably doesn't matter. Sometimes
 things seem self-apparent, but when in doubt no one was ever hurt by a little
 more concise explanation.
 
+Don't rely on markdown in your PR description for it to make sense, especially
+strike-through formatting. The Bitcoin Core merge script will copy your PR
+description to git history in the merge commit but the formatting will be lost.
+
 For simple edits of existing commits, don't hesitate to squash your commits
 before pushing, without waiting for the maintainers to ask you to do so.
 
