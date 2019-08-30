@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: August 28, 2019
+Last updated: August 30, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -520,6 +520,9 @@ Summarizing "what" can be good too, but "why" is essential to review because if
 the why doesn't make sense then the what probably doesn't matter. Sometimes
 things seem self-apparent, but when in doubt no one was ever hurt by a little
 more concise explanation.
+
+For simple edits of existing commits, don't hesitate to squash your commits
+before pushing, without waiting for the maintainers to ask you to do so.
 
 Set up Travis CI on your own GitHub Bitcoin repository so that when you push a
 branch or commit, the linter and continuous integration tests run. It can be a
