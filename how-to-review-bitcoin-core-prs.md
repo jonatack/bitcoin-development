@@ -10,11 +10,11 @@ This guide builds on the foundation laid by these presentations:
 1. [A Gentle Introduction to Bitcoin Core Development](https://bitcointechtalk.com/a-gentle-introduction-to-bitcoin-core-development-fdc95eaee6b8)
 by [Jimmy Song](https://twitter.com/jimmysong) (2017)
 
-2. [Understanding the Technical Side of Bitcoin](https://medium.com/@pierre_rochard/understanding-the-technical-side-of-bitcoin-2c212dd65c09)
-by [Pierre Rochard](https://twitter.com/pierre_rochard) (2018)
-
-3. [Contributing to Bitcoin Core, a personal account](https://bitcointechtalk.com/contributing-to-bitcoin-core-a-personal-account-35f3a594340b)
+2. [Contributing to Bitcoin Core, a personal account](https://bitcointechtalk.com/contributing-to-bitcoin-core-a-personal-account-35f3a594340b)
 by [John Newbery](https://twitter.com/jfnewbery) (2017)
+
+3. [Understanding the Technical Side of Bitcoin](https://medium.com/@pierre_rochard/understanding-the-technical-side-of-bitcoin-2c212dd65c09)
+by [Pierre Rochard](https://twitter.com/pierre_rochard) (2018)
 
 4. [A hardCORE workout](https://www.youtube.com/watch?v=MJBhZg0ytiw)
    /
@@ -95,6 +95,9 @@ Remember that contributor and maintainer resources are limited -- ask for them
 carefully and respectfully. The goal is to try to give more than you take, to
 help more than hinder, while getting up to speed.
 
+Try to figure things out on your own, at least sufficiently to respect others'
+time.
+
 Follow the
 [#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev)
 IRC channel and the
@@ -130,11 +133,11 @@ and logs of the previous meetings; there is gold in there.
 Many newcomers begin by filing pull requests that add to the hundreds already
 awaiting valuable review. In many cases, it may be better to begin by reviewing
 the existing pull requests and starting to understand what kind of pull
-requests and review are most helpful, while slowly gaining... the big picture.
+requests and review are most helpful, while slowly gaining the big picture.
 
 THE BIG PICTURE
 
-The big picture is much more important than nits, spelling, or code style.
+The big picture is more important than nits, spelling, or code style.
 
 Steps to improve understanding of the big picture:
 
@@ -153,10 +156,11 @@ read their [Scaling Book](https://github.com/bitcoinops/scaling-book)
 
 Aim for quality over quantity and a balance between deep work and quick wins.
 
-Documentation is important, e.g. whether a function has a good description and
-[Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
-for all its arguments, and high-level documentation of how
-things work and interact.
+Documentation is important, e.g. high-level documentation of how things work and
+interact, clear and accurate code docs, whether a function has a good
+description and [Doxygen
+documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments),
+test logging (both `info` and `debug`), and so on.
 
 Test coverage is essential; don't hesitate to improve or write any missing
 [unit](https://github.com/bitcoin/bitcoin/blob/master/src/test/) or
@@ -462,7 +466,7 @@ Gather context about the change you have in mind. Has it already been proposed
 in the past? Do issues or PRs about it already exist? (They probably do). Sleuth
 a bit. Search the `git log -S` history. Look at the `git blame` of the code in
 question and `git show` the commits. Check the GitHub file history. You'll see
-who understands that part of the codebase and be contacted for questions or
+who understands that part of the codebase and can be contacted for questions or
 review.
 
 Test coverage is essential; don't hesitate to write any missing
@@ -478,10 +482,11 @@ changed* detectors, when they would otherwise be more useful as *something isn't
 right* detectors if constructed more in terms of invariants instead of strict
 behaviour."
 
-Documentation is important, e.g. whether a function has a good description and
-[Doxygen documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments)
-for all its arguments, and high-level documentation of how things work and
-interact.
+Documentation is important, e.g. high-level documentation of how things work and
+interact, clear and accurate code docs, whether a function has a good
+description and [Doxygen
+documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#coding-style-doxygen-compatible-comments),
+test logging (both `info` and `debug`), and so on.
 
 In general, PRs that intelligently improve documentation and tests in a well
 thought-out way tend to be well-received.
@@ -514,21 +519,22 @@ commits to squash them. Rebasing is also frequently done to keep your commits
 logical, separate, and easier to review. Even better, hygienic -- each standing
 on their own without introducing regressions.
 
-PR descriptions are often either too terse or too verbose. Write the essentials,
-then take the time to make your PR description brief, clear, even
-[pithy](https://www.collinsdictionary.com/dictionary/english/pithy). In your PR
-description, it's a smart habit to give reviewers tips on how to review and test
-your changes: "Here's how to review this".
+PR descriptions are important. They "sell" your PR yet are often either too
+terse or too verbose. Write the essentials, then take the time to make your PR
+description brief, clear, even
+[pithy](https://www.collinsdictionary.com/dictionary/english/pithy).
 
-It is essential for commit messages and PR descriptions to explain *why*.
-Summarizing "what" can be good too, but "why" is essential to review because if
-the why doesn't make sense then the what probably doesn't matter. Sometimes
-things seem self-apparent, but when in doubt no one was ever hurt by a little
-more concise explanation.
+It's a smart habit to give reviewers tips in your PR description on how to
+review and test your changes: "Here's how to review this".
+
+PR descriptions need to explain *why*.  Summarizing "what" can be good too, but
+"why" is essential to review because if the why doesn't make sense then the what
+probably doesn't matter. Sometimes things seem self-apparent, but when in doubt
+no one was ever hurt by a little more concise explanation.
 
 Don't rely on markdown in your PR description for it to make sense, especially
 strike-through formatting. The Bitcoin Core merge script will copy your PR
-description to git history in the merge commit but the formatting will be lost.
+description to git history in the merge commit but any formatting will be lost.
 
 For simple edits of existing commits, don't hesitate to squash your commits
 before pushing, without waiting for the maintainers to ask you to do so.
@@ -539,9 +545,9 @@ good idea to verify that they are all green on your GitHub repository before
 filing a PR. Unfortunately, the Travis CI is also currently very slow and times
 out frequently, signaling false negatives.
 
-At the moment, https://bitcoinbuilds.org runs more quickly and reliably than
-the Travis CI (but runs fewer builds), so don't hesitate to consult it for early
-initial feedback when you push a PR or changes.
+At the moment, https://bitcoinbuilds.org runs more quickly and reliably than the
+Travis CI (but for the moment it tests fewer platforms), so don't hesitate to
+consult it for early initial feedback when you push a PR or changes.
 
 You can sign your commits using the [OpenTimestamps Git
 Integration](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md).
@@ -563,9 +569,13 @@ is to recap various ACKs from the previous PRs, with GitHub usernames, to rope
 in support for the new PR. If you do, be sure to do it in a comment -- not in a
 commit message and not in the PR description.
 
-Never put GitHub usernames in commits and PR descriptions; the latter because
-usernames in the description are copied into the merge commit by the merge
-script. This can cause endless annoying notifications for those concerned.
+Never put GitHub @-prefixed usernames in commits and PR descriptions; the latter
+because usernames in the description are copied into the merge commit by the
+merge script. This can cause endless annoying notifications for those
+concerned. An
+[update](https://github.com/bitcoin-core/bitcoin-maintainer-tools/pull/32) to
+the merge script now warns maintainers if a merge message contains a @username,
+but it's better not to add them to begin with.
 
 Add
 [release notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md#release-notes)
