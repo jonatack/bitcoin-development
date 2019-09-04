@@ -168,7 +168,7 @@ Test coverage is essential; don't hesitate to improve or write any missing
 tests.
 
 Be a contributor. Help PRs move forward by reviewing, [proposing
-tests](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946), or
+tests](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946) or
 fixes in a helpful way, proposing to rebase, or even offering to take over the
 PR after months of silence. In short, help each other!
 
@@ -643,8 +643,8 @@ Intermediate/advanced
 
 ### CREDITS
 
-A special thank you to [John Newbery](https://twitter.com/jfnewbery) (jnewbery)
-for launching the [Bitcoin Core PR Reviews
+A special thank you to [John Newbery](https://twitter.com/jfnewbery) (IRC nick:
+jnewbery) for launching the [Bitcoin Core PR Reviews
 Club](https://bitcoin-core-review-club.github.io/) and to the long-term
 contributors who participated so far: [Dave
 Harding](https://hash.social/users/harding) (harding), Anthony Towns (aj),
