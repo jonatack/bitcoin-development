@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: August 30, 2019
+Last updated: September 4, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -123,9 +123,14 @@ Participate in the excellent
 [Bitcoin Core PR Review Club](https://bitcoin-core-review-club.github.io/)
 weekly meetings on IRC. The club was launched in May 2019 by
 [John Newbery](https://twitter.com/jfnewbery). You'll benefit the most if you
-prepare for each meeting in advance by studying, building and testing the PR
-under review. Go through the notes, questions, and logs of the previous meetings
--- there is gold in there.
+prepare for each meeting in advance by studying, building, and testing the PR
+under review -- and then actually reviewing it! Go through the notes, questions,
+and logs of the previous meetings; there is gold in there.
+
+Many newcomers begin by filing pull requests that add to the hundreds already
+awaiting valuable review. In many cases, it may be better to begin by reviewing
+the existing pull requests and starting to understand what kind of pull
+requests and review are most helpful, while slowly gaining... the big picture.
 
 THE BIG PICTURE
 
