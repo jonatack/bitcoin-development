@@ -68,9 +68,15 @@ harding:  To grep Bitcoin "hidden" debug options:
           Unit tests info:
           https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
 
-          Run a single test with ./src/test/test_bitcoin -t suite_name/case_name
-          Specify the log level, usually debug, with -l debug (see --help)
-          Also, the test log to a debug log file (in master)
+          Help: src/test/test_bitcoin --help
+
+          Run all tests with make check or src/test/test_bitcoin
+
+          Run a single test with src/test/test_bitcoin -t suite_name/case_name
+
+          Specify the log level, usually debug or all, with -l debug or -l all (see --help)
+
+          Also, the test logs to a debug log file (in master)
           If you need temporary printing, you can do std::cout or std::cerr
 -----
 
