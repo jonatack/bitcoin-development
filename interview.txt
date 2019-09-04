@@ -2,35 +2,48 @@ Interview
 
 Who am I/background
 - Freelance software developer (and surfer) from the US, based mostly in France,
-	  often in Biarritz, sometimes Paris or NYC, doing software engineering,  project  management and even marketing for multinationals
+	often in Biarritz, sometimes Paris or NYC, doing software engineering, project
+  management and even marketing for multinationals
 - Speaks English, French, German, and some Russian
 - Computer languages: BASIC, assembly, Ruby, Lisp/Common Lisp, some C and C++
 - Engineering and business background (Harvey Mudd engineering, INSEAD MBA)
 - Spent years in the computer game business and in the music business
 - First heard of Bitcoin in 2013
-- Starting following Bitcoin closely in 2016 and saving money to spend time learning
-- Applied to Chaincode Labs in late February, told I needed to show some POW in the space
+- Starting following Bitcoin closely in 2016 and saving money to spend time
+  learning
+- Applied to Chaincode Labs in late February, told I needed to show some POW in
+  the space
 - Early March I began modestly contributing to Bitcoin Core
 - A month later, Jonas and John at Chaincode Labs proposed a phone call to
   advise/provide orientation/answer questions
-- 2 months after Jonas proposed joining the Chaincode Labs Bitcoin seminar in June
+- 2 months later, Jonas proposed joining the Chaincode Labs Bitcoin seminar in
+  June
 - Currently spending a few hours a week on Bitcoin Core
 - Considering ways to work on it full time
 
-Getting started working on Bitcoin Core (general advice, focus on reviewing PRs later)
+Getting started working on Bitcoin Core (general advice)
 - Good resources and how to begin
 - What kind of contributions are desired and needed
 - How to begin contributing changes
-- How long has it taken me to get to grips with the codebase and how Bitcoin Core works?
-- What skills and tools picked up on previous projects can be applied to working on Bitcoin Core?
-- Should onboarding be different for an enthusiast with less experience/technical ability or does everyone have to find their own path to contributing independently?
+- How long does it take to get to grips with the codebase and how Bitcoin Core
+  works
+- What skills and tools picked up on previous projects can be applied to working
+  on Bitcoin Core
+- Should onboarding be different for an enthusiast with less experience or
+  technical ability or does everyone have to find their own path to contributing
+  independently?
 - Warning: Be patient, context-aware, and don't take things personally
 - How to sustain contributing without burning out
+- Anything frustrating or inferior in Bitcoin Core compared to other open source
+  projects I've worked on
 - What is unusual and exceptional in Bitcoin Core compared to other large,
   legacy OSS projects I've seen
-- Anything frustrating or inferior in Bitcoin Core compared to other open source projects I've worked on
-  - Much context, history, specialised knowledge behind current state to assimilate
-  - BDFL-free (explore, what have BDFLs done wrong on other open source projects and what was Wladimir done right? Is Bitcoin a unique project or do I think how Wladimir and other Bitcoin maintainers is a potential template for other open source projects)
+  - Much context, history, specialised knowledge behind current state to
+    assimilate
+  - BDFL-free (explore, what have BDFLs done wrong on other open source projects
+    and what was Wladimir done right? Is Bitcoin a unique project or do I think
+    how Wladimir and other Bitcoin maintainers is a potential template for other
+    open source projects)
   - Very small number of experienced reviewers and contributors
   - Process
   - Criticality
@@ -38,10 +51,9 @@ Getting started working on Bitcoin Core (general advice, focus on reviewing PRs 
   - Humbleness and activism (why I'm here)
 
 Reviewing PRs and the Bitcoin Core PR Review Club (John)
-- This could be a section on reviewing Bitcoin Core PRs more widely. Talk about the doc I'm working on with guidance on how to review Bitcoin Core PRs
-- How does this advice contrast with other open source projects I've worked on?
-
-
+  - Reviewing is the ideal way to begin
+  - How to reviewing Bitcoin Core PRs
+  - How does this advice contrast with other open source projects
 
 Bitcoin Optech (John, David, Mike, Steve)
 
@@ -89,8 +101,9 @@ There is so much to do: Interesting developments in the Bitcoin Core codebase
 - Watch the IRC discussions, issues, and code reviews
 
 Future plans and goals
-- With so much interesting stuff happening how do/will I decide what to work on?- Haven't even mentioned all the exciting things happening with Lightning.
-- How should people decide on whether to work on base layer or second layer?
+- With so much interesting stuff happening, how to decide what to work on
+  (haven't even mentioned all the exciting things happening with Lightning)
+- How should people decide on whether to work on base layer or second layer
 - Is trying to work on both spreading oneself too thin?
 
 End note - humble service
