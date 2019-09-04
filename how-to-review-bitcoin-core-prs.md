@@ -470,10 +470,12 @@ who understands that part of the codebase and can be contacted for questions or
 review.
 
 Test coverage is essential; don't hesitate to write any missing
-[unit](https://github.com/bitcoin/bitcoin/tree/master/src/test) or
-[functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional)
+[unit](https://github.com/bitcoin/bitcoin/tree/master/src/test),
+[functional](https://github.com/bitcoin/bitcoin/tree/master/test/functional), or
+[property-based](https://github.com/bitcoin/bitcoin/blob/master/doc/rapidcheck.md)
 tests, or improve the
-[fuzzing tests](https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md) or
+[fuzzing tests](https://github.com/bitcoin/bitcoin/blob/master/doc/fuzzing.md)
+or
 [benchmarking](https://github.com/bitcoin/bitcoin/blob/master/doc/benchmarking.md).
 
 A Gregory Maxwell warning to test contributors: "Overly exact tests have greatly
