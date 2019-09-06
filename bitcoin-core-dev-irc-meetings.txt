@@ -53,7 +53,7 @@ Commands to host a #bitcoin-core-dev meeting:
 We start Bitcoin Core IRC meetings with a 'hi' so it's clear who is present.
 Feel free to say hi!
 
-Note that saying "hi" at any time during a #bitcoin-core-dev meeting adds you to
-the .txt meeting log attendance list.
+Note that saying "hi" or posting on the channel at any time during a
+#bitcoin-core-dev meeting adds you to archived meeting log and minutes.
 
 -----
