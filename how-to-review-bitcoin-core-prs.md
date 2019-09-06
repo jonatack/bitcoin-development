@@ -453,7 +453,10 @@ IRC before tackling a difficult project in potentially the wrong way, or one
 that has already been tried, or a dead end for reasons that may not be apparent
 to you.
 
-Good ideas may often be found while doing [PR
+The best place to look for good things to do is the ["good first issues"
+page](https://github.com/bitcoin/bitcoin/contribute).
+
+Good ideas may also be found while doing [PR
 reviews](https://github.com/bitcoin/bitcoin/pulls) and in
 [#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev) IRC
 discussions when maintainers or experienced contributors mention nice-to-haves.
