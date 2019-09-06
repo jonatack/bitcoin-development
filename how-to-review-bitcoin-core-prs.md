@@ -448,11 +448,6 @@ Choose your contribution carefully to be sure it is desired by the maintainers
 and reviewers; without their approval, you risk squandering your time and social
 capital.
 
-Also, it may be save a lot of time to humbly consult with the relevant people on
-IRC before tackling a difficult project in potentially the wrong way, or one
-that has already been tried, or a dead end for reasons that may not be apparent
-to you.
-
 The best place to look for good things to do is the ["good first issues"
 page](https://github.com/bitcoin/bitcoin/contribute).
 
@@ -487,6 +482,11 @@ a bit. Search the `git log -S` history. Look at the `git blame` of the code in
 question and `git show` the commits. Check the GitHub file history. You'll see
 who understands that part of the codebase and can be contacted for questions or
 review.
+
+It may save you a lot of time to consult with relevant people on IRC before
+tackling a difficult project in potentially the wrong way, or one that has
+already been tried and turned out to be a dead end for reasons that may not be
+apparent to you.
 
 Test coverage is essential; don't hesitate to write any missing
 [unit](https://github.com/bitcoin/bitcoin/tree/master/src/test),
