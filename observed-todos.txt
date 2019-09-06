@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-09-04
+Last updated: 2019-09-06
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -8,6 +8,59 @@ laanwj:    focus on user problems, actual bugs,
 -----
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup
+-----
+
+2019-09-06 Add code documentation to src/versionbits.cpp as per discussion here:
+           http://www.erisian.com.au/meetbot/bitcoin-core-dev/2019/bitcoin-core-dev.2019-09-05-19.01.log.html
+
+           <MarcoFalke> bits can be reused as long as they don't overlap in time
+
+           <aj> 16713 is updated as of a few hours to be even simpler; i think
+           it lets us reuse bits fine?
+
+           <achow101> my understanding of how consensus.vDeployments worked was
+           that you couldn't define two forks with the same bit since they'd
+           have to occupy the same index position and that's not possible
+
+           <MarcoFalke> oh, maybe you are right when it comes to the
+           implementation. Though, BIP9 does allow it
+
+           <wumpus> BIP9 definitely allows it, that was an important part of the
+           design
+
+           <aj> achow101: vDeployments just matches the enum, the actual bits
+           used are independant, and just have to not overlap per their
+           corresponding timestamps
+
+           <sipa> i haven't looked at the code in a while, but it was certainly
+           intended to permit reuse of bits
+
+           <sipa> the deployments array index is independent from the bip9 bit
+           position
+
+           <instagibbs> yep
+
+           <aj> achow101: see VersionBitsConditionChecker::Mask in
+           versionbits.cpp, it pulls out the .bit field from the BIP9Deployment
+           struct
+
+           <achow101> i'm probably wrong
+
+           <instagibbs> It was confusing the first time I read it, I came to
+           the same wrong conclusion
+
+           <aj> achow101: there's also a unit test for overlapping bit usage on
+           mainnet in src/test/versionbits_tests.cpp, "Verify that the
+           deployment windows of [...]"
+
+           <wumpus> if even experienced developers get confused by it, some
+           documentation/comments might help in that case.
+
+           <MarcoFalke> I think it shouldn't matter in practice, hopefully there
+           are less than 27 softforks in the future.
+
+           <wumpus> given that 'the future' is unbounded, that's a difficult
+           statement.
 -----
 
 2019-09-04 There is zero logging in the rpc_psbt.py functional test: Add some.
@@ -168,6 +221,17 @@ laanwj:    focus on user problems, actual bugs,
 2019-05-27 Perhaps improve/clarify the frequent bitcoind logged warning:
            "warning='XX of last 100 blocks have unexpected version'"
 -----
+
+13:51 < jnewbery> I liked aj's update to the getpeerinfo RPC here: https://github.com/bitcoin/bitcoin/pull/15776/files#diff-618d3a4f4fc0dc851ec29218c445c148R109
+13:52 < jnewbery> Because I like monitoring in general
+
+13:53 < jnewbery> I'd also love to see more work on stuff like https://forkmonitor.info/nodes/btc to provide live monitoring of the network
+13:53 < jnewbery> james o'beirne is planning to do some work on that, so if it's
+        something that interests anyone here, please reach out to him
+
+13:54 < jnewbery> I'd like to see more stress testing. Resource leaks like this
+        are really difficult to catch in deterministic, short-running tests
+
 
 2019-05-18 http://www.erisian.com.au/bitcoin-core-dev/log-2019-05-18.html#l-56
 
