@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: September 4, 2019
+Last updated: September 6, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -36,6 +36,11 @@ developers as both
 
   - the best and most helpful way to begin contributing and earning reputation
     in the community.
+
+*"Reviewing is the most effective way you can contribute as a new contributor
+(and also will teach you much more about the code than opening PRs)"*
+
+&mdash; John Newbery, Bitcoin Core PR Review club IRC meeting, 5 September 2019
 
 Yet the process and learning curve can seem intimidating and in practice very
 few new contributors do it.
@@ -103,6 +108,9 @@ Follow the
 IRC channel and the
 [bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
 mailing list.
+
+More IRC channels to follow can be found
+[here](https://github.com/jonatack/bitcoin-development/blob/master/irc-channels.txt).
 
 Before jumping in, take plenty of time to:
 
