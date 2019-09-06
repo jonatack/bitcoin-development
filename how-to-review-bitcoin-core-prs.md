@@ -346,7 +346,7 @@ comments section, browbeat others or overreact. Remember that the most
 important thing is probably not the issue being discussed, but your relationship
 with the other contributors.
 
-A complex PR usually requires 3-4 ACKs before merging.
+A complex PR usually requires at least 3-4 experienced ACKs before merging.
 
 The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
 following PR and review activity.
@@ -444,14 +444,19 @@ Aim for quality over quantity and a balance between deep work and quick wins.
 
 Read and know the Bitcoin Core [developer notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
 
-Focus on user problems, actual bugs, and "used, but untested" methods that
-affect outcomes and need tests.
+Choose your contribution carefully to be sure it is desired by the maintainers
+and reviewers; without their approval, you risk squandering your time and social
+capital.
 
-Good ideas may often be found in the
-[PR reviews](https://github.com/bitcoin/bitcoin/pulls)
-and
-[#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev)
-IRC discussions.
+Also, it may be save a lot of time to humbly consult with the relevant people on
+IRC before tackling a difficult project in potentially the wrong way, or one
+that has already been tried, or a dead end for reasons that may not be apparent
+to you.
+
+Good ideas may often be found while doing [PR
+reviews](https://github.com/bitcoin/bitcoin/pulls) and in
+[#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev) IRC
+discussions when maintainers or experienced contributors mention nice-to-haves.
 
 Things to do and fix can also be found by searching for TODO and FIXME comments
 in the codebase. An easy way to do this is to run `git grep "TODO\|FIXME"` on
@@ -460,6 +465,9 @@ out of date.
 
 I find it useful to keep a list of PR ideas in the form of [observed
 todos](observed-todos.txt).
+
+Focus on user problems, actual bugs, and "used, but untested" methods that
+affect outcomes and need tests.
 
 Avoid making trivial refactoring, style cleanup, or spelling PRs; these consume
 valuable contributor and maintainer time, often for little gain. Code churn can
