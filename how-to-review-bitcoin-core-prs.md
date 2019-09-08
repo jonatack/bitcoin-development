@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: September 6, 2019
+Last updated: September 8, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -26,6 +26,11 @@ by [Pierre Rochard](https://twitter.com/pierre_rochard) (2018)
 
 ### INTRODUCTION
 
+*"Reviewing is the most effective way you can contribute as a new contributor
+(and also will teach you much more about the code than opening PRs)."*
+
+&mdash; John Newbery, Bitcoin Core PR Review Club meeting, 5 September 2019
+
 Reviewing and testing can be the best ways to begin contributing to Bitcoin
 Core.
 
@@ -36,11 +41,6 @@ developers as both
 
   - the best and most helpful way to begin contributing and earning reputation
     in the community.
-
-*"Reviewing is the most effective way you can contribute as a new contributor
-(and also will teach you much more about the code than opening PRs)"*
-
-&mdash; John Newbery, Bitcoin Core PR Review club IRC meeting, 5 September 2019
 
 Yet the process and learning curve can seem intimidating and in practice very
 few new contributors do it.
