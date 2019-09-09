@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-09-06
+Last updated: 2019-09-09
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -195,17 +195,6 @@ laanwj:    focus on user problems, actual bugs,
            4. Clean up the test arguments help info
 
            5. Improve test runner output
------
-
-2019-06-16 GUI wallet "Enter passphrase" and "Change passphrase" forms:
-           Label the "Show password" and "Change password" checkbox buttons as
-           "Show passphrases" and "Edit passphrases" instead, since there are
-           2 or 3 fields and they are all labelled "passphrase" along with the
-           description at the top of the form.
-
-           Edit: Same for src/qt/forms/createwalletdialog.ui::L65 added in
-           https://github.com/bitcoin/bitcoin/pull/15450
-
 -----
 
 2019-06-15 P2P ideas from Chaincode residency Day 2 p2p session with Suhas:
