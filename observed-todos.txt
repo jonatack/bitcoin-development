@@ -10,6 +10,12 @@ laanwj:    focus on user problems, actual bugs,
            enable wallet tests to mock nodes without current heavy node setup
 -----
 
+2019-09-09 Add CLI examples to bitcoin-cli help scantxoutset as a follow-up to:
+           https://github.com/bitcoin/bitcoin/pull/16285
+           https://github.com/bitcoin/bitcoin/pull/13697
+           https://github.com/bitcoin/bitcoin/pull/12196
+-----
+
 2019-09-06 Add code documentation to src/versionbits.cpp as per discussion here:
            http://www.erisian.com.au/meetbot/bitcoin-core-dev/2019/bitcoin-core-dev.2019-09-05-19.01.log.html
 
