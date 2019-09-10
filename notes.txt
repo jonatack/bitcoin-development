@@ -90,6 +90,14 @@ harding:  To grep Bitcoin "hidden" debug options:
           bitcoin-cli logging '["net"]'
 -----
 
+          Berkeley DB special commands (located in db4/bin):
+
+          db4/bin/db_dump ~/.bitcoin/wallets/wallet.dat
+          db4/bin/db_dump -p ~/.bitcoin/wallets/wallet.dat | grep -C 2 0X1F
+
+          db4/bin/db_load
+-----
+
 sipa:     One easy way to make sure you have all the call sites is to rename it.
 
           If your end goal is integrating things into Bitcoin Core,
