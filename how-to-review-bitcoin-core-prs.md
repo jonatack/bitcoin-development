@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: September 8, 2019
+Last updated: September 10, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -329,7 +329,13 @@ to sign your commits using the [OpenTimestamps Git
 Integration](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md).
 
 In your local environment, review each commit separately using a difftool like
-gitk or meld on Linux, or opendiff on macOS.
+[gitk](https://git-scm.com/docs/gitk), [meld](https://meldmerge.org/), [meld for
+macOS](https://yousseb.github.io/meld/),
+[GNU](https://www.gnu.org/software/emacs/manual/html_node/ediff/index.html)
+[ediff](https://www.emacswiki.org/emacs/EdiffMode),
+[vimdiff](https://vim.fandom.com/wiki/A_better_Vimdiff_Git_mergetool), opendiff
+on macOS, etc. If you use gitk and like dark mode, I recommend [Dracula for
+gitk](https://github.com/dracula/gitk).
 
 Bitcoin Core reviewers frequently use the [Apache voting
 system](https://www.apache.org/foundation/voting.html#expressing-votes-1-0-1-and-fractions)
