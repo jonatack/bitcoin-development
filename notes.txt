@@ -80,6 +80,17 @@ harding:  To grep Bitcoin "hidden" debug options:
           If you need temporary printing, you can do std::cout or std::cerr
 -----
 
+          To install the contents of bitcoind's bin subdirectory into the
+          /usr/local/bin standard location for self-installed executables using
+          the GNU coreutils install command:
+
+          Using sudo:
+          sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.19.0/bin/*
+
+          Using su:
+          su -c 'install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.19.0/bin/*'
+-----
+
           To build Bitcoin with clang for better errors:
 
           CC=clang CXX=clang ./configure...
