@@ -35,14 +35,16 @@ harding:  To grep Bitcoin "hidden" debug options:
 -----
 
           To test compiler acceptance on the command line:
+          echo 'int main() {  }' | g++ -x c++ -
 
-          $ echo 'int main(){ const int min_depth = { true ? 1 : 0 };}' | g++ -x c++ -
-          $ echo 'int main(){ const int min_depth   { true ? 1 : 0 };}' | g++ -x c++ -
-          $ echo 'int main(){ const int min_depth =   true ? 1 : 0  ;}' | g++ -x c++ -
-
-          $ echo 'int main(){ const int min_depth =   true ? 1 : 0   }' | g++ -x c++ -
+          Examples:
+          echo 'int main(){ const int min_depth = { true ? 1 : 0 };}' | g++ -x c++ -
+          echo 'int main(){ const int min_depth   { true ? 1 : 0 };}' | g++ -x c++ -
+          echo 'int main(){ const int min_depth =   true ? 1 : 0  ;}' | g++ -x c++ -
+          echo 'int main(){ const int min_depth =   true ? 1 : 0   }' | g++ -x c++ -
           <stdin>: In function ‘int main()’:
           <stdin>:1:51: error: expected ‘,’ or ‘;’ before ‘}’ token
+
 -----
 
           C++ Compiler Explorer, shows compiler output and assembly:
@@ -73,6 +75,8 @@ harding:  To grep Bitcoin "hidden" debug options:
           Run all tests with make check or src/test/test_bitcoin
 
           Run a single test with src/test/test_bitcoin -t suite_name/case_name
+
+          Run QT unit tests with: src/qt/test/test_bitcoin-qt
 
           Specify the log level, usually debug or all, with -l debug or -l all (see --help)
 
