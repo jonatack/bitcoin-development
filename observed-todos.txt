@@ -11,11 +11,6 @@ laanwj:    focus on user problems, actual bugs,
            e.g. separate the wallet from the node more in the test framework.
 -----
 
-2019-09-10 Add functional tests for this PR as requested by laanwj,
-           if the PR author doesn't do it, and optionally address fixups:
-           https://github.com/bitcoin/bitcoin/pull/16787#issuecomment-529801457
------
-
 2019-09-09 Add CLI examples to bitcoin-cli help scantxoutset as a follow-up to:
            https://github.com/bitcoin/bitcoin/pull/16285
            https://github.com/bitcoin/bitcoin/pull/13697
