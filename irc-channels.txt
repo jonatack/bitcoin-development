@@ -12,6 +12,7 @@ order:
 #c-lightning
 ##hwi
 #lightning-dev
+#lnd
 ##miniscript
 #mit-dci
 #rust-bitcoin
