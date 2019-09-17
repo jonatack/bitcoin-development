@@ -113,6 +113,20 @@ harding:  To grep Bitcoin "hidden" debug options:
           db4/bin/db_load
 -----
 
+          Memory profiling:
+
+          Use valgrind + massif_visualizer, ideally in a controlled environment,
+          e.g. regtest, a small block chain, a custom wallet, etc. Valgrind is
+          much more precise, fine-grained analysis than a handmade python
+          procutils script (at the cost of being slow).
+
+          strace - man page strace
+
+          With these tools, run them in one terminal buffer, while performing
+          operations under test (say, loading/unloading the wallet) in another
+          terminal buffer.
+-----
+
 sipa:     One easy way to make sure you have all the call sites is to rename it.
 
           If your end goal is integrating things into Bitcoin Core,
