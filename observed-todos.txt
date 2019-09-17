@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-09-10
+Last updated: 2019-09-17
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -9,6 +9,14 @@ laanwj:    focus on user problems, actual bugs,
            *** jnewbery suggestion *** during our phone discussion:
            enable wallet tests to mock nodes without current heavy node setup,
            e.g. separate the wallet from the node more in the test framework.
+-----
+
+2019-09-17 Move gettransaction tests from wallet_basic.py to their own file, and
+           extend/improve them by checking all the values and not just the keys.
+-----
+
+2019-09-17 Split the wallet_basic.py tests out to separate functions and add
+           logging where missing. Same for any of the test files...
 -----
 
 2019-09-09 Add CLI examples to bitcoin-cli help scantxoutset as a follow-up to:
