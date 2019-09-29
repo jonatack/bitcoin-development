@@ -84,6 +84,88 @@ harding:  To grep Bitcoin "hidden" debug options:
           If you need temporary printing, you can do std::cout or std::cerr
 -----
 
+          To get and set bitcoind logging information, use:
+          bitcoin-cli logging
+          bitcoin-cli help logging
+
+          To set  on debug=net:  bitcoin-cli logging '["net"]'
+          To turn on debug=all:  bitcoin-cli logging '["all"]'
+          To turn debug log off: bitcoin-cli logging '["none"]'
+
+          net: All messages related to communicating with other nodes on the
+          network, including what P2P messages were sent and received and to
+          whom and other information about the network messages.
+
+          tor: All messages related to using a TOR SOCKS5 proxy and TOR hidden
+          service (used for receiving incoming connections over TOR). This
+          includes messages about the creation and shutdown of the TOR hidden
+          service and messages about the connection to the TOR proxy.
+
+          mempool: Messages related to actions done in the memory pool including
+          the acceptance and removal of transactions.
+
+          http: Messages related to the HTTP server that is used to handle the
+          RPC requests. These messages will typically be for the startup and
+          shutdown of the server as well as received requests.
+
+          bench: Messages about the benchmark performance of various parts of
+          the software that can have performance issues.
+
+          zmq: Messages about the ZeroMQ notification system, including the
+          startup and shutdown of the service as well as when notifications are
+          issued and new clients connected.
+
+          db: Messages about the status of the Berkeley Database engine used for
+          the wallet database, including messages about database flushes.
+
+          rpc: Messages about the RPC server, including its startup and shutdown
+          as well as when commands are issued.
+
+          estimatefee: Messages about the fee estimation algorithm, including
+          messages about when fee estimates are requested and information about
+          the status of the fee estimator.
+
+          addrman: Address Manager. Messages about the status of the address
+          manager and when addresses are added or removed from the address
+          manager database.
+
+          selectcoins: Coin Selection. Messages about the UTXOs that are
+          selected when sending money.
+
+          reindex: Messages about the reindexing process, in particular errors
+          about out-of-order blocks and repeated blocks.
+
+          cmpctblock: Messages about the Compact Blocks relay protocol,
+          including when blocks are partially downloaded or reconstructed.
+
+          rand: Messages for when randomness is needed by any function.
+
+          prune: Messages about local blockchain pruning, including the result
+          of a pruning operation.
+
+          proxy: Messages about using a SOCKS5 proxy and its authentication.
+
+          mempoolrej: Messages about transactions rejected from the memory pool.
+
+          libevent: Messages from the libevent library used for the HTTP server.
+
+          coindb: Coin Database. Messages about the coin database which contains
+          the UTXO set, including messages about database flushes and writes.
+
+          qt: Messages about Qt, the GUI framework.
+
+          leveldb: Messages about LevelDB which is used for the block indexes
+          and coin database.
+-----
+
+          Berkeley DB special commands (located in db4/bin):
+
+          db4/bin/db_dump ~/.bitcoin/wallets/wallet.dat
+          db4/bin/db_dump -p ~/.bitcoin/wallets/wallet.dat | grep -C 2 0X1F
+
+          db4/bin/db_load
+-----
+
           To install the contents of bitcoind's bin subdirectory into the
           /usr/local/bin standard location for self-installed executables using
           the GNU coreutils install command:
@@ -98,19 +180,6 @@ harding:  To grep Bitcoin "hidden" debug options:
           To build Bitcoin with clang for better errors:
 
           CC=clang CXX=clang ./configure...
------
-
-          To turn on debug=net with the logging RPC:
-
-          bitcoin-cli logging '["net"]'
------
-
-          Berkeley DB special commands (located in db4/bin):
-
-          db4/bin/db_dump ~/.bitcoin/wallets/wallet.dat
-          db4/bin/db_dump -p ~/.bitcoin/wallets/wallet.dat | grep -C 2 0X1F
-
-          db4/bin/db_load
 -----
 
           Memory profiling:
@@ -152,7 +221,7 @@ gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
 
           Ignore the smallest of nits, make style advice in a purely advisory
           way (as in, feel free to adjust if you happen to rebase, otherwise
-          don't bother), move style adjustments-- if any-- until right before
+          don't bother), move style adjustments -- if any -- until right before
           merging and not as soon as a PR opens. We've operated in that fashion
           before and I think the project accomplished a lot more at that time
           and was more enjoyable. (Likely not all due to coding style nits, but
