@@ -1,14 +1,71 @@
 OBSERVED TODOS
 
-Last updated: 2019-09-17
+Last updated: 2019-09-30
 
 -----
 laanwj:    focus on user problems, actual bugs,
            and "used, but untested" methods that affect outcomes and need tests
 -----
-           *** jnewbery suggestion *** during our phone discussion:
+           jnewbery during phone discussion:
            enable wallet tests to mock nodes without current heavy node setup,
            e.g. separate the wallet from the node more in the test framework.
+-----
+
+           - PR my flame graphs doc
+
+           - reply to gregory sanders re my review
+
+           - write a follow-up PR to achow's psbt shuffle PR
+
+           - review mzumsande's PR
+
+           - look at allocators in validation, since they take lots of memory;
+           learn how to write a faster allocator.
+
+           - achow: export blockchain+import with and without validating would
+           be super nice as menu items
+-----
+
+2019-09-30 Explore optimization in and around the UTXO hash data structure:
+           "it might be possible to regain the performance loss by caching the
+           hash ourselves. We have some padding in the maps' key, and it might
+           be possible to use these bytes to store the hash value (or at least 4
+           bytes of it) without having to increase the memory."
+
+           See PR "9% less memory: make SaltedOutpointHasher noexcept"
+           https://github.com/bitcoin/bitcoin/pull/16957
+-----
+
+2019-09-26 instagibbs: can someone point me to where parallel block fetch code
+           is/gets activated? I only see references to it in non-parallel fetch
+           code via grepping
+
+           sdaftuar: FindNextBlocksToDownload() is the relevant code. It's
+           invoked in SendMessages for each peer. The code is not written in a
+           way to make this obvious, but the "activation" comes from syncing
+           headers with a peer -- that allows us to download blocks from that
+           peer but the "activation" comes from syncing headers with a peer --
+           that allows us to download blocks from that peer. There are delays
+           (for a node starting up) around how quickly we will sync headers with
+           each peer.
+
+           instagibbs: Even a comment saying "parallel" would have been helpful :D
+
+           jamesob: Here is the logic that ensures we're downloading at most
+           (MAX_BLOCKS_IN_TRANSIT_PER_PEER * num_peers) simultaneously:
+           https://github.com/bitcoin/bitcoin/blob/master/src/net_processing.cpp#L4017-L4020
+           Download happens in parallel because queuing the GETDATA messages
+           isn't blocking, and `SendMessages()` is invoked in a loop for each
+           peer.
+-----
+
+2019-09-17 If PR 16512 is merged, make a follow-up PR to extract the manual
+           copy+shuffling to a member function of PartiallySignedTransaction,
+           cover it with unit tests and address remaining nits as per my review:
+           https://github.com/bitcoin/bitcoin/pull/16512#pullrequestreview-283522359
+
+           Perhaps look at if the test added in that PR for joinpsbt inequality
+           in rpc_psbt.py can be improved.
 -----
 
 2019-09-17 Move gettransaction tests from wallet_basic.py to their own file, and
