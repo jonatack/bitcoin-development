@@ -88,9 +88,10 @@ harding:  To grep Bitcoin "hidden" debug options:
           bitcoin-cli logging
           bitcoin-cli help logging
 
-          To set  on debug=net:  bitcoin-cli logging '["net"]'
-          To turn on debug=all:  bitcoin-cli logging '["all"]'
-          To turn debug log off: bitcoin-cli logging '["none"]'
+          To turn  on debug=net: bitcoin-cli logging '["net"]'
+          To turn off debug=net: bitcoin-cli logging '["net"]' '["net"]'
+          To turn  on debug=all: bitcoin-cli logging '["all"]'
+          To turn off debug log: bitcoin-cli logging '["none"]'
 
           net: All messages related to communicating with other nodes on the
           network, including what P2P messages were sent and received and to
