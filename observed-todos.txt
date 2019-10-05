@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-09-30
+Last updated: 2019-10-05
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -13,17 +13,35 @@ laanwj:    focus on user problems, actual bugs,
 
            - PR my flame graphs doc
 
-           - reply to gregory sanders re my review
+           - reply to gregory sanders re my review, or add a follow-up PR
 
            - write a follow-up PR to achow's psbt shuffle PR
 
-           - review mzumsande's PR
+           - review Chris Stewart's prop-based tests and mzumsande's PR
 
            - look at allocators in validation, since they take lots of memory;
            learn how to write a faster allocator.
 
            - achow: export blockchain+import with and without validating would
            be super nice as menu items
+-----
+
+2019-10-05 Address the todo described in src/wallet/wallet.cpp:1131
+           // TODO: Store all versions of the transaction, instead of just one.
+
+           and remove the extra space in src/wallet/wallet.cpp:1139 as seen in
+           bitcoind log output before "new" or "update":
+           "2019-10-05T17:18:34Z [default wallet] AddToWallet <hash>  update"
+-----
+
+2019-10-05 Update addresses to bech32 in RPC help sendtoaddress/gettransaction/
+           others?, and improve the examples to include using all the arguments.
+-----
+
+2019-10-05 Clean up the C-Lightning docs.
+-----
+
+2019-10-02 Fix remaining nits in https://github.com/bitcoin/bitcoin/pull/16727
 -----
 
 2019-09-30 Explore optimization in and around the UTXO hash data structure:
