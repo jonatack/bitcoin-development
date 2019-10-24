@@ -1,8 +1,8 @@
 IRC Channels
 ------------
 
-Join these IRC channels for Bitcoin and Lightning development, in alphabetical
-order:
+Join these IRC channels for Bitcoin and Lightning Network development, in
+alphabetical order:
 
 #bitcoin-builds
 #bitcoin-core-dev
