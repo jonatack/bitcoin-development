@@ -47,26 +47,6 @@ harding:  To grep Bitcoin "hidden" debug options:
 
 -----
 
-          C++ Compiler Explorer, shows compiler output and assembly:
-
-          https://godbolt.org/
------
-
-          To launch the Python debugger on failure of a functional test, pass
-          `--pdbonfailure` as seen in, say, test/functional/wallet_basic.py -h
-
-          test/functional/wallet_basic.py --pdbonfailure
-
-          Does not work via the test runner, e.g. this prints dots ad infinitum:
-
-          test/functional/test_runner.py wallet_basic --pdbonfailure
------
-
-          To run a functional test X times and launch the debugger on failure:
-
-          (for i in {1..100}; do test/functional/wallet_basic.py --pdbonfailure ; done)
------
-
           Unit tests info:
           https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
 
@@ -159,6 +139,21 @@ harding:  To grep Bitcoin "hidden" debug options:
           and coin database.
 -----
 
+          To launch the Python debugger on failure of a functional test, pass
+          `--pdbonfailure` as seen in, say, test/functional/wallet_basic.py -h
+
+          test/functional/wallet_basic.py --pdbonfailure
+
+          Does not work via the test runner, e.g. this prints dots ad infinitum:
+
+          test/functional/test_runner.py wallet_basic --pdbonfailure
+-----
+
+          To run a functional test X times and launch the debugger on failure:
+
+          (for i in {1..100}; do test/functional/wallet_basic.py --pdbonfailure ; done)
+-----
+
           Berkeley DB special commands (located in db4/bin):
 
           db4/bin/db_dump ~/.bitcoin/wallets/wallet.dat
@@ -197,23 +192,42 @@ harding:  To grep Bitcoin "hidden" debug options:
           terminal buffer.
 -----
 
-sipa:     One easy way to make sure you have all the call sites is to rename it.
+Marco:    To run functional tests in the gui, pass BITCOIND=bitcoin-qt
 
-          If your end goal is integrating things into Bitcoin Core,
-          getting familiar with the code is the best way to spend time.
-          To do that (which i very much encourage you to!) I think it's better
-          to focus on one piece at a time and actually integrate it.
+-----
 
-          Never put GitHub usernames in commits, nor PR descriptions which are
-          automatically copied into merge commits.
+          C++ Compiler Explorer, shows compiler output and assembly:
+
+          https://godbolt.org/
+-----
+
+ryanofsky PR review comment at:
+          https://github.com/bitcoin/bitcoin/pull/15849#pullrequestreview-231748721
+
+          "I'm not sure the change from const std::string& to std::string&&
+          is an improvement. You also now can't call SetInternalName with
+          an lvalue (plain variable or reference). This is now an error:
+
+          std::string name = "something";
+          SetInternalName(name);
+
+          "People get confused about this stuff, but if the goal is to just
+          move-enable SetInternalName, it should take plain std::string,
+          not const std::string&, and not std::string&&.
+
+          "If a function just needs to read an argument (and not manipulate it
+          before throwing it away or move it into a data structure) it should
+          take const T&.
+
+          "If a function wants to give callers the option of moving from an
+          argument but still allow copies, it should take plain T.
+
+          "If a function wants to force callers to move it should take T &&."
 -----
 
 laanwj:   Release notes should refer to the RPC help for details instead of
           substituting for full documentation. Example:
           "Please refer to the RPC help of `getbalances` for details."
------
-
-Marco:    To run functional tests in the gui, pass BITCOIND=bitcoin-qt
 -----
 
 gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
@@ -238,6 +252,17 @@ gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
           unifying effort.
 -----
 
+sipa:     One easy way to make sure you have all the call sites is to rename it.
+
+          If your end goal is integrating things into Bitcoin Core,
+          getting familiar with the code is the best way to spend time.
+          To do that (which i very much encourage you to!) I think it's better
+          to focus on one piece at a time and actually integrate it.
+
+          Never put GitHub usernames in commits, nor PR descriptions which are
+          automatically copied into merge commits.
+-----
+
 harding   Idea: sendrawtransaction spends from cold wallet with network disabled
           to do a final inspection of the transaction in local mempool (mainly
           to check not forgetting an output and spending everything in fees).
@@ -246,6 +271,7 @@ harding   Idea: sendrawtransaction spends from cold wallet with network disabled
 -----
 
 jnewbery: We now have a handy WITH_LOCK macro in src/sync.h#L209
+
 -----
 
 Static fully valid pubkey in the Core codebase to reference in unit tests:
@@ -259,27 +285,6 @@ instagibbs functional test harness has static keys for quick reference when
 
 MarcoFalke ADDRESS_BCRT1_UNSPENDABLE or
            self.nodes[i].get_deterministic_priv_key().address
------
-
-ryanofsky I'm not sure the change from const std::string& to std::string&&
-          is an improvement. You also now can't call SetInternalName with
-          an lvalue (plain variable or reference). This is now an error:
-
-          std::string name = "something";
-          SetInternalName(name);
-
-          People get confused about this stuff, but if the goal is to just
-          move-enable SetInternalName, it should take plain std::string,
-          not const std::string&, and not std::string&&.
-
-          If a function just needs to read an argument (and not manipulate it
-          before throwing it away or move it into a data structure) it should
-          take const T&.
-
-          If a function wants to give callers the option of moving from an
-          argument but still allow copies, it should take plain T.
-
-          If a function wants to force callers to move it should take T &&.
 -----
 
 GETDATA issues...
