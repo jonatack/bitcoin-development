@@ -9,6 +9,7 @@ order:
 #bitcoin-core-pr-reviews
 #bitcoin-wizards
 #bitcoin-workshops
+#bitmetas
 #c-lightning
 ##hwi
 #lightning-dev
@@ -17,3 +18,4 @@ order:
 #mit-dci
 #rust-bitcoin
 #secp256k1
+##taproot-bip-review
