@@ -26,7 +26,7 @@ Bitcoin Core Dev IRC Meetings
 
 *PR Review Club* meeting every Wednesday 1700 UTC on #bitcoin-core-pr-reviews
 
-  Website: https://bitcoin-core-review-club.github.io/
+  Website: https://bitcoincore.reviews
 
   PR Review Club meeting logs are available on the website by clicking on the
   past meeting links.

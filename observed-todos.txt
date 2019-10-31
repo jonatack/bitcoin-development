@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-10-05
+Last updated: 2019-10-31
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -360,7 +360,7 @@ laanwj:    focus on user problems, actual bugs,
 2019-05-01 Add tests for merged PR from Bitcoin Core Reviews Club #1:
            "Enhance `bumpfee` to include inputs when targeting a feerate"
            https://github.com/bitcoin/bitcoin/pull/15557
-           as per info in https://bitcoin-core-review-club.github.io/15557.html
+           as per info in https://bitcoincore.reviews/15557.html
 
            harding: I think this PR probably could've used more tests, and
            contributions to testing are welcome independently from the PRs
@@ -452,7 +452,7 @@ laanwj:    focus on user problems, actual bugs,
 2019-05-11 Add tests, then rebase/update code for open PR from Reviews Club #2:
            "Allow all mempool txs to be replaced after a configurable timeout
            (default 6h)" https://github.com/bitcoin/bitcoin/pull/10823
-           as per info in https://bitcoin-core-review-club.github.io/10823.html
+           as per info in https://bitcoincore.reviews/10823.html
 -----
 
 2019-05-10 Make MAX_BLOCKFILE_SIZE, BLOCKFILE_CHUNK_SIZE and UNDOFILE_CHUNK_SIZE
