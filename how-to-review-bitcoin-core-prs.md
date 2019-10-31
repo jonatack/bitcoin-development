@@ -130,13 +130,12 @@ Before jumping in, take plenty of time to:
   - get to know the maintainers and regular contributors: what they do, what
     they like and want, how they give feedback
 
-Participate in the excellent
-[Bitcoin Core PR Review Club](https://bitcoin-core-review-club.github.io/)
-weekly meetings on IRC. The club was launched in May 2019 by
-[John Newbery](https://twitter.com/jfnewbery). You'll benefit the most if you
-prepare for each meeting in advance by studying, building, and testing the PR
-under review -- and then actually reviewing it! Go through the notes, questions,
-and logs of the previous meetings; there is gold in there.
+Participate in the excellent [Bitcoin Core PR Review
+Club](https://bitcoincore.reviews) weekly meetings on IRC. The club was launched
+in May 2019 by [John Newbery](https://twitter.com/jfnewbery). You'll benefit the
+most if you prepare for each meeting in advance by studying, building, and
+testing the PR under review -- and then actually reviewing it! Go through the
+notes, questions, and logs of the previous meetings; there is gold in there.
 
 Many newcomers begin by filing pull requests that add to the hundreds already
 awaiting valuable review. In many cases, it may be better to begin by reviewing
@@ -486,12 +485,12 @@ Intermediate/advanced
 
 A special thank you to [John Newbery](https://twitter.com/jfnewbery) (IRC nick:
 jnewbery) for launching the [Bitcoin Core PR Reviews
-Club](https://bitcoin-core-review-club.github.io/) and to the long-term
-contributors who participated so far: [Dave
-Harding](https://hash.social/users/harding) (harding), Anthony Towns (aj),
-Gregory Sanders (instagibbs), Michael Ford (fanquake), Andrew Chow (achow101),
-Pieter Wuille (sipa), Bryan Bishop (kanzure), Mike Schmidt (bitschmidty), Marco
-Falke (MarcoFalke), and Wladimir van der Laan (wumpus).
+Club](https://bitcoincore.reviews) and to the long-term contributors who
+participated so far: [Dave Harding](https://hash.social/users/harding)
+(harding), Anthony Towns (aj), Gregory Sanders (instagibbs), Michael Ford
+(fanquake), Andrew Chow (achow101), Pieter Wuille (sipa), Bryan Bishop
+(kanzure), Mike Schmidt (bitschmidty), Marco Falke (MarcoFalke), and Wladimir
+van der Laan (wumpus).
 
 Thanks to [Steve Lee](https://twitter.com/moneyball) (moneyball) for reviewing
 this write-up and his suggestions.
