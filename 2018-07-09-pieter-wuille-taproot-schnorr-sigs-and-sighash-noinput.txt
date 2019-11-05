@@ -166,7 +166,7 @@ As we are potentially introducing a new signature scheme anyway, we have the
 opportunity to make a number of changes really unrelated to the theoretical
 foundations of the signature scheme. We can get rid of the dumb DER encoding
 from ECDSA signatures. There's some six, seven bytes of overhead, stuff like
-"there's an integer that follows that are this long" and we really just want 64
+"there's an integer that follows that is this long" and we really just want 64
 bytes so let's just use 64 bytes.
 
 
@@ -784,3 +784,56 @@ and safe. If that doesn't work, then you're already at a dead end I think. The
 engineering and review time in convincing a group of technical people is a first
 step. But then yes, the real bigger picture is just a concern that is a much
 harder to get anything adopted at all.
+
+
+----
+
+2019-11-04 ##taproot-bip-review IRC discussion (cleaned up for my own use).
+
+sipa: gmaxwell's writeup does mention "We compute the 2-of-2 aggregate key C = A
++ B (simplified; to protect against rogue key attacks you may want to use the
+MuSig key aggregation function)". As those things aren't really easily possible
+with non-Schnorr-like signature schemes, I believe he meant Schnorr use to be
+implied. Taproot is certainly possible with ECDSA as well, but much less useful,
+as you couldn't easily combine multiple public keys as the common path.
+
+<gmaxwell> It's not technically required to use Schnorr signatures, but it would
+be stupid to deploy it any other way. You can use multiparty ECDSA.
+
+<sipa> And if the common branch can only be a single key (rather than an
+aggregate of all parties, or a sufficient subset of them), Taproot's advantages
+go away. Maybe the question is if Schnorr is necessary for the tweaking to
+work: that's not the case. As long as there is a single signer, you don't need
+the linearity property, as all the signer needs to do is tweak his private key
+equivalently.
+
+<gmaxwell> Even with multiple signers... with multiparty ECDSA... (ignoring the
+fact that multiparty ECDSA is obnoxious to implement).
+
+<sipa> Right, the linearity property only makes things *easier*, it's not
+changing things from impossible to possible.
+
+<gmaxwell> The *keys* are still linear just fine.
+
+<sipa> My point is that in case you give up on linearity and complex ECDSA
+multisigning, Taproot tweaking still works just fine.
+
+<gmaxwell> Indeed. (Well, *tweaking* needs a kind of key linearity).
+
+<sipa> Right, but not signature linearity. key aggregation (even MuSig
+style) is always possible with EC keys, regardless of the signing
+algorithm. What Schnorr's linearity adds is that it makes it easy to construct a
+multiparty signing algorithm for the aggregated key a differrent style of key
+aggregation is possible that's more easily compatible with ECDSA, but the result
+is still significantly more complex than what is possible with additive key
+aggregation + schnorr. In particular, MuSig key aggregation is non-interactive,
+meaning that you can compute the address from just xpubs of participants for
+example, without communication with those participants (and more importantly,
+without those participants needing access to their private keys).
+
+<gmaxwell> re ECDSA multiple party signing... its complex enough that I'm
+dubious about people ever managing to correctly implement the N of M case in a
+way that has good comprehensive security.. in theory it's not hard, but in
+theory plain ECDH and ECDSA signatures are *trivial* and yet loads of things
+manage to screw those up. I have never seen even an example of the 2 of 2
+case (the simplest) that doesn't have obvious timing sidechannels.
