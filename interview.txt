@@ -1,112 +1,181 @@
 Interview
 
-Who am I/background
-- Freelance software developer (and surfer) from the US, based mostly in France,
-	often in Biarritz, sometimes Paris or NYC, doing software engineering, project
-  management and even marketing for multinationals
-- Speaks English, French, German, and some Russian
-- Computer languages: BASIC, assembly, Ruby, Lisp/Common Lisp, some C and C++
-- Engineering and business background (Harvey Mudd engineering, INSEAD MBA)
-- Spent years in the computer game business and in the music business
-- First heard of Bitcoin in 2013
-- Starting following Bitcoin closely in 2016 and saving money to spend time
-  learning
-- Applied to Chaincode Labs in late February, told I needed to show some POW in
-  the space
-- Early March I began modestly contributing to Bitcoin Core
-- A month later, Jonas and John at Chaincode Labs proposed a phone call to
-  advise/provide orientation/answer questions
-- 2 months later, Jonas proposed joining the Chaincode Labs Bitcoin seminar in
-  June
-- Currently spending a few hours a week on Bitcoin Core
-- Considering ways to work on it full time
 
-Getting started working on Bitcoin Core (general advice)
+Who am I/background
+
+- Bitcoin Core developer part-time, who would like to move sustainably to
+  full-time work on Bitcoin Core open source development
+
+- For the past decade I've been a freelance software developer based around
+  Paris, Biarritz (in France), NYC and SF, doing software engineering and CTO
+  roles for multinationals
+
+- I speak English, French, German, and some Russian
+
+- Computer languages: BASIC, assembly, Ruby, Lisp, some C, C++, and Python
+
+- Engineering and business background (Harvey Mudd engineering, INSEAD MBA)
+
+- Spent years in the computer game business and in the music business as a
+  freelance games creator and programmer in assembly
+
+- First heard of Bitcoin in 2013
+
+- Began contributing to open source in 2013 as lead maintainer of Ransack, a
+  leading database search engine in the Ruby ecosystem, and became a top 100
+  contributor to the Ruby on Rails web framework and co-editor of the This Week
+  in Rails newsletter
+
+- Starting following Bitcoin closely in 2016 and saving money from my freelance
+  missions to spend time learning to contribute
+
+- I applied to Chaincode Labs in late February, and was told I needed to begin
+  showing some proof of work in the space
+
+- In March, I began working on Bitcoin Core to learn how to contribute
+
+- A month later, Jonas and John at Chaincode Labs proposed a phone call to
+  advise, provide orientation, and answer questions
+
+- 2 months later, they proposed joining the Chaincode Labs Bitcoin seminar in
+  June, which was an amazing experience with great people
+
+- Since then, for the past months I have been spending a few hours a week on
+  Bitcoin Core and aiming to work on it sustainably full time
+
+- My priorities for Bitcoin Core are robustness and privacy /
+  censorship-resistance, followed by features, scaleability, and UX/UI.
+
+
+Getting started working on Bitcoin Core
+
 - Good resources and how to begin
+
 - What kind of contributions are desired and needed
+
 - How to begin contributing changes
-- How long does it take to get to grips with the codebase and how Bitcoin Core
-  works
+
+- How long does it take to get to grips with the codebase and how Bitcoin Core works
+
 - What skills and tools picked up on previous projects can be applied to working
   on Bitcoin Core
-- Should onboarding be different for an enthusiast with less experience or
-  technical ability or does everyone have to find their own path to contributing
-  independently?
-- Warning: Be patient, context-aware, and don't take things personally
+
+- It's good to keep in mind to be patient, context-aware, and not take things
+  personally... it takes time
+
 - How to sustain contributing without burning out
-- Anything frustrating or inferior in Bitcoin Core compared to other open source
-  projects I've worked on
+
 - What is unusual and exceptional in Bitcoin Core compared to other large,
   legacy OSS projects I've seen
-  - Much context, history, specialised knowledge behind current state to
-    assimilate
-  - BDFL-free (explore, what have BDFLs done wrong on other open source projects
-    and what was Wladimir done right? Is Bitcoin a unique project or do I think
-    how Wladimir and other Bitcoin maintainers is a potential template for other
-    open source projects)
+
+  - Much context, history, specialised knowledge behind current state to assimilate
+
+  - BDFL-free
+
   - Very small number of experienced reviewers and contributors
+
   - Process
+
   - Criticality
+
   - People care and are generous with their time
+
   - Humbleness and activism (why I'm here)
 
+
 Reviewing PRs and the Bitcoin Core PR Review Club (John)
-  - Reviewing is the ideal way to begin
-  - How to reviewing Bitcoin Core PRs
-  - How does this advice contrast with other open source projects
+
+- Reviewing is the ideal way to begin
+
+- How to reviewing Bitcoin Core PRs
+
+- How does this advice contrast with other open source projects
+
 
 Bitcoin Optech (John, David, Mike, Steve)
 
+- Newsletter review
+
+- Perhaps can come up with ideas to take it to the next level
+
+
 Chaincode Labs summer Bitcoin seminar and residency (Matt, John, Jonas)
+
 - Amazing place with amazing people
+
 - Semi-depressing to return to normal life after ten days there!
+
 - It makes business sense for OGs to protect their investment; patronage a la
   Chaincode can be one of the most effective and interesting ways to do so
+
 - A similar structure should exist in Europe, if any smart OGs are interested
 
-Square Crypto (Miles, Steve, Matt)
 
-There is so much to do: Interesting developments in the Bitcoin Core codebase
+There is much to do: Interesting developments in the Bitcoin Core codebase
+
 - Modularity, for example further separating the node from the wallet (Russ)
+
 - Multiprocess (Russ)
+
 - Property-based testing (Chris Stewart and I)
-- Fuzz testing (Marco)
-- Faster functional tests from more modularity or change of PL
+
+- Fuzz testing (Marco, practicalswift)
+
+- Faster functional tests from optimisations, more modularity, or switching from
+  Python to C++ or Rust
+
 - Better test coverage of the P2P networking code
-  - Might help catch bugs like #12392
-  - See issue #14210
+  - There is discussion of this in issue #14210 "Test coverage of our networking code"
+  - Might help catch bugs like #12392 "Fix ignoring tx data requests when fPauseSend is set on a peer"
+
 - Privacy improvements to the P2P networking (Suhas, Gleb):
+
   - Separating transaction relay from block relay
+
   - Need for better p2p testing tools and frameworks to evaluate how behaviour
-  changes in complex state: Suhas, Gleb, Jeremy, Giulia
+    changes in complex state: Suhas, Gleb, Jeremy, Giulia
+
   - Multiple p2p networks instead of just one (James Chiang idea).
+
   - Use different IP buckets per peer (James Chiang idea). Each IP
     would have its own AddrMan table and would confer to ensure they
     don't have the same peer IPs, to avoid IP poisoning e.g. flooding
     by attacker peers.
+
   - Separate block relay from txn relay, e.g. separate them into 2
     networks. Suhas is working on that with PRs like 15759.
+
   - A better framework for systematically thinking about privacy.
+
   - Better simulations needed for evaluating Dandelion/++/Lite,
     contact Giulia Fanti.
+
 - AssumeUTXO (James)
+
 - Benchmarking (James)
+
 - Builds (Carl, CFields)
-- Plugging Rust components into Bitcoin Core?
-- Projects worked on by each of the Chaincode Labs residents:
-  -
-  -
-  -
-  -
+
+- Plugging Rust components into Bitcoin Core (Matt DNS PR)
+
 - Watch the IRC discussions, issues, and code reviews
 
+
 Future plans and goals
+
 - With so much interesting stuff happening, how to decide what to work on
   (haven't even mentioned all the exciting things happening with Lightning)
+
 - How should people decide on whether to work on base layer or second layer
+
 - Is trying to work on both spreading oneself too thin?
+
 
 End note - humble service
 
+
+
+
 Twitter and GitHub: jonatack
+
 Bitcoin development repo at: https://github.com/jonatack/bitcoin-development
