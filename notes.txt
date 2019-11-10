@@ -96,8 +96,9 @@ harding:  To grep Bitcoin "hidden" debug options:
           startup and shutdown of the service as well as when notifications are
           issued and new clients connected.
 
-          db: Messages about the status of the Berkeley Database engine used for
-          the wallet database, including messages about database flushes.
+          walletdb (db in v.0.19 and earlier): Messages about the status of the
+          Berkeley Database engine used for the wallet database, including
+          messages about database flushes.
 
           rpc: Messages about the RPC server, including its startup and shutdown
           as well as when commands are issued.
