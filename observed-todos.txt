@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-10-31
+Last updated: 2019-11-03
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -24,6 +24,16 @@ laanwj:    focus on user problems, actual bugs,
 
            - achow: export blockchain+import with and without validating would
            be super nice as menu items
+-----
+
+        bip-taproot edits
+
+        bip-taproot could add a link to bip-schnorr which is frequently mentioned:
+        https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki
+
+        "each script version needs two subsequence byte values" -> subsequent
+        https://github.com/sipa/bips/blob/bip-schnorr/bip-taproot.mediawiki#cite_note-3
+
 -----
 
 2019-10-05 Address the todo described in src/wallet/wallet.cpp:1131
