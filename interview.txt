@@ -3,25 +3,31 @@ Interview
 
 Who am I/background
 
-- Bitcoin Core developer part-time, who would like to move sustainably to
-  full-time work on Bitcoin Core open source development
+- I'm Jon Atack, a Bitcoin Core developer in my free time, and I'd like to move
+  to full-time work, in a sustainable way, on Bitcoin Core open source development.
 
-- For the past decade I've been a freelance software developer based around
-  Paris, Biarritz (in France), NYC and SF, doing software engineering and CTO
-  roles for multinationals
+- For the past decade I've been a freelance software developer doing software
+  engineering and CTO roles for multinationals. I'm based between Paris and
+  Biarritz in France, as well as sometimes in NYC and SF
+
+- I studied computer science and physics at Harvey Mudd College in Claremont,
+  CA, and business at INSEAD in France.
 
 - I speak English, French, German, and some Russian
 
 - Computer languages: BASIC, assembly, Ruby, Lisp, some C, C++, and Python
 
-- Engineering and business background (Harvey Mudd engineering, INSEAD MBA)
+- I began programming computers when I was 9 on the terminal printer in the
+  administrative offices of our grade school.
 
-- Spent years in the computer game business and in the music business as a
-  freelance games creator and programmer in assembly
+- I then taught myself 6502 assembly language and from age 12 to 17, parallel
+  with school and athletic activities, I was a professional freelance games
+  creator and programmer, and wrote 3 games that were released for Atari and
+  Commodore computers.
 
-- First heard of Bitcoin in 2013
+- I first heard of Bitcoin in 2013
 
-- Began contributing to open source in 2013 as lead maintainer of Ransack, a
+- I began contributing to open source in 2013 as lead maintainer of Ransack, a
   leading database search engine in the Ruby ecosystem, and became a top 100
   contributor to the Ruby on Rails web framework and co-editor of the This Week
   in Rails newsletter
