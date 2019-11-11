@@ -294,9 +294,10 @@ opendiff on macOS. If you use gitk and like dark mode, I recommend [Dracula for
 gitk](https://github.com/dracula/gitk).
 
 Become adept at searching the repository with `git grep`. You'll use it
-constantly.
+constantly. Run `git grep --help` on the command line for help or information.
 
-Read and know the Bitcoin Core [developer notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
+Read and know the Bitcoin Core [developer
+notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
 
 Be sure to learn and understand the [peer review
 process](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review).
