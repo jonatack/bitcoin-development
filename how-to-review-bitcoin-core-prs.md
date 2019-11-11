@@ -248,16 +248,50 @@ John Newbery:
 
 ### TECHNICAL SPECIFICS
 
-Become comfortable with
-[compiling Bitcoin Core from
+*Don't trust, verify.* Minimize dependance on GitHub in your review process. Use
+the GitHub website only for the GitHub metadata, e.g. reading comments and
+adding your own comments -- not for reviewing the commits and code, which you
+should do in your local environment.
+
+Therefore, a review begins by pulling the PR branch down to your computer to
+build and review locally. There are several ways to do it:
+
+- Bitcoin Core documentation for [referencing PRs easily with
+  refspecs](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md#reference-prs-easily-with-refspecs)
+- Pulling down remote PRs with `git checkout pr/<number>` [as described in this nice
+  little gist](https://gist.github.com/piscisaureus/3342247) (what I personally
+  use)
+- GitHub now [exposes
+PRs](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/checking-out-pull-requests-locally)
+as branches on the upstream repository with `git pull/<number>/head` (contributor
+branch) and `git pull/<number>/merge` (merged into master), e.g. `git fetch origin
+pull/17283/head && git checkout FETCH_HEAD`
+
+You can test a PR either on the contributor's branch or with the changes merged
+on top of master. Testing the latter can be useful to see if anything merged
+into master since the last PR commit breaks the changes.
+
+Next, launch the build and tests while you begin reading the code
+locally. You'll need to become comfortable with [compiling Bitcoin Core from
 source](https://github.com/jonatack/bitcoin-development/blob/master/how-to-compile-bitcoin-core-from-source-for-linux-debian.md)
-and running the
-[unit tests](https://github.com/bitcoin/bitcoin/tree/master/src/test/README.md)
-and
-[functional tests](https://github.com/bitcoin/bitcoin/blob/master/test/README.md)
-since you will need to do it for each PR you review. For this, the Bitcoin Core
-[productivity notes](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md)
-are indispensable.
+and running the [unit
+tests](https://github.com/bitcoin/bitcoin/tree/master/src/test/README.md) and
+[functional
+tests](https://github.com/bitcoin/bitcoin/blob/master/test/README.md) since you
+will need to do it for each PR you review. For this, the Bitcoin Core
+[productivity
+notes](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md) are
+indispensable.
+
+While the build and tests are running, begin reviewing each commit separately in
+your local environment using a difftool like
+[gitk](https://git-scm.com/docs/gitk), [meld](https://meldmerge.org/), [meld for
+macOS](https://yousseb.github.io/meld/),
+[GNU](https://www.gnu.org/software/emacs/manual/html_node/ediff/index.html)
+[ediff](https://www.emacswiki.org/emacs/EdiffMode),
+[vimdiff](https://vim.fandom.com/wiki/A_better_Vimdiff_Git_mergetool), or
+opendiff on macOS. If you use gitk and like dark mode, I recommend [Dracula for
+gitk](https://github.com/dracula/gitk).
 
 Become adept at searching the repository with `git grep`. You'll use it
 constantly.
@@ -320,22 +354,10 @@ comments pertaining to the `HEAD` commit at the time of merge. Keep in mind that
 anything you write in an ACK comment that is copied by the merge script will be
 in git history forever.
 
-*Don't trust, verify.* Minimize dependance on GitHub in your review process.
-[Pull down the PRs
-locally](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md#reference-prs-easily-with-refspecs)
-and do all code review in your local environment. This is only a minimum; some
-Bitcoin Core contributors also sign and OpenTimestamp their ACKs. It's trivial
-to sign your commits using the [OpenTimestamps Git
+Some Bitcoin Core contributors sign and OpenTimestamp their ACKs. While that is
+beyond the scope of this document, it is surprisingly trivial to sign your
+commits using the [OpenTimestamps Git
 Integration](https://github.com/opentimestamps/opentimestamps-client/blob/master/doc/git-integration.md).
-
-In your local environment, review each commit separately using a difftool like
-[gitk](https://git-scm.com/docs/gitk), [meld](https://meldmerge.org/), [meld for
-macOS](https://yousseb.github.io/meld/),
-[GNU](https://www.gnu.org/software/emacs/manual/html_node/ediff/index.html)
-[ediff](https://www.emacswiki.org/emacs/EdiffMode),
-[vimdiff](https://vim.fandom.com/wiki/A_better_Vimdiff_Git_mergetool), opendiff
-on macOS, etc. If you use gitk and like dark mode, I recommend [Dracula for
-gitk](https://github.com/dracula/gitk).
 
 Bitcoin Core reviewers frequently use the [Apache voting
 system](https://www.apache.org/foundation/voting.html#expressing-votes-1-0-1-and-fractions)
