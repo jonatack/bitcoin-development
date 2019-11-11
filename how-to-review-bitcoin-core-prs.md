@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: October 25, 2019
+Last updated: November 11, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -315,9 +315,10 @@ are lost on GitHub.
 A full ACK could look like: "ACK `fa2f991`, I built, ran tests, tested manually
 by doing X/Y/Z and reviewed the code and it looks OK, I agree it can be merged."
 
-The Bitcoin Core merge script currently copies all ACK comments into the merge
-commit. Remember that anything you write in an ACK comment will be in git
-history forever when the PR is merged.
+The Bitcoin Core merge script currently copies into the merge commit all ACK
+comments pertaining to the `HEAD` commit at the time of merge. Keep in mind that
+anything you write in an ACK comment that is copied by the merge script will be
+in git history forever.
 
 *Don't trust, verify.* Minimize dependance on GitHub in your review process.
 [Pull down the PRs
