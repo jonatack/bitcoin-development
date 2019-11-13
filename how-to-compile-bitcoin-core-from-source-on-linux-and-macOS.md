@@ -69,5 +69,7 @@ All steps are to be run from your terminal emulator, i.e. the command line.
 6. Run the unit tests:
     - `make check`
 
-7. Run the functional tests:
-    - `test/functional/test_runner.py` or `test/functional/test_runner.py --extended`
+7. Run the functional tests. From the repository root:
+    - `test/functional/test_runner.py` to run the standard test suite
+    - `test/functional/test_runner.py --extended` to run the extended test suite
+    - `test/functional/test_runner.py --help` to see the various options for running tests
