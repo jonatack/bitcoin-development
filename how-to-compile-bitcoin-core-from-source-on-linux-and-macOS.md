@@ -1,6 +1,6 @@
 How to compile Bitcoin Core from source on Linux Debian and macOS and run the unit and functional tests
 -------------------------------------------------------------------------------------------------------
-Last updated: 22 August 2019
+Last updated: 13 November 2019
 
 This is a simplified summary of the various docs in https://github.com/bitcoin/bitcoin/tree/master/doc. Don't hesitate to read them for more information.
 
@@ -42,6 +42,15 @@ All steps are to be run from your terminal emulator, i.e. the command line.
       `make` to utilize all of them and reduce compile time significantly with
       `make -j"$(($(nproc)+1))"` on Linux or
       `make -j"$(($(sysctl -n hw.physicalcpu)+1))"` on macOS
+
+    If you build frequently from source (e.g. for testing pull requests), as
+    long as you don't need to change the configuration options you can skip
+    directly to the `make` step for subsequent builds.
+
+    Be sure to use `ccache` to speed up your builds. You can also gain time by
+    building only what you need. See the Bitcoin Core [productivity
+    notes](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md)
+    for more.
 
 6. Run the unit tests:
     - `make check`
