@@ -9,7 +9,6 @@ alphabetical order:
 #bitcoin-core-pr-reviews
 #bitcoin-wizards
 #bitcoin-workshops
-#bitmetas
 #c-lightning
 ##hwi
 #lightning-dev
