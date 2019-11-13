@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-11-03
+Last updated: 2019-11-13
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -26,14 +26,22 @@ laanwj:    focus on user problems, actual bugs,
            be super nice as menu items
 -----
 
-        bip-taproot edits
+2019-11-13 BlueMatt: #16323 and #16324 are up for grabs if anyone wants to work
+           on them, but there seems to be ~zero interest in reviewing them,
+           cause they have wonderfully scary titles (despite the code actually
+           being pretty simple)
+           - https://github.com/bitcoin/bitcoin/issues/16323
+             Call ProcessNewBlock() asynchronously
+           - https://github.com/bitcoin/bitcoin/issues/16324
+             Get cs_main out of the critical path in ProcessMessages
 
-        bip-taproot could add a link to bip-schnorr which is frequently mentioned:
-        https://github.com/sipa/bips/blob/bip-schnorr/bip-schnorr.mediawiki
+           jamesob: I'm very interested in that project, just having a hard time
+           getting a sense of the end goal (though haven't looked at them
+           recently). I'll give them a look in the next few weeks and maybe
+           write up some kind of explanation.
 
-        "each script version needs two subsequence byte values" -> subsequent
-        https://github.com/sipa/bips/blob/bip-schnorr/bip-taproot.mediawiki#cite_note-3
-
+           BlueMatt: oh it got cleaned up a lot, those two prs, by themselves,
+           where essentially an end-goal, some of the earlier work was a mess
 -----
 
 2019-10-05 Address the todo described in src/wallet/wallet.cpp:1131
