@@ -264,6 +264,53 @@ sipa:     One easy way to make sure you have all the call sites is to rename it.
           automatically copied into merge commits.
 -----
 
+practicalswift: Use `std::unique_ptr` (C++11) where possible.
+
+          Rationale:
+          1. Avoid resource leaks, e.g. forgetting to `delete` an object created using `new`
+          2. Avoid undefined behaviour (specifically: double `delete`)
+
+          From doc/developer-notes.md:
+
+          - Use the RAII (Resource Acquisition Is Initialization) paradigm where
+            possible. For example, by using `unique_ptr` for allocations in a
+            function. Rationale: This avoids memory and resource leaks, and
+            ensures exception safety.
+
+          - Use `MakeUnique()` to construct objects owned by `unique_ptr`s.
+            Rationale: `MakeUnique` is concise and ensures exception safety in
+            complex expressions. `MakeUnique` is a temporary project-local
+            implementation of `std::make_unique` (C++14).
+-----
+
+          On unique_ptr vs shared_ptr:
+
+          promag: Why not use unique_ptr? I don't see sharing of message
+          ownership.
+
+          jonasschnelli: I think shared is fine here and does allow more
+          flexible handling in future with little cost (ref counting).
+
+          gmaxwell: Adding an extra memory allocation for every network message
+          isn't free. I'm concerned that we may be falling into overusing
+          sharedptr "just in case", which is bad because it leaks performance in
+          a diffuse way that doesn't show up well in profiles. Please don't use
+          sharedptr where unique will work. If something new comes in in the
+          future that needs a sharedptr then we can switch then.
+
+          sipa: unique_ptr and shared_ptr have the same number of allocations
+          (if make_shared is used, at least), though shared_ptr uses more memory
+          (both for the pointer itself and for the allocated memory), and has
+          atomics to update the refcounts (which may reduce performance). To be
+          clear, I agree we should avoid shared_ptr unless there is a good
+          reason.
+
+          jonasschnell: The reason why I used shared_ptr over unique_ptr is the
+          polymorphism I'd like to use for the net messages and I once read that
+          shared_ptr are recommended for polymorphic inheritance. However, I
+          changed this PR now to use unique_ptr.
+-----
+
 harding   Idea: sendrawtransaction spends from cold wallet with network disabled
           to do a final inspection of the transaction in local mempool (mainly
           to check not forgetting an output and spending everything in fees).
