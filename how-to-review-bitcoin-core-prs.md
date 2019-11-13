@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: November 11, 2019
+Last updated: November 13, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -530,8 +530,8 @@ programming languages and open source projects. Wladimir van der Laan's
 [service](https://twitter.com/orionwl/status/1131924832071880705) to Bitcoin
 sparked the possibility to me of perhaps doing the same.
 
-Finally, a big thank you to the Core contributors for their patience with my
-review attempts so far, notably John Newbery, Marco Falke, João Barbosa,
+Finally, a big thank you to the Bitcoin Core contributors for their patience
+with my review attempts so far, notably John Newbery, Marco Falke, João Barbosa,
 practicalswift, Gregory Sanders, Jonas Schnelli, Pieter Wuille and Wladimir van
 der Laan, and to Adam Jonas and John Newbery for their guidance and advice from
 the start.
