@@ -24,10 +24,26 @@ jnewbery: Review 5-10 PRs per PR made
 
 harding:  To grep Bitcoin "hidden" debug options:
           bitcoind -help-debug | grep -A3 -- -limit
+
+-----
+
+practicalswift: git grep -iE '[^0-9a-z]520[^0-9a-z]' -- '*.cpp' '*.h'
+
 -----
 
           To search for a term in git history:
           git log -S 'some string'
+-----
+
+gmaxwell  Commit stats bash scripts:
+
+          git log --since=2019-03-15 --until=2019-11-15 --no-merges \
+          | grep '^Author' | sort | uniq -c | sort -nr | head -n 20
+
+          for i in 2012 2013 2014 2015 2016 2017 2018 2019; do echo $i \
+          `git log --since=$i-03-15 --until=$((i+1))-03-15 --no-merges \
+          | grep '^Author' | cut -d':' -f2- | cut -d'<' -f1 | sort | uniq -c \
+          | sort -nr | head -n 20 | awk '{print $2}' | tr '\n' ' '` ; done
 -----
 
           To see moved-only code:
