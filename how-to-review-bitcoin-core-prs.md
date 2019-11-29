@@ -299,6 +299,42 @@ constantly. Run `git grep --help` on the command line for help or information.
 Read and know the Bitcoin Core [developer
 notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
 
+IF YOU'RE NOT SURE WHERE TO START
+
+Read the code, read the PR comments, then re-read both. Find something that
+doesn't make sense and try to figure it out. Repeat. Once it all starts to make
+sense, run bitcoind on testnet (or on mainnet with very small amounts), and
+watch or search through the relevant logs. Maybe add some custom logging, printf
+statements, or asserts; it's always a privilege to add these into other people's
+code. Run the relevant functional tests and look through the debug logs or add
+pdb breakpoints and check values/run RPC commands. Try refactoring the code to
+be better or prettier, and discover why that doesn't work. Expect it to take
+twice as long as you planned it to. Yes, it's work.
+
+While you're reviewing, adding tests yourself can help you understand the
+behaviour and verify the changes, and you can send them to the author who can
+add them to the PR. Proposing automated tests to the author is a really helpful
+way to start contributing. Authors appreciate it when someone reviews their PR
+and provides additional tests. [Here's an
+example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
+
+Remember, the big picture is much more important than nits, spelling, or code
+style. Re-read the NITS section above. Try to avoid commenting on these while
+reviewing, even if you have no other comments to make. I know, it's hard -- I've
+done it too many times -- but there's a better alternative:
+
+A good thing you can do as a reviewer without specialised knowledge of the code
+is _ask questions_. A PR author is usually happy to discuss their work or see
+interest in it. So, spend 20 minutes or so looking at a change, find the thing
+that seems most confusing or surprising, and ask about it politely in the PR
+comments or on the
+[#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev) IRC
+channel. Chances are other people wonder about the same thing and it could be
+clarified or documented better. In this way you can learn and help make the
+project more accessible, too.
+
+IT'S ALL ABOUT THE "ACKS"
+
 Be sure to learn and understand the [peer review
 process](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review).
 The process is
@@ -320,34 +356,6 @@ a lack of tests or simulation framework. That shouldn't discourage you from
 reviewing. For example, if you've reviewed the code thoroughly, a comment like
 "the code looks correct to me, but I don't feel confident enough about behaviour
 to give an ACK" is a perfectly helpful contribution.
-
-If you're not sure where to start:
-
-While the PR is building and the unit and functional tests are running, read the
-code, read the PR comments, then re-read both. Find something that doesn't make
-sense and try to make sense of it. Repeat. Once it all starts to make sense, run
-it on testnet and/or mainnet, see what happens, tail or search through the
-relevant logs. Maybe add some custom logging, printf statements, or asserts;
-it's always a privilege to add these into other people's code. Run the relevant
-functional test and look through the debug logs. Try refactoring the code to be
-better or prettier, and discover why that doesn't work. Expect it to take twice
-as long as you planned it to. Yes, it's work.
-
-While you're reviewing, adding tests yourself helps you understand the behaviour
-and verify the changes, and you can send them to the author who can add them to
-the PR. Proposing automated tests to the author is a really helpful way to start
-contributing. Authors really appreciate it when someone reviews their PR and
-provides additional tests. [Here's an
-example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
-
-Lost or unsure? One good thing you can do as a reviewer without specialised
-knowledge of the code is _ask questions_. A PR author is usually happy to
-discuss their work or see interest in it. So spend 20 minutes or so looking at a
-change, find the thing that seems most confusing or surprising, and ask about it
-politely in the PR or on the #bitcoin-core-dev IRC channel. Chances are other
-people wonder about the same thing and it could be clarified or documented
-better. In this way you can learn and help make the project more accessible,
-too.
 
 When giving an ACK, specify the commits reviewed by appending the commit hash of
 the `HEAD` commit. The trustless way to do this is to use the hash from your
@@ -389,6 +397,7 @@ A complex PR usually requires at least 3-4 experienced ACKs before merging.
 The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
 following PR and review activity.
 
+MISCELLANEOUS TECHNICAL ADVICE
 
 fanquake:
 - I have some core dev tools in https://github.com/fanquake/core-review
