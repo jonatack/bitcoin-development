@@ -24,30 +24,38 @@ jnewbery: Review 5-10 PRs per PR made
 
 harding:  To grep Bitcoin "hidden" debug options:
           bitcoind -help-debug | grep -A3 -- -limit
-
 -----
 
-practicalswift: git grep -iE '[^0-9a-z]520[^0-9a-z]' -- '*.cpp' '*.h'
-
------
+          Git stuff
 
           To search for a term in git history:
           git log -S 'some string'
+
+          To see the git log of a function over time:
+          git log -L:function:file.c
+
+          This works for any line range as well:
+          git log -L 120,130:file.h
+
+          To see moved-only code:
+          git show --color-moved=dimmed-zebra
+
+          Word diff:
+          git diff --word-diff
+
+          git grep -iE '[^0-9a-z]520[^0-9a-z]' -- '*.cpp' '*.h'
+          grep -rnw './depends' -e 'http:'
 -----
 
-gmaxwell  Commit stats bash scripts:
+          Commit stats bash scripts:
 
-          git log --since=2019-03-15 --until=2019-11-15 --no-merges \
+          git log --since=2019-03-15 --until=2019-11-30 --no-merges \
           | grep '^Author' | sort | uniq -c | sort -nr | head -n 20
 
           for i in 2012 2013 2014 2015 2016 2017 2018 2019; do echo $i \
           `git log --since=$i-03-15 --until=$((i+1))-03-15 --no-merges \
           | grep '^Author' | cut -d':' -f2- | cut -d'<' -f1 | sort | uniq -c \
           | sort -nr | head -n 20 | awk '{print $2}' | tr '\n' ' '` ; done
------
-
-          To see moved-only code:
-          git show --color-moved=dimmed-zebra
 -----
 
           To test compiler acceptance on the command line:
@@ -60,11 +68,11 @@ gmaxwell  Commit stats bash scripts:
           echo 'int main(){ const int min_depth =   true ? 1 : 0   }' | g++ -x c++ -
           <stdin>: In function ‘int main()’:
           <stdin>:1:51: error: expected ‘,’ or ‘;’ before ‘}’ token
-
 -----
 
-          Unit tests info:
-          https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
+          Unit tests
+
+          Info: https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
 
           Help: src/test/test_bitcoin --help
 
@@ -78,6 +86,68 @@ gmaxwell  Commit stats bash scripts:
 
           Also, the test logs to a debug log file (in master)
           If you need temporary printing, you can do std::cout or std::cerr
+-----
+
+          Functional tests
+
+          To profile:  python3 -m cProfile -s time feature_block.py
+
+          To launch the Python debugger on failure of a functional test, pass
+          `--pdbonfailure` as seen in, say, test/functional/wallet_basic.py -h
+
+          test/functional/wallet_basic.py --pdbonfailure
+
+          Does not work via the test runner, e.g. this prints dots ad infinitum:
+          test/functional/test_runner.py wallet_basic --pdbonfailure
+
+          To run a functional test X times and launch the debugger on failure:
+
+          (for i in {1..100}; do test/functional/wallet_basic.py --pdbonfailure ; done)
+
+          To run functional tests in the gui, pass BITCOIND=bitcoin-qt
+-----
+
+          Memory profiling:
+
+          Use valgrind + massif_visualizer, ideally in a controlled environment,
+          e.g. regtest, a small block chain, a custom wallet, etc. Valgrind is
+          much more precise, fine-grained analysis than a handmade python
+          procutils script (at the cost of being slow).
+
+          strace - man page strace
+
+          With these tools, run them in one terminal buffer, while performing
+          operations under test (say, loading/unloading the wallet) in another
+          terminal buffer.
+-----
+
+          To build Bitcoin with clang for better errors:
+
+          CC=clang CXX=clang ./configure...
+-----
+
+          Berkeley DB special commands (located in db4/bin):
+
+          db4/bin/db_dump ~/.bitcoin/wallets/wallet.dat
+          db4/bin/db_dump -p ~/.bitcoin/wallets/wallet.dat | grep -C 2 0X1F
+
+          db4/bin/db_load
+-----
+
+          C++ Compiler Explorer, shows compiler output and assembly:
+
+          https://godbolt.org/
+-----
+
+          To install the contents of bitcoind's bin subdirectory into the
+          /usr/local/bin standard location for self-installed executables using
+          the GNU coreutils install command:
+
+          Using sudo:
+          sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.19.0/bin/*
+
+          Using su:
+          su -c 'install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.19.0/bin/*'
 -----
 
           To get and set bitcoind logging information, use:
@@ -156,66 +226,37 @@ gmaxwell  Commit stats bash scripts:
           and coin database.
 -----
 
-          To launch the Python debugger on failure of a functional test, pass
-          `--pdbonfailure` as seen in, say, test/functional/wallet_basic.py -h
+gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
+          style, especially if it comes across as oppressive rather than
+          enabling.
 
-          test/functional/wallet_basic.py --pdbonfailure
+          Ignore the smallest of nits, make style advice in a purely advisory
+          way (as in, feel free to adjust if you happen to rebase, otherwise
+          don't bother), move style adjustments -- if any -- until right before
+          merging and not as soon as a PR opens. We've operated in that fashion
+          before and I think the project accomplished a lot more at that time
+          and was more enjoyable. (Likely not all due to coding style nits, but
+          I would be surprised if it wasn't a factor.)
 
-          Does not work via the test runner, e.g. this prints dots ad infinitum:
-
-          test/functional/test_runner.py wallet_basic --pdbonfailure
+          I reiterate: the background level of refactors, style changes,
+          cleanups, and other related activity is actively repelling multiple
+          long term contributors, myself included. I beg: give it a bit of a
+          rest, we have so many other things that are crying for our attention
+          and our resolve. We should try to find some initiatives that we all
+          feel more excited about, success with them would make it easier to
+          work on other things... but right now a big style change is just not a
+          unifying effort.
 -----
 
-          To run a functional test X times and launch the debugger on failure:
+sipa:     One easy way to make sure you have all the call sites is to rename it.
 
-          (for i in {1..100}; do test/functional/wallet_basic.py --pdbonfailure ; done)
------
+          If your end goal is integrating things into Bitcoin Core,
+          getting familiar with the code is the best way to spend time.
+          To do that (which i very much encourage you to!) I think it's better
+          to focus on one piece at a time and actually integrate it.
 
-          Berkeley DB special commands (located in db4/bin):
-
-          db4/bin/db_dump ~/.bitcoin/wallets/wallet.dat
-          db4/bin/db_dump -p ~/.bitcoin/wallets/wallet.dat | grep -C 2 0X1F
-
-          db4/bin/db_load
------
-
-          To install the contents of bitcoind's bin subdirectory into the
-          /usr/local/bin standard location for self-installed executables using
-          the GNU coreutils install command:
-
-          Using sudo:
-          sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.19.0/bin/*
-
-          Using su:
-          su -c 'install -m 0755 -o root -g root -t /usr/local/bin bitcoin-0.19.0/bin/*'
------
-
-          To build Bitcoin with clang for better errors:
-
-          CC=clang CXX=clang ./configure...
------
-
-          Memory profiling:
-
-          Use valgrind + massif_visualizer, ideally in a controlled environment,
-          e.g. regtest, a small block chain, a custom wallet, etc. Valgrind is
-          much more precise, fine-grained analysis than a handmade python
-          procutils script (at the cost of being slow).
-
-          strace - man page strace
-
-          With these tools, run them in one terminal buffer, while performing
-          operations under test (say, loading/unloading the wallet) in another
-          terminal buffer.
------
-
-Marco:    To run functional tests in the gui, pass BITCOIND=bitcoin-qt
-
------
-
-          C++ Compiler Explorer, shows compiler output and assembly:
-
-          https://godbolt.org/
+          Never put GitHub usernames in commits, nor PR descriptions which are
+          automatically copied into merge commits.
 -----
 
 ryanofsky PR review comment at:
@@ -240,44 +281,6 @@ ryanofsky PR review comment at:
           argument but still allow copies, it should take plain T.
 
           "If a function wants to force callers to move it should take T &&."
------
-
-laanwj:   Release notes should refer to the RPC help for details instead of
-          substituting for full documentation. Example:
-          "Please refer to the RPC help of `getbalances` for details."
------
-
-gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
-          style, especially if it comes across as oppressive rather than
-          enabling.
-
-          Ignore the smallest of nits, make style advice in a purely advisory
-          way (as in, feel free to adjust if you happen to rebase, otherwise
-          don't bother), move style adjustments -- if any -- until right before
-          merging and not as soon as a PR opens. We've operated in that fashion
-          before and I think the project accomplished a lot more at that time
-          and was more enjoyable. (Likely not all due to coding style nits, but
-          I would be surprised if it wasn't a factor.)
-
-          I reiterate: the background level of refactors, style changes,
-          cleanups, and other related activity is actively repelling multiple
-          long term contributors, myself included. I beg: give it a bit of a
-          rest, we have so many other things that are crying for our attention
-          and our resolve. We should try to find some initiatives that we all
-          feel more exited about, success with them would make it easier to work
-          on other things... but right now a big style change is just not a
-          unifying effort.
------
-
-sipa:     One easy way to make sure you have all the call sites is to rename it.
-
-          If your end goal is integrating things into Bitcoin Core,
-          getting familiar with the code is the best way to spend time.
-          To do that (which i very much encourage you to!) I think it's better
-          to focus on one piece at a time and actually integrate it.
-
-          Never put GitHub usernames in commits, nor PR descriptions which are
-          automatically copied into merge commits.
 -----
 
 practicalswift: Use `std::unique_ptr` (C++11) where possible.
@@ -336,6 +339,11 @@ harding   Idea: sendrawtransaction spends from cold wallet with network disabled
 
 jnewbery: We now have a handy WITH_LOCK macro in src/sync.h#L209
 
+-----
+
+laanwj:   Release notes should refer to the RPC help for details instead of
+          substituting for full documentation. Example:
+          "Please refer to the RPC help of `getbalances` for details."
 -----
 
 Static fully valid pubkey in the Core codebase to reference in unit tests:
