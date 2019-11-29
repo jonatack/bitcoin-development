@@ -92,6 +92,11 @@ harding:  To grep Bitcoin "hidden" debug options:
 
           To profile:  python3 -m cProfile -s time feature_block.py
 
+          PDB (Python debugger)
+
+          Frequently add break points to manually run RPC commands with:
+          import pdb; pdb.set_trace()
+
           To launch the Python debugger on failure of a functional test, pass
           `--pdbonfailure` as seen in, say, test/functional/wallet_basic.py -h
 
