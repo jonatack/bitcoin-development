@@ -231,6 +231,10 @@ harding:  To grep Bitcoin "hidden" debug options:
           and coin database.
 -----
 
+          Compact c-lightning debug log:
+          lightning-cli getlog debug | jq '.log[] | .type + " " + .node_id + " " + .log' --raw-output | grep -v SKIPPED
+-----
+
 gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
           style, especially if it comes across as oppressive rather than
           enabling.
