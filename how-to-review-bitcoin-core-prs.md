@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: November 13, 2019
+Last updated: November 29, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -191,7 +191,7 @@ diminish your social capital on the project. Try to understand what kind of
 review is needed and when to do what.
 
 The best time for any nit comments is after the Concept/Approach ACKs and
-consensus on the PR, and before the PR is finalized and has tested ACKs.
+consensus on the PR, and before the PR is finalised and has tested ACKs.
 
 Give nits and style advice in a friendly, light, enabling way -- as in, feel
 free to ignore, feel free to adjust if you happen to rebase, etc.
@@ -248,7 +248,7 @@ John Newbery:
 
 ### TECHNICAL SPECIFICS
 
-*Don't trust, verify.* Minimize dependance on GitHub in your review process. Use
+*Don't trust, verify.* Minimise dependance on GitHub in your review process. Use
 the GitHub website only for the GitHub metadata, e.g. reading comments and
 adding your own comments -- not for reviewing the commits and code, which you
 should do in your local environment.
@@ -339,6 +339,15 @@ the PR. Proposing automated tests to the author is a really helpful way to start
 contributing. Authors really appreciate it when someone reviews their PR and
 provides additional tests. [Here's an
 example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
+
+Lost or unsure? One good thing you can do as a reviewer without specialised
+knowledge of the code is _ask questions_. A PR author is usually happy to
+discuss their work or see interest in it. So spend 20 minutes or so looking at a
+change, find the thing that seems most confusing or surprising, and ask about it
+politely in the PR or on the #bitcoin-core-dev IRC channel. Chances are other
+people wonder about the same thing and it could be clarified or documented
+better. In this way you can learn and help make the project more accessible,
+too.
 
 When giving an ACK, specify the commits reviewed by appending the commit hash of
 the `HEAD` commit. The trustless way to do this is to use the hash from your
