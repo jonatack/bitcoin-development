@@ -309,7 +309,8 @@ statements, or asserts; it's always a privilege to add these into other people's
 code. Run the relevant functional tests and look through the debug logs or add
 pdb breakpoints and check values/run RPC commands. Try refactoring the code to
 be better or prettier, and discover why that doesn't work. Expect it to take
-twice as long as you planned it to. Yes, it's work.
+twice as long as you planned it to. Yes, it's work. (Credit for this paragraph:
+Anthony Towns).
 
 While you're reviewing, adding tests yourself can help you understand the
 behaviour and verify the changes, and you can send them to the author who can
@@ -331,7 +332,8 @@ comments or on the
 [#bitcoin-core-dev](https://webchat.freenode.net/?channels=bitcoin-core-dev) IRC
 channel. Chances are other people wonder about the same thing and it could be
 clarified or documented better. In this way you can learn and help make the
-project more accessible, too.
+project more accessible, too. (Credit for this paragraph: [Russell
+Yanofsky](https://github.com/bitcoin/bitcoin/pull/15934#issuecomment-547095024)).
 
 IT'S ALL ABOUT THE "ACKS"
 
@@ -539,7 +541,8 @@ this write-up and his suggestions.
 
 This article includes observed comments on GitHub and IRC by the following
 Bitcoin Core contributors/maintainers who deserve to be credited:
-Wladimir van der Laan, Marco Falke, Pieter Wuille, and Gregory Maxwell.
+Wladimir van der Laan, Marco Falke, Pieter Wuille, Gregory Maxwell, Anthony
+Towns, and Russell Yanofsky.
 
 Over the years I had become disillusioned by the central influence of BDFLs in
 programming languages and open source projects. Wladimir van der Laan's
@@ -556,4 +559,7 @@ the start.
 
 Cheers,
 
-[Jon Atack](https://twitter.com/jonatack)
+Jon Atack
+GitHub: https://github.com/jonatack
+Twitter: https://twitter.com/jonatack
+Mastodon: https://x0f.org/web/@jon
