@@ -60,3 +60,7 @@ Note that saying "hi" or posting on the channel at any time during a
 #bitcoin-core-dev meeting adds you to archived meeting log and minutes.
 
 -----
+
+Another source of IRC meeting info:
+
+https://github.com/fanquake/core-review/blob/master/irc.md
