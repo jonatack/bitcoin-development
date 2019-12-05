@@ -126,9 +126,19 @@ harding:  To grep Bitcoin "hidden" debug options:
           terminal buffer.
 -----
 
-          To build Bitcoin with clang for better errors:
+          To build Bitcoin with Clang for better errors/use less resources,
+          optionally with --enable-werror to highlight and halt on first error
+          or CXXFLAGS flags like:
 
-          CC=clang CXX=clang ./configure...
+            -Wthread-safety
+            -Wformat-security
+            -Wthread-safety-analysis
+            -Wrange-loop-analysis
+            -Wredundant-decls
+            -Wunused-variable
+            -Wunused-parameter
+
+          ./configure CXX=clang++ CC=clang CXXFLAGS=-Wthread-safety --enable-werror
 -----
 
           Berkeley DB special commands (located in db4/bin):
