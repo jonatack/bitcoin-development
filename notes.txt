@@ -112,6 +112,15 @@ harding:  To grep Bitcoin "hidden" debug options:
           To run functional tests in the gui, pass BITCOIND=bitcoin-qt
 -----
 
+          Fuzz tests
+
+          Compile with Clang:
+
+          CC=clang CXX=clang++ ./configure --enable-fuzz --with-sanitizers=address,fuzzer,undefined
+
+          Run all fuzz tests using the test runner: ./test/fuzz/test_runner.py
+
+-----
           Memory profiling:
 
           Use valgrind + massif_visualizer, ideally in a controlled environment,
