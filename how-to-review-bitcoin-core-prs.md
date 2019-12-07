@@ -1,6 +1,6 @@
 ## How to Review Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: November 29, 2019
+Last updated: December 7, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -142,7 +142,7 @@ awaiting valuable review. In many cases, it may be better to begin by reviewing
 the existing pull requests and starting to understand what kind of pull
 requests and review are most helpful, while slowly gaining the big picture.
 
-THE BIG PICTURE
+#### The Big Picture
 
 The big picture is more important than nits, spelling, or code style.
 
@@ -179,7 +179,7 @@ tests](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946) or
 fixes in a helpful way, proposing to rebase, or even offering to take over the
 PR after months of silence. In short, help each other!
 
-NITS
+#### Nits
 
 Try to avoid overly commenting in PRs about nits, minutia and code style,
 particularly with PRs labeled as WIP, or when a PR has just been filed and the
@@ -201,7 +201,7 @@ it's perfectly fine for the author to reply that they don't want to do something
 if they feel it is outside the scope of the change, especially if your comment
 is nitpicky.
 
-SCALE UP
+#### Scale Up
 
 When you can, scale up the difficulty and priority of the PRs you review.
 
@@ -222,7 +222,7 @@ IRC channel, and the
 [bitcoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
 mailing list.
 
-STEP BY STEP
+#### Step by Step
 
 Keep ego and hopes out of the process. Don't take things personally and keep
 moving forward.
@@ -299,7 +299,7 @@ constantly. Run `git grep --help` on the command line for help or information.
 Read and know the Bitcoin Core [developer
 notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
 
-IF YOU'RE NOT SURE WHERE TO START
+#### If You're Not Sure Where to Start
 
 Read the code, read the PR comments, then re-read both. Find something that
 doesn't make sense and try to figure it out. Repeat. Once it all starts to make
@@ -320,9 +320,9 @@ and provides additional tests. [Here's an
 example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
 
 Remember, the big picture is much more important than nits, spelling, or code
-style. Re-read the NITS section above. Try to avoid commenting on these while
-reviewing, even if you have no other comments to make. I know, it's hard -- I've
-done it too many times -- but there's a better alternative:
+style. Re-read the [Nits](#nits) section above. Try to avoid commenting on these
+while reviewing, even if you have no other comments to make. I know, it's hard
+-- I've done it too many times -- but there's a better alternative:
 
 A good thing you can do as a reviewer without specialised knowledge of the code
 is _ask questions_. A PR author is usually happy to discuss their work or see
@@ -335,7 +335,7 @@ clarified or documented better. In this way you can learn and help make the
 project more accessible, too. (Credit for this paragraph: [Russell
 Yanofsky](https://github.com/bitcoin/bitcoin/pull/15934#issuecomment-547095024)).
 
-IT'S ALL ABOUT THE "ACKS"
+#### Peer Review
 
 Be sure to learn and understand the [peer review
 process](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review).
@@ -399,7 +399,7 @@ A complex PR usually requires at least 3-4 experienced ACKs before merging.
 The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
 following PR and review activity.
 
-MISCELLANEOUS TECHNICAL ADVICE
+#### Miscellaneous Technical Advice
 
 fanquake:
 - I have some core dev tools in https://github.com/fanquake/core-review
