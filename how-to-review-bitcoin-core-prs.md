@@ -324,6 +324,8 @@ style. Re-read the [Nits](#nits) section above. Try to avoid commenting on these
 while reviewing, even if you have no other comments to make. I know, it's hard
 -- I've done it too many times -- but there's a better alternative:
 
+#### Ask Questions
+
 A good thing you can do as a reviewer without specialised knowledge of the code
 is _ask questions_. A PR author is usually happy to discuss their work or see
 interest in it. So, spend 20 minutes or so looking at a change, find the thing
