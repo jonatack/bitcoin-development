@@ -339,12 +339,11 @@ Yanofsky](https://github.com/bitcoin/bitcoin/pull/15934#issuecomment-547095024))
 
 #### Peer Review
 
-Be sure to learn and understand the [peer review
+Be sure to learn and understand the Bitcoin Core [peer review
 process](https://github.com/bitcoin/bitcoin/blob/master/CONTRIBUTING.md#peer-review).
-The process is
-[often](https://github.com/bitcoin/bitcoin/pull/15626)
-[updated](https://github.com/bitcoin/bitcoin/pull/16149),
-so refer back to it frequently.
+The process is [often](https://github.com/bitcoin/bitcoin/pull/15626)
+[updated](https://github.com/bitcoin/bitcoin/pull/16149), so refer back to it
+frequently.
 
 Concept ACK means that the reviewer acknowledges and agrees with the concept of
 the change, but is not (yet) confirming they've looked at the code or tested it.
