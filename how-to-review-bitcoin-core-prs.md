@@ -345,10 +345,15 @@ The process is [often](https://github.com/bitcoin/bitcoin/pull/15626)
 [updated](https://github.com/bitcoin/bitcoin/pull/16149), so refer back to it
 frequently.
 
-Concept ACK means that the reviewer acknowledges and agrees with the concept of
-the change, but is not (yet) confirming they've looked at the code or tested it.
+Concept ACK means the reviewer acknowledges and agrees with the goal of the
+change, but is not (yet) confirming they've looked at the code or tested it.
 This can be a valuable signal to a PR author to let them know that the PR has
-merit and is headed in the right direction.
+merit and is headed in the right direction. As a corollary, a Concept NACK would
+indicate disagreement with the goal.
+
+Approach ACK is a step further than Concept ACK and means agreement with both
+the goal and the approach used in implementing the change. Approach NACK would
+therefore indicate agreement with the goal but not the approach.
 
 Manual testing of new features and reported issues is always welcome. A comment
 that is really helpful in review: "Here's what I tested and my methodology",
