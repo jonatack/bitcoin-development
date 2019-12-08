@@ -259,8 +259,7 @@ build and review locally. There are several ways to do it:
 - Bitcoin Core documentation for [referencing PRs easily with
   refspecs](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md#reference-prs-easily-with-refspecs)
 - Pulling down remote PRs with `git checkout pr/<number>` [as described in this nice
-  little gist](https://gist.github.com/piscisaureus/3342247) (what I personally
-  use)
+  little gist](https://gist.github.com/piscisaureus/3342247)
 - GitHub now [exposes
 PRs](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/checking-out-pull-requests-locally)
 as branches on the upstream repository with `git pull/<number>/head` (contributor
@@ -367,7 +366,7 @@ to give an ACK" is a perfectly helpful contribution.
 
 When giving an ACK, specify the commits reviewed by appending the commit hash of
 the `HEAD` commit. The trustless way to do this is to use the hash from your
-*local* checkout of the branch and *not* from the GitHub web page. That way,
+*local* checkout of the branch and not from the GitHub web page. That way,
 unless your local tools are compromised, you ensure you are ACKing the exact
 changes. This is also useful when a force push happens and links to old commits
 are lost on GitHub.
@@ -533,14 +532,12 @@ Intermediate/advanced
 
 ### CREDITS
 
-A special thank you to [John Newbery](https://twitter.com/jfnewbery) (IRC nick:
-jnewbery) for launching the [Bitcoin Core PR Reviews
-Club](https://bitcoincore.reviews) and to the long-term contributors who
-participated so far: [Dave Harding](https://hash.social/users/harding)
-(harding), Anthony Towns (aj), Gregory Sanders (instagibbs), Michael Ford
-(fanquake), Andrew Chow (achow101), Pieter Wuille (sipa), Bryan Bishop
-(kanzure), Mike Schmidt (bitschmidty), Marco Falke (MarcoFalke), and Wladimir
-van der Laan (wumpus).
+A special thank you to [John Newbery](https://twitter.com/jfnewbery) for
+launching the [Bitcoin Core PR Reviews Club](https://bitcoincore.reviews) and to
+the long-term contributors who participated so far: [Dave
+Harding](https://hash.social/users/harding), Anthony Towns, Gregory Sanders,
+Michael Ford, Andrew Chow, Pieter Wuille, Bryan Bishop, Mike Schmidt, Marco
+Falke, and Wladimir van der Laan.
 
 Thanks to [Steve Lee](https://twitter.com/moneyball) (moneyball) for reviewing
 this write-up and his suggestions.
