@@ -16,14 +16,14 @@
 - [IRC channels.](irc-channels.txt) Join these IRC channels for Bitcoin and
   Lightning development.
 
-- [Observed Todos.](observed-todos.txt) Ideas for things to do as I run across
-  them.
-
-- [Notes.](notes.txt) Miscellaneous technical notes.
+- [Notes.](notes.txt) Various miscellaneous technical notes.
 
 - [PSBTs - Partially-Signed Bitcoin Transactions.](psbts.txt) PSBT information,
   including new May 2019 IRC discussion of ideas for descriptor
   slicing/subsetting, e.g. "subscriptors".
+
+- [Observed Todos.](observed-todos.txt) Ideas for things to do as I run across
+  them.
 
 - [Flame Graphs.](flame-graphs.md) How to generate flame graph profiles.
 
