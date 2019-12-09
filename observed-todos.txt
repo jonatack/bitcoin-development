@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2019-11-13
+Last updated: 2019-12-09
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -13,6 +13,8 @@ laanwj:    focus on user problems, actual bugs,
 
            - PR my flame graphs doc
 
+           - PR fuzzing.md improvements that helped me finally get it working
+
            - reply to gregory sanders re my review, or add a follow-up PR
 
            - write a follow-up PR to achow's psbt shuffle PR
@@ -22,8 +24,16 @@ laanwj:    focus on user problems, actual bugs,
            - look at allocators in validation, since they take lots of memory;
            learn how to write a faster allocator.
 
-           - achow: export blockchain+import with and without validating would
-           be super nice as menu items
+           - achow: "export blockchain + import with and without validating
+           would be super nice as menu items"
+
+           - fix RPCExamples (example has no args) for: getnewaddress,
+             createwallet, getwalletinfo, getbalances (for the last two with a
+             multiwallet example, e.g. bitcoin-cli -rpcwallet="test"
+             getwalletinfo)
+
+           - add logging wallet_bumpfee.py and do my review nits:
+           https://github.com/bitcoin/bitcoin/pull/16373#pullrequestreview-328827090
 -----
 
 2019-11-13 BlueMatt: #16323 and #16324 are up for grabs if anyone wants to work
