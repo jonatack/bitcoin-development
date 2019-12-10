@@ -272,12 +272,12 @@ into master since the last PR commit breaks the changes.
 
 Next, launch the build and tests while you begin reading the code
 locally. You'll need to become comfortable with [compiling Bitcoin Core from
-source](https://github.com/jonatack/bitcoin-development/blob/master/how-to-compile-bitcoin-core-from-source-for-linux-debian.md)
+source](https://github.com/jonatack/bitcoin-development/blob/master/how-to-compile-bitcoin-core-from-source-on-linux-and-macOS.md)
 and running the [unit
 tests](https://github.com/bitcoin/bitcoin/tree/master/src/test/README.md) and
 [functional
 tests](https://github.com/bitcoin/bitcoin/blob/master/test/README.md) since you
-will need to do it for each PR you review. For this, the Bitcoin Core
+will need to do it for most of the PRs you test. For this, the Bitcoin Core
 [productivity
 notes](https://github.com/bitcoin/bitcoin/blob/master/doc/productivity.md) are
 indispensable.
