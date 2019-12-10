@@ -301,22 +301,38 @@ notes](https://github.com/bitcoin/bitcoin/blob/master/doc/developer-notes.md).
 #### If You're Not Sure Where to Start
 
 Read the code, read the PR comments, then re-read both. Find something that
-doesn't make sense and try to figure it out. Repeat. Once it all starts to make
-sense, run bitcoind on testnet (or on mainnet with very small amounts), and
-watch or search through the relevant logs. Maybe add some custom logging, printf
-statements, or asserts; it's always a privilege to add these into other people's
-code. Run the relevant functional tests and look through the debug logs or add
-pdb breakpoints and check values/run RPC commands. Try refactoring the code to
-be better or prettier, and discover why that doesn't work. Expect it to take
-twice as long as you planned it to. Yes, it's work. (Credit for this paragraph:
-Anthony Towns).
+doesn't make sense and try to figure it out. Repeat.
 
-While you're reviewing, adding tests yourself can help you understand the
-behaviour and verify the changes, and you can send them to the author who can
-add them to the PR. Proposing automated tests to the author is a really helpful
-way to start contributing. Authors appreciate it when someone reviews their PR
-and provides additional tests. [Here's an
+Once it all starts to make sense, run bitcoind on testnet (or on mainnet with
+very small amounts), and tail or search through the relevant logs (run
+`bitcoin-cli help logging` for the various bitcoind logging categories and how
+to toggle them on/off).
+
+Maybe add some custom logging, LogPrintfs, or asserts; it's always a privilege
+to add these into other people's code (to see how, run `git grep -ni logprintf`
+or `git grep assert` in the repository).
+
+Run the relevant functional tests and look through the debug logs. Verify that
+they fail in the expected way on master. Back in the PR branch, inverse or
+change the new tests to make them break and understand why.
+
+Maybe add C++ gdb or Python pdb breakpoints. Examine values. Run RPC commands.
+
+Check if any call sites, headers or declarations have been overlooked in the PR.
+
+Try refactoring the code to be better or prettier, and discover why that doesn't
+work. Expect it to take twice as long as you planned it to. Yes, it's work.
+
+#### Add missing tests
+
+While you're reviewing, writing tests yourself can help you understand the
+behaviour and verify the changes, and if they add useful coverage you can
+propose them to the author for inclusion in the PR. Proposing automated tests is
+a really helpful way to start contributing. Authors appreciate it when someone
+reviews their PR and provides additional tests. [Here's an
 example.](https://github.com/bitcoin/bitcoin/pull/15996#issuecomment-491740946)
+
+#### Big picture > nits
 
 Remember, the big picture is much more important than nits, spelling, or code
 style. Re-read the [Nits](#nits) section above. Try to avoid commenting on these
