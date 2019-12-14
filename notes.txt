@@ -78,13 +78,22 @@ harding:  To grep Bitcoin "hidden" debug options:
 
           Run all tests with make check or src/test/test_bitcoin
 
-          Run a single test with src/test/test_bitcoin -t suite_name/case_name
+          To run a suite: src/test/test_bitcoin -t suite_name
+          (for example)   src/test/test_bitcoin -t wallet_tests
+          or              src/test/test_bitcoin -t ismine_tests
+
+          To run a test:  src/test/test_bitcoin -t suite_name/case_name
+          (for example)   src/test/test_bitcoin -t wallet_tests/ListCoins
+                          src/test/test_bitcoin -t ismine_tests/ismine_standard
 
           Run QT unit tests with: src/qt/test/test_bitcoin-qt
 
-          Specify the log level, usually debug or all, with -l debug or -l all (see --help)
+          Specify the log level with -l or --log_level= (see --help).
+          Options: all|success|test_suite|unit_scope|message|warning|error|
+                   cpp_exception|system_error|fatal_error|nothing
+          Most useful: all, success, test_suite
 
-          Also, the test logs to a debug log file (in master)
+          The test logs to a debug log file (in master)
           If you need temporary printing, you can do std::cout or std::cerr
 -----
 
