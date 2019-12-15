@@ -16,7 +16,7 @@ Don't be in a hurry to add to the pile of open PRs.
 A good rule of thumb is to review 5-15 PRs for each PR you make.
 
 
-### HOW TO MAKE BITCOIN CORE PULL REQUESTS
+### HOW TO CONTRIBUTE PULL REQUESTS TO BITCOIN CORE
 
 When you do start contributing PRs, here are some guidelines:
 
@@ -197,7 +197,7 @@ Scale up your PR contributions gradually in line with your ability and
 understanding of the project, process, and codebase.
 
 Continue to do more reviewing and testing than adding PRs to the backlog.
-Reviewing 5 to 15 PRs for every PR you make is a good range.
+Reviewing 5 to 15 PRs for every PR you open is a good range.
 
 If you are a good reviewer and begin building a reputation and appreciation for
 your help in moving the project forward, maintainers and other contributors
