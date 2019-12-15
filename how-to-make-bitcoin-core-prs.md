@@ -1,6 +1,6 @@
 ## How to Make Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: October 25, 2019
+Last updated: December 15, 2019
 
 
 ### BEFORE YOU BEGIN
@@ -47,6 +47,9 @@ todos](observed-todos.txt).
 
 Focus on user problems, actual bugs, and "used, but untested" methods that
 affect outcomes and need tests.
+
+[Try to solve a clearly defined issue with a clear, minimal
+change](https://github.com/bitcoin/bitcoin/pull/17728#issuecomment-565803646).
 
 Avoid making trivial refactoring, style cleanup, or spelling PRs; these consume
 valuable contributor and maintainer time, often for little gain. Code churn can
