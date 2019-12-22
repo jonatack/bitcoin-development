@@ -27,6 +27,10 @@
 
 - [Flame Graphs.](flame-graphs.md) How to generate flame graph profiles.
 
+- John Newbery's [Bitcoin end-of-decade Twitter
+  thread](2019-12-21-john-newbery-bitcoin-end-of-decade-twitter-thread.md) - 21
+  December 2019
+
 - [Bryan Bishop transcript of Pieter Wuille's July 2018 SF Bitcoin talk:
   "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh
   my!"](2018-07-09-pieter-wuille-taproot-schnorr-sigs-and-sighash-noinput.txt)
