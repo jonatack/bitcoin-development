@@ -124,6 +124,11 @@ commits to squash them. Rebasing is also frequently done to keep your commits
 logical, separate, and easier to review. Even better, hygienic -- each standing
 on their own without introducing regressions.
 
+A PR prefixed or labelled as changing UI/UX can attract excessive
+bikeshedding. One tried-and-tested solution can be to make a minor UI fix or
+change as a commit inside a non-UI/UX PR that changes related items or code. The
+regular reviewers will see it, but few drive-by commentators will.
+
 PR descriptions are important. They "sell" your PR yet are often either too
 terse or too verbose. Write the essentials, then take the time to make your PR
 description brief, clear, even
