@@ -67,7 +67,9 @@ All steps are to be run from your terminal emulator, i.e. the command line.
     for more.
 
 6. Run the unit tests:
-    - `make check`
+    - `make check`, or
+    - `make -j"$(($(nproc)+1))" check` to use multithreading on Linux, or
+    - `make -j"$(($(sysctl -n hw.physicalcpu)+1))" check` on macOS
 
 7. Run the functional tests. From the repository root:
     - `test/functional/test_runner.py` to run the standard test suite
