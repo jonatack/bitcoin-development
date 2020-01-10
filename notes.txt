@@ -74,17 +74,18 @@ harding:  To grep Bitcoin "hidden" debug options:
 
           Info: https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
 
-          Help: src/test/test_bitcoin --help
+          Help: test_bitcoin --help
+          or:   src/test/test_bitcoin --help
 
-          Run all tests with make check or src/test/test_bitcoin
+          Run all tests with make check, test_bitcoin, or src/test/test_bitcoin
 
-          To run a suite: src/test/test_bitcoin -t suite_name
-          (for example)   src/test/test_bitcoin -t wallet_tests
-          or              src/test/test_bitcoin -t ismine_tests
+          To run a suite: test_bitcoin -t suite_name   (using -t or --run_test=)
+          (for example)   test_bitcoin -t wallet_tests
+          or              test_bitcoin -t ismine_tests
 
-          To run a test:  src/test/test_bitcoin -t suite_name/case_name
-          (for example)   src/test/test_bitcoin -t wallet_tests/ListCoins
-                          src/test/test_bitcoin -t ismine_tests/ismine_standard
+          To run a test:  test_bitcoin -t suite_name/case_name
+          (for example)   test_bitcoin -t wallet_tests/ListCoins
+                          test_bitcoin -t ismine_tests/ismine_standard
 
           Run QT unit tests with: src/qt/test/test_bitcoin-qt
 
@@ -95,6 +96,7 @@ harding:  To grep Bitcoin "hidden" debug options:
 
           The test logs to a debug log file (in master)
           If you need temporary printing, you can do std::cout or std::cerr
+          or BOOST_TEST_MESSAGE();
 -----
 
           Functional tests
@@ -207,25 +209,29 @@ harding:  To grep Bitcoin "hidden" debug options:
           bitcoin-cli help logging
 
           To turn  on debug=net: bitcoin-cli logging '["net"]'
-          To turn off debug=net: bitcoin-cli logging '["net"]' '["net"]'
+          To turn off debug=net: bitcoin-cli logging [] '["net"]'
           To turn  on debug=all: bitcoin-cli logging '["all"]'
-          To turn off debug log: bitcoin-cli logging '["none"]'
+          To turn off debug log: bitcoin-cli logging [] '["all"]'
 
           net: All messages related to communicating with other nodes on the
           network, including what P2P messages were sent and received and to
           whom and other information about the network messages.
 
-          tor: All messages related to using a TOR SOCKS5 proxy and TOR hidden
-          service (used for receiving incoming connections over TOR). This
-          includes messages about the creation and shutdown of the TOR hidden
-          service and messages about the connection to the TOR proxy.
+          mempool: Messages related to actions done in the memory pool, most
+          frequently transaction acceptance (`AcceptToMemoryPool`). Also
+          includes transaction removals.
 
-          mempool: Messages related to actions done in the memory pool including
-          the acceptance and removal of transactions.
+          validation: All messages related to the validation interface, most
+          frequently `TransactionAddedToMempool` and `stored orphan tx`.
 
           http: Messages related to the HTTP server that is used to handle the
           RPC requests. These messages will typically be for the startup and
           shutdown of the server as well as received requests.
+
+          tor: All messages related to using a TOR SOCKS5 proxy and TOR hidden
+          service (used for receiving incoming connections over TOR). This
+          includes messages about the creation and shutdown of the TOR hidden
+          service and messages about the connection to the TOR proxy.
 
           bench: Messages about the benchmark performance of various parts of
           the software that can have performance issues.
