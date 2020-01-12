@@ -43,6 +43,11 @@ harding:  To grep Bitcoin "hidden" debug options:
           Word diff:
           git diff --word-diff
 
+          Git diff that ignores all added lines having a matching identical
+          removed line. An empty result proves that a diff is only moving lines:
+          git diff 3f95fb0~1..3f95fb0 | grep -E '^[+-][^+-]' | cut -b2- | sort \
+          | uniq -c | grep -v '^ *2'
+
           git grep -iE '[^0-9a-z]520[^0-9a-z]' -- '*.cpp' '*.h'
           grep -rnw './depends' -e 'http:'
 
