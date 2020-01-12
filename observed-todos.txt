@@ -1,19 +1,25 @@
 OBSERVED TODOS
 
-Last updated: 2019-12-09
+Last updated: 2020-01-12
 
 -----
 laanwj:    focus on user problems, actual bugs,
            and "used, but untested" methods that affect outcomes and need tests
 -----
-           jnewbery during phone discussion:
+           jnewbery:
            enable wallet tests to mock nodes without current heavy node setup,
            e.g. separate the wallet from the node more in the test framework.
 -----
 
+           - ASmap: (a) communicate state via an rpc (which one?)
+                    (b) extract init code to testable function, write unit tests?
+
            - PR my flame graphs doc
 
+           - PR valgrind memcheck / msan / flags docs / improve valgrind docs
+
            - PR fuzzing.md improvements that helped me finally get it working
+             and add a practical example to doc/fuzzing.md
 
            - reply to gregory sanders re my review, or add a follow-up PR
 
@@ -32,8 +38,58 @@ laanwj:    focus on user problems, actual bugs,
              multiwallet example, e.g. bitcoin-cli -rpcwallet="test"
              getwalletinfo)
 
-           - add logging wallet_bumpfee.py and do my review nits:
-           https://github.com/bitcoin/bitcoin/pull/16373#pullrequestreview-328827090
+           - add logging to wallet_bumpfee.py
+
+           In doc/reduce-traffic.md, is this still correct? "By default, Bitcoin
+           Core allows up to 125 connections to different peers, 8 of which are
+           outbound. You can therefore, have at most 117 inbound connections."
+
+           - work on better peer eviction logic! see
+             http://www.erisian.com.au/bitcoin-core-dev/log-2019-06-20.html#l-629
+
+           - add logging to wallet_listtransactions.py and add test of number
+           and order of returned lists.
+
+           - add logging to feature_config_args.py and improve
+
+           - add logging to feature_logging.py
+
+           - add logging to rpc_help.py
+
+           - add missing logging to p2p_invalid_messages.py and split main test
+             to separate tests
+
+           - gui send screen tooltip should show a bech32 address
+
+           - add missing "regtest" to bottom of output when running:
+             bitcoin-cli -? or bitcoin-cli -h
+
+           - fix bitcoin-cli logging "none" option, update the help, and add
+             regression tests for this and the "validation" option. Do we need
+             other logging tests? Maybe a general file?
+
+           - in wallet/rpcwallet.cpp, DRY out repeated coincontrol sections
+             lines 423 and 877:
+    ```
+    UniValue subtractFeeFromAmount(UniValue::VARR);
+    if (!request.params[4].isNull())
+        subtractFeeFromAmount = request.params[4].get_array();
+
+    CCoinControl coin_control;
+    if (!request.params[5].isNull()) {
+        coin_control.m_signal_bip125_rbf = request.params[5].get_bool();
+    }
+
+    if (!request.params[6].isNull()) {
+        coin_control.m_confirm_target = ParseConfirmTarget(request.params[6], pwallet->chain().estimateMaxBlocks());
+    }
+
+    if (!request.params[7].isNull()) {
+        if (!FeeModeFromString(request.params[7].get_str(), coin_control.m_fee_mode)) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid estimate_mode parameter");
+        }
+    }
+    ````
 -----
 
 2019-11-13 BlueMatt: #16323 and #16324 are up for grabs if anyone wants to work
@@ -446,9 +502,6 @@ laanwj:    focus on user problems, actual bugs,
 2019-05-17 Possibly add `count` to responses of RPC calls like banned and peers
 -----
 
-2019-05-17 Get fuzzing to work and add practical example to doc/fuzzing.md
------
-
 2019-05-17 Ideas in https://github.com/bitcoin/bitcoin/pull/15870
            "wallet: Only fail rescan when blocks have actually been pruned"
 
@@ -582,14 +635,6 @@ laanwj:    focus on user problems, actual bugs,
 
 2019-03-29 RPC: Remove getbalance::minconf
            https://github.com/bitcoin/bitcoin/issues/15702
------
-
-2019-03-28 doc/dependencies: Fix trivial typo "cross-compliation"
-           introduced in https://github.com/bitcoin/bitcoin/pull/15684/files
------
-
-2019-03-21 Issue up for grabs: "flatfile_tests fail on alpine linux"
-           https://github.com/bitcoin/bitcoin/issues/15624
 -----
 
 2019-03-19 Missing functional test in PR "p2p: Do not relay banned IP addresses"
