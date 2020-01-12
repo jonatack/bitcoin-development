@@ -141,6 +141,8 @@ harding:  To grep Bitcoin "hidden" debug options:
 
           May need to run `make distclean` first.
 
+          Run an individual fuzz test: src/test/fuzz/base_encode_decode
+
           Run all fuzz tests using the test runner: ./test/fuzz/test_runner.py
 -----
 
