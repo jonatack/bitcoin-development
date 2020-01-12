@@ -417,9 +417,6 @@ with the other contributors.
 
 A complex PR usually requires at least 3-4 experienced ACKs before merging.
 
-The [Bitcoin ACKs](https://bitcoinacks.com/) web app dashboard is useful for
-following PR and review activity.
-
 #### Miscellaneous Technical Advice
 
 fanquake:
