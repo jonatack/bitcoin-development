@@ -190,9 +190,10 @@ harding:  To grep Bitcoin "hidden" debug options:
           db4/bin/db_load
 -----
 
-          C++ Compiler Explorer, shows compiler output and assembly:
+          C++ Compiler explorers to see compiler output and assembly:
 
-          https://godbolt.org/
+          https://godbolt.org
+          http://cpp.sh
 -----
 
           To install the contents of bitcoind's bin subdirectory into the
