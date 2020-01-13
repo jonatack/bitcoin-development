@@ -1,3 +1,5 @@
+<http://gnusha.org/bitcoin-wizards/2019-11-28.log>
+
 20:27 **gmaxwell** Is it just me or does the CHECKTEMPLATEVERIFY proposal totally miss the insight of graftroot?  -- that a signature is a lot more flexible than a hash, and except for storage considerations, basically strictly superior? ISTM that proposal would be much better constructed if it pushed the output hash (with optional masking) onto the stack... where it could then be constrained for equality or validated w/ a signature operator that checksigs stuff on the stack. Then it could be used either in a stateless taproot sort of way, or in a more flexible graftroot sort of way.
 
 20:37 **jeremyrubin** Can you expand on what you mean by the insight of graftroot? The key benefit of the hash being used is being able to statically verify all possible spends. Whereas graftroot seems more relevant for delegating control to a post-hoc selected script.
