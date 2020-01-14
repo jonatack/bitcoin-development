@@ -1,0 +1,113 @@
+Bitcoin Core P2P/net -- PRs and issue discussions
+
+-----
+
+https://github.com/bitcoin/bitcoin/pull/8282
+net: Feeler connections to increase online addrs in the tried table.
+EthanHeilman
+
+https://github.com/bitcoin/bitcoin/pull/8594
+Do not add random inbound peers to addrman. #8594
+gmaxwell
+
+https://github.com/bitcoin/bitcoin/pull/9037
+net: Add test-before-evict discipline to addrman
+EthanHeilman
+
+-----
+
+25 Dec 2019
+
+<gleb> Is there a way to trick functional tests to think that nodes are not
+connected locally? Like, so that addr is not 127.0.0.1
+
+<gwillen> gleb: I don't know if they're checking for 127.0.0.1 specifically, but
+you can use anything in 127.* and it will work as localhost. if that doesn't
+work, you can also use your own external IP, and see if it is able to catch that
+
+<gleb> No, it's like *I need* the node to think that a connection between 2
+regtest nodes is not local. So that they see each other as something from the
+internet
+
+<gwillen> right, that's what I'm saying -- try giving it 127.0.0.2 to connect
+to, and see if it believes that's not local, or if your LAN IP is 192.168.1.99,
+try giving it that. it will still connect locally but the IP will be different
+(but if it's connecting to itself automatically and you don't supply the IP,
+then I'm not sure)
+
+<gleb> gwillen: Thanks. I gave up and tested manually. If you have a bit more
+time, perhaps looking at the last comment in 16702 would let you know what I
+want to achieve better, cuz it's hard to explain without context. If not, no
+worries, at this point I feel like there is no good answer anyway =\
+
+<gwillen> gleb: I do see what you mean (and it turns out that none of my
+suggestions would work anyway, since all of the addresses I suggested will
+identify as "local"), or rather as !routable
+
+<pinheadmz> gleb: is there any sense in "allowing" local connections in regtest
+mode only? you'd still have to shim in a ASN number for 127.0.0.1 ...
+
+<gwillen> pinheadmz: it seems like you'd have to shim multiple ones, to test
+meaningfully, but I guess you could do that with a fake asmap data file. in the
+code you would just need to disable the check for local addresses for testing,
+and it does make _some_ sense to just remove all the nonroutable checks in
+regtest, potentially
+
+-----
+
+2019-05-17 Slow getrawmempool
+
+<gmaxwell> getrawmempool verbose is astonishingly slow, a PR just went in to
+make it faster but it is still astonishingly slow. I am reasonably confident
+that it was not anywhere near this slow last time the mempools were big.
+
+<gmaxwell> This change in Aug 2017 made all the UNIVALUE additions quadratic:
+https://github.com/bitcoin-core/univalue/commit/ceb1194137421afba01e8c1042bf75f3a2cdddc3
+(which probably makes a number of our other RPCs slow too), but the changes
+works around it.
+
+-----
+
+2019-05-11 GETDATA issues
+
+<gmaxwell> gleb: sdaftuar: uh, is random fetch ordering putting more stress on
+orphan handling?  The INVs we get from peers are usually in dependency
+order. That makes us fetch in dependency order, and thus the results we get back
+end up being mostly in dependency order.
+
+<gmaxwell> With the random ordering I think we're breaking that.
+
+<sdaftuar> gmaxwell: i asked you that question! :P .. but yeah i wonder the same
+
+<gmaxwell> oh. you did? damn. sorry, fishbrain here.
+
+<gmaxwell> I noticed more use of the orphanmap in my logs which is what caused
+me to ask the question, so I believe the answer is yes :/ ... this is annoying
+
+<sdaftuar> i think it at least seems we gave this insufficient thought before
+merging #14897, so if you have reason to believe it's making things worse, i
+certainly believe it
+
+  https://github.com/bitcoin/bitcoin/pull/14897 "randomize GETDATA(tx) request
+  order and introduce bias toward outbound by naumenkogs" · Pull Request #14897
+
+<gmaxwell> It's not so much a problem but the orphan map is limited in size and
+its expiration process is random, so you really don't want to be using it "by
+default". One answer to this would be to just improve the orphan map behavior.
+
+<sdaftuar> gmaxwell: regarding the orphan transaction issue and the GETDATA
+randomization behavior, it looks to me like:
+
+  (a) we do not put any delay on GETDATA requests for outbound peers
+      announcing a tx for the first time, and
+
+  (b) we have a fixed delay for inbound peers announcing a tx for the first time
+
+<sdaftuar> gmaxwell: so i think in the case of a peer announcing a set of
+transactions that are new to us, we'll request those transactions in dependency
+order from that peer, except if an inbound peer's announcement is partially
+supserseded by a later announcement from an outbound peer for a subset of the
+transactions
+
+<sdaftuar> gmaxwell: so that seems like it should be a relatively small effect
+(and is an effect we have to some degree already).
