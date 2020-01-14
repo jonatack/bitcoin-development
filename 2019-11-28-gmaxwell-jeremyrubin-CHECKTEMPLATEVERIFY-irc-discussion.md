@@ -1,9 +1,7 @@
 IRC log URL: http://gnusha.org/bitcoin-wizards/2019-11-28.log
 
-(Cleaned up a bit for my personal reading).
-
-20:27 **gmaxwell** Is it just me or does the CHECKTEMPLATEVERIFY proposal
-totally miss the insight of graftroot?  -- that a signature is a lot more
+20:27 **gmaxwell** Is it just me or does the `CHECKTEMPLATEVERIFY` proposal
+totally miss the insight of graftroot? -- that a signature is a lot more
 flexible than a hash, and except for storage considerations, basically strictly
 superior?
 
@@ -21,7 +19,7 @@ control to a post-hoc selected script.
 20:38 **jeremyrubin** gmaxwell: ^^
 
 20:40 **jeremyrubin** An OP which pushes the StandardTemplateHash onto the stack
-would also not have the constexpr restriction that CHECKTEMPLATEVERIFY is
+would also not have the constexpr restriction that `CHECKTEMPLATEVERIFY` is
 designed to support.
 
 20:40 **jeremyrubin** It would be possible to enable more expansive covenants
@@ -29,7 +27,7 @@ with such an opcode.
 
 20:41 **jeremyrubin** Therefore, in the pursuit of the minimal feature to enable
 the functionality required and not more, especially not to introduce potentially
-unsafe scripts, CHECKTEMPLATEVERIFY only verifies a constexpr literal matches
+unsafe scripts, `CHECKTEMPLATEVERIFY` only verifies a constexpr literal matches
 the computed value.
 
 20:42 **jeremyrubin** I'd be open to making the check of the hash happen via a
@@ -79,8 +77,8 @@ held by anyone, -- it's a misunderstanding of my post introducing the term.  The
 whole point of my post was that it's stupid to _create_ immortal covenants, just
 as it's stupid to throw your private keys away. I think the pattern I described
 essentially makes the multi-input usage impossible to use safely.  If instead it
-worked by having each usage of CHECKTEMPLATE 'consume' its output so that no
-other usage of CHECKTEMPLATE could make use of it, then that vulnerablity goes
+worked by having each usage of `CHECKTEMPLATE` 'consume' its output so that no
+other usage of `CHECKTEMPLATE` could make use of it, then that vulnerablity goes
 away, and then I think there is no need to constrain input count at all. (Aside,
 thanks for renaming the proposal.)
 
@@ -153,11 +151,11 @@ of the tree of payments ... which can't even be sent in advance)
 21:17 **gmaxwell** I'm totally fine with leaving that application out of the
 bip, but I still want it work well. :)
 
-21:18 **jeremyrubin** For CTV or for NUMS-GRAFTROOT
+21:18 **jeremyrubin** For `CTV` or for `NUMS-GRAFTROOT`
 
 21:18 **gmaxwell** jeremyrubin: I mean if the exchange is going to pay users A,
 B, C, D .... user D needs to know about that hashtree with A,B,C in it too to
-know they got paid with CTV.  The exchange could tell them the nums 'secret' at
+know they got paid with `CTV`.  The exchange could tell them the nums 'secret' at
 the same time.
 
 21:19 **jeremyrubin** Ah correct. The difference is those transactions can be
@@ -168,7 +166,7 @@ broadcast it to the user through some new path or make it public.
 21:20 **gmaxwell** Plus they have to interact for the user to provide their own
 address in the first place.  The nums secret is something they only need to
 learn once for a given counterparty (exchange) (since the nums value can just be
-derrived as H(inputs||secret) or the like, no per-payment interaction is
+derived as `H(inputs||secret)` or the like, no per-payment interaction is
 needed).
 
 21:20 **jeremyrubin** Wouldn't re-use make it unsafe? or do you imagine tweaking

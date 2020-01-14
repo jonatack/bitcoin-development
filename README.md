@@ -27,18 +27,22 @@
 
 - [Flame Graphs.](flame-graphs.md) How to generate flame graph profiles.
 
-- John Newbery's [Bitcoin end-of-decade Twitter
-  thread](2019-12-21-john-newbery-bitcoin-end-of-decade-twitter-thread.md) - 21
-  December 2019
+- 2019-12-21 [John Newbery's Bitcoin end-of-decade Twitter
+  thread](2019-12-21-john-newbery-bitcoin-end-of-decade-twitter-thread.md)
 
-- [Bryan Bishop transcript of Pieter Wuille's July 2018 SF Bitcoin talk:
+- 2019-11-28 [CHECKTEMPLATEVERIFY Bitcoin Wizards IRC discussion: Gregory
+  Maxwell / Jeremy
+  Rubin.](2019-11-28-gmaxwell-jeremyrubin-CHECKTEMPLATEVERIFY-irc-discussion.md)
+  Cleaned up a bit from the original log for personal study.
+
+- 2019-06-08 [Bryan Bishop transcript of Jonas Schnelli's June 2019 Breaking Bitcoin talk:
+  "BIP324 V2 Message Transport
+  Protocol."](2019-06-08-jonas-schnelli-bip324-v2-p2p.txt)
+
+- 2019-06-07 [Bryan Bishop transcript of Jonas Schnelli's June 2019 core.dev talk: "P2P
+  Encryption."](2019-06-07-jonas-schnelli-p2p-encryption.txt)
+
+- 2018-07-09 [Bryan Bishop transcript of Pieter Wuille's July 2018 SF Bitcoin talk:
   "Taproot, Schnorr signatures, and SIGHASH_NOINPUT, oh
   my!"](2018-07-09-pieter-wuille-taproot-schnorr-sigs-and-sighash-noinput.txt)
   Edited and cleaned up a bit from the original transcript for personal study.
-
-- [Bryan Bishop transcript of Jonas Schnelli's June 2019 core.dev talk: "P2P
-  Encryption."](2019-06-07-jonas-schnelli-p2p-encryption.txt)
-
-- [Bryan Bishop transcript of Jonas Schnelli's June 2019 Breaking Bitcoin talk:
-  "BIP324 V2 Message Transport
-  Protocol."](2019-06-08-jonas-schnelli-bip324-v2-p2p.txt)
