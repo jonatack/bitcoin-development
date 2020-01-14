@@ -1,3 +1,7 @@
+IRC log URL: http://gnusha.org/bitcoin-wizards/2019-11-28.log
+
+(Cleaned up a bit for my personal reading).
+
 20:27 **gmaxwell** Is it just me or does the CHECKTEMPLATEVERIFY proposal
 totally miss the insight of graftroot?  -- that a signature is a lot more
 flexible than a hash, and except for storage considerations, basically strictly
