@@ -18,3 +18,21 @@ alphabetical order:
 #rust-bitcoin
 #secp256k1
 ##taproot-bip-review
+
+
+IRC Logs
+--------
+
+Log for #bitcoin-core-dev may be found at:
+
+http://www.erisian.com.au/bitcoin-core-dev
+
+
+Logs for #bitcoin-core-pr-reviews may be found at:
+
+https://bitcoincore.reviews
+
+
+This server hosts a number of Bitcoin-related IRC channel logs:
+
+http://gnusha.org/
