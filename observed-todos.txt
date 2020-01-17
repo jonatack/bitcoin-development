@@ -1,6 +1,6 @@
 OBSERVED TODOS
 
-Last updated: 2020-01-12
+Last updated: 2020-01-17
 
 -----
 laanwj:    focus on user problems, actual bugs,
@@ -11,8 +11,9 @@ laanwj:    focus on user problems, actual bugs,
            e.g. separate the wallet from the node more in the test framework.
 -----
 
-           - ASmap: (a) communicate state via an rpc (which one?)
-                    (b) extract init code to testable function, write unit tests?
+           - ASmap: (a) asmap init earlier
+                    (b) communicate state via an rpc (which one?)
+                    (c) extract init code to testable function, write unit tests?
 
            - PR my flame graphs doc
 
