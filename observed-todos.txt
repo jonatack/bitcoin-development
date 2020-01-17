@@ -15,6 +15,59 @@ laanwj:    focus on user problems, actual bugs,
                     (b) communicate state via an rpc (which one?)
                     (c) extract init code to testable function, write unit tests?
 
+-----
+           Labels
+
+           - Add arg for case-indifferent search in:
+             - RPC getaddressesbylabel
+             - RPC listtransactions
+
+           - RPC getaddressesbylabel: (a) remove purpose field in the response?
+                                      (b) empty json object instead of error if none?
+
+           - RPC listreceivedbylabel: add returning the number of txns per label
+
+           - Allow passing an array of addresses:
+             - RPC setlabel
+
+           - Allow passing an array of labels:
+             - RPC setlabel
+             - RPC getnewaddress
+             - RPC importaddress
+             - RPC addmultisigaddress
+             - RPC importprivkey
+             - RPC importpubkey
+             - RPC importmulti
+
+           - Handle an array of labels:
+             - RPC listtransactions (output an array)
+             - RPC listreceivedbylabel (filter on array of strings)
+
+             Multilabels meeting notes
+             http://www.erisian.com.au/meetbot/bitcoin-core-dev/2020/bitcoin-core-dev.2020-01-17-19.00.log.html
+
+             <achow101> I think purpose is separate from labels (so seems ok to
+             rm from getaddressesbylabel response).
+
+             <meshcollider> Have you thought about whether the GUI display would
+             display all labels for each address?
+
+             <achow101> concept ack multiple labels on things
+             <meshcollider> Yep supporting multiple labels makes logical sense
+             to me
+
+             <achow101> keep in mind api compatibility though,  every place we
+             take a label will need to be able to tae both a string and array of
+             strings otherwise we lose compatibility. same with output. that
+             could be problematic.
+
+             <meshcollider> Is "purpose" able to be set by the user currently or
+             does it just default to "receive" automatically?
+
+             <achow101> meshcollider: I don't think it's user accessible. it's
+             "receive", "send", or "". "" is how we determine change.
+----
+
            - PR my flame graphs doc
 
            - PR valgrind memcheck / msan / flags docs / improve valgrind docs
