@@ -1,6 +1,10 @@
 ## How to Make Bitcoin Core PRs - A work-in-progress guide
 
-Last updated: December 15, 2019
+Last updated: January 20, 2020
+
+*Hi! This article now lives at
+[https://jonatack.github.io/articles/how-to-open-bitcoin-core-prs](https://jonatack.github.io/articles/how-to-open-bitcoin-core-prs).
+I continue to update it there. Cheers.*
 
 
 ### BEFORE YOU BEGIN
