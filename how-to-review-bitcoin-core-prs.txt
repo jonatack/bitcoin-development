@@ -1,10 +1,8 @@
 How to Review Bitcoin Core PRs
 
-Hi! I just moved this document to:
+Hi! This article now lives at:
 
-https://github.com/jonatack/bitcoin-development/blob/master/how-to-review-bitcoin-core-prs.md
-
-Sorry for the inconvenience.
+https://jonatack.github.io/articles/how-to-review-bitcoin-core-prs
 
 Cheers,
 

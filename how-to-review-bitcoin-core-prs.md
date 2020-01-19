@@ -1,6 +1,10 @@
-## How to Review Bitcoin Core PRs - A work-in-progress guide
+## How to Review Bitcoin Core PRs
 
-Last updated: December 7, 2019
+Last updated: January 20, 2020
+
+*Hi! This article now lives at
+[https://jonatack.github.io/articles/how-to-review-bitcoin-core-prs](https://jonatack.github.io/articles/how-to-review-bitcoin-core-prs).
+I continue to update it there. Cheers.*
 
 
 ### BEFORE YOU BEGIN
