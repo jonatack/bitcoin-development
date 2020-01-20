@@ -2,7 +2,9 @@ How to Review Bitcoin Core PRs
 
 Hi! This article now lives at:
 
-https://jonatack.github.io/articles/how-to-review-bitcoin-core-prs
+https://jonatack.github.io/articles/how-to-review-pull-requests-in-bitcoin-core
+
+I'll be continuing to update it there.
 
 Cheers,
 

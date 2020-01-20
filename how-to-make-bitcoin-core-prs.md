@@ -3,7 +3,7 @@
 Last updated: January 20, 2020
 
 *Hi! This article now lives at
-[https://jonatack.github.io/articles/how-to-open-bitcoin-core-prs](https://jonatack.github.io/articles/how-to-open-bitcoin-core-prs).
+[https://jonatack.github.io/articles/how-to-contribute-pull-requests-to-bitcoin-core](https://jonatack.github.io/articles/how-to-contribute-pull-requests-to-bitcoin-core).
 I continue to update it there. Cheers.*
 
 

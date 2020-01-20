@@ -3,8 +3,8 @@
 Last updated: January 20, 2020
 
 *Hi! This article now lives at
-[https://jonatack.github.io/articles/how-to-review-bitcoin-core-prs](https://jonatack.github.io/articles/how-to-review-bitcoin-core-prs).
-I continue to update it there. Cheers.*
+[https://jonatack.github.io/articles/how-to-review-pull-requests-in-bitcoin-core](https://jonatack.github.io/articles/how-to-review-pull-requests-in-bitcoin-core).
+I'll be continuing to update it there. Cheers.*
 
 
 ### BEFORE YOU BEGIN
