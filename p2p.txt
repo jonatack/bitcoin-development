@@ -111,3 +111,10 @@ transactions
 
 <sdaftuar> gmaxwell: so that seems like it should be a relatively small effect
 (and is an effect we have to some degree already).
+
+---
+
+Dandelion: Suhas notes in
+https://bitcoin.stackexchange.com/questions/81503/what-is-the-tradeoff-between-privacy-and-implementation-complexity-of-dandelion
+that the tradeoff of increased complexity for limited additional privacy may not
+be worth it.
