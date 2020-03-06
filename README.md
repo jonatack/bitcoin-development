@@ -1,10 +1,8 @@
 ## Various notes and ideas for development work on Bitcoin Core
 
 - [How to Review Bitcoin Core PRs.](how-to-review-bitcoin-core-prs.md)
-  A work-in-progress guide.
 
 - [How to Make Bitcoin Core PRs.](how-to-make-bitcoin-core-prs.md)
-  A work-in-progress guide.
 
 - [How to compile Bitcoin Core from source and run the
   tests.](how-to-compile-bitcoin-core-from-source-on-linux-and-macOS.md) A
