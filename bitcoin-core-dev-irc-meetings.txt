@@ -12,8 +12,8 @@ Bitcoin Core Dev IRC Meetings
   Past and future topics are managed by Steve Lee (moneyball on IRC) in this gist:
   https://gist.github.com/moneyball/071d608fdae217c2a6d7c35955881d8a
 
-  To propose a meeting topic, post a message to moneyball on #bitcoin-core-dev:
-  moneyball: #proposedmeetingtopic <topic>
+  To propose a meeting topic, post this message on #bitcoin-core-dev:
+  #proposedmeetingtopic <topic>
 
 -----
 
