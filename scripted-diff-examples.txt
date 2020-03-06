@@ -42,7 +42,7 @@ scripted-diff: Replace fprintf with tfm::format
 
 Commit [`bb81e173`](https://github.com/bitcoin/bitcoin/commit/bb81e173)
 
-scripted-diff: stop using the gArgs wrappers 
+scripted-diff: stop using the gArgs wrappers
 
     find src/ -name "*.cpp" ! -wholename "src/util.h" ! -wholename "src/util.cpp" | xargs perl -i -pe 's/(?<!\.)(ParseParameters|ReadConfigFile|IsArgSet|(Soft|Force)?(Get|Set)(|Bool|)Arg(s)?)\(/gArgs.\1(/g'
 
@@ -57,4 +57,11 @@ Commit [`e1e1146`](https://github.com/bitcoin/bitcoin/commit/e1e1146)
 scripted-diff: Complete the move from CCriticalSection to identical RecursiveMutex
 
     git grep -l "CCriticalSection" ":(exclude)src/sync.h" | xargs sed -i "s/CCriticalSection/RecursiveMutex/g"
+
+
+More accurate names to avoid confusion:
+
+-BEGIN VERIFY SCRIPT-
+sed -i -e 's/UsedDestination/SpentKey/g' $(git grep -l 'UsedDestination' ./src)
+-END VERIFY SCRIPT-
 
