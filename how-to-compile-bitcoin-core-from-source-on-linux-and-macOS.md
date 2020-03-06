@@ -2,6 +2,10 @@ How to compile Bitcoin Core from source on Linux Debian and macOS and run the un
 -------------------------------------------------------------------------------------------------------
 Last updated: 6 January 2020
 
+*Hi! This article now lives at
+[https://jonatack.github.io/articles/how-to-compile-bitcoin-core-and-run-the-tests](https://jonatack.github.io/articles/how-to-review-pull-requests-in-bitcoin-core).
+I will continue to update it there. Cheers.*
+
 This is a simplified summary of the various docs in
 https://github.com/bitcoin/bitcoin/tree/master/doc. Don't hesitate to read them
 for more information.

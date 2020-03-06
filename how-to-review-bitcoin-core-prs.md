@@ -4,7 +4,7 @@ Last updated: January 20, 2020
 
 *Hi! This article now lives at
 [https://jonatack.github.io/articles/how-to-review-pull-requests-in-bitcoin-core](https://jonatack.github.io/articles/how-to-review-pull-requests-in-bitcoin-core).
-I'll be continuing to update it there. Cheers.*
+I will continue to update it there. Cheers.*
 
 
 ### BEFORE YOU BEGIN
