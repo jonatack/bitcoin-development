@@ -22,9 +22,6 @@
   including new May 2019 IRC discussion of ideas for descriptor
   slicing/subsetting, e.g. "subscriptors".
 
-- [Observed Todos.](observed-todos.txt) Ideas for things to do as I run across
-  them.
-
 - [Flame Graphs.](flame-graphs.md) How to generate flame graph profiles.
 
 - 2019-12-21 [John Newbery's Bitcoin end-of-decade Twitter
