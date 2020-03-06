@@ -18,6 +18,9 @@
 
 - [Notes.](notes.txt) Various miscellaneous technical notes.
 
+- [Gitian Building.](gitian-building.md) How to build and commit Gitian
+  signatures to help with deterministically verifying Bitcoin Core releases.
+
 - [PSBTs - Partially-Signed Bitcoin Transactions.](psbts.txt) PSBT information,
   including new May 2019 IRC discussion of ideas for descriptor
   slicing/subsetting, e.g. "subscriptors".
