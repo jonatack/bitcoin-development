@@ -72,16 +72,21 @@ Create the base VMs used for gitian-building.
 
 ```bash
 pushd gitian-builder
-bin/make-base-vm --suite bionic --arch amd64 --docker // For building 0.17 onwards
-bin/make-base-vm --suite trusty --arch amd64 --docker // For building 0.15 & 0.16
+
+// For building 0.17 onwards
+bin/make-base-vm --suite bionic --arch amd64 --docker
+
+// For building 0.15 & 0.16
+bin/make-base-vm --suite trusty --arch amd64 --docker
+
 popd
 ```
 
 ## Fetch Gitian Inputs
 
 ```bash
-export VERSION=0.19.1
-export SIGNER=your_username
+export VERSION=0.20.0rc1
+export SIGNER=jonatack
 export USE_DOCKER=1
 
 pushd gitian.sigs
@@ -96,6 +101,7 @@ pushd gitian-builder
 make -C ../bitcoin/depends download SOURCES_PATH=`pwd`/cache/common
 mkdir -p inputs
 wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+wget -O osslsigncode-2.0.tar.gz -P inputs https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz
 wget -P inputs https://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
 wget -P inputs https://bitcoincore.org/depends-sources/sdks/MacOSX10.14.sdk.tar.gz
 ```
@@ -134,15 +140,6 @@ bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.
 mv build/out/bitcoin-*.tar.gz build/out/src/bitcoin-*.tar.gz ../
 ```
 
-### macOS
-
-```bash
-bin/gbuild --num-make 5 --memory 12000 --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-mv build/out/bitcoin-*-osx-unsigned.tar.gz inputs/bitcoin-osx-unsigned.tar.gz
-mv build/out/bitcoin-*.tar.gz build/out/bitcoin-*.dmg ../
-```
-
 ### Windows
 
 ```bash
@@ -150,6 +147,15 @@ bin/gbuild --num-make 5 --memory 12000 --commit bitcoin=v${VERSION} ../bitcoin/c
 bin/gsign --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
 mv build/out/bitcoin-*-win-unsigned.tar.gz inputs/bitcoin-win-unsigned.tar.gz
 mv build/out/bitcoin-*.zip build/out/bitcoin-*.exe ../
+```
+
+### macOS
+
+```bash
+bin/gbuild --num-make 5 --memory 12000 --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
+bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
+mv build/out/bitcoin-*-osx-unsigned.tar.gz inputs/bitcoin-osx-unsigned.tar.gz
+mv build/out/bitcoin-*.tar.gz build/out/bitcoin-*.dmg ../
 ```
 
 ```
@@ -161,7 +167,7 @@ popd
 ```bash
 pushd gitian.sigs
 git add .
-git commit -m "$SIGNER $VERSION unsigned sigs"
+git commit -m "$SIGNER $VERSION unsigned"
 git push
 popd
 ```
@@ -202,7 +208,7 @@ popd
 ```bash
 pushd gitian.sigs
 git add .
-git commit -m "$SIGNER $VERSION signed sigs"
+git commit -m "$SIGNER $VERSION signed"
 git push
 popd
 ```
