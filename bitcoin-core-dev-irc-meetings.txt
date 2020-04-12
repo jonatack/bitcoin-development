@@ -64,3 +64,16 @@ Note that saying "hi" or posting on the channel at any time during a
 Another source of IRC meeting info:
 
 https://github.com/fanquake/core-review/blob/master/irc.md
+
+-----
+
+Emojis
+
+👍  thumbs up
+😂  laughing crying
+🤦  facepalm
+🤷‍  shruggingTT
+🏆  trophy
+♂
+‍♀️
+※
