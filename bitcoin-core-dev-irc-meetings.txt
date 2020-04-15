@@ -70,9 +70,11 @@ https://github.com/fanquake/core-review/blob/master/irc.md
 Emojis
 
 👍  thumbs up
+👌  ok
+🚀  rocket
 😂  laughing crying
 🤦  facepalm
-🤷‍  shruggingTT
+🤷‍  shrugging
 🏆  trophy
 ♂
 ‍♀️
