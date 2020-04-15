@@ -165,14 +165,30 @@ jnewbery: Review 5-10 PRs per PR made
 
           Fuzz tests
 
+          Help: pass with -help=1 argument:
+          src/test/fuzz/process_messages -help=1
+
+          Documentation on options
+          https://llvm.org/docs/LibFuzzer.html#options
+
           Compile with Clang:
           CC=clang CXX=clang++ ./configure --enable-fuzz --with-sanitizers=address,fuzzer,undefined
-
           May need to run `make distclean` first.
 
-          Run an individual fuzz test: src/test/fuzz/base_encode_decode
+          Run an individual fuzz test:
+          src/test/fuzz/base_encode_decode
 
-          Run all fuzz tests using the test runner: ./test/fuzz/test_runner.py
+          You can supply a folder where to put the seeds:
+          mkdir -p process_messages/
+          src/test/fuzz/process_messages process_messages/
+
+          If you inspect the seeds manually with cat, be sure to pass in
+          `cat --show-nonprinting` otherwise it might execute arbitary code
+          in your terminal:
+          cat --show-nonprinting ./where/to/put/the/seeds/000fff
+
+          Run all fuzz tests with the test runner (not working; for the CI):
+          ./test/fuzz/test_runner.py
 -----
 
           Memory profiling:
