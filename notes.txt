@@ -26,9 +26,11 @@ jnewbery: Review 5-10 PRs per PR made
           bitcoind -help-debug | grep -A3 -- -limit
 -----
 
-          Use Clang formatting to clean up files. To format the last commit with
-          0 lines of context, call the script from root as follows:
+          Use Clang formatting to clean up a file:
+          clang-format -i src/test/fuzz/locale.cpp
 
+          To format the last commit with 0 lines of context, call the
+          clang-format-diff.py script from root as follows:
           git diff -U0 HEAD~1.. | ./contrib/devtools/clang-format-diff.py -p1 -i -v
 -----
 
@@ -85,6 +87,12 @@ jnewbery: Review 5-10 PRs per PR made
 
           and try this to have all of those edits filled for you:
           git rebase -i $(git merge-base HEAD master) -x "<command>"
+
+          Verify a revert
+          from https://github.com/bitcoin/bitcoin/pull/18588#pullrequestreview-391760193
+          git checkout $(git merge-base origin/master origin/pull/18588/head)
+          git revert --no-edit $(git rev-list --min-parents=2 --max-count=1 origin/pull/16367/head)..origin/pull/16367/head
+          git diff origin/pull/18588/head
 -----
 
           Commit stats bash scripts
@@ -168,8 +176,11 @@ jnewbery: Review 5-10 PRs per PR made
           Help: pass with -help=1 argument:
           src/test/fuzz/process_messages -help=1
 
-          Documentation on options
-          https://llvm.org/docs/LibFuzzer.html#options
+          Documentation
+          https://llvm.org/docs/LibFuzzer.html
+
+          Source code
+          https://llvm.org/doxygen/FuzzerMutate_8h_source.html
 
           Compile with Clang:
           CC=clang CXX=clang++ ./configure --enable-fuzz --with-sanitizers=address,fuzzer,undefined
