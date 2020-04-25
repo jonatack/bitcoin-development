@@ -1,7 +1,6 @@
-Scripted Diffs
---------------
+# Scripted Diffs
 
-Description from /doc/developer-notes.md in the repo:
+Description from `/doc/developer-notes.md` in the repo:
 
 For reformatting and refactoring commits where the changes can be easily
 automated using a bash script, we use scripted-diff commits. The bash script is
@@ -28,9 +27,9 @@ To create a scripted-diff:
 -----
 
 The scripted-diff is verified by the script check tool:
-
+```
 test/lint/commit-script-check.sh
-
+```
 The tool's default behavior when supplied with a commit is to verify all
 scripted-diffs from the beginning of time up to said commit. Internally, the
 tool passes the first supplied argument to `git rev-list --reverse` to determine
@@ -39,40 +38,37 @@ the commit message format described above.
 
 For development, it might be more convenient to verify all scripted-diffs in a
 range `A..B`, for example:
-
+```
 test/lint/commit-script-check.sh origin/master..HEAD
+```
 
-------
+## Examples
 
-EXAMPLES
-
------
-
-More accurate names to avoid confusion:
-
+scripted-diff: More accurate names to avoid confusion
+```
 -BEGIN VERIFY SCRIPT-
 sed -i -e 's/UsedDestination/SpentKey/g' $(git grep -l 'UsedDestination' ./src)
 -END VERIFY SCRIPT-
-
+```
 -----
 
 scripted-diff: Sort test includes
-
+```
 -BEGIN VERIFY SCRIPT-
  # Mark all lines with #includes
  sed -i --regexp-extended -e 's/(#include <.*>)/\1 /g' $(git grep -l '#include' ./src/bench/ ./src/test ./src/wallet/test/)
  # Sort all marked lines
  git diff -U0 | ./contrib/devtools/clang-format-diff.py -p1 -i -v
 -END VERIFY SCRIPT-
-
+```
 -----
 
 scripted-diff: Bump copyright headers
-
+```
 -BEGIN VERIFY SCRIPT-
 ./contrib/devtools/copyright_header.py update ./
 -END VERIFY SCRIPT-
-
+```
 -----
 
 scripted-diff: Replace fprintf with tfm::format
