@@ -25,6 +25,9 @@
 
 - [Flame Graphs.](flame-graphs.md) How to generate flame graph profiles.
 
+- [Scripted diffs.](scripted-diffs.md) How to use scripted diffs in commits,
+  with examples from Bitcoin Core PRs.
+
 - 2019-12-21 [John Newbery's Bitcoin end-of-decade Twitter
   thread](2019-12-21-john-newbery-bitcoin-end-of-decade-twitter-thread.md)
 
