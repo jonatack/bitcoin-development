@@ -75,9 +75,13 @@ jnewbery: Review 5-10 PRs per PR made
           git diff HEAD^
 
           git range-diff master PREV NEW
+
           PREV=317bf6a NEW=ab8a6cd && diff <(git show $PREV) <(git show $NEW)
 
           git blame src/wallet/rpcwallet.cpp | cut -c 39-65 | sort | uniq -c | sort -g
+
+          grepping rpc output:
+          bitcoin-cli getpeerinfo | grep 'mapped_as' | sort
 
           To check each commit when feeling patient:
           git rebase -i $(git merge-base HEAD origin/master)"
@@ -148,14 +152,16 @@ jnewbery: Review 5-10 PRs per PR made
 
           To profile:  python3 -m cProfile -s time feature_block.py
 
+          To run a functional test X times and print the run times:
+          for i in {1..20}; do ./test/functional/mempool_updatefromblock.py | grep -o 'in [0-9]\.[0-9]*'; done
+
+
           PDB (Python debugger)
 
-          Frequently add break points to manually run RPC commands with:
+          Add break points to manually run RPC commands with:
           import pdb; pdb.set_trace()
 
-          To launch the Python debugger on failure of a functional test, pass
-          `--pdbonfailure` as seen in, say, test/functional/wallet_basic.py -h
-
+          To attach a python debugger if test fails, run the test and pass --pdbonfailure:
           test/functional/wallet_basic.py --pdbonfailure
 
           Does not work via the test runner, e.g. this prints dots ad infinitum:
@@ -257,6 +263,8 @@ valgrind --gen-suppressions=all --verbose --exit-on-first-error=yes --error-exit
 valgrind --gen-suppressions=all --verbose --exit-on-first-error=yes --error-exitcode=1 --suppressions=contrib/valgrind.supp src/test/test_bitcoin --log_level=test_suite
 
 -----
+          GDB
+
           cd src
           gdb bitcoind
           b bitcoin-cli.cpp:246
@@ -269,6 +277,26 @@ valgrind --gen-suppressions=all --verbose --exit-on-first-error=yes --error-exit
           n (next)
           p (print) tx, wtx, etc.
           c (continue)
+-----
+
+          Sipa on annotations vs assertions: they're somewhat orthogonal
+
+          Annotations:
+
+          [+] Compile-time check. Guarantees absence of issues in every possible code path.
+          [-] Only works in Clang.
+          [-] Can't be used in some more advanced locking scenarios.
+
+          Assertions:
+
+          [+] Works in GCC and Clang
+          [+] Isn't restricted to analyzable cases
+          [-] Is only a runtime check; it needs test cases that actually exercise the bug
+          [-] Needs building with -DDEBUG_LOCKORDER
+
+          Perhaps at some point it's time to evaluate if we can pick just one
+          over the other (which I guess would be the annotations approach), but
+          they're not exactly identical.
 -----
 
           Berkeley DB special commands (located in db4/bin):
