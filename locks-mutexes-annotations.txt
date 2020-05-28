@@ -1,0 +1,122 @@
+LOCKS, MUTEXES, ANNOTATIONS
+
+-----
+
+sipa:     Annotations vs assertions: they're somewhat orthogonal
+
+          Annotations:
+
+          [+] Compile-time check. Guarantees absence of issues in every possible code path.
+          [-] Only works in Clang.
+          [-] Can't be used in some more advanced locking scenarios.
+
+          Assertions:
+
+          [+] Works in GCC and Clang
+          [+] Isn't restricted to analyzable cases
+          [-] Is only a runtime check; it needs test cases that actually exercise the bug
+          [-] Needs building with -DDEBUG_LOCKORDER
+
+          Perhaps at some point it's time to evaluate if we can pick just one
+          over the other (which I guess would be the annotations approach), but
+          they're not exactly identical.
+-----
+
+Discussion in https://github.com/bitcoin/bitcoin/pull/16127
+
+sipa:     Our "default" mutexes are recursive mutexes (which you can enter
+          multiple times from the same thread). They're easier to work with as
+          you don't need to worry about whether to call a lock-grabbing function
+          from either inside or outside the lock. However, recursive mutexes
+          can't be used for condition variable waiting, so for those, we use
+          std::mutex (which is not recursive) directly.
+
+          Longer term we should try to get rid of recursive mutexes entirely;
+          code is much cleaner without them.
+
+
+ajtowns   > MarcoFalke: How is this different from using Mutex m; and LOCK(m); ?
+
+          If you do Mutex cs; instead of std::mutex cs; then you can do
+          LOCK(cs); or WAIT_LOCK(cs, g); instead of MutexGuard g(cs);. In that
+          case the type of g changes from a trivial subclass of std::lock_guard
+          to UniqueLock which is a subclass of std::unique_lock that supports
+          DEBUG_LOCKCONTENTION in which case it uses LogPrintf to report
+          potential deadlocks or lock contention. Even without the extra
+          features we have, std::unique_lock is potentially higher overhead than
+          std::lock_guard, but std::lock_guard isn't unlockable except on
+          destruction, so unique_lock is needed for use with condition
+          variables.
+
+          - We can't use Mutex for locking for the logging API, because that is
+            a circular dependency.
+
+          - We use std::mutex in code that implements our specialised locking
+            behaviour got Mutex etc.
+
+          - We don't use Mutex in support/lockedpool.h, probably because at
+            present it is independent of bitcoin interfaces in general (this PR
+            adds a dependency on threadsafety.h, so maybe just using Mutex would
+            make sense at that point).
+
+          - We use std::mutex instead of Mutex for protecting dir_locks in
+            util/system.h, not sure if there's a circular dependency there to
+            justify it though?
+
+          - We also use std::mutex in some unit tests, which I don't think
+            matters much.
+
+          There's some cases where we currently use std::lock_guard<std::mutex>
+          g(cs) where cs is a Mutex, rather than calling LOCK(cs); or
+          WAIT_LOCK(cs, g); That saves a bit of overhead, while losing our
+          contention/deadlock debugging info, which I'm not sure makes much
+          sense. I've updated this PR to change those instances to just use
+          LOCK(cs) instead of lock_guard.
+
+          I think that means it makes sense to:
+
+          - Use Mutex and LOCK etc as the "normal" locking mechanism.
+
+          - Use RecursiveMutex (aka CCriticalSection) if recursive locks are
+            needed, or it's old code that we haven't worked through yet.
+
+          - Use std::mutex and { MutexGuard guard(mutex); ... } for code that's
+            used to implement Mutex
+
+          I've bumped this PR to replace a couple of the lock_guard instances
+          that referred to our Mutex/CCriticalSection classes with LOCK instead
+          of MutexGuard.
+
+          > ryanofsky: I don't think it's true that we can't allow a circular
+          dependency, but maybe you can explain more.
+
+          Maybe; LOCK(m); becomes a call to UniqueLock constructor, which calls
+          Enter() (or TryEnter()), which calls EnterCritical(), which calls
+          push_lock() which may call potential_deadlock_detected() which then
+          calls LogPrintf, which calls LogPrintStr which, when logging to a
+          file, will then lock m_file_mutex. But I don't think that actually
+          causes a problem, because I don't think any lock is ever taken while
+          the m_file_mutex is held, so that shouldn't trigger
+          potential_deadlock_detected.
+
+          There's also the case if you compile with -DDEBUG_LOCKCONTENTION. If
+          two processes try to log simultaneously, the first one will lock
+          m_file_mutex successfully, while the second one will fail at the
+          try_lock phase of UniqueLock::Enter, which will then call
+          PrintLockContention and hence LogPrintf, and recursively fail for the
+          same reason until m_file_mutex is released, at which point things
+          should clean up.
+
+          > ryanofsky: I think ideally, we would just use Mutex and RecursiveMutex
+          everywhere, since they fully support LOCK macros, lock assertions,
+          lock annotations, deadlock detection, and so on. What exactly is the
+          need for std::mutex and MutexGuard?
+
+          If we can switch all the uses of std::mutex to Mutex, I don't think
+          there's a need for MutexGuard.
+-----
+
+jnewbery: We now have a handy WITH_LOCK macro in src/sync.h#L209
+
+-----
+
