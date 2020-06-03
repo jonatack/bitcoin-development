@@ -45,7 +45,7 @@ sudo apt install coreutils # if coreutils is not already included in your distri
   by going to `Preferences -> Advanced` in the app and allocating as required.
 
 
-## Setup
+## Initial Setup
 
 ```bash
 mkdir gitian-building
@@ -68,7 +68,18 @@ git clone https://github.com/bitcoin/bitcoin.git
 git clone https://github.com/bitcoin-core/bitcoin-detached-sigs.git # macOS and Windows only
 ```
 
-Create the base VMs used for gitian-building.
+Download the gitian inputs/dependencies into gitian-builder.
+```bash
+pushd gitian-builder
+make -C ../bitcoin/depends download SOURCES_PATH=`pwd`/cache/common
+mkdir -p inputs
+wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+wget -O osslsigncode-2.0.tar.gz -P inputs https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz
+wget -P inputs https://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
+wget -P inputs https://bitcoincore.org/depends-sources/sdks/MacOSX10.14.sdk.tar.gz
+```
+
+## Make base VM for gitian-building
 
 ```bash
 pushd gitian-builder
@@ -82,10 +93,10 @@ bin/make-base-vm --suite trusty --arch amd64 --docker
 popd
 ```
 
-## Fetch Gitian Inputs
+## Set up and git checkout the branches to build
 
 ```bash
-export VERSION=0.20.0rc1
+export VERSION=0.20.0
 export SIGNER=jonatack
 export USE_DOCKER=1
 
@@ -96,22 +107,7 @@ popd
 pushd bitcoin
 git checkout v$VERSION
 popd
-
-pushd gitian-builder
-make -C ../bitcoin/depends download SOURCES_PATH=`pwd`/cache/common
-mkdir -p inputs
-wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
-wget -O osslsigncode-2.0.tar.gz -P inputs https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz
-wget -P inputs https://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
-wget -P inputs https://bitcoincore.org/depends-sources/sdks/MacOSX10.14.sdk.tar.gz
 ```
-
-If you want to gitian build for macOS, you'll need the macOS 10.11 SDK. You can
-read the documentation
-[here](https://github.com/bitcoin/bitcoin/blob/master/doc/build-osx.md#deterministic-macos-dmg-notes)
-about how to create it. Once you have `MacOSX10.11.sdk.tar.gz`, place it in
-`gitian-builder/inputs/`.
-
 
 ## Build Unsigned Sigs
 
