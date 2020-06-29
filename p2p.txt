@@ -112,9 +112,253 @@ transactions
 <sdaftuar> gmaxwell: so that seems like it should be a relatively small effect
 (and is an effect we have to some degree already).
 
----
+----
 
 Dandelion: Suhas notes in
 https://bitcoin.stackexchange.com/questions/81503/what-is-the-tradeoff-between-privacy-and-implementation-complexity-of-dandelion
 that the tradeoff of increased complexity for limited additional privacy may not
 be worth it.
+
+-----
+
+Banning
+
+<ossifrage> Should bitcoind be more aggressive in banning nodes that send
+high-hash or bad-diffbits?
+
+<luke-jr> ossifrage: no, we're already too aggressive.
+
+<sipa> i don't see a good reason not to disconnect on invalid PoW,
+actually. that's unambiguously invalid, for as long as the protocol existed.
+
+<luke-jr> disconnect != ban. though having difficulty coming up with a scenario
+where banning would be bad. oh, thought of one: a hardfork to reclaim
+always-zero bits in the header. we'd of course reject the HF blocks, but we
+still want to share our best chain with such nodes. disconnection might be a
+problem there, too.
+
+<sipa> i think banning is desired behavior between nodes on different sides of a
+HF, to partition as quickly as possible, and not waste connection slots on
+either side with peers they disagree with.
+
+<luke-jr> partitioning is bad and should not happen with a HF.
+
+<sipa> ?!
+
+<luke-jr> furthermore, it is at best a false sense of "security" since anyone
+can start a bridge later.
+
+<sipa> there is nothing to bridge.
+
+<luke-jr> I'm talking about real HFs, not scamcoins calling themselves HFs. also
+HFs that *only* make invalid blocks valid, in this example, so the HF'd nodes
+would always prefer the pre-HF chain, so long as they see it, and it's more work
+ofc.
+
+<sipa> as long as no such HF is defined, there is no need to accomodate
+it. right now, seeing a peer give you a block with invalid PoW is a sign that
+peer is, from your perspective, completely broken.
+
+<luke-jr> I'm not suggesting accomodation, just not going out of the way to
+disconnect it. outgoing connections, sure, since those are providing services to
+us primarily, but inbound connections are primarily for the sake of the other
+node.
+
+<sipa> that's reasonable.
+
+-----
+
+PR 19219 Replace automatic bans with discouragement filter by sipa
+https://github.com/bitcoin/bitcoin/pull/19219
+
+This patch improves performance and resource usage around IP addresses that are
+banned for misbehavior. They're already not actually banned since #14929, as
+connections from them are still allowed, but they are preferred for eviction if
+the inbound connection slots are full.
+
+Stop treating these like manually banned IP ranges, and instead just keep them
+in a rolling Bloom filter of misbehaving nodes, which isn't persisted to disk or
+exposed through the ban framework. The effect remains the same: preferred for
+eviction, avoided for outgoing connections, and not relayed to other peers.
+
+Also change the name of this mechanism to "discouraged" to better reflect
+reality.
+
+
+jonatack
+
+Concept ACK on improving the performance/resource usage of IsBanned.
+
+Light code review ACK 4c4df6b. I have not benchmarked the performance deltas of
+IsBanned (presumably improved for discouraged addrs) and IsBannedLevel
+(presumably marginally worse for non-banned addrs) and how meaningful they are
+with this change or the shape of the BanReason distribution and how manipulable
+it is. Benchmarking these and test coverage would be good.
+
+A comment on the choice of nElements and nFPRate may be good here. These are the
+same as for filterInventoryKnown.
+
+
+
+luke:
+I think we need to skip over BanReasonNodeMisbehaving entries when loading
+existing ban data?
+
+sipa:
+They (by default) have a 24 hour limit only, and during that time, they will
+just be treated as a real ban instead of a discouragement.
+
+
+
+jasonbcox
+Looks like ClearBanned() should call m_discouraged.reset() otherwise the
+clearbanned RPC no longer does what users expect.
+
+sipa:
+I considered that, but I think it would be counterintuitive. Discouragement
+isn't exposed as bans (it's not visible or accessible in RPCs or UI) as it's a
+completely automatic process, so I think that exposing a way to clear it would
+violate that abstraction.
+
+jasonbcox:
+I see. The current implementation may introduce subtle bugs then, especially
+considering that IsBanned() is now unintuitively named. setban "someIP" "add"
+may return Error: IP/Subnet already banned for instance.
+
+sipa:
+Nice catch. I've addressed it by adding a separate IsBannedOrDiscouraged that's
+distinct from IsBanned.
+
+
+
+jnewbery:
+
+This seems like an improvement, but it leaves the BanMan with a
+slightly odd and inconsistent interface:
+
+- Ban() has an enum as its second parameter, but that parameter is only ever set
+to BanReasonManuallyAdded.
+
+- If IsBanned() is called with an address, it returns whether an address is
+discouraged or banned. If it's called with a subnet, it returns if it's banned,
+but not discouraged.
+
+- Unban() won't remove a discouraged address from banman, but it's not possible
+to add an outbound connection to that address with addnode onetry.
+
+- ClearBanned() (which is called by the clearban RPC ("Clear all banned IPs"))
+doesn't clear discouraged addresses.
+
+- The listbanned RPC returns a ban_reason, which can only ever be "manually
+added". (banReasonToString() is basically dead code now).
+
+- It'd be nice to rationalize this so BanMan just had a setter SetBanLevel()
+function and a getter GetBanLevel() function.
+
+sipa:
+
+Most of those things are no longer true, apart from the BanReason being
+superfluous now (there is a separate IsBannedOrDiscouraged). I think a follow-up
+can remove BanReason altogether, but I think it's preferable to not have a
+SetBanLevel - discouragement and banning are very different concepts (and it
+wouldn't be unreasonable to move discouragement elsewhere entirely).
+
+
+
+cculianu:
+You really should add a benchmark for this. What happens if someone floods the
+filter with a big block of 1 million IPv6 addresses?
+
+sipa:
+Rolling Bloom filters only keep the last N elements added; 50000 in this
+case. Their performance is not affected by how many elements are kept. So worst
+case, being flooded with IPs would reduce the effectiveness of the filter in
+keeping broken peers out.
+
+cculianu:
+Right, so you can flood the filter with even something like 150k inserts,
+saturate it to always return false positive, and then all peers are "equally
+discouraged" (meaning you have no ban policy anymore)....
+
+sipa:
+No, the false positive rate never goes above the specified one (0.000001 in this
+case). The rolling aspect discards old entries.
+
+jnewbery:
+I suggest you take a look at the CRollingBloomFilter implementation. The rolling
+bloom filter is actually multiple generations of bloom filters, so you can't
+saturate it by adding many entries. It'll just discard the oldest generation
+when it reaches (max entries * 3/2).
+
+cculianu:
+Ok, so basically:
+- this is as if you had a typical hash table implementation clamped to 75k most
+  recent entries
+- but it has no ability to unban
+- it only eats about 67k memory
+- small tiny chance of false positives.
+- slightly slower insertions and lookups than a hash table, but not monstrously
+  so.
+Got it. Thanks.
+
+sipa:
+Indeed. Your numbers are a bit off: it only guarantees 50000 entries (it keeps
+up to 75000, but the last 25000 are removed whenever that number is
+exceeded). It also uses around 528 KiB (at an fprate of 1/1000000).
+
+cculianu:
+Oh right.. it's 67k uint64's -> 528KiB. My bad.
+Hmm. For ~800KiB you could have just implemented a regular hash table
+(std::unordered_map, etc) or a std::unordered_set, clamped it to 50k items, and
+then had the ability to query it, iterate over it, show it in the UI, and/or
+remove individual items.
+
+sipa:
+Yeah, we do have a limitedmap data structure that implements effectively
+that. Its memory usage is significantly worse though (because every entry in the
+map needs several pointers, plus dynamic allocation overhead). If I recall the
+number correctly it would be 4 MiB at least for 50000 entries.
+
+cculianu:
+
+I'm aware of that data structure but it's not a hash table, it's a red-black
+tree based map, which also stores a reverse-map as well. It's not very efficient
+for this situation...
+
+You can probably get away with just a straight hash table (unordered_map) with
+some wrapper that periodically sweeps it to clamp it to some max size --
+probably just remove the oldest entries by creation time. While not ideal, it
+has some advantages -- namely being able to remove from the set... and blazing
+fast lookups.
+
+I guess it's your call -- you either pay the memory and upkeep costs and
+preserve the facility of a traditional ban list and save a few cycles on lookups
+-- or you toss that aside and maintain a bloom set and redefine the semantics of
+banning (which is already happening anyway)...
+
+sipa:
+
+Hash table or red-black tree doesn't matter much. It's (table size + 2 pointers
++ alloc overhead per entry) or (3 pointers + 1 int + alloc overhead per entry),
+and in both cases you need a way to iterate efficiently in order of insertion
+(either through a separate map like limitedmap does, or by doubly-linking the
+elements together like is supported by boost::multi_index). Even if you don't do
+that and just occasionally sweep, you need to keep track of insertion time per
+item, and the allocation overheads don't go away.
+
+In either case, the overhead is much larger than a rolling bloom filter, and as
+you say - changes to the semantics of auto banned items are happening anyway.
+
+
+sipa:
+
+I've made a few changes suggested by @jnewbery. The PR is now split into two
+commits:
+
+- The first is a minimal change that implements the new behavior (smaller than
+  the previous PR), plus release notes and RPC documentation changes.
+
+- The second makes the distinction between discouraging and banning much cleaner
+  in the interface, removing BanReason altogether.
+
+I'm happy to split off the second commit. It could also be ignored in backports.

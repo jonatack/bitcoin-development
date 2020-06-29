@@ -94,3 +94,9 @@ scripted-diff: Complete the move from CCriticalSection to identical RecursiveMut
     git grep -l "CCriticalSection" ":(exclude)src/sync.h" | xargs sed -i "s/CCriticalSection/RecursiveMutex/g"
 
 -----
+
+https://github.com/bitcoin/bitcoin/pull/19373
+
+    sed -i --regexp-extended -e 's/HexStr\(([^(]+)\.begin\(\), *([^(]+)\.end\(\)\)/HexStr(\1)/g' $(git grep -l HexStr)
+
+-----

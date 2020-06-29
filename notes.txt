@@ -27,7 +27,7 @@ jnewbery: Review 5-10 PRs per PR made
 -----
 
           Use Clang formatting to clean up a file:
-          clang-format -i src/test/fuzz/locale.cpp
+          clang-format -i <file>
 
           To format the last commit with 0 lines of context, call the
           clang-format-diff.py script from root as follows:
@@ -81,7 +81,7 @@ jnewbery: Review 5-10 PRs per PR made
           git blame src/wallet/rpcwallet.cpp | cut -c 39-65 | sort | uniq -c | sort -g
 
           grepping rpc output:
-          bitcoin-cli getpeerinfo | grep 'mapped_as' | sort
+          bitcoin-cli getpeerinfo | grep 'banscore' | sort
 
           To check each commit when feeling patient:
           git rebase -i $(git merge-base HEAD origin/master)"
@@ -146,6 +146,9 @@ jnewbery: Review 5-10 PRs per PR made
           The test logs to a debug log file (in master)
           If you need temporary printing, you can do std::cout or std::cerr
           or BOOST_TEST_MESSAGE();
+
+          ryanofsky tip to get full debug log of test run:
+          test_bitcoin -l test_suite -- DEBUG_LOG_OUT
 -----
 
           Functional tests
@@ -174,7 +177,14 @@ jnewbery: Review 5-10 PRs per PR made
           https://github.com/bitcoin/bitcoin/pull/18516#discussion_r404191587
           raise AssertionError("Error: Invalid vsize of {}".format(tx["vsize"]))
 
-          To run functional tests in the gui, pass BITCOIND=bitcoin-qt
+          ./src/qt/bitcoin-qt -lang=nl -blocksdir=/tmp/no/no -printtoconsole | grep 'no/no'
+2019-06-15T10:11:27Z Fout: Opgegeven blocks map "/tmp/no/no" bestaat niet.
+
+          To run functional tests via the gui from the command line, pass BITCOIND=bitcoin-qt
+
+          LC_ALL=de_DE.UTF-8 QT_QPA_PLATFORM=minimal BITCOIND=bitcoin-qt ./test/functional/test_runner.py  --tracerpc feature_versionbits_warning.py
+
+          LC_ALL=de_DE.UTF-8 QT_QPA_PLATFORM=xcb BITCOIND=bitcoin-qt ./test/functional/p2p_permissions.py --tracerpc
 -----
 
           Fuzz tests
@@ -227,6 +237,11 @@ jnewbery: Review 5-10 PRs per PR made
           ./src/bench/bench_bitcoin -evals=1
           ./src/bench/bench_bitcoin -filter=VerifyNestedIfScript -evals=50
           ./src/bench/bench_bitcoin -filter="SipHash|SipHash_3b|SipHash_32b"
+
+          git clean -fdx && git checkout master && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
+
+          git clean -dfx && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 -C src bench/bench_bitcoin && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
+
 -----
 
           Valgrind Memcheck incantations (WIP)
@@ -277,26 +292,6 @@ valgrind --gen-suppressions=all --verbose --exit-on-first-error=yes --error-exit
           n (next)
           p (print) tx, wtx, etc.
           c (continue)
------
-
-          Sipa on annotations vs assertions: they're somewhat orthogonal
-
-          Annotations:
-
-          [+] Compile-time check. Guarantees absence of issues in every possible code path.
-          [-] Only works in Clang.
-          [-] Can't be used in some more advanced locking scenarios.
-
-          Assertions:
-
-          [+] Works in GCC and Clang
-          [+] Isn't restricted to analyzable cases
-          [-] Is only a runtime check; it needs test cases that actually exercise the bug
-          [-] Needs building with -DDEBUG_LOCKORDER
-
-          Perhaps at some point it's time to evaluate if we can pick just one
-          over the other (which I guess would be the annotations approach), but
-          they're not exactly identical.
 -----
 
           Berkeley DB special commands (located in db4/bin):
@@ -467,10 +462,12 @@ gmaxwell: Avoid doing review that is inconsistent or focused on minutia or code
 
 sipa:     One easy way to make sure you have all the call sites is to rename it.
 
-          If your end goal is integrating things into Bitcoin Core,
-          getting familiar with the code is the best way to spend time.
-          To do that (which i very much encourage you to!) I think it's better
-          to focus on one piece at a time and actually integrate it.
+          Is test coverage missing for something? Break it, and see if tests fail :)
+
+          If your end goal is integrating things into Bitcoin Core, getting
+          familiar with the code is the best way to spend time.  To do that
+          (which i very much encourage you to!) I think it's better to focus on
+          one piece at a time and actually integrate it.
 
           Never put GitHub usernames in commits, nor PR descriptions which are
           automatically copied into merge commits.
@@ -554,10 +551,6 @@ harding   Idea: sendrawtransaction spends from cold wallet with network disabled
           broadcasting it.
 -----
 
-jnewbery: We now have a handy WITH_LOCK macro in src/sync.h#L209
-
------
-
 laanwj:   Release notes should refer to the RPC help for details instead of
           substituting for full documentation. Example:
           "Please refer to the RPC help of `getbalances` for details."
@@ -574,4 +567,19 @@ instagibbs functional test harness has static keys for quick reference when
 
 MarcoFalke ADDRESS_BCRT1_UNSPENDABLE or
            self.nodes[i].get_deterministic_priv_key().address
+-----
+
+gmaxwell   script to verify message signatures
+
+           wget https://paste.debian.net/plain/1148565 && MSG=`cat 1148565 | head -n 7 | sed -e 's/\"//'`; echo $MSG ; tail -n 145 1148565 | while read -d $'\n' -a line ; do echo ${line[0]} `./bitcoin-cli verifymessage ${line[0]} ${line[1]} "$MSG"` ; done
+
+-----
+
+sjors      Tested it's reachable via IPv4 and IPv6 (and returns both types of
+           addresses, and the filters work):
+
+           dig -t A +trace seed.bitcoin.wiz.biz
+           dig -t AAAA +trace seed.bitcoin.wiz.biz
+           dig -6 -t A +trace seed.bitcoin.wiz.biz
+           dig -6 -t AAAA +trace x5.seed.bitcoin.wiz.biz
 -----
