@@ -46,6 +46,20 @@ jnewbery: Review 5-10 PRs per PR made
           <stdin>:1:51: error: expected ‘,’ or ‘;’ before ‘}’ token
 -----
 
+practicalswift: C++ undefined, unspecified and implementation-defined behavior:
+
+          - undefined: "behavior, upon use of a nonportable or erroneous program
+            construct or of erroneous data, for which this International
+            Standard imposes no requirements."
+
+          - unspecified: "use of an unspecified value, or other behavior where
+            this International Standard provides two or more possibilities and
+            imposes no further requirements on which is chosen in any instance."
+
+          - implementation-defined: "unspecified behavior where each
+            implementation documents how the choice is made."
+-----
+
           Git stuff
 
           To search for a term in git history:
@@ -97,26 +111,6 @@ jnewbery: Review 5-10 PRs per PR made
           git checkout $(git merge-base origin/master origin/pull/18588/head)
           git revert --no-edit $(git rev-list --min-parents=2 --max-count=1 origin/pull/16367/head)..origin/pull/16367/head
           git diff origin/pull/18588/head
------
-
-          Commit stats bash scripts
-
-          Count non-merge commits over a time period
-          git log --oneline --since=2019-01-01 --until=2019-12-31 --no-merges | wc -l
-
-          Commits/contributor ranking over a time period
-          git log --since=2020-01-01 --until=2020-12-31 --no-merges \
-          | grep '^Author' | sort | uniq -c | sort -nr | head -n 20
-
-          Count contributors over a time period
-          git log --since=2019-01-01 --until=2019-12-31 --no-merges \
-          | grep '^Author' | sort | uniq -c | sort -nr | wc -l
-
-          List top 20 contributors in commits per year
-          for i in 2012 2013 2014 2015 2016 2017 2018 2019 2020; do echo $i \
-          `git log --since=$i-01-01 --until=$((i+1))-03-15 --no-merges \
-          | grep '^Author' | cut -d':' -f2- | cut -d'<' -f1 | sort | uniq -c \
-          | sort -nr | head -n 20 | awk '{print $2}' | tr '\n' ' '` ; done
 -----
 
           Unit tests
@@ -177,8 +171,7 @@ jnewbery: Review 5-10 PRs per PR made
           https://github.com/bitcoin/bitcoin/pull/18516#discussion_r404191587
           raise AssertionError("Error: Invalid vsize of {}".format(tx["vsize"]))
 
-          ./src/qt/bitcoin-qt -lang=nl -blocksdir=/tmp/no/no -printtoconsole | grep 'no/no'
-2019-06-15T10:11:27Z Fout: Opgegeven blocks map "/tmp/no/no" bestaat niet.
+          ./src/qt/bitcoin-qt -lang=nl -blocksdir=/tmp/no/no -printtoconsole | grep 'no/no' 2019-06-15T10:11:27Z Fout: Opgegeven blocks map "/tmp/no/no" bestaat niet.
 
           To run functional tests via the gui from the command line, pass BITCOIND=bitcoin-qt
 
@@ -241,7 +234,26 @@ jnewbery: Review 5-10 PRs per PR made
           git clean -fdx && git checkout master && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
 
           git clean -dfx && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 -C src bench/bench_bitcoin && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
+-----
 
+          Commit stats bash scripts
+
+          Count non-merge commits over a time period
+          git log --oneline --since=2019-01-01 --until=2019-12-31 --no-merges | wc -l
+
+          Commits/contributor ranking over a time period
+          git log --since=2020-01-01 --until=2020-12-31 --no-merges \
+          | grep '^Author' | sort | uniq -c | sort -nr | head -n 20
+
+          Count contributors over a time period
+          git log --since=2019-01-01 --until=2019-12-31 --no-merges \
+          | grep '^Author' | sort | uniq -c | sort -nr | wc -l
+
+          List top 20 contributors in commits per year
+          for i in 2012 2013 2014 2015 2016 2017 2018 2019 2020; do echo $i \
+          `git log --since=$i-01-01 --until=$((i+1))-03-15 --no-merges \
+          | grep '^Author' | cut -d':' -f2- | cut -d'<' -f1 | sort | uniq -c \
+          | sort -nr | head -n 20 | awk '{print $2}' | tr '\n' ' '` ; done
 -----
 
           Valgrind Memcheck incantations (WIP)
@@ -471,6 +483,15 @@ sipa:     One easy way to make sure you have all the call sites is to rename it.
 
           Never put GitHub usernames in commits, nor PR descriptions which are
           automatically copied into merge commits.
+-----
+
+jnewbery  On insert vs emplace, in src/net_processing.cpp::ProcessMessage::L2836
+          https://github.com/bitcoin/bitcoin/pull/19364#discussion_r448377825
+
+          emplace wins when you have to construct a temporary in place which is
+          then copied/moved to the container. When you already have the object
+          in hand (as we do here), it makes no difference -- the object is just
+          copied into the container.
 -----
 
 ryanofsky PR review comment at:
