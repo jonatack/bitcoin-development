@@ -1,6 +1,6 @@
 ## Gitian Building
 
-Last updated: March 6, 2020
+Last updated: July 17, 2020
 
 *This is my updated version of fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md) resource.*
@@ -8,6 +8,13 @@ Last updated: March 6, 2020
 Bitcoin Core releases are [reproducibly built](https://reproducible-builds.org)
 using [Gitian Builder](https://github.com/devrandom/gitian-builder).
 
+
+If you have already set up your environment to build gitian signatures, you can
+skip directly to [Make base VM for
+gitian-building](#make-base-vm-for-gitian-building) below.
+
+
+## Initial Dependencies
 
 ### macOS
 
@@ -63,9 +70,9 @@ git clone https://github.com/your_github_username/gitian.sigs.git
 Clone the other required repositories.
 
 ```bash
-git clone https://github.com/devrandom/gitian-builder.git
 git clone https://github.com/bitcoin/bitcoin.git
-git clone https://github.com/bitcoin-core/bitcoin-detached-sigs.git # macOS and Windows only
+git clone https://github.com/devrandom/gitian-builder.git
+git clone https://github.com/bitcoin-core/bitcoin-detached-sigs.git # sigs for macOS and Windows only
 ```
 
 Download the gitian inputs/dependencies into gitian-builder.
@@ -77,26 +84,23 @@ wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.p
 wget -O osslsigncode-2.0.tar.gz -P inputs https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz
 wget -P inputs https://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
 wget -P inputs https://bitcoincore.org/depends-sources/sdks/MacOSX10.14.sdk.tar.gz
+popd
 ```
 
 ## Make base VM for gitian-building
 
 ```bash
 pushd gitian-builder
-
-// For building 0.17 onwards
 bin/make-base-vm --suite bionic --arch amd64 --docker
-
-// For building 0.15 & 0.16
-bin/make-base-vm --suite trusty --arch amd64 --docker
-
 popd
 ```
 
-## Set up and git checkout the branches to build
+## Set up and check out the branches to build
+
+Update the version and signer values with the version to build and your username.
 
 ```bash
-export VERSION=0.20.0
+export VERSION=0.20.1rc1
 export SIGNER=jonatack
 export USE_DOCKER=1
 
@@ -111,8 +115,9 @@ popd
 
 ## Build Unsigned Sigs
 
-You should still be in the `gitian-builder` repository. If not, run `pushd
-gitian-builder`.
+```
+pushd gitian-builder
+```
 
 The first time `depends` is built for a new version, it can take a *long* time,
 as [dependencies](https://github.com/bitcoin/bitcoin/tree/master/depends/packages)
