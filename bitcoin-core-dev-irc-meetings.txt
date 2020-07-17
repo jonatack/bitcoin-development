@@ -67,7 +67,7 @@ https://github.com/fanquake/core-review/blob/master/irc.md
 
 -----
 
-Emojis
+Some emojis for the fun of it
 
 👍  thumbs up
 👌  ok
@@ -76,6 +76,3 @@ Emojis
 🤦  facepalm
 🤷‍  shrugging
 🏆  trophy
-♂
-‍♀️
-※
