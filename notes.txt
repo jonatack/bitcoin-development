@@ -71,6 +71,9 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           This works for any line range as well:
           git log -L 120,130:file.h
 
+          To search git history for a GitHub PR number:
+          git log --grep='#1117 ' --merges
+
           To see moved-only code:
           git show --color-moved=dimmed-zebra
 
@@ -254,6 +257,23 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           `git log --since=$i-01-01 --until=$((i+1))-03-15 --no-merges \
           | grep '^Author' | cut -d':' -f2- | cut -d'<' -f1 | sort | uniq -c \
           | sort -nr | head -n 20 | awk '{print $2}' | tr '\n' ' '` ; done
+-----
+
+vasild    https://github.com/bitcoin/bitcoin/pull/19551/files
+          for "unused variable" warnings like your PR, can also do:
+
+          auto f = [] {
+              std::cout << "foo" << std::endl;
+              return true;
+          };
+          f();
+
+          or
+
+          [] {
+              std::cout << "foo" << std::endl;
+              return true;
+          }();
 -----
 
           Valgrind Memcheck incantations (WIP)
