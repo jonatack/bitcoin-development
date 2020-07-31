@@ -1,9 +1,12 @@
 ## Gitian Building
 
-Last updated: July 17, 2020
+Last updated: July 31, 2020
 
-*This is my updated version of fanquake's
-[gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md) resource.*
+*This is based on fanquake's
+[gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md)
+resource that I initially updated in January 2020 with info and changes that I
+found helpful when using it for the first time. Since then, I continue to update
+this resource regularly.*
 
 Bitcoin Core releases are [reproducibly built](https://reproducible-builds.org)
 using [Gitian Builder](https://github.com/devrandom/gitian-builder).
@@ -15,6 +18,12 @@ gitian-building](#make-base-vm-for-gitian-building) below.
 
 
 ## Initial Dependencies
+
+### Linux
+
+```bash
+sudo apt install coreutils # if coreutils is not already included in your distribution
+```
 
 ### macOS
 
@@ -30,12 +39,6 @@ sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 
 ```bash
 brew cask install docker
-```
-
-### Linux
-
-```bash
-sudo apt install coreutils # if coreutils is not already included in your distribution
 ```
 
 ### All platforms
@@ -97,11 +100,19 @@ popd
 
 ## Set up and check out the branches to build
 
+You can run the following git command from within your local bitcoin repository
+to see the Bitcoin Core release tags and descriptions, ordered by most recent
+last.
+
+```bash
+git tag -n | sort -V
+```
+
 Update the version and signer values with the version to build and your username.
 
 ```bash
-export VERSION=0.20.1rc1
-export SIGNER=jonatack
+export VERSION=0.20.1
+export SIGNER=your_username
 export USE_DOCKER=1
 
 pushd gitian.sigs
