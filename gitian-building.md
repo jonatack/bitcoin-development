@@ -1,6 +1,6 @@
-## Gitian Building
+# Gitian Building
 
-Last updated: July 31, 2020
+Last updated: August 1, 2020
 
 *This is based on fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md)
@@ -19,10 +19,17 @@ gitian-building](#make-base-vm-for-gitian-building) below.
 
 ## Initial Dependencies
 
+This is a simplified version of the dependencies documentation in
+https://github.com/devrandom/gitian-builder#prerequisites -- don't hesitate to
+refer to it for further info or if you get stuck.
+
 ### Linux
 
+If `coreutils` is already included in your distribution, remove it from this
+line:
+
 ```bash
-sudo apt install coreutils # if coreutils is not already included in your distribution
+sudo apt install apt-cacher-ng coreutils
 ```
 
 ### macOS
@@ -41,7 +48,7 @@ sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 brew cask install docker
 ```
 
-### All platforms
+### Docker info for all platforms
 
 - To install Docker, see the information for your platform here: [Docker Engine
   overview](https://docs.docker.com/install/).
@@ -94,18 +101,21 @@ popd
 
 ```bash
 pushd gitian-builder
+git pull # pull any updates
 bin/make-base-vm --suite bionic --arch amd64 --docker
 popd
 ```
 
 ## Set up and check out the branches to build
 
-You can run the following git command from within your local bitcoin repository
-to see the Bitcoin Core release tags and descriptions, ordered by most recent
-last.
+You can run the following `git tag` command from within your local bitcoin
+repository to see the Bitcoin Core release tags and descriptions, ordered by
+most recent last.
 
 ```bash
+pushd bitcoin
 git tag -n | sort -V
+popd
 ```
 
 Update the version and signer values with the version to build and your username.
@@ -126,25 +136,49 @@ popd
 
 ## Build Unsigned Sigs
 
+All of the instructions in this section are to be run from within the
+`gitian-builder` directory:
+
 ```
 pushd gitian-builder
 ```
 
+#### Intro
+
 The first time `depends` is built for a new version, it can take a *long* time,
-as [dependencies](https://github.com/bitcoin/bitcoin/tree/master/depends/packages)
+as
+[dependencies](https://github.com/bitcoin/bitcoin/tree/master/depends/packages)
 are being built for all architectures and operating systems. Subsequent builds
 will be much faster, as only Bitcoin Core is being compiled.
 
-Follow build progress using:
+If you encounter any errors, it may be helpful to restart the base VM, or more
+rarely, delete the cache in `gitian-builder/cache` and rebuild the depends:
+
+```bash
+# Don't do these unless you need to, because it takes much more time.
+rm -r cache
+make -C ../bitcoin/depends download SOURCES_PATH=`pwd`/cache/common
+```
+
+Follow build progress from the `gitian-builder` directory root using:
 
 ```bash
 tail -f var/install.log # Setup
 tail -f var/build.log # Building dependencies and Bitcoin Core
 ```
 
-Adjust `num-make` and `memory` as needed below.
+### Now, on to building the unsigned sigs
 
-### Linux
+You would normally run all three of these (Linux, Windows, and macOS) and submit
+the results in one PR.
+
+Adjust `num-make` (number of cores, like for `make -j`) and `memory` (RAM) as
+needed below. For instance, I have four cores and add one for the `num_make`
+value.
+
+The first build will be slow. The subsequent ones will go faster.
+
+#### Linux
 
 ```bash
 bin/gbuild --num-make 5 --memory 12000 --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
@@ -152,7 +186,7 @@ bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.
 mv build/out/bitcoin-*.tar.gz build/out/src/bitcoin-*.tar.gz ../
 ```
 
-### Windows
+#### Windows
 
 ```bash
 bin/gbuild --num-make 5 --memory 12000 --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
@@ -161,7 +195,7 @@ mv build/out/bitcoin-*-win-unsigned.tar.gz inputs/bitcoin-win-unsigned.tar.gz
 mv build/out/bitcoin-*.zip build/out/bitcoin-*.exe ../
 ```
 
-### macOS
+#### macOS
 
 ```bash
 bin/gbuild --num-make 5 --memory 12000 --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
@@ -184,16 +218,28 @@ git push
 popd
 ```
 
-## Build Signed Sigs - macOS and Windows only
+Go to https://github.com/bitcoin-core/gitian.sigs and open a PR from that
+commit. Done 🍻
+
+
+## Build Signed Sigs
 
 Signed signatures can be built once the `detached sigs` are available in the
-[detached-sigs repo](https://github.com/bitcoin-core/bitcoin-detached-sigs/).
+[detached-sigs
+repo](https://github.com/bitcoin-core/bitcoin-detached-sigs/). They are often
+pushed a day or so after the release is tagged and announced on the
+#bitcoin-core-dev IRC channel with a message like "0.21.0 detached signatures
+are up and tagged."
+
+You would normally run both of these (macOS and Windows) and submit the results
+in one PR. These build far faster than the builds for the unsigned signatures --
+within a minute or so, or even a few seconds.
 
 ```
 pushd gitian-builder
 ```
 
-### macOS
+#### macOS
 
 ```bash
 bin/gbuild -i --commit signature=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
@@ -202,7 +248,7 @@ bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitcoin/contrib/gi
 mv build/out/bitcoin-osx-signed.dmg ../bitcoin-${VERSION}-osx.dmg
 ```
 
-### Windows
+#### Windows
 
 ```bash
 bin/gbuild -i --commit signature=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
@@ -225,7 +271,8 @@ git push
 popd
 ```
 
-Done 🍻
+Go to https://github.com/bitcoin-core/gitian.sigs and open a PR from that
+commit. Done 🍻
 
 
 ## One-off builds
