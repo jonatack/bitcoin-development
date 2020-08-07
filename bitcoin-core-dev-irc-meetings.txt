@@ -17,10 +17,14 @@ Bitcoin Core Dev IRC Meetings
 
 -----
 
-*Wallet* meeting every other Friday 1900 UTC on #bitcoin-core-dev since 29/10/18
+*Wallet* meeting every other Friday 1900 UTC on #bitcoin-core-dev since 29 Oct 2018
 
   Wallet meeting logs (same link as for the General meetings):
   http://www.erisian.com.au/meetbot/bitcoin-core-dev/
+
+-----
+
+*P2P* meeting every other Tuesday 1500 UTC on #bitcoin-core-dev since 11 Aug 2020
 
 -----
 
@@ -72,7 +76,9 @@ Some emojis for the fun of it
 👍  thumbs up
 👌  ok
 🚀  rocket
+👏  clapping
 😂  laughing crying
 🤦  facepalm
 🤷‍  shrugging
 🏆  trophy
+⏰  alarm clock
