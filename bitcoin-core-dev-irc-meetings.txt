@@ -9,8 +9,8 @@ Bitcoin Core Dev IRC Meetings
   To link to a specific line in the log history, append #l-<line-number>
   http://www.erisian.com.au/bitcoin-core-dev/log-2019-04-16.html#l-129
 
-  Past and future topics are managed by Steve Lee (moneyball on IRC) in this gist:
-  https://gist.github.com/moneyball/071d608fdae217c2a6d7c35955881d8a
+  Past and future meeting topics:
+  http://gnusha.org/bitcoin-core-dev/proposedmeetingtopics.txt
 
   To propose a meeting topic, post this message on #bitcoin-core-dev:
   #proposedmeetingtopic <topic>
@@ -21,6 +21,12 @@ Bitcoin Core Dev IRC Meetings
 
   Wallet meeting logs (same link as for the General meetings):
   http://www.erisian.com.au/meetbot/bitcoin-core-dev/
+
+  Past and future meeting topics:
+  http://gnusha.org/bitcoin-core-dev/proposedwalletmeetingtopics.txt
+
+  To propose a meeting topic, post this message on #bitcoin-core-dev:
+  #proposedwalletmeetingtopic <topic>
 
 -----
 
@@ -76,8 +82,11 @@ Some emojis for the fun of it
 👍  thumbs up
 👌  ok
 🚀  rocket
+🎉  ta-da
+✨   starry sky
 👏  clapping
 😂  laughing crying
+😛  face with tongue stuck out
 🤦  facepalm
 🤷‍  shrugging
 🏆  trophy
