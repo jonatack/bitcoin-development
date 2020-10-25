@@ -6,6 +6,7 @@ alphabetical order:
 
 #bitcoin-builds
 #bitcoin-core-dev
+##bitcoin-core-gui
 #bitcoin-core-pr-reviews
 #bitcoin-wizards
 #bitcoin-workshops
@@ -17,6 +18,7 @@ alphabetical order:
 #mit-dci
 #rust-bitcoin
 #secp256k1
+##taproot-activation
 ##taproot-bip-review
 
 
@@ -35,4 +37,4 @@ https://bitcoincore.reviews
 
 This server hosts a number of Bitcoin-related IRC channel logs:
 
-http://gnusha.org/
+http://gnusha.org
