@@ -55,10 +55,10 @@ sed -i -e 's/UsedDestination/SpentKey/g' $(git grep -l 'UsedDestination' ./src)
 scripted-diff: Sort test includes
 ```
 -BEGIN VERIFY SCRIPT-
- # Mark all lines with #includes
- sed -i --regexp-extended -e 's/(#include <.*>)/\1 /g' $(git grep -l '#include' ./src/bench/ ./src/test ./src/wallet/test/)
- # Sort all marked lines
- git diff -U0 | ./contrib/devtools/clang-format-diff.py -p1 -i -v
+# Mark all lines with #includes
+sed -i --regexp-extended -e 's/(#include <.*>)/\1 /g' $(git grep -l '#include' ./src/bench/ ./src/test ./src/wallet/test/)
+# Sort all marked lines
+git diff -U0 | ./contrib/devtools/clang-format-diff.py -p1 -i -v
 -END VERIFY SCRIPT-
 ```
 -----
@@ -73,13 +73,13 @@ scripted-diff: Bump copyright headers
 
 scripted-diff: Replace fprintf with tfm::format
 
-    sed -i --regexp-extended -e 's/fprintf\(std(err|out), /tfm::format(std::c\1, /g' $(git grep -l 'fprintf(' -- ':(exclude)src/crypto' ':(exclude)src/leveldb' ':(exclude)src/univalue' ':(exclude)src/secp256k1')
+sed -i --regexp-extended -e 's/fprintf\(std(err|out), /tfm::format(std::c\1, /g' $(git grep -l 'fprintf(' -- ':(exclude)src/crypto' ':(exclude)src/leveldb' ':(exclude)src/univalue' ':(exclude)src/secp256k1')
 
 -----
 
 scripted-diff: stop using the gArgs wrappers
 
-    find src/ -name "*.cpp" ! -wholename "src/util.h" ! -wholename "src/util.cpp" | xargs perl -i -pe 's/(?<!\.)(ParseParameters|ReadConfigFile|IsArgSet|(Soft|Force)?(Get|Set)(|Bool|)Arg(s)?)\(/gArgs.\1(/g'
+find src/ -name "*.cpp" ! -wholename "src/util.h" ! -wholename "src/util.cpp" | xargs perl -i -pe 's/(?<!\.)(ParseParameters|ReadConfigFile|IsArgSet|(Soft|Force)?(Get|Set)(|Bool|)Arg(s)?)\(/gArgs.\1(/g'
 
 -----
 
@@ -98,5 +98,20 @@ scripted-diff: Complete the move from CCriticalSection to identical RecursiveMut
 https://github.com/bitcoin/bitcoin/pull/19373
 
     sed -i --regexp-extended -e 's/HexStr\(([^(]+)\.begin\(\), *([^(]+)\.end\(\)\)/HexStr(\1)/g' $(git grep -l HexStr)
+
+-----
+
+https://github.com/bitcoin/bitcoin/pull/19953/commits/d17bebdf9b42b6f823aced1d3768879707d94847
+
+scripted-diff: put ECDSA in name of signature functions
+
+In preparation for adding Schnorr versions of `CheckSig`, `VerifySignature`, and
+`ComputeEntry`, give them an ECDSA specific name.
+
+-BEGIN VERIFY SCRIPT-
+sed -i 's/CheckSig(/CheckECDSASignature(/g' $(git grep -l CheckSig ./src)
+sed -i 's/VerifySignature(/VerifyECDSASignature(/g' $(git grep -l VerifySignature ./src)
+sed -i 's/ComputeEntry(/ComputeEntryECDSA(/g' $(git grep -l ComputeEntry ./src)
+-END VERIFY SCRIPT-
 
 -----
