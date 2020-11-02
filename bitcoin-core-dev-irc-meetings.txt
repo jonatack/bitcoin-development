@@ -32,6 +32,9 @@ Bitcoin Core Dev IRC Meetings
 
 *P2P* meeting every other Tuesday 1500 UTC on #bitcoin-core-dev since 11 Aug 2020
 
+  To propose a meeting topic, edit/update the public wiki at:
+  https://github.com/bitcoin-core/bitcoin-devwiki/wiki/P2P-IRC-meetings
+
 -----
 
 *PR Review Club* meeting every Wednesday 1800 UTC on #bitcoin-core-pr-reviews
