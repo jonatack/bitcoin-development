@@ -234,9 +234,15 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           ./src/bench/bench_bitcoin -filter=VerifyNestedIfScript -evals=50
           ./src/bench/bench_bitcoin -filter="SipHash|SipHash_3b|SipHash_32b"
 
-          git clean -fdx && git checkout master && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
+          git clean -dfX && git checkout master && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
 
-          git clean -dfx && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 -C src bench/bench_bitcoin && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
+          git clean -dfX && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 -C src bench/bench_bitcoin && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
+
+gwillen   I suggest -dfX instead of -dfx (capitalize the x) when doing git clean
+          as it may save you someday. X only removes ignored files, x also
+          removes locally added non-ignored files, including new code you did
+          not yet call 'git add' on.
+
 -----
 
           Commit stats bash scripts
@@ -623,4 +629,12 @@ sjors      Tested it's reachable via IPv4 and IPv6 (and returns both types of
            dig -t AAAA +trace seed.bitcoin.wiz.biz
            dig -6 -t A +trace seed.bitcoin.wiz.biz
            dig -6 -t AAAA +trace x5.seed.bitcoin.wiz.biz
+-----
+
+vasild     To view open network connections:
+           sockstat -l
+
+           For interactive communication with another host using the TELNET protocol:
+           telnet 127.0.0.1 8333
+
 -----
