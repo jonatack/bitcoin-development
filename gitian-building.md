@@ -45,7 +45,7 @@ sudo ln -s /usr/local/bin/gsha256sum /usr/local/bin/sha256sum
 ```
 
 ```bash
-brew cask install docker
+brew cask install docker && brew link docker
 ```
 
 ### Docker info for all platforms
