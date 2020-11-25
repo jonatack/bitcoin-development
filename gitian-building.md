@@ -106,6 +106,8 @@ bin/make-base-vm --suite bionic --arch amd64 --docker
 popd
 ```
 
+If you encounter an error about connection timeouts on 172.17.0.1:3142, you probably have blocked port 3142 for apt-cacher-ng.
+
 ## Set up and check out the branches to build
 
 You can run the following `git tag` command from within your local bitcoin
