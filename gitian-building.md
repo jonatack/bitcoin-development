@@ -1,20 +1,40 @@
 # Gitian Building
 
-Last updated: November 25, 2020
+Last updated: November 26, 2020
 
 *This is based on fanquake's
-[gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md)
-resource that I initially updated in January 2020 with info and changes that I
-found helpful when using it for the first time. Since then, I continue to update
-this resource regularly.*
+[gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md),
+a resource I began updating in January 2020 with info and changes that were
+helpful when using it for the first time. Since then, this is updated
+regularly.*
 
-Bitcoin Core releases are [reproducibly built](https://reproducible-builds.org)
-using [Gitian Builder](https://github.com/devrandom/gitian-builder).
-
+----
 
 If you have already set up your environment to build gitian signatures, you can
 skip directly to [Make base VM for
 gitian-building](#make-base-vm-for-gitian-building) below.
+
+----
+
+Bitcoin Core releases are [reproducibly built](https://reproducible-builds.org)
+using [Gitian Builder](https://github.com/devrandom/gitian-builder).
+
+Gitian is the deterministic build process that is used to build the Bitcoin Core
+executables. It provides a way to be reasonably sure that the executables are
+really built from the git source. It also makes sure that the same, tested
+dependencies are used and statically built into the executable.
+
+Multiple developers build the source code by following a specific descriptor
+("recipe"), cryptographically sign the result, and upload the resulting
+signature. These results are compared and only if they match, the build is
+accepted and provided for download.
+
+More independent Gitian builders are needed, which is why this guide exists. It
+is preferred you follow the steps yourself instead of using someone else's VM
+image to avoid "contaminating" the build.
+
+For further information, the Bitcoin Core "Gitian building" documentation is at
+https://github.com/bitcoin-core/docs/blob/master/gitian-building.md
 
 
 ## Initial Dependencies
@@ -25,17 +45,17 @@ refer to it for further info or if you get stuck.
 
 ### Linux
 
-If `coreutils` is already included in your distribution, remove it from this
+If `coreutils` or `ruby` is already included in your distribution, remove it from this
 line:
 
 ```bash
-sudo apt install apt-cacher-ng coreutils
+sudo apt install apt-cacher-ng coreutils ruby
 ```
 
 ### macOS
 
 ```bash
-brew install coreutils
+brew install coreutils ruby
 ```
 
 Gitian-builder needs `sha256sum`, which doesn't exist on macOS.
