@@ -91,6 +91,9 @@ Some emojis for the fun of it
 😂  laughing crying
 😛  face with tongue stuck out
 🤦  facepalm
+😱  astonished/scream
 🤷‍  shrugging
 🏆  trophy
 ⏰  alarm clock
+🍰  cake
+😈  devil imp
