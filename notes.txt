@@ -2,13 +2,25 @@ NOTES
 
 -----
 
-laanwj:   Focus on user problems, actual bugs, and "used, but untested" methods
+wumpus:   Focus on user problems, actual bugs, and "used, but untested" methods
           that affect outcomes and need tests
 
           What kind of frustrates me, personally, is that we didn't manage to
           clearly separate out the consensus parts. Not to a library (which
           would be useful for rust-bitcoin et al), but also not even to a
           separate directory.
+
+          I think it's important to isolate the consensus code soon, and be
+          extremely careful about that. I'm not sure we can be careful
+          enough. yes, I think isolating the conensus code would be most bang
+          for buck with regard to risk minimalization. make it clear which areas
+          of the code are the really risky ones that could break bitcoin as a
+          thing. bitcoin core is too big.
+
+sipa:     happy to see renewed activity on that front with dongcarl's recent PRs
+
+wumpus:   but I've been screaming into the void about this since forever, I'm
+          happy dongcarl picked up on it.
 -----
 
 jnewbery: Review 5-10 PRs per PR made
@@ -252,7 +264,7 @@ gwillen   I suggest -dfX instead of -dfx (capitalize the x) when doing git clean
 
           Commits/contributor ranking over a time period
           git log --since=2020-01-01 --until=2020-12-31 --no-merges \
-          | grep '^Author' | sort | uniq -c | sort -nr | head -n 20
+          | grep '^Author' | sort | uniq -c | sort -nr | head -n 40
 
           Count contributors over a time period
           git log --since=2019-01-01 --until=2019-12-31 --no-merges \
@@ -637,4 +649,16 @@ vasild     To view open network connections:
            For interactive communication with another host using the TELNET protocol:
            telnet 127.0.0.1 8333
 
+-----
+
+RPC command line curl:
+
+curl --user `cat ~/.bitcoin/.cookie` --data-binary '{"jsonrpc": "1.0", "id": "curltest", "method": "getwalletinfo", "params": []}' -H 'content-type: text/plain;' http://127.0.0.1:8332/wallet/ | json_pp
+
+-----
+
+           To push to another user's remote branch:
+           git push <remote> <your-branch>:<remote-branch>
+
+           git push harding news125-pr20305:2020-11-25-newsletter
 -----
