@@ -126,6 +126,13 @@ bin/make-base-vm --suite bionic --arch amd64 --docker
 popd
 ```
 
+If you encounter an error about connection timeouts and you are running a firewall like UFW, you have likely blocked port 3142. Open port 3142, which is required for apt-cacher-ng's web server:
+
+```bash
+ufw allow 3142/tcp
+ufw reload
+```
+
 ## Set up and check out the branches to build
 
 You can run the following `git tag` command from within your local bitcoin
