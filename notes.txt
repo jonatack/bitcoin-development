@@ -523,6 +523,10 @@ sipa:     One easy way to make sure you have all the call sites is to rename it.
           automatically copied into merge commits.
 -----
 
+          Discussion on why to not use const with by value params:
+          https://github.com/bitcoin/bitcoin/pull/19845#discussion_r489776345
+-----
+
 jnewbery  On insert vs emplace, in src/net_processing.cpp::ProcessMessage::L2836
           https://github.com/bitcoin/bitcoin/pull/19364#discussion_r448377825
 
