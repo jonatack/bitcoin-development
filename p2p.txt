@@ -16,6 +16,69 @@ EthanHeilman
 
 -----
 
+27 Nov 2020
+
+sdaftuar dhruvm: i saw your question about my comment here:
+https://github.com/bitcoin/bitcoin/pull/19858/files#r483713328. the point i was
+trying to make is that it's healthy for the whole network if any honest node is
+engaging in the proposed behavior because even an eclipsed (listening) node will
+eventually get an inbound connection from the honest nodes who are syncing tips
+with everyone in their addrman, and at the point that happens they'll have a
+chance to learn of a block from the incoming connection. at any rate this ties
+right into the comment that amiti made, that by creating new edges in the
+network graph all the time, we are hardening the network against partition
+attacks (ie raising the cost to an attacker of being able to successfully
+partition the network for a given amount of time). please feel free to ping me
+here if you have more questions.
+
+<dhruvm> sdaftuar: Thank you. That's what I originally thought this was about --
+helping nodes that are listening, eclipsed and addrman 100% poisoned(especially
+because listening nodes are easier to poison iiuc). To my rookie eye, that'd
+argue that this PR is not merely an incremental change. There are no other
+mechanisms today that I know of where the network can help an eclipsed node
+where the owner does not know it is eclipsed. Would you agree? When addrman is
+100% poisoned, the node does not have memory of any peer outside the dishonest
+network, but the honest network still has memory of this trapped, honest node.
+
+<sdaftuar> dhruvm: i don't understand the "addrman 100% poisoned" reference -- a
+peer can be eclipsed regardless of how "poisoned" its addrman is, it's just a
+question of likelihood/cost. an adversary with 10 (diverse) ip addresses can
+(with very low probability) eclipse new nodes coming online, today, because
+aside from the stale-tip-detection logic, we don't make any attempt to rotate
+our outbound peers and it's possible to bypass that logic by feeding blocks
+(slowly) to the target peer, which opens up certain kinds of attacks (either by
+mining a bogus/less work chain, or even just keeping a peer lagged behind the
+network for the purposes of attacks on eg layer 2 systems like
+lightning). anyway i do agree with the statement that this PR is not just an
+incremental change to our peering/network topology -- it would be a step-up in
+costs to an attacker to sustain a partitioning attack against a node, because
+after this pr we should always eventually find the honest chain, as long as we
+have at least 1 honest peer in our addrman. (of course, if our addrman is taken
+over, then things are pretty hopeless). but your point is right that if we're a
+listening node and our addrman is taken over, then theoretically honest peers
+could still connect in to us and keep us connected to the honest network. that
+seems an unlikely situation however, as if we're taking connections from honest
+peers, we should also have a not-completely-overrun addrman
+
+<dhruvm> Thank you, that helps me understand. If an incoming block-relay
+connection reveals we are behind by more than 1 block, and is a listening peer,
+are there downsides to evicting an outbound peer to open a slot for the more
+up-to-date peer?
+
+<sdaftuar> i think it's hard to say...eviction of an existing peer can be a
+dangerous thing, because an adversary can use such behavior to (at some cost)
+cause you to disconnect honest peers. but if you design it right, i think it
+could be a fine and beneficial behavior even to seek out new outbound peers if
+you get indications that none of your current peers are themselves connected to
+the honest, most-work network. the existing outbound peer rotation/eviction
+system takes some care to only consider 4 of our 8 peers for eviction, and then
+chooses the one that has least recently provided us a block, i think. so that
+even if an adversary were trying to game our rules, or if there was some network
+condition we failed to foresee that caused an unexpected behavior, at least 4 of
+our 8 peers would be unaffected by the eviction logic.
+
+-----
+
 25 Dec 2019
 
 <gleb> Is there a way to trick functional tests to think that nodes are not
