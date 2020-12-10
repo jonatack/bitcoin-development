@@ -1,6 +1,6 @@
 # Gitian Building
 
-Last updated: November 26, 2020
+Last updated: December 10, 2020
 
 *This is based on fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md),
@@ -126,7 +126,9 @@ bin/make-base-vm --suite bionic --arch amd64 --docker
 popd
 ```
 
-If you encounter an error about connection timeouts and you are running a firewall like UFW, you have likely blocked port 3142. Open port 3142, which is required for apt-cacher-ng's web server:
+If you encounter an error about connection timeouts and are running a firewall
+like UFW, you may need to open port 3142, which is required for the
+`apt-cacher-ng` web server:
 
 ```bash
 ufw allow 3142/tcp
@@ -148,7 +150,7 @@ popd
 Update the version and signer values with the version to build and your username.
 
 ```bash
-export VERSION=0.21.0rc2
+export VERSION=0.21.0rc3
 export SIGNER=your_username
 export USE_DOCKER=1
 
