@@ -1,6 +1,6 @@
 # Gitian Building
 
-Last updated: December 10, 2020
+Last updated: December 12, 2020
 
 *This is based on fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md),
@@ -10,9 +10,8 @@ regularly.*
 
 ----
 
-If you have already set up your environment to build gitian signatures, you can
-skip directly to [Make base VM for
-gitian-building](#make-base-vm-for-gitian-building) below.
+If you have already set up your environment for gitian builds, you can skip
+directly to [Make Base VM for Gitian Building](#make-base-vm-for-gitian-building) below.
 
 ----
 
@@ -114,10 +113,24 @@ wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.p
 wget -O osslsigncode-2.0.tar.gz -P inputs https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz
 wget -P inputs https://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
 wget -P inputs https://bitcoincore.org/depends-sources/sdks/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz
+```
+
+If building gitian for Bitcoin Core 0.20.x on macOS, you'll need:
+```
+wget -P inputs https://bitcoincore.org/depends-sources/sdks/MacOSX10.14.sdk.tar.gz
+```
+
+If building gitian for Bitcoin Core 0.19.x on macOS, you'll need:
+```
+wget -P inputs https://bitcoincore.org/depends-sources/sdks/MacOSX10.11.sdk.tar.gz
+```
+
+Exit when you're done with the downloads.
+```
 popd
 ```
 
-## Make base VM for gitian-building
+## Make Base VM for Gitian Building
 
 ```bash
 pushd gitian-builder
