@@ -1,6 +1,6 @@
 # Gitian Building
 
-Last updated: December 12, 2020
+Last updated: December 25, 2020
 
 *This is based on fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md),
@@ -167,16 +167,20 @@ export VERSION=0.21.0rc3
 export SIGNER=your_username
 export USE_DOCKER=1
 
-pushd gitian.sigs
-git checkout -b $SIGNER-$VERSION
-popd
-
 pushd bitcoin
 git checkout v$VERSION
 popd
 ```
 
 ## Build Unsigned Sigs
+
+Since we'll be creating a PR to the `gitian.sigs` repo, make a new branch off master:
+
+```bash
+pushd gitian.sigs
+git checkout -b $SIGNER-$VERSION-unsigned master
+popd
+```
 
 All of the instructions in this section are to be run from within the
 `gitian-builder` directory:
@@ -276,6 +280,16 @@ are up and tagged."
 You would normally run both of these (macOS and Windows) and submit the results
 in one PR. These build far faster than the builds for the unsigned signatures --
 within a minute or so, or even a few seconds.
+
+Since we'll be creating a PR to the `gitian.sigs` repo, make a new branch off master:
+
+```bash
+pushd gitian.sigs
+git checkout -b $SIGNER-$VERSION-signed master
+popd
+```
+
+Then navigate to `gitian-builder`
 
 ```
 pushd gitian-builder
