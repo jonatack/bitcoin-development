@@ -1,6 +1,6 @@
 # Gitian Building
 
-Last updated: January 5, 2021
+Last updated: January 14, 2021
 
 *This is based on fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md),
@@ -163,7 +163,7 @@ popd
 Update the version and signer values with the version to build and your username.
 
 ```bash
-export VERSION=0.21.0rc5
+export VERSION=0.21.0
 export SIGNER=your_username
 export USE_DOCKER=1
 
@@ -274,7 +274,7 @@ Signed signatures can be built once the `detached sigs` are available in the
 [detached-sigs
 repo](https://github.com/bitcoin-core/bitcoin-detached-sigs/). They are often
 pushed a day or so after the release is tagged and announced on the
-#bitcoin-core-dev IRC channel with a message like "0.21.0 detached signatures
+#bitcoin-core-dev IRC channel with a message like "22.0.0 detached signatures
 are up and tagged."
 
 You would normally run both of these (macOS and Windows) and submit the results
