@@ -89,6 +89,7 @@ Some emojis for the fun of it
 ✨   starry sky
 👏  clapping
 😂  laughing crying
+🤣  laughing crying slanted
 😛  face with tongue stuck out
 🤦  facepalm
 😱  astonished/scream
@@ -97,3 +98,6 @@ Some emojis for the fun of it
 ⏰  alarm clock
 🍰  cake
 😈  devil imp
+💰  money bag
+☕ coffee
+⚡ lightning
