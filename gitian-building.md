@@ -93,7 +93,7 @@ Fork and clone a copy of the
 
 ```bash
 # After forking https://github.com/bitcoin-core/gitian.sigs on GitHub
-git clone https://github.com/your_github_username/gitian.sigs.git
+git clone git@github.com:your_github_username/gitian.sigs.git
 ```
 
 Clone the other required repositories.
@@ -260,7 +260,7 @@ popd
 pushd gitian.sigs
 git add .
 git commit -m "$SIGNER $VERSION unsigned"
-git push
+git push -u origin $SIGNER-$VERSION-unsigned
 popd
 ```
 
