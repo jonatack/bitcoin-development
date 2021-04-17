@@ -277,6 +277,12 @@ pushed a day or so after the release is tagged and announced on the
 #bitcoin-core-dev IRC channel with a message like "22.0.0 detached signatures
 are up and tagged."
 
+```bash
+pushd bitcoin-detached-sigs
+git pull # pull new detached signatures
+popd
+```
+
 You would normally run both of these (macOS and Windows) and submit the results
 in one PR. These build far faster than the builds for the unsigned signatures --
 within a minute or so, or even a few seconds.
@@ -323,7 +329,7 @@ popd
 pushd gitian.sigs
 git add .
 git commit -m "$SIGNER $VERSION signed"
-git push
+git push -u origin $SIGNER-$VERSION-signed
 popd
 ```
 
