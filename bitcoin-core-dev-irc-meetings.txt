@@ -84,6 +84,7 @@ Some emojis for the fun of it
 
 👍  thumbs up
 👌  ok
+🤙  shaka
 🚀  rocket
 🎉  ta-da
 ✨   starry sky
@@ -95,9 +96,14 @@ Some emojis for the fun of it
 😱  astonished/scream
 🤷‍  shrugging
 🏆  trophy
-⏰  alarm clock
 🍰  cake
 😈  devil imp
 💰  money bag
-☕ coffee
-⚡ lightning
+🧠  brain
+💡  lightbulb
+🦗  cricket
+⏰   alarm clock
+☕   coffee
+⚡   lightning
+
+Yᵒᵘ Oᶰˡʸ Lᶤᵛᵉ Oᶰᶜᵉ
