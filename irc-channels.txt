@@ -12,6 +12,7 @@ alphabetical order:
 #bitcoin-workshops
 #c-lightning
 ##hwi
+#joinmarket
 #lightning-dev
 #lnd
 ##miniscript
