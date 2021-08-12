@@ -1,6 +1,6 @@
 # Gitian Building
 
-Last updated: April 29, 2021
+Last updated: August 12, 2021
 
 *This is based on fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md),
@@ -113,6 +113,7 @@ wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.p
 wget -O inputs/osslsigncode-2.0.tar.gz https://github.com/mtrojnar/osslsigncode/archive/2.0.tar.gz
 wget -P inputs https://github.com/bitcoin/bitcoin/files/6175295/osslsigncode-1.7.1.tar.gz
 wget -P inputs https://bitcoincore.org/depends-sources/sdks/Xcode-11.3.1-11C505-extracted-SDK-with-libcxx-headers.tar.gz
+wget iP inputs https://bitcoincore.org/depends-sources/sdks/Xcode-12.1-12A7403-extracted-SDK-with-libcxx-headers.tar.gz
 ```
 
 If building gitian for Bitcoin Core 0.20.x on macOS, you'll need:
@@ -163,7 +164,7 @@ popd
 Update the version and signer values with the version to build and your username.
 
 ```bash
-export VERSION=0.21.1
+export VERSION=0.21.2rc1
 export SIGNER=your_username
 export USE_DOCKER=1
 
