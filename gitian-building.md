@@ -1,6 +1,6 @@
 # Gitian Building
 
-Last updated: August 12, 2021
+Last updated: August 28, 2021
 
 *This is based on fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md),
@@ -164,7 +164,7 @@ popd
 Update the version and signer values with the version to build and your username.
 
 ```bash
-export VERSION=0.21.2rc1
+export VERSION=0.21.2rc2
 export SIGNER=your_username
 export USE_DOCKER=1
 
