@@ -84,6 +84,7 @@ Some emojis for the fun of it
 
 👍  thumbs up
 👌  ok
+👋  wave hi
 🤙  shaka
 🚀  rocket
 🎉  ta-da
@@ -107,3 +108,5 @@ Some emojis for the fun of it
 ⚡   lightning
 
 Yᵒᵘ Oᶰˡʸ Lᶤᵛᵉ Oᶰᶜᵉ
+
+⎦˚◡˚⎣

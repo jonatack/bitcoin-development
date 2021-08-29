@@ -12,15 +12,10 @@ wumpus:   Focus on user problems, actual bugs, and "used, but untested" methods
 
           I think it's important to isolate the consensus code soon, and be
           extremely careful about that. I'm not sure we can be careful
-          enough. yes, I think isolating the conensus code would be most bang
+          enough. yes, I think isolating the consensus code would be most bang
           for buck with regard to risk minimalization. make it clear which areas
           of the code are the really risky ones that could break bitcoin as a
           thing. bitcoin core is too big.
-
-sipa:     happy to see renewed activity on that front with dongcarl's recent PRs
-
-wumpus:   but I've been screaming into the void about this since forever, I'm
-          happy dongcarl picked up on it.
 -----
 
 jnewbery: Review 5-10 PRs per PR made
@@ -103,6 +98,8 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           git grep -l VARINT | xargs sed -i 's/VARINT(\([^,]\+\), VarIntMode::DEFAULT)/VARINT(\1\)/'
           git diff HEAD^
 
+          git grep -E '^( |std::optional<)*std::pair.*\(' -- "*.h"
+
           git range-diff master PREV NEW
 
           PREV=317bf6a NEW=ab8a6cd && diff <(git show $PREV) <(git show $NEW)
@@ -126,6 +123,8 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           git checkout $(git merge-base origin/master origin/pull/18588/head)
           git revert --no-edit $(git rev-list --min-parents=2 --max-count=1 origin/pull/16367/head)..origin/pull/16367/head
           git diff origin/pull/18588/head
+
+          grep -cr encourage _site/en/newsletters | sort -r -n -t ":" -k 2 | head
 -----
 
           Unit tests
@@ -195,6 +194,26 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           LC_ALL=de_DE.UTF-8 QT_QPA_PLATFORM=xcb BITCOIND=bitcoin-qt ./test/functional/p2p_permissions.py --tracerpc
 -----
 
+raj       Generic steps for reviewing functional tests
+
+          - Start python debugging and step through the *.py file.
+
+          - At the start of a test run, the output prints the temp directory
+            where regtest nodes are created. You can talk to them while you
+            pause the python file, with bitcoin-cli -datadir=/tmp-filepath/node0/ <command>.
+
+          - tail -f the debug.log and activate logging (net, rpc, etc.) to see
+            communications happening in each nodes. Verify log is as expected.
+
+          - If you want to print something from src/*.cpp, use LogPrintf() to
+            print in the debug.log file, that you were already tailing.
+
+          - Use python debug console to work with the python objects, call
+            functions, check that object attributes are updated as expected.
+
+          - Look for edge cases by changing test variables & observing failures.
+-----
+
           Fuzz tests
 
           Help: pass with -help=1 argument:
@@ -211,11 +230,26 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           May need to run `make distclean` first.
 
           Run an individual fuzz test:
-          src/test/fuzz/base_encode_decode
+          FUZZ=process_message src/test/fuzz/fuzz
 
+          vasild added fuzzing seeds to qa-assets by running the following:
+          mkdir /tmp/fuzz
+          FUZZ=netbase_dns_lookup src/test/fuzz/fuzz /tmp/fuzz
+          ./test/fuzz/test_runner.py --m_dir /tmp/fuzz /path/to/bitcoin-core/qa-assets/fuzz_seed_corpus/
+
+
+MarcoFalke jonatack: I couldn't run into a crash with 1kk iters in a single thread.
+             - With "-use_value_profile=1 -workers=9 -jobs=9" and a folder to
+               share the corpus, 400k iterations.
+             - Same but without use_value_profile, 1.1kk iters for first crash.
+             - Same as above (use_value_profile=1) w/o a shared corpus, 1.5kk.
+             Result of this experiment (N=1):
+             - Use a folder to share the corpus, Use more CPU, -use_value_profile=1
+
+vasild    I run it like "src/test/fuzz/fuzz /some/new/empty/directory"
           You can supply a folder where to put the seeds:
-          mkdir -p process_messages/
-          src/test/fuzz/process_messages process_messages/
+          FUZZ=node_eviction src/test/fuzz/fuzz ../qa-assets/fuzz_seed_corpus/node_eviction
+          FUZZ=addrman src/test/fuzz/fuzz ../qa-assets/fuzz_seed_corpus/addrman
 
           If you inspect the seeds manually with cat, be sure to pass in
           `cat --show-nonprinting` otherwise it might execute arbitary code
@@ -224,6 +258,9 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
 
           Run all fuzz tests with the test runner (not working; for the CI):
           ./test/fuzz/test_runner.py
+
+practicalswift fuzz survival test
+               https://gist.github.com/practicalswift/e3de0d96af31f42d3a2f5bcb6f631432
 -----
 
           Memory profiling:
@@ -240,11 +277,25 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           terminal buffer.
 -----
 
+          Run the CI locally:
+
+          FILE_ENV="./ci/test/00_setup_env_win64.sh" ./ci/test_run_all.sh
+-----
+
           Bench:
 
-          ./src/bench/bench_bitcoin -evals=1
-          ./src/bench/bench_bitcoin -filter=VerifyNestedIfScript -evals=50
-          ./src/bench/bench_bitcoin -filter="SipHash|SipHash_3b|SipHash_32b"
+martinus  It is really helpful to run a benchmark in an endless loop like so:
+
+          NANOBENCH_ENDLESS=BlockToJsonVerbose ./src/bench/bench_bitcoin -filter=BlockToJsonVerbose
+
+          and then fire up a profiler like `perf top` or hotspot
+          (https://github.com/KDAB/hotspot) to see where all the cycles are used.
+
+          ./src/bench/bench_bitcoin
+          ./src/bench/bench_bitcoin -?
+          ./src/bench/bench_bitcoin -h
+          ./src/bench/bench_bitcoin -filter=EvictionProtection*.*
+-----
 
           git clean -dfX && git checkout master && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
 
@@ -254,24 +305,24 @@ gwillen   I suggest -dfX instead of -dfx (capitalize the x) when doing git clean
           as it may save you someday. X only removes ignored files, x also
           removes locally added non-ignored files, including new code you did
           not yet call 'git add' on.
-
 -----
 
           Commit stats bash scripts
 
           Count non-merge commits over a time period
-          git log --oneline --since=2019-01-01 --until=2019-12-31 --no-merges | wc -l
-
-          Commits/contributor ranking over a time period
-          git log --since=2020-01-01 --until=2020-12-31 --no-merges \
-          | grep '^Author' | sort | uniq -c | sort -nr | head -n 40
+          git log --oneline --since=2020-01-01 --until=2020-12-31 --no-merges | wc -l
 
           Count contributors over a time period
-          git log --since=2019-01-01 --until=2019-12-31 --no-merges \
+          git log --since=2020-01-01 --until=2020-12-31 --no-merges \
           | grep '^Author' | sort | uniq -c | sort -nr | wc -l
 
+          Commits/contributor ranking over a time period
+          git log \
+          --since=2021-01-01 --until=2021-12-31 --no-merges \
+          | grep '^Author' | sort | uniq -c | sort -nr | head -n 10
+
           List top 20 contributors in commits per year
-          for i in 2012 2013 2014 2015 2016 2017 2018 2019 2020; do echo $i \
+          for i in 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021; do echo $i \
           `git log --since=$i-01-01 --until=$((i+1))-03-15 --no-merges \
           | grep '^Author' | cut -d':' -f2- | cut -d'<' -f1 | sort | uniq -c \
           | sort -nr | head -n 20 | awk '{print $2}' | tr '\n' ' '` ; done
@@ -342,8 +393,22 @@ valgrind --gen-suppressions=all --verbose --exit-on-first-error=yes --error-exit
           n (next)
           p (print) tx, wtx, etc.
           c (continue)
------
 
+          n (run) or r –> executes the program from start to end.
+          break or b –> sets breakpoint on a particular line.
+          disable -> disable a breakpoint.
+          enable –> enable a disabled breakpoint.
+          next or n -> executes next line of code, but don’t dive into functions.
+          step –> go to next instruction, diving into the function.
+          list or l –> displays the code.
+          print or p –> used to display the stored value.
+          quit or q –> exits out of gdb.
+          clear –> to clear all breakpoints.
+          continue or c –> continue normal execution.
+-----
+          Multinode / Multiwallet Bitcoin regtest network
+          https://github.com/FreekPaans/bitcoin-multi-node-regtest
+-----
           Berkeley DB special commands (located in db4/bin):
 
           db4/bin/db_dump ~/.bitcoin/wallets/wallet.dat
@@ -664,5 +729,226 @@ curl --user `cat ~/.bitcoin/.cookie` --data-binary '{"jsonrpc": "1.0", "id": "cu
            To push to another user's remote branch:
            git push <remote> <your-branch>:<remote-branch>
 
-           git push harding news125-pr20305:2020-11-25-newsletter
+           git push harding news152-review-club:2021-06-09-newsletter
+-----
+
+satoshi    https://www.metzdowd.com/pipermail/cryptography/2008-November/014832.html
+
+"I actually did this kind of backwards.  I had to write all the code before I
+could convince myself that I could solve every problem, then I wrote the paper.
+I think I will be able to release the code sooner than I could write a detailed
+spec.  You're already right about most of your assumptions where you filled in
+the blanks."
+-----
+
+Run this to print the bitcoin white paper from the blockchain:
+
+bitcoin-cli getblock 00000000000000ecbbff6bafb7efa2f7df05b227d5c73dca8f2635af32a2e949 0 | tail -c+92167 | for ((o=0;o<946;++o)) ; do read -rN420 x ; echo -n ${x::130}${x:132:130}${x:264:130} ; done | xxd -r -p | tail -c+9 | head -c184292 > bitcoin.pdf
+
+bitcoin-cli getrawtransaction 54e48e5f5c656b26c3bca14a8c95aa583d07ebe84dde3b7dd4a78f4e4186e713 | sed 's/0100000000000000/\n/g' | tail -n +2 | cut -c7-136,139-268,271-400 | tr -d '\n' | cut -c17-368600 | xxd -p -r > bitcoin.pdf
+-----
+
+Why onlynet=onion is not a particularly recommended option
+
+sipa:
+
+It's a trade-off. Only connecting out over Tor is more private of course when
+you combine it with no reachable IPv4/IPv6 address, in particular if you want to
+broadcast transactions without them being correlatable with your IP.
+
+On the other hand, if you only make random Tor connections, you're much more
+vulnerable to Sybil attacks (as Tor addresses have 0 cost to create, an attacker
+can just flood the network with 1000s of apparent Tor Bitcoin nodes, and have a
+high probability of receiving all outbound Tor connections a Tor-only node
+makes). This is significantly less a concern with IPv4/IPv6 (especially with
+asmap) due to cost of getting IPs in many networks. It's also less a concern if
+you have -addnoded connections to trusted peers (even if they're onion
+addresses).
+
+me:
+
+For example, search on "onlynet" in
+https://en.bitcoin.it/wiki/Setting_up_a_Tor_hidden_service
+
+"not particularly recommended...if everyone used onlynet=onion nobody on the
+onion bitcoin chain would be able to communicate with the clearnet chain. It is
+essential that some nodes access both clearnet and Tor...If you only wish to
+give access to your node to other Tor users, do not use it. "
+
+-----
+
+           How to see your version of Boost:
+
+           dpkg -s libboost-dev | grep 'Version'
+           echo -e '#include <boost/version.hpp>\nBOOST_VERSION' | gcc -x c++ -E -
+           dpkg -S /usr/include/boost/version.hpp
+-----
+
+template<typename Function>
+void printtime_inplace(string title, Function func)
+{
+    //...
+    func(title);
+    //...
+}
+
+-----
+
+           When should static_cast, dynamic_cast, const_cast and reinterpret_cast be used?
+           https://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used
+
+           https://github.com/bitcoin/bitcoin/pull/20965#issuecomment-770375623
+
+           Q: static_casts: What is an example of a compile time check that is
+           enabled when using those for numeric types?
+
+           A: If the destination type is numeric, the named cast asserts at
+           compile time that also the source type is numeric, while a c-style
+           cast doesn't in all cases:
+
+           long foo = (long)some_pointer; // compiles happily
+           long bar = static_cast<long>some_pointer; // "error: invalid ‘static_cast’ from type ‘char*’ to type ‘long int’"
+
+           Also note that modern C++ coding guidelines discourage the use of C casts:
+           https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-casts-named
+           https://google.github.io/styleguide/cppguide.html#Casting
+-----
+
+           Brace (uniform) initialization
+
+           https://github.com/bitcoin/bitcoin/pull/20685#discussion_r584631345
+
+           Brace (uniform) initialization raises compile time warnings (e.g. for
+           narrowing and conversions), and named casts provide compile time
+           checks as well.
+
+           https://google.github.io/styleguide/cppguide.html#Casting
+           https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Res-casts-named
+
+           "Use brace initialization to convert arithmetic types
+           (e.g. int64{x}). This is the safest approach because code will not
+           compile if conversion can result in information loss. The syntax is
+           also concise. Use static_cast as the equivalent of a C-style cast
+           that does value conversion."
+
+           "Brace initialization makes it clear that the type conversion was
+           intended and also prevents conversions between types that might
+           result in loss of precision. (It is a compilation error to try to
+           initialize a float from a double in this fashion, for example.)"
+
+
+           https://github.com/bitcoin/bitcoin/pull/21848#issuecomment-831763809
+
+           Important note which may not be immediately clear for all reviewers:
+
+           int32_t i{j}; is not necessarily equivalent to int32_t i = j; or int32_t i(j);.
+
+           Thus the choice of {}-initialization is not a cosmetic style choice.
+
+           int32_t i{j}; is the preferred choice not because it looks nicer, but because it is safer.
+
+           Safer how? Live demo:
+
+           $ cling
+           [cling]$ #include <cstdint>
+           [cling]$ int64_t j = 2147483648
+           (long) 2147483648
+           [cling]$ int32_t non_uniform_1 = j
+           (int) -2147483648
+           [cling]$ int32_t non_uniform_2(j)
+           (int) -2147483648
+           [cling]$ int32_t uniform{j}
+
+           input_line_9:2:18: error: non-constant-expression cannot be narrowed
+           from type 'int64_t' (aka 'long') to 'int32_t' (aka 'int') in initializer list
+
+           Note the silent narrowing from 2147483648 to -2147483648 for = j and
+           (j), but not for {j}.  That is why the {}-initializer syntax is said
+           to be safer than the other forms of initializations: by using {}
+           we're guaranteed not to be hit by an unexpected narrowing conversion.
+
+           See C++ Core Guidelines: ES.23: Prefer the {}-initializer syntax.
+           https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es23-prefer-the--initializer-syntax
+-----
+
+jonatack   https://github.com/bitcoin/bitcoin/pull/20210#discussion_r528835313
+
+           -> In this case, we can remove the default argument in the constructor declaration
+
+           -> As to your last point, it suggests the default member
+              `m_inbound_onion` initializer not set a value, since we are doing
+              it dynamically in the ctor. It's true that I see a build error in
+              this case, but not without the change in `net.h:1099`
+
+           More generally, from what I can gather, the ideas behind in-class
+           default member initializers added in C++11 were (a) to allow a
+           non-static data member to be initialized where it is declared,
+           e.g. in its class. A constructor can then use the initializer when
+           run-time initialization is needed, which can then (b) tidy up the
+           code up by avoiding doing it in the member initializer list of the
+           constructor. This provides extra benefits in classes with multiple
+           constructors.
+
+           I guess one can see the default member initializer as the general
+           default, particularly useful for constant initializers, that can be
+           overridden by any specific ones in member initializer lists in the
+           constructors.
+
+           Some resources:
+           - https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html#Rc-in-class-initializer
+           - https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html#c49-prefer-initialization-to-assignment-in-constructors
+           - https://en.cppreference.com/w/cpp/language/data_members#member-initialization
+           - https://www.stroustrup.com/C++11FAQ.html#member-init
+-----
+
+           How to deterministically reproduce a rare test issue using rr
+           https://github.com/bitcoin/bitcoin/issues/16337#issuecomment-629360810
+           https://github.com/bitcoin/bitcoin/issues/16337#issuecomment-629041023
+
+$ git clone https://github.com/bitcoin/bitcoin
+$ cd bitcoin/
+$ ./autogen.sh
+$ ./configure --with-incompatible-bdb
+$ make
+$ git clone https://github.com/mozilla/rr
+$ cd rr/
+$ ./configure
+$ make
+$ cd ../
+$ rm -rf test_bitcoin_chaos
+$ while rr/bin/rr record --chaos -o test_bitcoin_chaos src/test/test_bitcoin -l test_suite -t blockfilter_index_tests -- DEBUG_LOG_OUT; do
+      rm -rf test_bitcoin_chaos
+  done
+-----
+
+           Why we require brackets with conditionals over one line:
+           CVE-2014-1266: the Apple "goto fail" vulnerability
+           https://dwheeler.com/essays/apple-goto-fail.html
+-----
+
+           export TMPDIR=/dev/shm
+
+           mkdir /dev/shm/fuzz_temp_seeds
+           export TMPDIR=/dev/shm ; time src/test/fuzz/utxo_total_supply /dev/shm/fuzz_temp_seeds
+-----
+
+#!/usr/bin/env python3
+import subprocess
+with open('contrib/seeds/nodes_test.txt') as f:
+    for line in (line for line in (line.rstrip().split('#', 1)[0] for line in f) if line):
+        subprocess.call(["nc", "-v", "-x", "127.0.0.1:9050", "-z"] + line.split(':'))
+-----
+
+alex bosworth
+
+Threats to Lightning Network:
+1. Miner censorship prevents predictable confirmation
+2. Free message passing used as denial of service
+3. Funding and interest dry up before critical mass
+4. Liquidity fees fails to represent real market
+5. Capital requirements too high in practice
+
+-----
+
+Guix       https://gist.github.com/hebasto/7293726cbfcd0b58e1cfd5418316cee3
 -----

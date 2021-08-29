@@ -16,6 +16,40 @@ EthanHeilman
 
 -----
 
+6 Jan 2021
+
+suhas:
+
+I'm proposing the addition of a new, optional p2p message to allow peers to
+communicate that they do not want to send or receive (loose) transactions
+for the lifetime of a connection.
+
+The goal of this message is to help facilitate connections on the network
+over which only block-related data (blocks/headers/compact blocks/etc) are
+relayed, to create low-resource connections that help protect against
+partition attacks on the network.  In particular, by adding a network
+message that communicates that transactions will not be relayed for the
+life of the connection, we ease the implementation of software that could
+have increased inbound connection limits for such peers, which in turn will
+make it easier to add additional persistent block-relay-only connections on
+the network -- strengthening network security for little additional
+bandwidth.
+
+Software has been deployed for over a year now which makes such
+connections, using the BIP37/BIP60 "fRelay" field in the version message to
+signal that transactions should not be sent initially.  However, BIP37
+allows for transaction relay to be enabled later in the connection's
+lifetime, complicating software that would try to distinguish inbound peers
+that will never relay transactions from those that might.
+
+This proposal would add a single new p2p message, "disabletx", which (if
+used at all) must be sent between version and verack.  I propose that this
+message is valid for peers advertising protocol version 70017 or higher.
+Software is free to implement this BIP or ignore this message and remain
+compatible with software that does implement it.
+
+-----
+
 27 Nov 2020
 
 sdaftuar dhruvm: i saw your question about my comment here:
@@ -425,3 +459,5 @@ commits:
   in the interface, removing BanReason altogether.
 
 I'm happy to split off the second commit. It could also be ignored in backports.
+
+-----
