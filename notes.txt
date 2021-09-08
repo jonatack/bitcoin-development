@@ -279,7 +279,15 @@ practicalswift fuzz survival test
 
           Run the CI locally:
 
-          FILE_ENV="./ci/test/00_setup_env_win64.sh" ./ci/test_run_all.sh
+          MAKEJOBS="-j5" FILE_ENV="./ci/test/00_setup_env_win64.sh" ./ci/test_run_all.sh
+
+          32-bit depends build:
+
+          CONFIG_SITE="$PWD/depends/i686-pc-linux-gnu/share/config.site" ./configure CC="clang -m32" CXX="clang++ -m32"
+          make V=1
+
+          CONFIG_SITE="$PWD/depends/i686-pc-linux-gnu/share/config.site" ./configure --enable-suppress-external-warnings
+          make -j9 > /dev/null
 -----
 
           Bench:
@@ -923,7 +931,7 @@ $ while rr/bin/rr record --chaos -o test_bitcoin_chaos src/test/test_bitcoin -l 
 
            Why we require brackets with conditionals over one line:
            CVE-2014-1266: the Apple "goto fail" vulnerability
-           https://dwheeler.com/essays/apple-goto-fail.html
+           https://dwheeler.com/essays/apple-goto-fail
 -----
 
            export TMPDIR=/dev/shm
@@ -951,4 +959,11 @@ Threats to Lightning Network:
 -----
 
 Guix       https://gist.github.com/hebasto/7293726cbfcd0b58e1cfd5418316cee3
+-----
+
+key server https://keys.openpgp.org/search?q=jon%40atack.com
+-----
+
+           constexpr vs macros (#define)
+           https://stackoverflow.com/questions/42388077/constexpr-vs-macros/42388687
 -----
