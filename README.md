@@ -14,6 +14,9 @@
 - [IRC channels.](irc-channels.txt) Join these IRC channels for Bitcoin and
   Lightning development.
 
+- [Logging.](logging.md) How to read and set bitcoind debug logging, with
+  descriptions of each log category.
+
 - [Notes.](notes.txt) Various miscellaneous technical notes.
 
 - [Gitian Building.](gitian-building.md) How to build and commit Gitian
