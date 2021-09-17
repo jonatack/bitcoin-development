@@ -4,7 +4,9 @@ Bitcoin Core Dev IRC Meetings
 *General* meeting every Thursday 1900 UTC on #bitcoin-core-dev
 
   General meeting logs:
-  http://www.erisian.com.au/meetbot/bitcoin-core-dev/
+  https://bitcoin-irc.chaincode.com/
+  https://gnusha.org/bitcoin-core-dev/
+  https://www.erisian.com.au/meetbot/bitcoin-core-dev/
 
   To link to a specific line in the log history, append #l-<line-number>
   http://www.erisian.com.au/bitcoin-core-dev/log-2019-04-16.html#l-129
@@ -20,20 +22,15 @@ Bitcoin Core Dev IRC Meetings
 *Wallet* meeting every other Friday 1900 UTC on #bitcoin-core-dev since 29 Oct 2018
 
   Wallet meeting logs (same link as for the General meetings):
-  http://www.erisian.com.au/meetbot/bitcoin-core-dev/
+  https://bitcoin-irc.chaincode.com/
+  https://gnusha.org/bitcoin-core-dev/
+  https://www.erisian.com.au/meetbot/bitcoin-core-dev/
 
   Past and future meeting topics:
   http://gnusha.org/bitcoin-core-dev/proposedwalletmeetingtopics.txt
 
   To propose a meeting topic, post this message on #bitcoin-core-dev:
   #proposedwalletmeetingtopic <topic>
-
------
-
-*P2P* meeting every other Tuesday 1500 UTC on #bitcoin-core-dev since 11 Aug 2020
-
-  To propose a meeting topic, edit/update the public wiki at:
-  https://github.com/bitcoin-core/bitcoin-devwiki/wiki/P2P-IRC-meetings
 
 -----
 
