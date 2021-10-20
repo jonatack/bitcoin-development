@@ -1,6 +1,6 @@
 # Gitian Building
 
-Last updated: September 23, 2021
+Last updated: October 19, 2021
 
 *This is based on fanquake's
 [gitian-building](https://github.com/fanquake/core-review/blob/master/gitian-building/README.md),
@@ -164,7 +164,7 @@ popd
 Update the version and signer values with the version to build and your username.
 
 ```bash
-export VERSION=0.21.2
+export VERSION=0.20.2
 export SIGNER=your_username
 export USE_DOCKER=1
 
@@ -212,6 +212,19 @@ Follow build progress from the `gitian-builder` directory root using:
 ```bash
 tail -f var/install.log # Setup
 tail -f var/build.log # Building dependencies and Bitcoin Core
+```
+
+Examples
+
+```
+tail -f ~/projects/bitcoin/gitian-builder/var/install.log
+tail -f ~/projects/bitcoin/gitian-builder/var/build.log
+```
+
+or
+
+```
+tail -f ~/projects/bitcoin/gitian-builder/var/*.log
 ```
 
 ### Now, on to building the unsigned sigs
