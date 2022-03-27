@@ -77,6 +77,8 @@ in 2017 by Andrew Chow.
           ipc: All requests and responses between processes. See
           [doc/multiprocess.md](https://github.com/bitcoin/bitcoin/blob/master/doc/multiprocess.md).
 
+          leveldb: Messages from the LevelDB databases used for indexes.
+
           libevent: Messages from the libevent library used for the HTTP server.
 
           lock: All lock contentions and their duration.
