@@ -79,8 +79,6 @@ in 2017 by Andrew Chow.
 
           libevent: Messages from the libevent library used for the HTTP server.
 
-          libevent: Messages from the libevent library used for the HTTP server.
-
           lock: All lock contentions and their duration.
 
           mempool: Messages related to actions done in the memory pool, most
