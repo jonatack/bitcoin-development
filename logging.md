@@ -43,6 +43,10 @@ To turn off all debug logging:
 
     bitcoin-cli logging [] '["all"]'
 
+To turn on all debug logging except net and leveldb:
+
+    bitcoin-cli logging '["all"]' '["net", "leveldb"]'
+
 
 ## Log categories
 
