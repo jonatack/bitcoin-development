@@ -1,6 +1,6 @@
 # Logging
 
-Last updated: September 12, 2021
+Last updated: March 28, 2022
 
 ## How to configure bitcoind debug logging
 
@@ -52,7 +52,7 @@ To turn on all debug logging except net and leveldb:
 
 Here are the log categories and a description of each. This is an updated
 version of this [Bitcoin Stack Exchange
-answer](https://bitcoin.stackexchange.com/questions/66892/what-are-the-debug-categories/66895#66895)
+answer](https://bitcoin.stackexchange.com/questions/66892/what-are-the-debug-categories/66895)
 in 2017 by Andrew Chow.
 
           addrman: Address Manager. Messages about the status of the address
@@ -61,6 +61,8 @@ in 2017 by Andrew Chow.
 
           bench: Messages about the benchmark performance of various parts of
           the software that can have performance issues.
+
+          blockstorage: Messages related to block file storage.
 
           cmpctblock: Messages about the Compact Blocks relay protocol,
           including when blocks are partially downloaded or reconstructed.
@@ -119,6 +121,8 @@ in 2017 by Andrew Chow.
           service (used for receiving incoming connections over TOR). This
           includes messages about the creation and shutdown of the TOR hidden
           service and messages about the connection to the TOR proxy.
+
+          util: Messages related to syscall sandboxing and filtering.
 
           validation: All messages related to the validation interface, most
           frequently `TransactionAddedToMempool` and `stored orphan tx`.
