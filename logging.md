@@ -43,6 +43,10 @@ To turn off all debug logging:
 
     bitcoin-cli logging [] '["all"]'
 
+To turn on all debug logging except net and leveldb:
+
+    bitcoin-cli logging '["all"]' '["net", "leveldb"]'
+
 
 ## Log categories
 
@@ -77,7 +81,7 @@ in 2017 by Andrew Chow.
           ipc: All requests and responses between processes. See
           [doc/multiprocess.md](https://github.com/bitcoin/bitcoin/blob/master/doc/multiprocess.md).
 
-          libevent: Messages from the libevent library used for the HTTP server.
+          leveldb: Messages from the LevelDB databases used for indexes.
 
           libevent: Messages from the libevent library used for the HTTP server.
 
