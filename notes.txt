@@ -16,6 +16,11 @@ wumpus:   Focus on user problems, actual bugs, and "used, but untested" methods
           for buck with regard to risk minimalization. make it clear which areas
           of the code are the really risky ones that could break bitcoin as a
           thing. bitcoin core is too big.
+
+          We should be especially careful with testing on compiler updates,
+          especially the Windows one. It's a low tier platform for GCC and time
+          after time it's clear that it cannot be assumed even basic things keep
+          working with a new version.
 -----
 
 jnewbery: Review 5-10 PRs per PR made
@@ -127,6 +132,10 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           grep -cr encourage _site/en/newsletters | sort -r -n -t ":" -k 2 | head
 -----
 
+          Bitcoin Core daily coverage reports
+          https://marcofalke.github.io/btc_cov/
+
+-----
           Unit tests
 
           Info: https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
@@ -144,7 +153,7 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           (for example)   test_bitcoin -t wallet_tests/ListCoins
                           test_bitcoin -t ismine_tests/ismine_standard
 
-          Run QT unit tests with: src/qt/test/test_bitcoin-qt
+          Run QT unit tests with: ./src/qt/test/test_bitcoin-qt
 
           Specify the log level with -l or --log_level= (see --help).
           Options: all|success|test_suite|unit_scope|message|warning|error|
@@ -535,6 +544,19 @@ valgrind --gen-suppressions=all --verbose --exit-on-first-error=yes --error-exit
           startup and shutdown of the service as well as when notifications are
           issued and new clients connected.
 
+-----
+
+ryanofsky How to use a LOCK_RETURNED helper annotation to be able to keep using
+          clang thread safety lock annotations when an object (here m_mempool)
+          is null:
+
+          RecursiveMutex* MempoolMutex() const LOCK_RETURNED(m_mempool->cs)
+          {
+              return m_mempool ? &m_mempool->cs : nullptr;
+          }
+
+          Described in:
+          https://github.com/bitcoin/bitcoin/pull/22415#issuecomment-875999127
 -----
 
           To build Bitcoin with Clang for better errors/use less resources,
@@ -972,4 +994,9 @@ key server https://keys.openpgp.org/search?q=jon%40atack.com
 
            constexpr vs macros (#define)
            https://stackoverflow.com/questions/42388077/constexpr-vs-macros/42388687
+-----
+
+           Bitcoind dashboards
+           https://bitcoind.observer (b10c)
+           https://bitcoinperf.com (jamesob)
 -----
