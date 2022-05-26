@@ -44,6 +44,19 @@ test/lint/commit-script-check.sh origin/master..HEAD
 
 ## Examples
 
+scripted-diff: remove duplicate categories from logging output
+```
+-BEGIN VERIFY SCRIPT-
+s() { git grep -l "$1" src | xargs sed -i "s/$1/$2/g"; }
+s 'BCLog::TOR, "tor: '       'BCLog::TOR, "'
+s 'BCLog::I2P, "I2P: '       'BCLog::I2P, "'
+s 'BCLog::NET, "net: '       'BCLog::NET, "'
+s 'BCLog::ZMQ, "zmq: '       'BCLog::ZMQ, "'
+s 'BCLog::PRUNE, "Prune: '   'BCLog::PRUNE, "'
+-END VERIFY SCRIPT-
+```
+-----
+
 scripted-diff: More accurate names to avoid confusion
 ```
 -BEGIN VERIFY SCRIPT-
