@@ -4,23 +4,19 @@ IRC Channels
 Join these IRC channels for Bitcoin and Lightning Network development, in
 alphabetical order:
 
-#bitcoin-builds
+#bitcoin-core-builds
 #bitcoin-core-dev
-##bitcoin-core-gui
+#bitcoin-core-gui
 #bitcoin-core-pr-reviews
 #bitcoin-wizards
-#bitcoin-workshops
 #c-lightning
 ##hwi
 #joinmarket
 #lightning-dev
 #lnd
 ##miniscript
-#mit-dci
 #rust-bitcoin
 #secp256k1
-##taproot-activation
-##taproot-bip-review
 
 
 IRC Logs
