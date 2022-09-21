@@ -74,11 +74,18 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
 
           Git stuff
 
+          Better than git blame:
+          git log -p `filename`
+
+          git blame src/wallet/rpcwallet.cpp | cut -c 39-65 | sort | uniq -c | sort -g
+
           To search for a term in git history:
           git log -S 'some string'
 
           To see the git log of a function over time:
           git log -L:function:file.c
+          git log -L:CNodeStateStats:src/net_processing.h
+          git log -L:getpeerinfo:src/rpc/net.cpp
 
           This works for any line range as well:
           git log -L 120,130:file.h
@@ -108,8 +115,6 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           git range-diff master PREV NEW
 
           PREV=317bf6a NEW=ab8a6cd && diff <(git show $PREV) <(git show $NEW)
-
-          git blame src/wallet/rpcwallet.cpp | cut -c 39-65 | sort | uniq -c | sort -g
 
           grepping rpc output:
           bitcoin-cli getpeerinfo | grep 'banscore' | sort
@@ -301,6 +306,8 @@ practicalswift fuzz survival test
 
           Bench:
 
+          Online docs: https://nanobench.ankerl.com/tutorial.html
+
 martinus  It is really helpful to run a benchmark in an endless loop like so:
 
           NANOBENCH_ENDLESS=BlockToJsonVerbose ./src/bench/bench_bitcoin -filter=BlockToJsonVerbose
@@ -422,6 +429,11 @@ valgrind --gen-suppressions=all --verbose --exit-on-first-error=yes --error-exit
           quit or q –> exits out of gdb.
           clear –> to clear all breakpoints.
           continue or c –> continue normal execution.
+
+vasild    that should boil down to something like "gdb ./src/bitcoind", then
+          inside gdb, press "r" to start it, as soon as it crashes type "bt"
+          to get the backtrace, type "up" or "f 1", "p contents.size_",
+          "p contents.data_", "p n", and "p data"
 -----
           Multinode / Multiwallet Bitcoin regtest network
           https://github.com/FreekPaans/bitcoin-multi-node-regtest
@@ -956,6 +968,10 @@ $ while rr/bin/rr record --chaos -o test_bitcoin_chaos src/test/test_bitcoin -l 
       rm -rf test_bitcoin_chaos
   done
 -----
+
+While here, could you add the missing brackets to the conditional per the developer notes, or hoist `return false;` to the same line?
+
+We require brackets with conditionals over one line due to CVE-2014-1266 (the Apple "goto fail" vulnerability, see also https://dwheeler.com/essays/apple-goto-fail).
 
            Why we require brackets with conditionals over one line:
            CVE-2014-1266: the Apple "goto fail" vulnerability
