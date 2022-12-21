@@ -337,7 +337,7 @@ gwillen   I suggest -dfX instead of -dfx (capitalize the x) when doing git clean
           git log --oneline --since=2020-01-01 --until=2020-12-31 --no-merges | wc -l
 
           Count contributors over a time period
-          git log --since=2020-01-01 --until=2020-12-31 --no-merges \
+          git log --since=2009-01-01 --until=2025-12-31 --no-merges \
           | grep '^Author' | sort | uniq -c | sort -nr | wc -l
 
           Commits/contributor ranking over a time period
@@ -477,9 +477,9 @@ vasild    that should boil down to something like "gdb ./src/bitcoind", then
           bitcoin-cli help logging
 
           To turn  on debug=net: bitcoin-cli logging '["net"]'
-          To turn off debug=net: bitcoin-cli logging [] '["net"]'
+          To turn off debug=net: bitcoin-cli logging '[]' '["net"]'
           To turn  on debug=all: bitcoin-cli logging '["all"]'
-          To turn off debug log: bitcoin-cli logging [] '["all"]'
+          To turn off debug log: bitcoin-cli logging '[]' '["all"]'
 
           addrman: Address Manager. Messages about the status of the address
           manager and when addresses are added or removed from the address
