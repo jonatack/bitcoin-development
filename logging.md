@@ -1,6 +1,6 @@
 # Logging
 
-Last updated: March 28, 2022
+Last updated: December 21, 2022
 
 ## How to configure bitcoind debug logging
 
@@ -33,7 +33,7 @@ To turn on debug=net:
 
 To turn off debug=net:
 
-    bitcoin-cli logging [] '["net"]'
+    bitcoin-cli logging '[]' '["net"]'
 
 To turn on debug=all:
 
@@ -41,7 +41,7 @@ To turn on debug=all:
 
 To turn off all debug logging:
 
-    bitcoin-cli logging [] '["all"]'
+    bitcoin-cli logging '[]' '["all"]'
 
 To turn on all debug logging except net and leveldb:
 
