@@ -208,6 +208,20 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
           LC_ALL=de_DE.UTF-8 QT_QPA_PLATFORM=xcb BITCOIND=bitcoin-qt ./test/functional/p2p_permissions.py --tracerpc
 -----
 
+          Run tests with loopback address other than 127.0.0.1 for more parallelism
+          This results in successfully running all of the tests that would
+          normally be run, and without interfering with each other.  Ref:
+          https://github.com/bitcoin/bitcoin/pull/26841#issuecomment-1376544220
+
+ip netns add bitcoin_test_netns_1
+ip netns exec bitcoin_test_netns_1 ip link set dev lo up
+ip netns exec bitcoin_test_netns_1 ip link add dum0 type dummy
+ip netns exec bitcoin_test_netns_1 ip addr add 10.1.1.1/32 dev dum0
+ip netns exec bitcoin_test_netns_1 ip link set dum0 up
+ip netns exec bitcoin_test_netns_1 sudo -u $(whoami) test/functional/test_runner.py -j 60
+
+-----
+
 raj       Generic steps for reviewing functional tests
 
           - Start python debugging and step through the *.py file.
@@ -230,9 +244,6 @@ raj       Generic steps for reviewing functional tests
 
           Fuzz tests
 
-          Help: pass with -help=1 argument:
-          src/test/fuzz/process_messages -help=1
-
           Documentation
           https://llvm.org/docs/LibFuzzer.html
 
@@ -240,15 +251,20 @@ raj       Generic steps for reviewing functional tests
           https://llvm.org/doxygen/FuzzerMutate_8h_source.html
 
           Compile with Clang:
-          CC=clang CXX=clang++ ./configure --enable-fuzz --with-sanitizers=address,fuzzer,undefined
-          May need to run `make distclean` first.
+
+          ./configure --enable-fuzz --with-sanitizers=fuzzer,address,undefined --disable-asm --enable-suppress-external-warnings CC=$(brew --prefix llvm)/bin/clang CXX=$(brew --prefix llvm)/bin/clang++
+
+          May need to run `make clean` or `make distclean`.
 
           Run an individual fuzz test:
-          FUZZ=process_message src/test/fuzz/fuzz
+          FUZZ=process_message ./src/test/fuzz/fuzz
+
+          Help: pass with -help=1 argument:
+          FUZZ=process_message ./src/test/fuzz/fuzz -help=1
 
           vasild added fuzzing seeds to qa-assets by running the following:
           mkdir /tmp/fuzz
-          FUZZ=netbase_dns_lookup src/test/fuzz/fuzz /tmp/fuzz
+          FUZZ=netbase_dns_lookup ./src/test/fuzz/fuzz /tmp/fuzz
           ./test/fuzz/test_runner.py --m_dir /tmp/fuzz /path/to/bitcoin-core/qa-assets/fuzz_seed_corpus/
 
 
@@ -318,7 +334,7 @@ martinus  It is really helpful to run a benchmark in an endless loop like so:
           ./src/bench/bench_bitcoin
           ./src/bench/bench_bitcoin -?
           ./src/bench/bench_bitcoin -h
-          ./src/bench/bench_bitcoin -filter=EvictionProtection*.*
+          ./src/bench/bench_bitcoin -filter='EvictionProtection*.*'
 -----
 
           git clean -dfX && git checkout master && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
@@ -976,6 +992,18 @@ We require brackets with conditionals over one line due to CVE-2014-1266 (the Ap
            Why we require brackets with conditionals over one line:
            CVE-2014-1266: the Apple "goto fail" vulnerability
            https://dwheeler.com/essays/apple-goto-fail
+-----
+
+           A [[nodiscard]] attribute is most useful in two cases:
+
+           - if a function has no effects beyond returning a certain result,
+             i.e. is pure. If the result is not used, the call is certainly
+             useless. On the other hand, discarding the result would not be
+             incorrect.
+
+           - if the return value must be checked, e.g. for a C-like interface
+             that returns error codes instead of throwing. This is the primary
+             use case. For idiomatic C++, that's going to be quite rare.
 -----
 
            export TMPDIR=/dev/shm
