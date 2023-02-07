@@ -1,16 +1,17 @@
 IRC Channels
 ------------
 
-Join these IRC channels for Bitcoin and Lightning Network development, in
-alphabetical order:
+Here are various IRC channels for Bitcoin and Lightning Network development on
+irc.server.libera, in alphabetical order:
 
 #bitcoin-core-builds
 #bitcoin-core-dev
 #bitcoin-core-gui
+#bitcoin-hwi
 #bitcoin-core-pr-reviews
+#bitcoin-signet
 #bitcoin-wizards
 #c-lightning
-##hwi
 #joinmarket
 #lightning-dev
 #lnd
