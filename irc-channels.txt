@@ -7,11 +7,12 @@ irc.server.libera, in alphabetical order:
 #bitcoin-core-builds
 #bitcoin-core-dev
 #bitcoin-core-gui
-#bitcoin-hwi
 #bitcoin-core-pr-reviews
+#bitcoin-hwi
 #bitcoin-signet
 #bitcoin-wizards
 #c-lightning
+##eltoo
 #joinmarket
 #lightning-dev
 #lnd
