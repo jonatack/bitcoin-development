@@ -1,8 +1,8 @@
 IRC Channels
 ------------
 
-Here are various IRC channels for Bitcoin and Lightning Network development on
-irc.server.libera, in alphabetical order:
+Here are various IRC channels for Bitcoin and Lightning Network development,
+in alphabetical order:
 
 #bitcoin-core-builds
 #bitcoin-core-dev
@@ -20,20 +20,26 @@ irc.server.libera, in alphabetical order:
 #rust-bitcoin
 #secp256k1
 
+They are on irc.libera.chat:
+
+Website: https://libera.chat
+
+Webchat: https://kiwiirc.com/nextclient/irc.libera.chat
+
 
 IRC Logs
 --------
 
-Log for #bitcoin-core-dev may be found at:
+Logs for #bitcoin-core-dev may be found at:
 
-http://www.erisian.com.au/bitcoin-core-dev
+- https://bitcoin-irc.chaincode.com/bitcoin-core-dev/
+- https://www.erisian.com.au/bitcoin-core-dev/
+- https://gnusha.org/bitcoin-core-dev/
 
+This server hosts many Bitcoin-related IRC channel logs:
+
+https://gnusha.org/
 
 Logs for #bitcoin-core-pr-reviews may be found at:
 
 https://bitcoincore.reviews
-
-
-This server hosts a number of Bitcoin-related IRC channel logs:
-
-http://gnusha.org
