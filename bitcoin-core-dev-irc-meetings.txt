@@ -1,12 +1,21 @@
 Bitcoin Core Dev IRC Meetings
 -----------------------------
 
+These meetings take place on irc.libera.chat:
+
+Website: https://libera.chat
+
+Webchat: https://kiwiirc.com/nextclient/irc.libera.chat
+
+-----
+
 *General* meeting every Thursday 1900 UTC on #bitcoin-core-dev
 
   General meeting logs:
-  https://bitcoin-irc.chaincode.com/
-  https://gnusha.org/bitcoin-core-dev/
-  https://www.erisian.com.au/meetbot/bitcoin-core-dev/
+
+  - https://bitcoin-irc.chaincode.com/bitcoin-core-dev/
+  - https://www.erisian.com.au/bitcoin-core-dev/
+  - https://gnusha.org/bitcoin-core-dev/
 
   To link to a specific line in the log history, append #l-<line-number>
   http://www.erisian.com.au/bitcoin-core-dev/log-2019-04-16.html#l-129
@@ -21,10 +30,11 @@ Bitcoin Core Dev IRC Meetings
 
 *Wallet* meeting every other Friday 1900 UTC on #bitcoin-core-dev since 29 Oct 2018
 
-  Wallet meeting logs (same link as for the General meetings):
-  https://bitcoin-irc.chaincode.com/
-  https://gnusha.org/bitcoin-core-dev/
-  https://www.erisian.com.au/meetbot/bitcoin-core-dev/
+  Wallet meeting logs (same links as for the General meetings):
+
+  - https://bitcoin-irc.chaincode.com/bitcoin-core-dev/
+  - https://www.erisian.com.au/bitcoin-core-dev/
+  - https://gnusha.org/bitcoin-core-dev/
 
   Past and future meeting topics:
   http://gnusha.org/bitcoin-core-dev/proposedwalletmeetingtopics.txt
@@ -34,16 +44,14 @@ Bitcoin Core Dev IRC Meetings
 
 -----
 
-*PR Review Club* meeting every Wednesday 1800 UTC on #bitcoin-core-pr-reviews
+*PR Review Club* meeting every Wednesday at 1700 UTC on #bitcoin-core-pr-reviews
 
   Website: https://bitcoincore.reviews
 
   PR Review Club meeting logs are available on the website by clicking on the
   past meeting links.
 
-  To suggest a PR or offer to host a meeting, leave a comment at:
-
-  https://github.com/bitcoin-core-review-club/bitcoin-core-review-club.github.io/issues/14
+  To suggest a PR or offer to host a meeting, leave a message in the IRC channel.
 
 -----
 
@@ -77,7 +85,7 @@ https://github.com/fanquake/core-review/blob/master/irc.md
 
 -----
 
-Some emojis for the fun of it
+Some emojis for the fun of it:
 
 👍  thumbs up
 👌  ok
