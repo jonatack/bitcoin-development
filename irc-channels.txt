@@ -43,3 +43,11 @@ https://gnusha.org/
 Logs for #bitcoin-core-pr-reviews may be found at:
 
 https://bitcoincore.reviews
+
+
+Bitcoin Stack Exchange
+--------
+
+A good place to ask Bitcoin-related questions and read/learn is:
+
+https://bitcoin.stackexchange.com/
