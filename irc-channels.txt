@@ -9,6 +9,7 @@ in alphabetical order:
 #bitcoin-core-gui
 #bitcoin-core-pr-reviews
 #bitcoin-hwi
+##bitcoin-p2p
 #bitcoin-signet
 #bitcoin-wizards
 #c-lightning
