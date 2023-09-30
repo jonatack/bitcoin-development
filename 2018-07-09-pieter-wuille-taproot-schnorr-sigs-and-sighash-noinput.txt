@@ -2,7 +2,7 @@
 
 Transcript of talk by Pieter Wuille (sipa) at the SF Bitcoin Meetup, 2018-07-09
 
-URL: diyhpluswiki/transcripts/sf-bitcoin-meetup/2018-07-09-taproot-schnorr-signatures-and-sighash-noinput-oh-my
+URL: diyhpl.us/wiki/transcripts/sf-bitcoin-meetup/2018-07-09-taproot-schnorr-signatures-and-sighash-noinput-oh-my
 
 https://twitter.com/kanzure/status/1021880538020368385
 
@@ -418,7 +418,7 @@ https://diyhpl.us/wiki/transcripts/bitcoin-core-dev-tech/2018-03-06-merkleized-a
 as it was called originally. According to Russell O'Connor, it's not what we
 should be talking about when we talk about merkle branches today. The
 observation is that most scripts that you see in practice are something that is
-just this junction of a number of possibilities. You can spend if A and B sign,
+just a disjunction of a number of possibilities. You can spend if A and B sign,
 or if C has signed and some time has passed, or D and A has signed and some hash
 has been revealed. Pretty much everything we have seen to date is some
 combination of these things. It's unfortunate that we have to reveal all
@@ -486,6 +486,12 @@ Taproot gives the ability to say-- it's based on the idea that we can use a
 construction called pay-to-contract which was originally invented by Timo Hanke
 in 2013 I think, to tweak a public key with a script using the equation there on
 the screen.
+
+	Taproot tweaked public key is Q = P + H(P,S)G
+
+	P is the sum of all parties' public keys
+
+	S is the merkle root for all possible scripts
 
 It has a number of properties. Namely, if I know the original public key and I
 know the scripts, then I can compute the tweaked public key. If I know the
@@ -592,7 +598,7 @@ is Schnorr signatures and taproot. The reason for this is focus is that the
 ability to make any input and output in the cooperative case to look identical
 is an enormous win for how script execution works. Schnorr is necessary for this
 because without it we cannot encode multiple parties into a single key. Having
-multiple branches in there is a relatively simple change. If you look at the
+merkle branches in there is a relatively simple change. If you look at the
 consensus changes necessary for these things, it's really remarkably small,
 dozens of lines of code. It looks like a lot of the complexity is in explaining
 why these things are useful and how to use them and not so much in the impact on
@@ -628,7 +634,7 @@ system. One of the advantages I talked about is all these multisig adaptor
 signature constructions and we will have a reference implementation for that.
 
 Christopher Allen: What is the kind of rigorous list of things that ought to be
-done or ought to be checked or where do people find to do this? I'm ont finding
+done or ought to be checked or where do people find to do this? I'm not finding
 good resources for how to do that.
 
 Q: In the atomic swap case, do you need both chains to understand Schnorr
