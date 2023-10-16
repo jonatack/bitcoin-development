@@ -9,7 +9,7 @@ Webchat: https://kiwiirc.com/nextclient/irc.libera.chat
 
 -----
 
-*General* meeting every Thursday 1900 UTC on #bitcoin-core-dev
+*General* meeting every Thursday 1400 UTC on #bitcoin-core-dev
 
   General meeting logs:
 
@@ -17,7 +17,8 @@ Webchat: https://kiwiirc.com/nextclient/irc.libera.chat
   - https://www.erisian.com.au/bitcoin-core-dev/
   - https://gnusha.org/bitcoin-core-dev/
 
-  To link to a specific line in the log history, append #l-<line-number>
+  To link to a specific line in the log history on www.erisian.com,
+  append #l-<line-number> as follows:
   http://www.erisian.com.au/bitcoin-core-dev/log-2019-04-16.html#l-129
 
   Past and future meeting topics:
@@ -29,6 +30,7 @@ Webchat: https://kiwiirc.com/nextclient/irc.libera.chat
 -----
 
 *Wallet* meeting every other Friday 1900 UTC on #bitcoin-core-dev since 29 Oct 2018
+(Edit: the wallet meetings are currently no longer being held.)
 
   Wallet meeting logs (same links as for the General meetings):
 
@@ -44,7 +46,8 @@ Webchat: https://kiwiirc.com/nextclient/irc.libera.chat
 
 -----
 
-*PR Review Club* meeting every Wednesday at 1700 UTC on #bitcoin-core-pr-reviews
+*PR Review Club* meeting every Wednesday at 1700 or 1800 UTC on #bitcoin-core-pr-reviews IRC.
+Check on the website if a meeting is planned for a specific date.
 
   Website: https://bitcoincore.reviews
 
