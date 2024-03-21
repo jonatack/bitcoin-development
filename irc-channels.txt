@@ -18,7 +18,7 @@ in alphabetical order:
 #lightning-dev
 #lnd
 ##miniscript
-#rust-bitcoin
+#bitcoin-rust
 #secp256k1
 
 They are on irc.libera.chat:
