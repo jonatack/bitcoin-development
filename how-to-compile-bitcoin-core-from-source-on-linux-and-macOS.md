@@ -19,7 +19,7 @@ All steps are to be run from your terminal emulator, i.e. the command line.
       libboost-system-dev libboost-filesystem-dev libboost-chrono-dev
       libboost-test-dev libboost-thread-dev libminiupnpc-dev libzmq3-dev
       libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools
-      libprotobuf-dev protobuf-compiler git ccache`
+      libprotobuf-dev protobuf-compiler git ccache libqrencode-dev`
 
     - macOS (with command line tools and Homebrew already installed): `brew
       install automake berkeley-db4 libtool boost miniupnpc openssl pkg-config
