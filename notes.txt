@@ -58,6 +58,13 @@ jnewbery: Review 5-10 PRs per PR made
           <stdin>:1:51: error: expected ‘,’ or ‘;’ before ‘}’ token
 -----
 
+CMAKE
+
+          Get the build flags:
+          git grep -W BITCOIN_CONFIG ./ci/test/00_setup_env_native_tsan.sh
+
+-----
+
 practicalswift: C++ undefined, unspecified and implementation-defined behavior:
 
           - undefined: "behavior, upon use of a nonportable or erroneous program
@@ -118,6 +125,7 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
 
           grepping rpc output:
           bitcoin-cli getpeerinfo | grep 'banscore' | sort
+          bitcoin-cli getpeerinfo | grep 'transport_protocol_type' | sort -nk2r | uniq -c | sort
 
           To check each commit when feeling patient:
           git rebase -i $(git merge-base HEAD origin/master)"
@@ -143,22 +151,27 @@ practicalswift: C++ undefined, unspecified and implementation-defined behavior:
 -----
           Unit tests
 
-          Info: https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
+          Docs:
+          https://github.com/bitcoin/bitcoin/blob/master/src/test/README.md
 
-          Help: test_bitcoin --help
-          or:   src/test/test_bitcoin --help
+          Help:
+          test_bitcoin --help
+          or
+          ./build/src/test/test_bitcoin --help
 
-          Run all tests with make check, test_bitcoin, or src/test/test_bitcoin
+          Run all tests with:
+          test_bitcoin
+          or
+          ./build/src/test/test_bitcoin
 
-          To run a suite: test_bitcoin -t suite_name   (using -t or --run_test=)
-          (for example)   test_bitcoin -t wallet_tests
-          or              test_bitcoin -t ismine_tests
+          To run a single test file
+          ./build/src/test/test_bitcoin --run_test=validation_chainstatemanager_tests
 
-          To run a test:  test_bitcoin -t suite_name/case_name
-          (for example)   test_bitcoin -t wallet_tests/ListCoins
-                          test_bitcoin -t ismine_tests/ismine_standard
+          To run a single test in a test file:
+          ./build/src/test/test_bitcoin --run_test=validation_chainstatemanager_tests/chainstatemanager_args
 
-          Run QT unit tests with: ./src/qt/test/test_bitcoin-qt
+          Run QT unit tests with:
+          ./build/src/qt/test/test_bitcoin-qt
 
           Specify the log level with -l or --log_level= (see --help).
           Options: all|success|test_suite|unit_scope|message|warning|error|
@@ -258,6 +271,7 @@ raj       Generic steps for reviewing functional tests
 
           Run an individual fuzz test:
           FUZZ=process_message ./src/test/fuzz/fuzz
+          FUZZ=coinscache_sim ./src/test/fuzz/fuzz
 
           Help: pass with -help=1 argument:
           FUZZ=process_message ./src/test/fuzz/fuzz -help=1
@@ -309,7 +323,7 @@ practicalswift fuzz survival test
 
           Run the CI locally:
 
-          MAKEJOBS="-j5" FILE_ENV="./ci/test/00_setup_env_win64.sh" ./ci/test_run_all.sh
+          MAKEJOBS="-j11" FILE_ENV="./ci/test/00_setup_env_win64.sh" ./ci/test_run_all.sh
 
           32-bit depends build:
 
@@ -335,6 +349,45 @@ martinus  It is really helpful to run a benchmark in an endless loop like so:
           ./src/bench/bench_bitcoin -?
           ./src/bench/bench_bitcoin -h
           ./src/bench/bench_bitcoin -filter='EvictionProtection*.*'
+
+
+          A nice way to create and share detailed benchmark results -- example:
+          - share.firefox.dev/3Z02boN
+          - https://profiler.firefox.com/public/dcs5hmy4h3w6jnen8gzq7vac2j3jf7b64s9g8zr/flame-graph/
+
+          How to do this
+          https://github.com/bitcoin/bitcoin/pull/26957#issuecomment-1474761651
+
+          - Run a benchmark for a few seconds and record data with perf:
+
+perf record --call-graph lbr ./src/bench/bench_bitcoin -filter="LogPrintLevelWithoutThreadNames" -min-time=5000
+
+          - Convert into data-readable form with https://profiler.firefox.com/
+
+perf script -F +pid > /tmp/test.perf
+
+          - Drag & drop test.perf into profiler.firefox.com, upload the data, and create a permalink to it
+-----
+
+fanquake  Now that we can build a bdb-only depends prefix (#26833), there is no
+          need to maintain a bdb-building bash script, that does the same thing
+          as depends, except worse, as it's missing patches/workarounds, i.e #26623.
+
+          Someone that wants to compile bdb themselves, but doesn't want to use
+          other depends built libs, can do:
+
+make -C depends NO_BOOST=1 NO_LIBEVENT=1 NO_QT=1 NO_SQLITE=1 NO_NATPMP=1 NO_UPNP=1 NO_ZMQ=1 NO_USDT=1
+...
+to: /path/to/bitcoin/depends/x86_64-pc-linux-gnu
+
+which gives them a BDB only prefix, and then compile using:
+
+export BDB_PREFIX="/path/to/bitcoin/depends/x86_64-pc-linux-gnu"
+./autogen.sh
+./configure \
+    BDB_LIBS="-L${BDB_PREFIX}/lib -ldb_cxx-4.8" \
+    BDB_CFLAGS="-I${BDB_PREFIX}/include"
+
 -----
 
           git clean -dfX && git checkout master && ./autogen.sh && ./configure --with-incompatible-bdb --without-gui && make -j5 && ./src/bench/bench_bitcoin --filter='(SHA256|Merkle).*'
@@ -358,8 +411,8 @@ gwillen   I suggest -dfX instead of -dfx (capitalize the x) when doing git clean
 
           Commits/contributor ranking over a time period
           git log \
-          --since=2021-01-01 --until=2021-12-31 --no-merges \
-          | grep '^Author' | sort | uniq -c | sort -nr | head -n 10
+          --since=2019-01-01 --until=2025-12-31 --no-merges \
+          | grep '^Author' | sort | uniq -c | sort -nr | head -n 20
 
           List top 20 contributors in commits per year
           for i in 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021; do echo $i \
@@ -994,6 +1047,12 @@ We require brackets with conditionals over one line due to CVE-2014-1266 (the Ap
            https://dwheeler.com/essays/apple-goto-fail
 -----
 
+           My comment about nodiscard:
+           https://github.com/bitcoin/bitcoin/pull/27675#discussion_r1264440771
+
+Right, nodiscard is "use it or lose it" (remove it) -- applicable to getter/pure functions and any interfaces where the return value must be checked. Unlike the latter, if the result of a getter is not used it would not be incorrect, but in that case the call is useless and should be removed; nodiscard just enforces it.
+
+
            A [[nodiscard]] attribute is most useful in two cases:
 
            - if a function has no effects beyond returning a certain result,
@@ -1030,6 +1089,12 @@ Threats to Lightning Network:
 
 -----
 
+Peter Todd:
+
+I'm not on delving and I have no intent of doing so at the moment. Putting critical protocol discussion on infrastructure that is not cryptographically signed, and under the centralized control of parties with a direct interest in the discussion, is not a good idea. The email list remains a much better alternative as email is signed via both DKIM and, in some cases, PGP. GitHub second best, as at least the infrastructure is run by people entirely independent of Bitcoin Core.
+
+-----
+
 Guix       https://gist.github.com/hebasto/7293726cbfcd0b58e1cfd5418316cee3
 -----
 
@@ -1043,4 +1108,36 @@ key server https://keys.openpgp.org/search?q=jon%40atack.com
            Bitcoind dashboards
            https://bitcoind.observer (b10c)
            https://bitcoinperf.com (jamesob)
+-----
+
+           Run iwyu (Include What You Use) on a file, from repo root:
+
+$ python3 /usr/bin/iwyu_tool src/net.cpp -p . -j5 -- -Xiwyu --cxx17ns -Xiwyu --mapping_file=/home/jon/projects/bitcoin/bitcoin/contrib/devtools/iwyu/bitcoin.core.imp
+
+$ iwyu --version
+
+--- a/ci/test/06_script_b.sh
++++ b/ci/test/06_script_b.sh
+@@ -35,14 +35,13 @@ if [ "$RUN_FUNCTIONAL_TESTS" = "true" ]; then
+
+ if [ "${RUN_TIDY}" = "true" ]; then
+-  export P_CI_DIR="${BASE_BUILD_DIR}/bitcoin-$HOST/src/"
+-  CI_EXEC run-clang-tidy "${MAKEJOBS}"
+   export P_CI_DIR="${BASE_BUILD_DIR}/bitcoin-$HOST/"
+   CI_EXEC "python3 ${DIR_IWYU}/include-what-you-use/iwyu_tool.py"\
+           " src/compat"\
+           " src/init"\
+           " src/rpc/fees.cpp"\
+           " src/rpc/signmessage.cpp"\
++          " src/validationinterface.cpp"\
+           " -p . ${MAKEJOBS} -- -Xiwyu --cxx17ns -Xiwyu --mapping_file=${BASE_BUILD_DIR}/bitcoin-$HOST/contrib/devtools/iwyu/bitcoin.core.imp"
+ fi
+-----
+
+josie      is there a reason we use bcrt for regtest in bitcoin core? its not
+           defined in BIP173 or BIP350 and it seems easier to use the same HRP
+           for all test networks
+
+_aj_       https://github.com/bitcoin/bitcoin/pull/11167#issuecomment-327623706
+           https://github.com/bitcoin/bitcoin/issues/12314
 -----
