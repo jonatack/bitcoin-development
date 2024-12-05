@@ -27,6 +27,10 @@ Webchat: https://kiwiirc.com/nextclient/irc.libera.chat
   To propose a meeting topic, post this message on #bitcoin-core-dev:
   #proposedmeetingtopic <topic>
 
+  For more information, see also:
+  - https://github.com/bitcoin-core/bitcoin-devwiki/wiki/General-IRC-meeting
+  - https://github.com/bitcoin-core/bitcoin-devwiki/wiki/IRC-Meeting-Cheat-Sheet
+
 -----
 
 *Wallet* meeting every other Friday 1900 UTC on #bitcoin-core-dev since 29 Oct 2018
@@ -46,10 +50,11 @@ Webchat: https://kiwiirc.com/nextclient/irc.libera.chat
 
 -----
 
-*PR Review Club* meeting every Wednesday at 1700 or 1800 UTC on #bitcoin-core-pr-reviews IRC.
-Check on the website if a meeting is planned for a specific date.
+*PR Review Club* meeting every first Wednesday and Thursday of the month at
+17:00 UTC on #bitcoin-core-pr-reviews IRC.
 
-  Website: https://bitcoincore.reviews
+  Website for details:
+  https://bitcoincore.reviews
 
   PR Review Club meeting logs are available on the website by clicking on the
   past meeting links.
