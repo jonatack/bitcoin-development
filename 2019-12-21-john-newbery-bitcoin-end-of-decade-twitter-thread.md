@@ -138,7 +138,7 @@ and private off-chain contracts will be made possible.
 
 29/ Some of these things will happen in 2020, and some will take a bit longer,
 but they're all heading in the same direction: using the chain for what the
-chain's good for (h/t Andrew Poesltra).
+chain's good for (h/t Andrew Poelstra).
 
 30/ That's to say: the block chain allows nodes to arrive at an agreed ledger
 state, while contracting and functionality move up onto layer two. Doing so is
