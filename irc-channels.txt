@@ -1,15 +1,17 @@
 IRC Channels
 ------------
 
-Here are various IRC channels for Bitcoin and Lightning Network development,
+#bitcoin-core-dev is far and away the most active IRC channel. Here are
+various other IRC channels for Bitcoin and Lightning Network development,
 in alphabetical order:
 
+#asmap
 #bitcoin-core-builds
 #bitcoin-core-dev
+#bitcoin-core-github
 #bitcoin-core-gui
 #bitcoin-core-pr-reviews
 #bitcoin-hwi
-##bitcoin-p2p
 #bitcoin-signet
 #bitcoin-wizards
 #c-lightning
@@ -18,7 +20,6 @@ in alphabetical order:
 #lightning-dev
 #lnd
 ##miniscript
-#bitcoin-rust
 #secp256k1
 
 They are on irc.libera.chat:
